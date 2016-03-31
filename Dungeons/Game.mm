@@ -2,7 +2,7 @@
 
 #include "SOIL.h"
 #include "ios_path.h"
-//#define DEMO
+#define DEMO 0
 
 using namespace glm;
 using namespace gl_enums::usage;
@@ -75,9 +75,6 @@ const vec3 WATER_VERTICES[] = {
     vec3( -WATER_SIZE, 0, -WATER_SIZE )
 };
 
-#define SOIL_LOAD_OGL_TEXTURE_OPTIONS   \
-SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID,     \
-SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
 
 Game::~Game()
 {
@@ -101,7 +98,7 @@ Game::Game( GLKView* view )
     , _enemies( ObjMesh( ios_path( "Level0EnemyPos.obj" ) ), _program )
     , _rail( ios_path( "DemoRail.obj" ) )
     , _entities( {
-#ifdef DEMO
+#if DEMO
         Entity( &_model, vec3( 2, -.75, 0 ) ),
         Entity( &_model, vec3( 0, .75, 2 ) ),
         Entity( &_model, vec3( 0, 2, 0 ) )
@@ -115,7 +112,8 @@ Game::Game( GLKView* view )
         ios_path( "skybox/bottom.tga" ),
         ios_path( "skybox/back.tga" ),
         ios_path( "skybox/front.tga" ),
-        SOIL_LOAD_OGL_TEXTURE_OPTIONS ) )
+        SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT ) )
 
     , _skybox_program( ios_path( "Skybox.vs" ), ios_path( "Skybox.fs" ), "aPosition" )
     , _skybox_buffer( SKYBOX_VERTICES, 36, STATIC_DRAW,
@@ -124,21 +122,20 @@ Game::Game( GLKView* view )
     , _water_dudv( ios_path( "water/water_dudv.png" ) )
     , _water_normal( ios_path( "water/water_normal.png" ) )
     , _water_program( ios_path( "WaterShader.vs" ), ios_path( "WaterShader.fs" ), "aPosition" )
-    , _water_quad( WATER_VERTICES, sizeof( WATER_VERTICES ), STATIC_DRAW,
+    , _water_quad( WATER_VERTICES, 6, STATIC_DRAW,
                    _water_program.make_vert_attribute< vec3 >( "aPosition" ) )
 {
-#ifdef DEMO
+#if DEMO
     _entities[ 0 ].color = vec4( 0, 0, 1, 0.1 );
     _entities[ 1 ].color = vec4( 1, 0, 0, 0.1 );
     _entities[ 2 ].color = vec4( 0, 1, 0, 0.1 );
 #endif
-
+    
     glBindTexture( GL_TEXTURE_CUBE_MAP, _skybox_texture );
     glTexParameteri( GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
     glTexParameteri( GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
     glBindTexture( GL_TEXTURE_CUBE_MAP, 0 );
 
-#undef SOIL_LOAD_OGL_TEXTURE_OPTIONS
     //glGenFramebuffers( 3, &_water_fbo );
 
     //glBindFramebuffer( GL_FRAMEBUFFER, _water_reflect_fbo );
@@ -244,25 +241,24 @@ Game::Game( GLKView* view )
     mat4 waterModel;
 
     _water_program.bind();
-    glUniform3fv( _water_program.find_uniform( "uSunPosition" ), 1,
-                  &sunPosition[0] );
-    glUniform3fv( _water_program.find_uniform( "uSunColor" ), 1,
-                  &specularComponent[0] );
+    glUniform3fv( _water_program.find_uniform( "uSunPosition" ), 1, &sunPosition[0] );
+    glUniform3fv( _water_program.find_uniform( "uSunColor" ), 1, &specularComponent[0] );
     glUniform1i( _water_program.find_uniform( "uTextureRefle" ), 0 );
     glUniform1i( _water_program.find_uniform( "uTextureRefra" ), 1 );
     glUniform1i( _water_program.find_uniform( "uMapDepth" ), 2 );
     glUniform1i( _water_program.find_uniform( "uMapDuDv" ), 3 );
     glUniform1i( _water_program.find_uniform( "uMapNormal" ), 4 );
 
-    glUniform4f( _water_program.find_uniform( "uColor" ), 0, 0.1, 1, 0.1 );
-    glUniformMatrix4fv( _water_program.find_uniform( "uModelMatrix" ),
-                        1, GL_FALSE, &waterModel[ 0 ][ 0 ] );
+    glUniform4f( _water_program.find_uniform( "uColor" ), 0, 0.1, 1, 1 );
+    glUniformMatrix4fv( _water_program.find_uniform( "uModelMatrix" ), 1, GL_FALSE, &waterModel[ 0 ][ 0 ] );
+    
+    glUseProgram( 0 );
     
     //_program->validate();
     //_skybox_program.validate();
     //_water_program.validate();
     
-#ifndef DEMO
+#if !DEMO
     size_t railsize = _rail.rail.size();
     _eyepos = _rail.rail[ _railidx % railsize ];
     _eyelook = _rail.rail[ (_railidx + 1) % railsize ];
@@ -276,23 +272,12 @@ void Game::update( double step )
     _currTime += step;
     const double time = _currTime - _startTime;
     
+#if DEMO
     const float eyedist = 5;
-    //vec3 eyepos( eyedist, eyedist + (eyedist * 0.8 * sin( time )), eyedist );
-    /*_eyepos = vec3
-    (
-        eyedist * sin( time / 2 ),
-        0.1 + eyedist / 4 + eyedist / 4 * sin( time / 6 ),
-        eyedist * cos( time / 2 )
-    );*/
-    
-#ifdef DEMO
-    //vec3 eyepos( eyedist, eyedist + (eyedist * 0.8 * sin( time )), eyedist );
-    _eyepos = vec3
-    (
-        eyedist * sin( time / 2 ),
-        0.1 + eyedist / 4 + eyedist / 4 * sin( time / 6 ),
-        eyedist * cos( time / 2 )
-    );
+    //_eyepos = vec3( eyedist, eyedist * sin( time ) / 2, eyedist );/*
+    _eyepos.x = eyedist * sin( time / 2 );
+    _eyepos.y = 0.1 + eyedist / 4 + eyedist / 4 * sin( time / 6 );
+    _eyepos.z = eyedist * cos( time / 2 );//*/
     _eyelook = vec3();
 #else
     
@@ -330,7 +315,6 @@ void Game::update( double step )
     _water_program.bind();
     glUniform1f( _water_program.find_uniform( "uDuDvFactor" ), waveFactor );
     glUniform3fv( _water_program.find_uniform( "uEyePosition" ), 1, &_eyepos[0] );
-    
     glUseProgram( 0 );
     
     for ( int i = 0; i < _entities.size(); i++ )
@@ -341,9 +325,6 @@ void Game::update( double step )
 void Game::render() const
 {
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-
-    glDisable( GL_CLIP_DISTANCE( 0 ) );
-    glDisable( GL_CLIP_DISTANCE( 1 ) );
     
     glEnable( GL_DEPTH_TEST );
     glEnable( GL_CULL_FACE );
@@ -367,7 +348,6 @@ void Game::render() const
 
 
     // Render refLEction.
-    glBindTexture( GL_TEXTURE_2D, 0 );
     glBindFramebuffer( GL_FRAMEBUFFER, _water_reflect_fbo );
     glViewport( 0, 0, (int) _width/2, (int) _height/2 );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
@@ -376,19 +356,16 @@ void Game::render() const
     eyelook.y = -eyelook.y;
     draw_scene( lookAt( eyepos, eyelook, vec3( 0, 1, 0 ) ), proj );
     glDisable( GL_CLIP_DISTANCE(0) );
-    glBindTexture( GL_TEXTURE_2D, _water_reflect_texture );
     [_view bindDrawable];
 
 
-    // Render refRAction.
-    glBindTexture( GL_TEXTURE_2D, 0 );
+    // Render refRAction
     glBindFramebuffer( GL_FRAMEBUFFER, _water_refract_fbo );
     glViewport( 0, 0, (int) (_width * .75), (int) (_height * .75) );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-    glEnable( GL_CLIP_DISTANCE(1) );
+    //glEnable( GL_CLIP_DISTANCE(1) );
     draw_scene( view, proj );
-    glDisable( GL_CLIP_DISTANCE(1) );
-    glBindTexture( GL_TEXTURE_2D, _water_refract_texture );
+    //glDisable( GL_CLIP_DISTANCE(1) );
     [_view bindDrawable];
 
 
@@ -398,10 +375,8 @@ void Game::render() const
     glViewport( 0, 0, (int) _width, (int) _height );
     //draw_scene( view, proj );
     _skybox_program.bind();
-    glUniformMatrix4fv( _skybox_program.find_uniform( "uViewMatrix" ),
-                       1, GL_FALSE, &view[ 0 ][ 0 ] );
-    glUniformMatrix4fv( _skybox_program.find_uniform( "uProjMatrix" ),
-                       1, GL_FALSE, &proj[ 0 ][ 0 ] );
+    glUniformMatrix4fv( _skybox_program.find_uniform( "uViewMatrix" ), 1, GL_FALSE, &view[ 0 ][ 0 ] );
+    glUniformMatrix4fv( _skybox_program.find_uniform( "uProjMatrix" ), 1, GL_FALSE, &proj[ 0 ][ 0 ] );
     
     glUniform1i( _skybox_program.find_uniform( "uTexture" ), 0 );
     glActiveTexture( GL_TEXTURE0 );
@@ -409,10 +384,8 @@ void Game::render() const
     _skybox_buffer.draw( GL_TRIANGLES, 0, 36 );
     
     _program->bind();
-    glUniformMatrix4fv( _program->find_uniform( "uViewMatrix" ),
-                       1, GL_FALSE, &view[ 0 ][ 0 ] );
-    glUniformMatrix4fv( _program->find_uniform( "uProjMatrix" ),
-                       1, GL_FALSE, &proj[ 0 ][ 0 ] );
+    glUniformMatrix4fv( _program->find_uniform( "uViewMatrix" ), 1, GL_FALSE, &view[ 0 ][ 0 ] );
+    glUniformMatrix4fv( _program->find_uniform( "uProjMatrix" ), 1, GL_FALSE, &proj[ 0 ][ 0 ] );
     glUniform4f( _program->find_uniform( "uColor" ), 1, 1, 1, 0 );
     
     _model.render( mat4(), view, proj );
@@ -420,7 +393,7 @@ void Game::render() const
     for ( const Entity& entity : _entities )
         entity.render( view, proj );
     
-#ifndef DEMO
+#if !DEMO
     glUniform4f( _program->find_uniform( "uColor" ), 1, 1, 1, 0 );
     _level.render( translate( mat4(), vec3( 0, -0.1, 0 ) ), view, proj );
 #endif
@@ -439,6 +412,9 @@ void Game::render() const
     glBindTexture( GL_TEXTURE_2D, _water_dudv.glHandle );
     glActiveTexture( GL_TEXTURE4 );
     glBindTexture( GL_TEXTURE_2D, _water_normal.glHandle );
+    
+    glUniformMatrix4fv( _water_program.find_uniform( "uViewMatrix" ), 1, GL_FALSE, &view[ 0 ][ 0 ] );
+    glUniformMatrix4fv( _water_program.find_uniform( "uProjMatrix" ), 1, GL_FALSE, &proj[ 0 ][ 0 ] );
 
     //glEnable( GL_BLEND );
     //glDisable( GL_DEPTH_TEST );
@@ -448,7 +424,7 @@ void Game::render() const
     //glDisable( GL_BLEND );
     //glEnable( GL_CULL_FACE );
     
-#ifndef DEMO
+#if !DEMO
     glEnable( GL_BLEND );
     _enemies.render( translate( mat4(), vec3( 0, -0.1, 0 ) ), view, proj );
     glDisable( GL_BLEND );
@@ -459,10 +435,8 @@ void Game::render() const
 void Game::draw_scene( glm::mat4 view, glm::mat4 proj ) const
 {
     _skybox_program.bind();
-    glUniformMatrix4fv( _skybox_program.find_uniform( "uViewMatrix" ),
-                        1, GL_FALSE, &view[ 0 ][ 0 ] );
-    glUniformMatrix4fv( _skybox_program.find_uniform( "uProjMatrix" ),
-                        1, GL_FALSE, &proj[ 0 ][ 0 ] );
+    glUniformMatrix4fv( _skybox_program.find_uniform( "uViewMatrix" ), 1, GL_FALSE, &view[ 0 ][ 0 ] );
+    glUniformMatrix4fv( _skybox_program.find_uniform( "uProjMatrix" ), 1, GL_FALSE, &proj[ 0 ][ 0 ] );
 
     glUniform1i( _skybox_program.find_uniform( "uTexture" ), 0 );
     glActiveTexture( GL_TEXTURE0 );
@@ -470,10 +444,8 @@ void Game::draw_scene( glm::mat4 view, glm::mat4 proj ) const
     _skybox_buffer.draw( GL_TRIANGLES, 0, 36 );
 
     _program->bind();
-    glUniformMatrix4fv( _program->find_uniform( "uViewMatrix" ),
-                        1, GL_FALSE, &view[ 0 ][ 0 ] );
-    glUniformMatrix4fv( _program->find_uniform( "uProjMatrix" ),
-                        1, GL_FALSE, &proj[ 0 ][ 0 ] );
+    glUniformMatrix4fv( _program->find_uniform( "uViewMatrix" ), 1, GL_FALSE, &view[ 0 ][ 0 ] );
+    glUniformMatrix4fv( _program->find_uniform( "uProjMatrix" ), 1, GL_FALSE, &proj[ 0 ][ 0 ] );
     glUniform4f( _program->find_uniform( "uColor" ), 1, 1, 1, 0 );
 
     _model.render( mat4(), view, proj );
@@ -481,7 +453,7 @@ void Game::draw_scene( glm::mat4 view, glm::mat4 proj ) const
     for ( const Entity& entity : _entities )
         entity.render( view, proj );
     
-#ifndef DEMO
+#if !DEMO
     glUniform4f( _program->find_uniform( "uColor" ), 1, 1, 1, 0 );
     _level.render( translate( mat4(), vec3( 0, -0.1, 0 ) ), view, proj );
     glEnable( GL_BLEND );

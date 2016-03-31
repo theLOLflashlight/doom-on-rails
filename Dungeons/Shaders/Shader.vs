@@ -1,18 +1,18 @@
 //
-//  Shader.fsh
+//  Shader.vsh
 //  Dungeons
 //
 //  Created by Andrew Meckling on 2016-03-22.
 //  Copyright © 2016 Andrew Meckling. All rights reserved.
 //
 #version 300 es
-precision highp float;
 
-in lowp vec4 colorVarying;
+in vec3 aPosition;
 
-out vec4 out_FragColor;
+uniform mat4 uViewMatrix;
+uniform mat4 uProjMatrix;
 
 void main()
 {
-    out_FragColor = colorVarying;
+    gl_Position = uProjMatrix * uViewMatrix * vec4( aPosition, 1.0 );
 }

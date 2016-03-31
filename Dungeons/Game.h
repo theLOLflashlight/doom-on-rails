@@ -41,6 +41,9 @@ public:
     GLTexture               _water_dudv;
     GLTexture               _water_normal;
     
+    GLProgram               _water_program;
+    GLVertexBuffer          _water_quad;
+    
     GLHandle                _water_reflect_texture;
     GLHandle                _water_reflect_fbo;
     
@@ -49,9 +52,6 @@ public:
     GLHandle                _water_refract_fbo;
     
     GLHandle                _water_render_buffer;
-    
-    GLProgram               _water_program;
-    GLVertexBuffer          _water_quad;
     
     glm::vec3               _eyepos, _eyepos0, _eyelook, _eyelook2;
     int                     _railidx = 0;

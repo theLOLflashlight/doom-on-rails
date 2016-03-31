@@ -1,6 +1,8 @@
 #version 300 es
 
 in          vec3        aPosition;
+//in          vec3        aNormal;
+//in          vec2        aTexCoord;
 
 out         vec4        vClipSpace;
 out         vec3        vEyeNormal;
@@ -21,9 +23,10 @@ void main()
     vec4 worldPos = uModelMatrix * vec4( aPosition, 1 );
 
     gl_Position = vp * worldPos;
-    /*vClipSpace = gl_Position;
+    
+    vClipSpace = gl_Position;
     vEyeNormal = worldPos.xyz - uEyePosition;
     vLightDirection = worldPos.xyz - uSunPosition;
 
-    vTexCoord =  (aPosition.xz / 2.0 + 0.5) / TILING;*/
+    vTexCoord = (aPosition.xz / 2.0 + 0.5) / TILING;
 }
