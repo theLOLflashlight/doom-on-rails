@@ -8,6 +8,7 @@
 
 #import "GameViewController.h"
 #import <OpenGLES/ES2/glext.h>
+#import "Game.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
@@ -84,9 +85,13 @@ GLfloat gCubeVertexData[216] =
     
     GLuint _vertexArray;
     GLuint _vertexBuffer;
+    Game*  _game;
+    GLuint _frameBuffer;
+    GLuint _colorBuffer;
 }
+
 @property (strong, nonatomic) EAGLContext *context;
-@property (strong, nonatomic) GLKBaseEffect *effect;
+//@property (strong, nonatomic) GLKBaseEffect *effect;
 
 - (void)setupGL;
 - (void)tearDownGL;
@@ -103,7 +108,7 @@ GLfloat gCubeVertexData[216] =
 {
     [super viewDidLoad];
     
-    self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    self.context = [[EAGLContext alloc] initWithAPI: kEAGLRenderingAPIOpenGLES3];
 
     if (!self.context) {
         NSLog(@"Failed to create ES context");
@@ -123,6 +128,8 @@ GLfloat gCubeVertexData[216] =
     if ([EAGLContext currentContext] == self.context) {
         [EAGLContext setCurrentContext:nil];
     }
+    
+    delete _game;
 }
 
 - (void)didReceiveMemoryWarning
@@ -150,28 +157,54 @@ GLfloat gCubeVertexData[216] =
 - (void)setupGL
 {
     [EAGLContext setCurrentContext:self.context];
+
+    /*//Build the main FrameBuffer
+    glGenFramebuffers(1, &_frameBuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, _frameBuffer);
+        
+    //Build the color Buffer
+    glGenRenderbuffers(1, &_colorBuffer);
+    glBindRenderbuffer(GL_RENDERBUFFER, _colorBuffer);
     
-    [self loadShaders];
+    int bufferWidth, bufferHeight;
+    //setup the color buffer with the EAGLLayer (it automatically defines width and height of the buffer)
+    [self.context renderbufferStorage:GL_RENDERBUFFER fromDrawable: [self.view layer]];
+    glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &bufferWidth);
+    glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &bufferHeight);
     
-    self.effect = [[GLKBaseEffect alloc] init];
-    self.effect.light0.enabled = GL_TRUE;
-    self.effect.light0.diffuseColor = GLKVector4Make(1.0f, 0.4f, 0.4f, 1.0f);
+    //Attach the colorbuffer to the framebuffer
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _colorBuffer);
+        
+    //Check the Framebuffer status
+    GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
     
-    glEnable(GL_DEPTH_TEST);
+    if ( status == GL_FRAMEBUFFER_COMPLETE )
+        ;//ERROR_FRAMEBUFFER_FAIL;*/
     
-    glGenVertexArraysOES(1, &_vertexArray);
-    glBindVertexArrayOES(_vertexArray);
+    //[self loadShaders];
     
-    glGenBuffers(1, &_vertexBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(gCubeVertexData), gCubeVertexData, GL_STATIC_DRAW);
+    //self.effect = [[GLKBaseEffect alloc] init];
+    //self.effect.light0.enabled = GL_TRUE;
+    //self.effect.light0.diffuseColor = GLKVector4Make(1.0f, 0.4f, 0.4f, 1.0f);
     
-    glEnableVertexAttribArray(GLKVertexAttribPosition);
-    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(0));
-    glEnableVertexAttribArray(GLKVertexAttribNormal);
-    glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(12));
+    //glEnable(GL_DEPTH_TEST);
     
-    glBindVertexArrayOES(0);
+    //glGenVertexArraysOES(1, &_vertexArray);
+    //glBindVertexArrayOES(_vertexArray);
+    
+    //glGenBuffers(1, &_vertexBuffer);
+    //glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
+    //glBufferData(GL_ARRAY_BUFFER, sizeof(gCubeVertexData), gCubeVertexData, GL_STATIC_DRAW);
+    
+    //glEnableVertexAttribArray(GLKVertexAttribPosition);
+    //glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(0));
+    //glEnableVertexAttribArray(GLKVertexAttribNormal);
+    //glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(12));
+    
+    //glBindVertexArrayOES(0);
+    
+    _game = new Game( (GLKView*) self.view );
+    //_game = new Game( 720, 1280 );
 }
 
 - (void)tearDownGL
@@ -181,7 +214,7 @@ GLfloat gCubeVertexData[216] =
     glDeleteBuffers(1, &_vertexBuffer);
     glDeleteVertexArraysOES(1, &_vertexArray);
     
-    self.effect = nil;
+    //self.effect = nil;
     
     if (_program) {
         glDeleteProgram(_program);
@@ -193,10 +226,12 @@ GLfloat gCubeVertexData[216] =
 
 - (void)update
 {
+    _game->update( self.timeSinceLastUpdate );
+    
     float aspect = fabs(self.view.bounds.size.width / self.view.bounds.size.height);
     GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
     
-    self.effect.transform.projectionMatrix = projectionMatrix;
+    //self.effect.transform.projectionMatrix = projectionMatrix;
     
     GLKMatrix4 baseModelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -4.0f);
     baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix, _rotation, 0.0f, 1.0f, 0.0f);
@@ -206,7 +241,7 @@ GLfloat gCubeVertexData[216] =
     modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
     modelViewMatrix = GLKMatrix4Multiply(baseModelViewMatrix, modelViewMatrix);
     
-    self.effect.transform.modelviewMatrix = modelViewMatrix;
+    //self.effect.transform.modelviewMatrix = modelViewMatrix;
     
     // Compute the model view matrix for the object rendered with ES2
     modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 1.5f);
@@ -222,23 +257,25 @@ GLfloat gCubeVertexData[216] =
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    glBindVertexArrayOES(_vertexArray);
+    //glBindVertexArray(_vertexArray);
     
     // Render the object with GLKit
-    [self.effect prepareToDraw];
+    //[self.effect prepareToDraw];
     
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+    //glDrawArrays(GL_TRIANGLES, 0, 36);
     
     // Render the object again with ES2
-    glUseProgram(_program);
+    //glUseProgram(_program);
     
-    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
-    glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, _normalMatrix.m);
+    //glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
+    //glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, _normalMatrix.m);
     
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+    //glDrawArrays(GL_TRIANGLES, 0, 36);
+    
+    _game->render();
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation

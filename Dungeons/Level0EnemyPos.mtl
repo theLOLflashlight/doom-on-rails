@@ -1,0 +1,21 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl enemy2
+Ka 0.000000 0.000000 0.000000
+Kd 0.631373 0.384314 0.380392
+Ks 0.330000 0.330000 0.330000
+map_Kd Level0EnemyPos/enemy2.png
+
+newmtl ForegroundColor
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.330000 0.330000 0.330000
+
+newmtl enemy0
+Ka 0.000000 0.000000 0.000000
+Kd 0.635294 0.682353 0.568627
+Ks 0.330000 0.330000 0.330000
+map_Kd Level0EnemyPos/enemy0.png
+

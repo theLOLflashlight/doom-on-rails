@@ -5,11 +5,12 @@
 //  Created by Andrew Meckling on 2016-03-22.
 //  Copyright © 2016 Andrew Meckling. All rights reserved.
 //
+#version 300 es
 
-attribute vec4 position;
-attribute vec3 normal;
+in vec4 position;
+in vec3 normal;
 
-varying lowp vec4 colorVarying;
+out lowp vec4 colorVarying;
 
 uniform mat4 modelViewProjectionMatrix;
 uniform mat3 normalMatrix;
