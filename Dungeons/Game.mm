@@ -102,6 +102,8 @@ Game::Game( GLKView* view )
         Entity( &_model, vec3( 2, -.75, 0 ) ),
         Entity( &_model, vec3( 0, .75, 2 ) ),
         Entity( &_model, vec3( 0, 2, 0 ) )
+#else
+        Entity( &_model )
 #endif
     } )
 
@@ -317,8 +319,10 @@ void Game::update( double step )
     glUniform3fv( _water_program.find_uniform( "uEyePosition" ), 1, &_eyepos[0] );
     glUseProgram( 0 );
     
+#if DEMO
     for ( int i = 0; i < _entities.size(); i++ )
         _entities[ i ].rotation[ i % 3 ] += step * 2;
+#endif
 }
 
 

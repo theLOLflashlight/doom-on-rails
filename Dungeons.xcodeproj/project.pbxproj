@@ -183,6 +183,7 @@
 		53C679491CA22E62007C7945 /* DungeonsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DungeonsUITests.m; sourceTree = "<group>"; };
 		53C6794B1CA22E62007C7945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53C679571CA22F35007C7945 /* glm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = glm; sourceTree = "<group>"; };
+		8132867C1CADF3B500EC6C72 /* Dungeons-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dungeons-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -369,6 +370,7 @@
 				5385DE751CA3366800F1A323 /* Renderer */,
 				5385DE8C1CA3429600F1A323 /* SOIL */,
 				53C679201CA22E62007C7945 /* Supporting Files */,
+				8132867C1CADF3B500EC6C72 /* Dungeons-Bridging-Header.h */,
 			);
 			path = Dungeons;
 			sourceTree = "<group>";
@@ -469,7 +471,7 @@
 				TargetAttributes = {
 					53C6791C1CA22E62007C7945 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = QBSFJ43NUJ;
+						DevelopmentTeam = RX327XMQJX;
 					};
 					53C679391CA22E62007C7945 = {
 						CreatedOnToolsVersion = 7.2;
@@ -726,6 +728,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -742,9 +745,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Dungeons/Dungeons-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -752,6 +757,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -768,9 +774,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Dungeons/Dungeons-Bridging-Header.h";
 			};
 			name = Release;
 		};
