@@ -1,10 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="c2o-XR-f66">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="mee-7g-ees">
+            <objects>
+                <viewController id="c2o-XR-f66" customClass="MainViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qcv-97-tjL"/>
+                        <viewControllerLayoutGuide type="bottom" id="ROd-qp-XwJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fQx-Be-q5P">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f75-dD-U7M">
+                                <rect key="frame" x="0.0" y="630" width="600" height="90"/>
+                                <connections>
+                                    <action selector="LoginSoundEffect:" destination="c2o-XR-f66" eventType="touchUpInside" id="cxc-vU-Czx"/>
+                                    <segue destination="BV1-FR-VrT" kind="show" id="672-By-tah"/>
+                                </connections>
+                            </button>
+                            <webView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kgn-ub-bvq">
+                                <rect key="frame" x="180" y="236" width="240" height="128"/>
+                            </webView>
+                            <webView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AMb-h0-fhH">
+                                <rect key="frame" x="0.0" y="630" width="600" height="90"/>
+                            </webView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h82-3T-8J3">
+                                <rect key="frame" x="940" y="20" width="50" height="50"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="SoundButton:" destination="c2o-XR-f66" eventType="touchUpInside" id="Z2D-RX-s4f"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="kgn-ub-bvq" firstAttribute="width" secondItem="fQx-Be-q5P" secondAttribute="width" id="6XY-x3-ZxX"/>
+                            <constraint firstItem="AMb-h0-fhH" firstAttribute="width" secondItem="fQx-Be-q5P" secondAttribute="width" id="7oa-Ze-s0n"/>
+                            <constraint firstItem="kgn-ub-bvq" firstAttribute="centerX" secondItem="fQx-Be-q5P" secondAttribute="centerX" id="Drb-hK-mhJ"/>
+                            <constraint firstItem="kgn-ub-bvq" firstAttribute="centerY" secondItem="fQx-Be-q5P" secondAttribute="centerY" id="JBq-t8-qIF"/>
+                            <constraint firstItem="kgn-ub-bvq" firstAttribute="height" secondItem="fQx-Be-q5P" secondAttribute="height" id="T6u-SF-F6A"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="Login" destination="AMb-h0-fhH" id="XW0-u3-SNz"/>
+                        <outlet property="SoundButtonEffect" destination="h82-3T-8J3" id="f5K-Ya-LKr"/>
+                        <outlet property="UIWebView" destination="kgn-ub-bvq" id="45Q-lZ-JfD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HyO-IZ-pwh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="285" y="561"/>
+        </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
@@ -21,6 +76,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1276" y="561"/>
         </scene>
     </scenes>
 </document>
