@@ -51,7 +51,8 @@ public:
     GLHandle                _water_refract_depth_texture;
     GLHandle                _water_refract_fbo;
     
-    GLHandle                _water_render_buffer;
+    GLHandle                _water_reflect_render_buffer;
+    GLHandle                _water_refract_render_buffer;
     
     glm::vec3               _eyepos, _eyepos0, _eyelook, _eyelook2;
     int                     _railidx = 0;

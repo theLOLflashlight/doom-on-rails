@@ -15,7 +15,7 @@ uniform     mat4        uProjMatrix;
 uniform     vec3        uEyePosition;
 uniform     vec3        uSunPosition;
 
-const       float       TILING              = 3.0;
+const       float       TILING              = 4.0;
 
 void main()
 {

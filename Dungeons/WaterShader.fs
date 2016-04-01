@@ -19,7 +19,7 @@ uniform     float       uDuDvFactor;
 
 out         vec4        out_Color;
 
-const       float       WAVE_STRENGTH       = 0.04;
+const       float       WAVE_STRENGTH       = 0.02;
 const       float       SHINE_DAMPER        = 40.0;
 const       float       REFLECTIVITY        = 0.5;
 
@@ -40,13 +40,14 @@ void main()
     float waterDist = 2.0 * NEAR * FAR / (FAR + NEAR - (2.0 * gl_FragCoord.z - 1.0) * (FAR - NEAR));
     float waterDepth = floorDist - waterDist;
 
+
     vec2 distor = texture( uMapDuDv, vec2( vTexCoord.x + uDuDvFactor, vTexCoord.y ) ).rg * 0.1;
     distor = vTexCoord + vec2( distor.x, distor.y + uDuDvFactor );
     distor = (texture( uMapDuDv, distor ).rg * 2.0 - 1.0) * WAVE_STRENGTH;
 
     float depthClamp = clamp( waterDepth / 5.0, 0.0, 1.0 );
 
-    refleTexCoord += distor * depthClamp;
+    refleTexCoord += distor * clamp( waterDepth, 0.0, 1.0 );
     refleTexCoord.x = clamp( refleTexCoord.x, 0.001, 0.999 );
     refleTexCoord.y = clamp( refleTexCoord.y, -0.999, -0.001 );
 
@@ -72,10 +73,10 @@ void main()
 
     out_Color = mix( refleColor, refraColor, fresnl );
     out_Color = mix( out_Color, vec4( 0.0, 0.3, 0.5, 1.0 ), 0.2 ) + vec4( specHigh, 0.0 );
-    //gl_FragColor.a = depthClamp * 2.0 - 1.0;
-
-    //gl_FragColor = vec4( clamp( waterDepth / 5, 0, 1 ) );
-
-    //gl_FragColor = mix( gl_FragColor, uColor, 0 );
-    //out_Color = texture( uMapDepth, distor );
+    //out_Color = texture( uMapDepth, vTexCoord );
 }
+
+
+
+
+

@@ -39,7 +39,6 @@ void main()
 
     vec4 plane = uWaterPlane;
     gl_ClipDistance[ 0 ] = dot( gl_Position, vec4( plane.xyz, plane.w + 0.02 ) );
-    gl_ClipDistance[ 1 ] = dot( gl_Position, vec4( -plane.xyz, plane.w + 0.02 ) );
 
     gl_Position = uProjMatrix * uViewMatrix * gl_Position;
 
