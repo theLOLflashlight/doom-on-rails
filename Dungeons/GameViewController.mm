@@ -9,6 +9,7 @@
 #import "GameViewController.h"
 #import <OpenGLES/ES2/glext.h>
 #import "Game.h"
+#import "glm/gtx/intersect.hpp"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
@@ -88,7 +89,14 @@ GLfloat gCubeVertexData[216] =
     Game*  _game;
     GLuint _frameBuffer;
     GLuint _colorBuffer;
+    
+    Entity* _projectile;
+    
+    glm::vec3 _projectileVelocity;
+    
+    bool rotating;
 }
+
 
 @property (strong, nonatomic) EAGLContext *context;
 //@property (strong, nonatomic) GLKBaseEffect *effect;
@@ -104,6 +112,36 @@ GLfloat gCubeVertexData[216] =
 
 @implementation GameViewController
 
+- (IBAction)onTouch:(id)sender {
+    printf( "lol" );
+}
+
+//Tap handling - spawn projectile
+- (void)handleTapGesture:(UITapGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateRecognized) {
+        //spawn_projectile:( glm::vec3 )pos velocity:( glm::vec3 ) vel
+        
+        const auto width = _game->_width / 2;
+        const auto height = _game->_height / 2;
+        const float aspectRatio = width / height;
+        
+        const glm::mat4 view = glm::lookAt( _game->_eyepos, _game->_eyelook, glm::vec3( 0, 1, 0 ) );
+        const glm::mat4 proj = glm::perspective< float >( glm::radians( 80.0f ), aspectRatio, 0.1, 1000 );
+        
+        CGPoint mouse = [sender locationInView:self.view];
+        
+        glm::vec3 touchPos0 = glm::unProject(
+            glm::vec3( mouse.x, -mouse.y, 0 ),
+            view, proj, glm::vec4( 0, -height, width, height ) );
+        
+        glm::vec3 touchPos1 = glm::unProject(
+            glm::vec3( mouse.x, -mouse.y, 1 ),
+            view, proj, glm::vec4( 0, -height, width, height ) );
+        
+        [self spawn_projectile: touchPos0 velocity: glm::normalize(touchPos1 - touchPos0)];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -113,6 +151,12 @@ GLfloat gCubeVertexData[216] =
     if (!self.context) {
         NSLog(@"Failed to create ES context");
     }
+    
+    //Q2 - double tap
+    rotating = YES; //init rotating
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+    tapGesture.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer:tapGesture];
     
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
@@ -157,7 +201,7 @@ GLfloat gCubeVertexData[216] =
 - (void)setupGL
 {
     [EAGLContext setCurrentContext:self.context];
-
+    
     /*//Build the main FrameBuffer
     glGenFramebuffers(1, &_frameBuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, _frameBuffer);
@@ -204,6 +248,9 @@ GLfloat gCubeVertexData[216] =
     //glBindVertexArrayOES(0);
     
     _game = new Game( (GLKView*) self.view );
+    
+    _projectile = &_game->_entities[ 0 ];
+    _projectileVelocity = glm::vec3();
     //_game = new Game( 720, 1280 );
 }
 
@@ -224,9 +271,22 @@ GLfloat gCubeVertexData[216] =
 
 #pragma mark - GLKView and GLKViewController delegate methods
 
+- (void) spawn_projectile:( glm::vec3 )pos velocity:( glm::vec3 ) vel
+{
+    //const glm::mat4 view = glm::lookAt( _game->_eyepos, _game->_eyelook, glm::vec3( 0, 1, 0 ) );
+    _projectile->position = pos;
+    _projectileVelocity = vel;
+    
+}
+
 - (void)update
 {
+    //_game->update( self.timeSinceLastUpdate / 8 );
     _game->update( self.timeSinceLastUpdate );
+    //_game->update( 0 );
+    //_projectile->position += _projectileVelocity / 8.0f;
+    _projectile->position += _projectileVelocity;
+    
     
     float aspect = fabs(self.view.bounds.size.width / self.view.bounds.size.height);
     GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
