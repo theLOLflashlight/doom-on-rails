@@ -183,7 +183,6 @@
 		53C679491CA22E62007C7945 /* DungeonsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DungeonsUITests.m; sourceTree = "<group>"; };
 		53C6794B1CA22E62007C7945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53C679571CA22F35007C7945 /* glm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = glm; sourceTree = "<group>"; };
-		8132867C1CADF3B500EC6C72 /* Dungeons-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dungeons-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,7 +346,6 @@
 		53C6791F1CA22E62007C7945 /* Dungeons */ = {
 			isa = PBXGroup;
 			children = (
-				532ECA9A1CADBDC5001BB153 /* Levels */,
 				53C679351CA22E62007C7945 /* Info.plist */,
 				53C679231CA22E62007C7945 /* AppDelegate.h */,
 				53C679241CA22E62007C7945 /* AppDelegate.m */,
@@ -365,12 +363,12 @@
 				53C679301CA22E62007C7945 /* Assets.xcassets */,
 				53C6792D1CA22E62007C7945 /* Main.storyboard */,
 				53C679321CA22E62007C7945 /* LaunchScreen.storyboard */,
+				532ECA9A1CADBDC5001BB153 /* Levels */,
 				532ECA731CADAC79001BB153 /* Textures */,
 				532ECA721CADAB21001BB153 /* Shaders */,
 				5385DE751CA3366800F1A323 /* Renderer */,
 				5385DE8C1CA3429600F1A323 /* SOIL */,
 				53C679201CA22E62007C7945 /* Supporting Files */,
-				8132867C1CADF3B500EC6C72 /* Dungeons-Bridging-Header.h */,
 			);
 			path = Dungeons;
 			sourceTree = "<group>";
@@ -471,7 +469,7 @@
 				TargetAttributes = {
 					53C6791C1CA22E62007C7945 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = RX327XMQJX;
+						DevelopmentTeam = QBSFJ43NUJ;
 					};
 					53C679391CA22E62007C7945 = {
 						CreatedOnToolsVersion = 7.2;
@@ -745,7 +743,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons2;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dungeons/Dungeons-Bridging-Header.h";
@@ -774,7 +772,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons2;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dungeons/Dungeons-Bridging-Header.h";
