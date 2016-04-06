@@ -152,20 +152,20 @@ Game::Game( GLKView* view )
     glBindTexture( GL_TEXTURE_2D, _water_reflect_texture );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-    glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA8_OES, _width/2, _height/2, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr );
+    glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, _width/2, _height/2, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr );
     glBindTexture( GL_TEXTURE_2D, 0 );
     
     // DEPTH BUFFER
     glGenRenderbuffers( 1, &_water_reflect_render_buffer );
     glBindRenderbuffer( GL_RENDERBUFFER, _water_reflect_render_buffer );
-    glRenderbufferStorage( GL_RENDERBUFFER, GL_DEPTH_COMPONENT24_OES, _width, _height );
+    glRenderbufferStorage( GL_RENDERBUFFER, GL_DEPTH_COMPONENT32F, _width, _height );
     glBindRenderbuffer( GL_RENDERBUFFER, 0 );
     
     // FRAME BUFFER
     glGenFramebuffers( 1, &_water_reflect_fbo );
     glBindFramebuffer( GL_FRAMEBUFFER, _water_reflect_fbo );
     glFramebufferTexture2D( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _water_reflect_texture, 0 );
-
+    
     glFramebufferRenderbuffer( GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _water_reflect_render_buffer );
     
     status = glCheckFramebufferStatus( GL_FRAMEBUFFER );
@@ -180,7 +180,7 @@ Game::Game( GLKView* view )
     glBindTexture( GL_TEXTURE_2D, _water_refract_texture );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-    glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA8_OES, _width * .75, _height * .75, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr );
+    glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, _width * .75, _height * .75, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr );
     glBindTexture( GL_TEXTURE_2D, 0 );
     
     // DEPTH TEXTURE
@@ -188,13 +188,13 @@ Game::Game( GLKView* view )
     glBindTexture( GL_TEXTURE_2D, _water_refract_depth_texture );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-    glTexImage2D( GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24_OES, _width * .75, _height * .75, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr );
+    glTexImage2D( GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, _width * .75, _height * .75, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr );
     glBindTexture( GL_TEXTURE_2D, 0 );
     
     // DEPTH BUFFER
     glGenRenderbuffers( 1, &_water_refract_render_buffer );
     glBindRenderbuffer( GL_RENDERBUFFER, _water_refract_render_buffer );
-    glRenderbufferStorage( GL_RENDERBUFFER, GL_DEPTH_COMPONENT24_OES, _width, _height );
+    glRenderbufferStorage( GL_RENDERBUFFER, GL_DEPTH_COMPONENT32F, _width, _height );
     glBindRenderbuffer( GL_RENDERBUFFER, 0 );
 
     // FRAME BUFFER

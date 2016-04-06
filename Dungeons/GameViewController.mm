@@ -7,7 +7,7 @@
 //
 
 #import "GameViewController.h"
-#import <OpenGLES/ES2/glext.h>
+#import <OpenGLES/ES3/glext.h>
 #import "Game.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))

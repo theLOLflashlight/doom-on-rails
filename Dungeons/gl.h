@@ -11,12 +11,12 @@
 //#ifndef gl_h
 //#define gl_h
 
-#import <OpenGLES/ES2/glext.h>
+#import <OpenGLES/ES3/glext.h>
 
-#define glBindVertexArray       glBindVertexArrayOES
-#define glDeleteVertexArrays    glDeleteVertexArraysOES
-#define glGenVertexArrays       glGenVertexArraysOES
-#define glIsVertexArray         glIsVertexArrayOES
+//#define glBindVertexArray       glBindVertexArrayOES
+//#define glDeleteVertexArrays    glDeleteVertexArraysOES
+//#define glGenVertexArrays       glGenVertexArraysOES
+//#define glIsVertexArray         glIsVertexArrayOES
 
 #define GL_CLIP_DISTANCE( n )   GL_CLIP_DISTANCE##0##_APPLE
 
