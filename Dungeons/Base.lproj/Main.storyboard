@@ -1,10 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rZz-8N-SCI">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="ysK-lj-nbf">
+            <objects>
+                <viewController id="rZz-8N-SCI" customClass="MainViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="l3Y-cb-RCH"/>
+                        <viewControllerLayoutGuide type="bottom" id="sTi-vM-V0k"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5l8-c4-kS1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Tq-bk-452">
+                                <rect key="frame" x="180" y="236" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kc6-S5-CUW">
+                                <rect key="frame" x="940" y="30" width="50" height="50"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="SoundButton:" destination="rZz-8N-SCI" eventType="touchUpInside" id="l30-y5-9Lf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OC2-Dp-ZLW">
+                                <rect key="frame" x="0.0" y="630" width="600" height="90"/>
+                                <connections>
+                                    <action selector="Login:" destination="rZz-8N-SCI" eventType="touchUpInside" id="RQH-M7-9wv"/>
+                                    <segue destination="BV1-FR-VrT" kind="showDetail" action="showViewController:sender:" id="JEP-ZT-spM"/>
+                                </connections>
+                            </button>
+                            <webView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o8y-Pk-AgF">
+                                <rect key="frame" x="0.0" y="630" width="600" height="90"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="3Tq-bk-452" firstAttribute="centerX" secondItem="5l8-c4-kS1" secondAttribute="centerX" id="L8i-sh-b7r"/>
+                            <constraint firstItem="o8y-Pk-AgF" firstAttribute="width" secondItem="5l8-c4-kS1" secondAttribute="width" id="Nci-Ac-pBo"/>
+                            <constraint firstItem="3Tq-bk-452" firstAttribute="height" secondItem="5l8-c4-kS1" secondAttribute="height" id="Y98-R0-yRd"/>
+                            <constraint firstItem="3Tq-bk-452" firstAttribute="centerY" secondItem="5l8-c4-kS1" secondAttribute="centerY" id="hSE-XS-zOD"/>
+                            <constraint firstItem="3Tq-bk-452" firstAttribute="width" secondItem="5l8-c4-kS1" secondAttribute="width" id="qOB-Wc-US3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="Login" destination="o8y-Pk-AgF" id="7ZU-3F-VWk"/>
+                        <outlet property="SoundButtonEffect" destination="kc6-S5-CUW" id="47H-rP-e70"/>
+                        <outlet property="UIWebView" destination="3Tq-bk-452" id="sU1-Kf-ow1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xga-Ij-T8a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="331" y="525"/>
+        </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
@@ -23,6 +79,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="0si-ZP-tQY"/>
             </objects>
+            <point key="canvasLocation" x="1126" y="525"/>
         </scene>
     </scenes>
 </document>

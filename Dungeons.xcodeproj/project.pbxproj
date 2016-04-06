@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		445332001CB5BD3B004DC43B /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445331FF1CB5BD3B004DC43B /* MainViewController.m */; };
+		445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */ = {isa = PBXBuildFile; fileRef = 445332041CB5BD81004DC43B /* ButtonPress.wav */; };
+		445332071CB5BD81004DC43B /* DOOM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 445332051CB5BD81004DC43B /* DOOM.mp3 */; };
+		4453320C1CB5BD9C004DC43B /* BGT1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 445332081CB5BD9C004DC43B /* BGT1.gif */; };
+		4453320D1CB5BD9C004DC43B /* SoundOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 445332091CB5BD9C004DC43B /* SoundOff.png */; };
+		4453320E1CB5BD9C004DC43B /* SoundOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4453320A1CB5BD9C004DC43B /* SoundOn.png */; };
+		4453320F1CB5BD9C004DC43B /* Start.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4453320B1CB5BD9C004DC43B /* Start.gif */; };
 		532ECA701CADA9F8001BB153 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532ECA6F1CADA9F8001BB153 /* OpenGLES.framework */; };
 		532ECA881CADBDBD001BB153 /* DemoRail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA761CADBDBD001BB153 /* DemoRail.mtl */; };
 		532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA771CADBDBD001BB153 /* DemoRail.obj */; };
@@ -88,6 +95,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		445331FF1CB5BD3B004DC43B /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		445332011CB5BD44004DC43B /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		445332041CB5BD81004DC43B /* ButtonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonPress.wav; sourceTree = "<group>"; };
+		445332051CB5BD81004DC43B /* DOOM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DOOM.mp3; sourceTree = "<group>"; };
+		445332081CB5BD9C004DC43B /* BGT1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = BGT1.gif; sourceTree = "<group>"; };
+		445332091CB5BD9C004DC43B /* SoundOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SoundOff.png; sourceTree = "<group>"; };
+		4453320A1CB5BD9C004DC43B /* SoundOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SoundOn.png; sourceTree = "<group>"; };
+		4453320B1CB5BD9C004DC43B /* Start.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Start.gif; sourceTree = "<group>"; };
 		532ECA6F1CADA9F8001BB153 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		532ECA741CADB02B001BB153 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		532ECA761CADBDBD001BB153 /* DemoRail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DemoRail.mtl; sourceTree = "<group>"; };
@@ -213,6 +228,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		445332021CB5BD5E004DC43B /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				445332041CB5BD81004DC43B /* ButtonPress.wav */,
+				445332051CB5BD81004DC43B /* DOOM.mp3 */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
+		445332031CB5BD68004DC43B /* Pictures */ = {
+			isa = PBXGroup;
+			children = (
+				445332081CB5BD9C004DC43B /* BGT1.gif */,
+				445332091CB5BD9C004DC43B /* SoundOff.png */,
+				4453320A1CB5BD9C004DC43B /* SoundOn.png */,
+				4453320B1CB5BD9C004DC43B /* Start.gif */,
+			);
+			name = Pictures;
+			sourceTree = "<group>";
+		};
 		532ECA711CADAA1D001BB153 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,9 +381,13 @@
 		53C6791F1CA22E62007C7945 /* Dungeons */ = {
 			isa = PBXGroup;
 			children = (
+				445332031CB5BD68004DC43B /* Pictures */,
+				445332021CB5BD5E004DC43B /* Sounds */,
 				53C679351CA22E62007C7945 /* Info.plist */,
 				53C679231CA22E62007C7945 /* AppDelegate.h */,
 				53C679241CA22E62007C7945 /* AppDelegate.m */,
+				445332011CB5BD44004DC43B /* MainViewController.h */,
+				445331FF1CB5BD3B004DC43B /* MainViewController.m */,
 				53C6792A1CA22E62007C7945 /* GameViewController.h */,
 				53C6792B1CA22E62007C7945 /* GameViewController.mm */,
 				5385DE351CA3365100F1A323 /* Game.h */,
@@ -517,12 +556,16 @@
 				53C679291CA22E62007C7945 /* Shader.vs in Resources */,
 				532ECA931CADBDBD001BB153 /* Level0EnemyRail.mtl in Resources */,
 				532ECA971CADBDBD001BB153 /* Level0Layout.obj in Resources */,
+				4453320F1CB5BD9C004DC43B /* Start.gif in Resources */,
+				4453320D1CB5BD9C004DC43B /* SoundOff.png in Resources */,
 				532ECA8F1CADBDBD001BB153 /* Level0All.obj in Resources */,
 				532ECA911CADBDBD001BB153 /* Level0EnemyPos.mtl in Resources */,
 				53C679311CA22E62007C7945 /* Assets.xcassets in Resources */,
 				5385DE5C1CA3365100F1A323 /* crate.mtl in Resources */,
+				445332071CB5BD81004DC43B /* DOOM.mp3 in Resources */,
 				53C679581CA22F35007C7945 /* glm in Resources */,
 				53C679341CA22E62007C7945 /* LaunchScreen.storyboard in Resources */,
+				4453320E1CB5BD9C004DC43B /* SoundOn.png in Resources */,
 				532ECA961CADBDBD001BB153 /* Level0Layout.mtl in Resources */,
 				5385DE6E1CA3365100F1A323 /* skybox in Resources */,
 				5385DE721CA3365100F1A323 /* water in Resources */,
@@ -537,6 +580,8 @@
 				532ECA921CADBDBD001BB153 /* Level0EnemyPos.obj in Resources */,
 				5385DE731CA3365100F1A323 /* WaterShader.fs in Resources */,
 				5385DE5B1CA3365100F1A323 /* crate in Resources */,
+				4453320C1CB5BD9C004DC43B /* BGT1.gif in Resources */,
+				445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */,
 				532ECA941CADBDBD001BB153 /* Level0EnemyRail.obj in Resources */,
 				532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */,
 				5385DE741CA3365100F1A323 /* WaterShader.vs in Resources */,
@@ -570,6 +615,7 @@
 				5385DE5D1CA3365100F1A323 /* Entity.cpp in Sources */,
 				5385DE8F1CA3543200F1A323 /* image_helper.c in Sources */,
 				5385DE631CA3365100F1A323 /* GLVertexBuffer.cpp in Sources */,
+				445332001CB5BD3B004DC43B /* MainViewController.m in Sources */,
 				53C679251CA22E62007C7945 /* AppDelegate.m in Sources */,
 				5385DE6C1CA3365100F1A323 /* ShaderInterface.cpp in Sources */,
 				5385DE941CA359B700F1A323 /* ios_path.mm in Sources */,
