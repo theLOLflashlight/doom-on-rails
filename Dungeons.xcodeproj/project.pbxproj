@@ -14,6 +14,7 @@
 		4453320D1CB5BD9C004DC43B /* SoundOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 445332091CB5BD9C004DC43B /* SoundOff.png */; };
 		4453320E1CB5BD9C004DC43B /* SoundOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4453320A1CB5BD9C004DC43B /* SoundOn.png */; };
 		4453320F1CB5BD9C004DC43B /* Start.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4453320B1CB5BD9C004DC43B /* Start.gif */; };
+		445332111CB5C48E004DC43B /* Logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 445332101CB5C48E004DC43B /* Logout.png */; };
 		532ECA701CADA9F8001BB153 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532ECA6F1CADA9F8001BB153 /* OpenGLES.framework */; };
 		532ECA881CADBDBD001BB153 /* DemoRail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA761CADBDBD001BB153 /* DemoRail.mtl */; };
 		532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA771CADBDBD001BB153 /* DemoRail.obj */; };
@@ -103,6 +104,7 @@
 		445332091CB5BD9C004DC43B /* SoundOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SoundOff.png; sourceTree = "<group>"; };
 		4453320A1CB5BD9C004DC43B /* SoundOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SoundOn.png; sourceTree = "<group>"; };
 		4453320B1CB5BD9C004DC43B /* Start.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Start.gif; sourceTree = "<group>"; };
+		445332101CB5C48E004DC43B /* Logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logout.png; sourceTree = "<group>"; };
 		532ECA6F1CADA9F8001BB153 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		532ECA741CADB02B001BB153 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		532ECA761CADBDBD001BB153 /* DemoRail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DemoRail.mtl; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 		445332031CB5BD68004DC43B /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
+				445332101CB5C48E004DC43B /* Logout.png */,
 				445332081CB5BD9C004DC43B /* BGT1.gif */,
 				445332091CB5BD9C004DC43B /* SoundOff.png */,
 				4453320A1CB5BD9C004DC43B /* SoundOn.png */,
@@ -561,6 +564,7 @@
 				532ECA8F1CADBDBD001BB153 /* Level0All.obj in Resources */,
 				532ECA911CADBDBD001BB153 /* Level0EnemyPos.mtl in Resources */,
 				53C679311CA22E62007C7945 /* Assets.xcassets in Resources */,
+				445332111CB5C48E004DC43B /* Logout.png in Resources */,
 				5385DE5C1CA3365100F1A323 /* crate.mtl in Resources */,
 				445332071CB5BD81004DC43B /* DOOM.mp3 in Resources */,
 				53C679581CA22F35007C7945 /* glm in Resources */,
