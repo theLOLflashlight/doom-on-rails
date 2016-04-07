@@ -90,8 +90,7 @@ Game::Game( GLKView* view )
     , _startTime( 0 )
     , _currTime( _startTime )
 
-    , _program( new GLProgram( ios_path( "MyShader.vs" ), ios_path( "MyShader.fs" ),
-                              "aPosition", "aNormal", "aTexCoord" ) )
+    , _program( new GLProgram( ios_path( "MyShader.vs" ), ios_path( "MyShader.fs" ), "aPosition", "aNormal", "aTexCoord" ) )
 
     , _model( ObjMesh( ios_path( "crate.obj" ) ), _program )
     , _level( ObjMesh( ios_path( "Level0Layout.obj" ) ), _program )

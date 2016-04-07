@@ -72,27 +72,8 @@
 		53C6792F1CA22E62007C7945 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53C6792D1CA22E62007C7945 /* Main.storyboard */; };
 		53C679311CA22E62007C7945 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53C679301CA22E62007C7945 /* Assets.xcassets */; };
 		53C679341CA22E62007C7945 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53C679321CA22E62007C7945 /* LaunchScreen.storyboard */; };
-		53C6793F1CA22E62007C7945 /* DungeonsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C6793E1CA22E62007C7945 /* DungeonsTests.m */; };
-		53C6794A1CA22E62007C7945 /* DungeonsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C679491CA22E62007C7945 /* DungeonsUITests.m */; };
 		53C679581CA22F35007C7945 /* glm in Resources */ = {isa = PBXBuildFile; fileRef = 53C679571CA22F35007C7945 /* glm */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		53C6793B1CA22E62007C7945 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 53C679151CA22E62007C7945 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 53C6791C1CA22E62007C7945;
-			remoteInfo = Dungeons;
-		};
-		53C679461CA22E62007C7945 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 53C679151CA22E62007C7945 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 53C6791C1CA22E62007C7945;
-			remoteInfo = Dungeons;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		445331FF1CB5BD3B004DC43B /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
@@ -191,12 +172,6 @@
 		53C679301CA22E62007C7945 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		53C679331CA22E62007C7945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		53C679351CA22E62007C7945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		53C6793A1CA22E62007C7945 /* DungeonsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DungeonsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		53C6793E1CA22E62007C7945 /* DungeonsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DungeonsTests.m; sourceTree = "<group>"; };
-		53C679401CA22E62007C7945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		53C679451CA22E62007C7945 /* DungeonsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DungeonsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		53C679491CA22E62007C7945 /* DungeonsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DungeonsUITests.m; sourceTree = "<group>"; };
-		53C6794B1CA22E62007C7945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53C679571CA22F35007C7945 /* glm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = glm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -208,20 +183,6 @@
 				532ECA701CADA9F8001BB153 /* OpenGLES.framework in Frameworks */,
 				5385DE791CA33D8900F1A323 /* libSOIL.a in Frameworks */,
 				5385DE2F1CA3339200F1A323 /* GLKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		53C679371CA22E62007C7945 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		53C679421CA22E62007C7945 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,8 +322,6 @@
 			isa = PBXGroup;
 			children = (
 				53C6791F1CA22E62007C7945 /* Dungeons */,
-				53C6793D1CA22E62007C7945 /* DungeonsTests */,
-				53C679481CA22E62007C7945 /* DungeonsUITests */,
 				53C6791E1CA22E62007C7945 /* Products */,
 				532ECA711CADAA1D001BB153 /* Libraries */,
 			);
@@ -372,8 +331,6 @@
 			isa = PBXGroup;
 			children = (
 				53C6791D1CA22E62007C7945 /* Dungeons.app */,
-				53C6793A1CA22E62007C7945 /* DungeonsTests.xctest */,
-				53C679451CA22E62007C7945 /* DungeonsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -423,24 +380,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		53C6793D1CA22E62007C7945 /* DungeonsTests */ = {
-			isa = PBXGroup;
-			children = (
-				53C6793E1CA22E62007C7945 /* DungeonsTests.m */,
-				53C679401CA22E62007C7945 /* Info.plist */,
-			);
-			path = DungeonsTests;
-			sourceTree = "<group>";
-		};
-		53C679481CA22E62007C7945 /* DungeonsUITests */ = {
-			isa = PBXGroup;
-			children = (
-				53C679491CA22E62007C7945 /* DungeonsUITests.m */,
-				53C6794B1CA22E62007C7945 /* Info.plist */,
-			);
-			path = DungeonsUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -461,42 +400,6 @@
 			productReference = 53C6791D1CA22E62007C7945 /* Dungeons.app */;
 			productType = "com.apple.product-type.application";
 		};
-		53C679391CA22E62007C7945 /* DungeonsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 53C679511CA22E62007C7945 /* Build configuration list for PBXNativeTarget "DungeonsTests" */;
-			buildPhases = (
-				53C679361CA22E62007C7945 /* Sources */,
-				53C679371CA22E62007C7945 /* Frameworks */,
-				53C679381CA22E62007C7945 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				53C6793C1CA22E62007C7945 /* PBXTargetDependency */,
-			);
-			name = DungeonsTests;
-			productName = DungeonsTests;
-			productReference = 53C6793A1CA22E62007C7945 /* DungeonsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		53C679441CA22E62007C7945 /* DungeonsUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 53C679541CA22E62007C7945 /* Build configuration list for PBXNativeTarget "DungeonsUITests" */;
-			buildPhases = (
-				53C679411CA22E62007C7945 /* Sources */,
-				53C679421CA22E62007C7945 /* Frameworks */,
-				53C679431CA22E62007C7945 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				53C679471CA22E62007C7945 /* PBXTargetDependency */,
-			);
-			name = DungeonsUITests;
-			productName = DungeonsUITests;
-			productReference = 53C679451CA22E62007C7945 /* DungeonsUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -509,14 +412,6 @@
 					53C6791C1CA22E62007C7945 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = QBSFJ43NUJ;
-					};
-					53C679391CA22E62007C7945 = {
-						CreatedOnToolsVersion = 7.2;
-						TestTargetID = 53C6791C1CA22E62007C7945;
-					};
-					53C679441CA22E62007C7945 = {
-						CreatedOnToolsVersion = 7.2;
-						TestTargetID = 53C6791C1CA22E62007C7945;
 					};
 				};
 			};
@@ -534,8 +429,6 @@
 			projectRoot = "";
 			targets = (
 				53C6791C1CA22E62007C7945 /* Dungeons */,
-				53C679391CA22E62007C7945 /* DungeonsTests */,
-				53C679441CA22E62007C7945 /* DungeonsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -590,20 +483,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		53C679381CA22E62007C7945 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		53C679431CA22E62007C7945 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -635,36 +514,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		53C679361CA22E62007C7945 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				53C6793F1CA22E62007C7945 /* DungeonsTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		53C679411CA22E62007C7945 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				53C6794A1CA22E62007C7945 /* DungeonsUITests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		53C6793C1CA22E62007C7945 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 53C6791C1CA22E62007C7945 /* Dungeons */;
-			targetProxy = 53C6793B1CA22E62007C7945 /* PBXContainerItemProxy */;
-		};
-		53C679471CA22E62007C7945 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 53C6791C1CA22E62007C7945 /* Dungeons */;
-			targetProxy = 53C679461CA22E62007C7945 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		53C6792D1CA22E62007C7945 /* Main.storyboard */ = {
@@ -825,56 +675,6 @@
 			};
 			name = Release;
 		};
-		53C679521CA22E62007C7945 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				INFOPLIST_FILE = DungeonsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.DungeonsTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dungeons.app/Dungeons";
-			};
-			name = Debug;
-		};
-		53C679531CA22E62007C7945 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = DungeonsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.DungeonsTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dungeons.app/Dungeons";
-			};
-			name = Release;
-		};
-		53C679551CA22E62007C7945 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				INFOPLIST_FILE = DungeonsUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.DungeonsUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = Dungeons;
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		53C679561CA22E62007C7945 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = DungeonsUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.DungeonsUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = Dungeons;
-				USES_XCTRUNNER = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -892,24 +692,6 @@
 			buildConfigurations = (
 				53C6794F1CA22E62007C7945 /* Debug */,
 				53C679501CA22E62007C7945 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		53C679511CA22E62007C7945 /* Build configuration list for PBXNativeTarget "DungeonsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				53C679521CA22E62007C7945 /* Debug */,
-				53C679531CA22E62007C7945 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		53C679541CA22E62007C7945 /* Build configuration list for PBXNativeTarget "DungeonsUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				53C679551CA22E62007C7945 /* Debug */,
-				53C679561CA22E62007C7945 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
