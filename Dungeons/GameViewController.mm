@@ -8,6 +8,7 @@
 
 #import "GameViewController.h"
 #import <OpenGLES/ES3/glext.h>
+#import <AVFoundation/AVFoundation.h>
 #import "Game.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
@@ -17,6 +18,8 @@
     Game*       _game;
     Entity*     _projectile;
     glm::vec3   _projectileVelocity;
+    
+    AVAudioPlayer *GunSoundEffects;
 }
 
 @property (strong, nonatomic) EAGLContext* context;
@@ -74,11 +77,30 @@
     
     _projectile = &_game->_entities[ 0 ];
     _projectileVelocity = glm::vec3();
+    
+    NSData *GBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"GunSoundEffect_1" ofType:@"mp3"]];
+    GunSoundEffects = [[AVAudioPlayer alloc]initWithData:GBSoundPath error:nil];
+    [GunSoundEffects prepareToPlay];
 
 }
 
+- (void)viewDidLayoutSubviews
+{
+    NSLog(@"dd");
+//        UIBlurEffect *blurEffect = [UIBlurEffect s];
+//        UIVisualEffectView *blurEffectView = UIVisualEffectView( effect: blurEffect );
+//        UIVisualEffectView *vibeEffectView = UIVisualEffectView( effect: UIVibrancyEffect( forBlurEffect: blurEffect ) );
+//        
+//        blurEffectView.frame = Hud.bounds
+//        vibeEffectView.frame = Hud.bounds
+//        
+//        blurEffectView.addSubview( vibeEffectView )
+//        Hud.insertSubview( blurEffectView, atIndex: 0 )
+    
+}
+
 - (void)dealloc
-{    
+{
     [self tearDownGL];
     
     if ([EAGLContext currentContext] == self.context) {
@@ -123,6 +145,8 @@
     //const glm::mat4 view = glm::lookAt( _game->_eyepos, _game->_eyelook, glm::vec3( 0, 1, 0 ) );
     _projectile->position = pos;
     _projectileVelocity = vel;
+    
+    [GunSoundEffects play];
     
 }
 

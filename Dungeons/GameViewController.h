@@ -10,5 +10,10 @@
 #import <GLKit/GLKit.h>
 
 @interface GameViewController : GLKViewController
+{
+    
+}
+
+@property (weak, nonatomic) IBOutlet UIView *HUD;
 
 @end
