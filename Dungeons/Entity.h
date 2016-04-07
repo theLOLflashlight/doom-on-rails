@@ -53,19 +53,52 @@ struct Component
 };
 
 
-struct GraphicsComponent
+struct GraphicalComponent
 {
     EntityId    entityId;
     bool        visible;
-    GLProgram*  program;
-    Model*      model;
-    Sprite*     sprite;
+    GLProgram*  program = 0;
+    Model*      model   = 0;
+    Sprite*     sprite  = 0;
     
-    std::function< void(GraphicsComponent*, glm::mat4, glm::mat4, glm::mat4) > delegate;
-    
-    void update( glm::mat4 model, glm::mat4 view, glm::mat4 proj )
+    GraphicalComponent( EntityId _id, bool _visible = false )
+        : entityId( _id )
+        , visible( _visible )
     {
-        delegate( this, model, view, proj );
+    }
+    
+    //std::function< void(GraphicsComponent*, glm::mat4, glm::mat4, glm::mat4) > delegate;
+    
+    void update( glm::mat4 _model, glm::mat4 _view, glm::mat4 _proj )
+    {
+        if ( !visible )
+            return;
+        
+        if ( model )
+            model->render( _model, _view, _proj, GL_TRIANGLES );
+        
+        //delegate( this, model, view, proj );
+    }
+};
+
+struct PhysicalComponent
+{
+    EntityId    entityId;
+    bool        active;
+    glm::vec3   position;
+    glm::vec3   rotation;
+    
+    glm::mat4   model() const
+    {
+        using namespace glm;
+        mat4 transform;
+        transform = translate( transform, position );
+        
+        transform = rotate( transform, rotation.x, vec3( 1, 0, 0 ) );
+        transform = rotate( transform, rotation.y, vec3( 0, 1, 0 ) );
+        transform = rotate( transform, rotation.z, vec3( 0, 0, 1 ) );
+        
+        return transform;
     }
 };
 
