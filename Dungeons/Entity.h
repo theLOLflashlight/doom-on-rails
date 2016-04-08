@@ -5,6 +5,7 @@
 #include "glm/glm.hpp"
 
 #include <functional>
+#include <unordered_map>
 
 
 struct EntityId
@@ -16,10 +17,11 @@ struct EntityId
     EntityId()
         : bitPattern( NO_ENTITY ) {}
     
-    explicit EntityId( uint64_t entityId )
+    EntityId( uint64_t entityId )
         : bitPattern( entityId ) {}
     
-    explicit EntityId( const char* entityName )
+    template< uint N, typename = typename std::enable_if< (N <= 9) >::type >
+    EntityId( const char (&entityName)[ N ] )
     {
         std::strncpy( (char*) &bitPattern, entityName, sizeof( bitPattern ) );
         
@@ -28,67 +30,42 @@ struct EntityId
     }
 };
 
-struct Component
+inline bool operator ==( const EntityId& _l, const EntityId& _r )
 {
-    EntityId    entityId;
-    bool        enabled;
-    
-    Component()
-        : entityId()
-        , enabled( false )
-    {
-    }
-    
-    explicit Component( uint64_t entityId )
-        : entityId( entityId )
-        , enabled( true )
-    {
-    }
-    
-    explicit Component( const char* entityName )
-        : entityId( entityName )
-        , enabled( true )
-    {
-    }
-};
+    return _l.bitPattern == _r.bitPattern;
+}
 
-
-struct GraphicalComponent
+namespace std
 {
-    EntityId    entityId;
-    bool        visible;
-    GLProgram*  program = 0;
-    Model*      model   = 0;
-    Sprite*     sprite  = 0;
-    
-    GraphicalComponent( EntityId _id, bool _visible = false )
-        : entityId( _id )
-        , visible( _visible )
+    template<>
+    struct hash< EntityId >
     {
-    }
-    
-    //std::function< void(GraphicsComponent*, glm::mat4, glm::mat4, glm::mat4) > delegate;
-    
-    void update( glm::mat4 _model, glm::mat4 _view, glm::mat4 _proj )
-    {
-        if ( !visible )
-            return;
+        typedef EntityId argument_type;
+        typedef std::size_t result_type;
         
-        if ( model )
-            model->render( _model, _view, _proj, GL_TRIANGLES );
-        
-        //delegate( this, model, view, proj );
-    }
-};
+        result_type operator()(argument_type const& s) const
+        {
+            return std::hash< uint64_t >{}( s.bitPattern );
+        }
+    };
+}
 
-struct PhysicalComponent
+struct Entity
 {
-    EntityId    entityId;
-    bool        active;
     glm::vec3   position;
     glm::vec3   rotation;
     
-    glm::mat4   model() const
+    Entity
+    (
+        glm::vec3   position        = {},
+        glm::vec3   rotation        = {}
+    )
+        : position( position )
+        , rotation( rotation )
+    {
+    }
+    
+    glm::mat4 transform_matrix() const
     {
         using namespace glm;
         mat4 transform;
@@ -103,23 +80,56 @@ struct PhysicalComponent
 };
 
 
-struct Entity
+typedef std::unordered_map< EntityId, Entity > EntityCollection;
+
+
+struct GraphicalComponent
 {
-    const Model*    model;
-    glm::vec3       position;
-    glm::vec3       rotation;
-    glm::vec3       scale;
-    glm::vec4       color;
+    EntityId    entityId;
+    bool        visible;
+    GLProgram*  program = 0;
+    Model*      model   = 0;
+    Sprite*     sprite  = 0;
+    glm::vec4   color   = { 1, 1, 1, 0 };
+    
+    GraphicalComponent( EntityId _id, bool _visible = true )
+        : entityId( _id )
+        , visible( _visible )
+    {
+    }
+    
+    //std::function< void(GraphicsComponent*, glm::mat4, glm::mat4, glm::mat4) > delegate;
+    
+    void update( EntityCollection& entities, glm::mat4 _view, glm::mat4 _proj )
+    {
+        if ( !visible )
+            return;
+        
+        if ( program )
+            glUniform4fv( program->find_uniform( "uColor" ), 1, &color[ 0 ] );
+        
+        if ( model )
+            model->render( entities[ entityId ].transform_matrix(), _view, _proj, GL_TRIANGLES );
+        
+        //delegate( this, model, view, proj );
+    }
+};
 
-    Entity
-    (
-        const Model*    model,
-        glm::vec3       position        = {},
-        glm::vec3       rotation        = {},
-        glm::vec3       scale           = { 1, 1, 1 },
-        glm::vec4       color           = { 1, 1, 1, 0 }
-    );
-
-    void render( glm::mat4 view, glm::mat4 proj ) const;
+struct PhysicalComponent
+{
+    EntityId    entityId;
+    bool        active;
+    glm::vec3   position;
+    glm::vec3   rotation;
+    
+    void update( EntityCollection& entities )
+    {
+        if ( !active )
+            return;
+        
+        Entity& entity = entities[ entityId ];
+        entity.position = position;
+        entity.rotation = rotation;
+    }
 };
 

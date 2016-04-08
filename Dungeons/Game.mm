@@ -2,7 +2,7 @@
 
 #include "SOIL.h"
 #include "ios_path.h"
-#define DEMO 0
+#define DEMO 1
 
 using namespace glm;
 using namespace gl_enums::usage;
@@ -76,11 +76,6 @@ const vec3 WATER_VERTICES[] = {
 };
 
 
-Game::~Game()
-{
-}
-
-
 Game::Game( GLKView* view )
     : _view( ([view bindDrawable], view) )
 
@@ -96,14 +91,25 @@ Game::Game( GLKView* view )
     , _level( ObjMesh( ios_path( "Level0Layout.obj" ) ), _program )
     , _enemies( ObjMesh( ios_path( "Level0EnemyPos.obj" ) ), _program )
     , _rail( ios_path( "DemoRail.obj" ) )
+
     , _entities( {
 #if DEMO
-        Entity( &_model, vec3( 2, -.75, 0 ) ),
-        Entity( &_model, vec3( 0, .75, 2 ) ),
-        Entity( &_model, vec3( 0, 2, 0 ) )
+        { "crate0", Entity(vec3( 2, -.75, 0 )) },
+        { "crate1", Entity(vec3( 0, .75, 2 )) },
+        { "crate2", Entity(vec3( 0, 2, 0 )) }
 #else
-        Entity( &_model )
+        { "crate", Entity() }
 #endif
+    } )
+    , _graphics( {
+        { "crate0" },
+        { "crate1" },
+        { "crate2" }
+    } )
+    , _physics( {
+        { "crate0" },
+        { "crate1" },
+        { "crate2" }
     } )
 
     , _skybox_texture( SOIL_load_OGL_cubemap(
@@ -127,9 +133,17 @@ Game::Game( GLKView* view )
                    _water_program.make_vert_attribute< vec3 >( "aPosition" ) )
 {
 #if DEMO
-    _entities[ 0 ].color = vec4( 0, 0, 1, 0.1 );
-    _entities[ 1 ].color = vec4( 1, 0, 0, 0.1 );
-    _entities[ 2 ].color = vec4( 0, 1, 0, 0.1 );
+    _graphics[ 0 ].model = &_model;
+    _graphics[ 0 ].program = _program.get();
+    _graphics[ 0 ].color = vec4( 0, 0, 1, 0.1 );
+    
+    _graphics[ 1 ].model = &_model;
+    _graphics[ 1 ].program = _program.get();
+    _graphics[ 1 ].color = vec4( 1, 0, 0, 0.1 );
+    
+    _graphics[ 2 ].model = &_model;
+    _graphics[ 2 ].program = _program.get();
+    _graphics[ 2 ].color = vec4( 0, 1, 0, 0.1 );
 #endif
     
     glBindTexture( GL_TEXTURE_CUBE_MAP, _skybox_texture );
@@ -320,8 +334,9 @@ void Game::update( double step )
     glUseProgram( 0 );
     
 #if DEMO
-    for ( int i = 0; i < _entities.size(); i++ )
-        _entities[ i ].rotation[ i % 3 ] += step * 2;
+    _entities[ "crate0" ].rotation.x += step * 2;
+    _entities[ "crate1" ].rotation.y += step * 2;
+    _entities[ "crate2" ].rotation.z += step * 2;
 #endif
 }
 
@@ -400,8 +415,8 @@ void Game::render() const
     
     _model.render( mat4(), view, proj );
 
-    for ( const Entity& entity : _entities )
-        entity.render( view, proj );
+    for ( auto drawable : _graphics )
+        drawable.update( _entities, view, proj );
     
 #if !DEMO
     glUniform4f( _program->find_uniform( "uColor" ), 1, 1, 1, 0 );
@@ -465,8 +480,8 @@ void Game::draw_scene( glm::mat4 view, glm::mat4 proj ) const
 
     _model.render( mat4(), view, proj );
 
-    for ( const Entity& entity : _entities )
-        entity.render( view, proj );
+    for ( auto drawable : _graphics )
+        drawable.update( _entities, view, proj );
     
 #if !DEMO
     glUniform4f( _program->find_uniform( "uColor" ), 1, 1, 1, 0 );

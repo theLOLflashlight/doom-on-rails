@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "94"
             endingLineNumber = "94"
-            landmarkName = "-didReceiveMemoryWarning"
+            landmarkName = "-viewDidLayoutSubviews"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -122,12 +122,12 @@
                   moduleName = "Dungeons"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a00854442/Desktop/Dungeons/Dungeons/Model.cpp"
-                  timestampString = "481765842.446765"
+                  timestampString = "481770851.443941"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "57"
                   endingLineNumber = "57"
-                  offsetFromSymbolStart = "968">
+                  offsetFromSymbolStart = "1136">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -137,12 +137,12 @@
                   moduleName = "Dungeons"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a00854442/Desktop/Dungeons/Dungeons/Model.cpp"
-                  timestampString = "481765842.446843"
+                  timestampString = "481770851.444007"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "57"
                   endingLineNumber = "57"
-                  offsetFromSymbolStart = "980">
+                  offsetFromSymbolStart = "1148">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Dungeons/Game.mm"
-            timestampString = "481747976.862561"
+            timestampString = "481770850.417703"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "Game::Game( GLKView* view )"
             landmarkType = "5">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Dungeons/Game.mm"
-            timestampString = "481747979.992587"
+            timestampString = "481770850.417703"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
             landmarkName = "Game::Game( GLKView* view )"
             landmarkType = "5">
          </BreakpointContent>

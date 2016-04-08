@@ -40,7 +40,7 @@ void GLProgram::link( GLShader* vert_shader, GLShader* frag_shader  )
         
         glGetProgramInfoLog( glHandle, logLength, &logLength, log );
         printf( "Shader link log: %s\n", log );
-        delete log;
+        delete[] log;
     }
     
     if ( status == GL_FALSE )
@@ -63,7 +63,7 @@ bool GLProgram::validate()
 
         glGetProgramInfoLog( glHandle, logLength, &logLength, log );
         printf( "Shader validate log: %s\n", log );
-        delete log;
+        delete[] log;
 
         //throw Exception( *this, Exception::INIT, status );
         return false;
