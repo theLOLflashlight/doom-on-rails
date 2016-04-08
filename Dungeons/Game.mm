@@ -2,7 +2,7 @@
 
 #include "SOIL.h"
 #include "ios_path.h"
-#define DEMO 1
+#define DEMO 0
 
 using namespace glm;
 using namespace gl_enums::usage;
@@ -98,18 +98,22 @@ Game::Game( GLKView* view )
         { "crate1", Entity(vec3( 0, .75, 2 )) },
         { "crate2", Entity(vec3( 0, 2, 0 )) }
 #else
-        { "crate", Entity() }
+        { "bullet", Entity() }
 #endif
     } )
     , _graphics( {
+#if DEMO
         { "crate0" },
         { "crate1" },
         { "crate2" }
+#endif
     } )
     , _physics( {
+#if DEMO
         { "crate0" },
         { "crate1" },
         { "crate2" }
+#endif
     } )
 
     , _skybox_texture( SOIL_load_OGL_cubemap(
@@ -144,6 +148,44 @@ Game::Game( GLKView* view )
     _graphics[ 2 ].model = &_model;
     _graphics[ 2 ].program = _program.get();
     _graphics[ 2 ].color = vec4( 0, 1, 0, 0.1 );
+#else
+    {
+        GraphicalComponent level( "level" );
+        level.model = &_level;
+        level.program = _program.get();
+        
+        _graphics.push_back( level );
+    }
+    {
+        PhysicalComponent level( "level" );
+        level.position = vec3( 0, -0.1, 0 );
+        
+        _physics.push_back( level );
+    }
+    
+    {
+        GraphicalComponent enemies( "enemies" );
+        enemies.model = &_enemies;
+        enemies.translucent = true;
+        enemies.program = _program.get();
+        enemies.delegate = [](GraphicalComponent* gfx, EntityCollection& entities, glm::mat4 view, glm::mat4 proj)
+        {
+            glUniform4fv( gfx->program->find_uniform( "uColor" ), 1, &gfx->color[ 0 ] );
+            
+            glEnable( GL_BLEND );
+            gfx->model->render( entities[ gfx->entityId ].transform_matrix(), view, proj );
+            glDisable( GL_BLEND );
+        };
+        
+        _graphics.push_back( enemies );
+    }
+    {
+        PhysicalComponent enemies( "enemies" );
+        enemies.position = vec3( 0, -0.1, 0 );
+    
+        _physics.push_back( enemies );
+    }
+    
 #endif
     
     glBindTexture( GL_TEXTURE_CUBE_MAP, _skybox_texture );
@@ -338,6 +380,9 @@ void Game::update( double step )
     _entities[ "crate1" ].rotation.y += step * 2;
     _entities[ "crate2" ].rotation.z += step * 2;
 #endif
+    
+    for ( auto& physable : _physics )
+        physable.update( _entities, step );
 }
 
 
@@ -416,11 +461,12 @@ void Game::render() const
     _model.render( mat4(), view, proj );
 
     for ( auto drawable : _graphics )
-        drawable.update( _entities, view, proj );
+        if ( !drawable.translucent )
+            drawable.update( _entities, view, proj );
     
 #if !DEMO
-    glUniform4f( _program->find_uniform( "uColor" ), 1, 1, 1, 0 );
-    _level.render( translate( mat4(), vec3( 0, -0.1, 0 ) ), view, proj );
+    //glUniform4f( _program->find_uniform( "uColor" ), 1, 1, 1, 0 );
+    //_level.render( translate( mat4(), vec3( 0, -0.1, 0 ) ), view, proj );
 #endif
 
     
@@ -454,10 +500,15 @@ void Game::render() const
     //glDisable( GL_BLEND );
     //glEnable( GL_CULL_FACE );
     
+    
+    for ( auto drawable : _graphics )
+        if ( drawable.translucent )
+            drawable.update( _entities, view, proj );
+    
 #if !DEMO
-    glEnable( GL_BLEND );
-    _enemies.render( translate( mat4(), vec3( 0, -0.1, 0 ) ), view, proj );
-    glDisable( GL_BLEND );
+    //glEnable( GL_BLEND );
+    //_enemies.render( translate( mat4(), vec3( 0, -0.1, 0 ) ), view, proj );
+    //glDisable( GL_BLEND );
 #endif
 }
 
@@ -484,10 +535,10 @@ void Game::draw_scene( glm::mat4 view, glm::mat4 proj ) const
         drawable.update( _entities, view, proj );
     
 #if !DEMO
-    glUniform4f( _program->find_uniform( "uColor" ), 1, 1, 1, 0 );
+    /*glUniform4f( _program->find_uniform( "uColor" ), 1, 1, 1, 0 );
     _level.render( translate( mat4(), vec3( 0, -0.1, 0 ) ), view, proj );
     glEnable( GL_BLEND );
     _enemies.render( translate( mat4(), vec3( 0, -0.1, 0 ) ), view, proj );
-    glDisable( GL_BLEND );
+    glDisable( GL_BLEND );*/
 #endif
 }

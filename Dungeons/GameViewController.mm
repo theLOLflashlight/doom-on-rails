@@ -19,6 +19,8 @@
     Entity*     _projectile;
     glm::vec3   _projectileVelocity;
     
+    int         _bulletCount;
+    
     AVAudioPlayer *GunSoundEffects;
 }
 
@@ -75,8 +77,9 @@
     
     _game = new Game( (GLKView*) self.view );
     
-    //_projectile = &_game->_entities[ 0 ];
-    //_projectileVelocity = glm::vec3();
+    _projectile = &_game->_entities[ "bullet" ];
+    _projectileVelocity = glm::vec3();
+    _bulletCount = 0;
     
     NSData *GBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"GunSoundEffect_1" ofType:@"mp3"]];
     GunSoundEffects = [[AVAudioPlayer alloc]initWithData:GBSoundPath error:nil];
@@ -142,6 +145,24 @@
 
 - (void) spawn_projectile:( glm::vec3 )pos velocity:( glm::vec3 ) vel
 {
+    {
+        GraphicalComponent bullet( 100 + _bulletCount );
+        bullet.program = _game->_program.get();
+        bullet.model = &_game->_model;
+        
+        _game->_graphics.push_back( bullet );
+    }
+    {
+        PhysicalComponent bullet( 100 + _bulletCount );
+        bullet.position = pos;
+        bullet.velocity = vel;
+        
+        _game->_physics.push_back( bullet );
+    }
+    
+    _bulletCount++;
+    
+    
     //const glm::mat4 view = glm::lookAt( _game->_eyepos, _game->_eyelook, glm::vec3( 0, 1, 0 ) );
     //_projectile->position = pos;
     //_projectileVelocity = vel;

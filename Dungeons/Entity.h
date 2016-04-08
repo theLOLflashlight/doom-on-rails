@@ -85,12 +85,17 @@ typedef std::unordered_map< EntityId, Entity > EntityCollection;
 
 struct GraphicalComponent
 {
+    using Delegate = std::function< void(GraphicalComponent*, EntityCollection&, glm::mat4, glm::mat4) >;
+    
     EntityId    entityId;
     bool        visible;
+    bool        translucent;
     GLProgram*  program = 0;
     Model*      model   = 0;
     Sprite*     sprite  = 0;
     glm::vec4   color   = { 1, 1, 1, 0 };
+    
+    Delegate    delegate;
     
     GraphicalComponent( EntityId _id, bool _visible = true )
         : entityId( _id )
@@ -98,18 +103,22 @@ struct GraphicalComponent
     {
     }
     
-    //std::function< void(GraphicsComponent*, glm::mat4, glm::mat4, glm::mat4) > delegate;
-    
-    void update( EntityCollection& entities, glm::mat4 _view, glm::mat4 _proj )
+    void update( EntityCollection& entities, glm::mat4 view, glm::mat4 proj )
     {
         if ( !visible )
             return;
+        
+        if ( delegate )
+        {
+            delegate( this, entities, view, proj );
+            return;
+        }
         
         if ( program )
             glUniform4fv( program->find_uniform( "uColor" ), 1, &color[ 0 ] );
         
         if ( model )
-            model->render( entities[ entityId ].transform_matrix(), _view, _proj, GL_TRIANGLES );
+            model->render( entities[ entityId ].transform_matrix(), view, proj, GL_TRIANGLES );
         
         //delegate( this, model, view, proj );
     }
@@ -121,11 +130,23 @@ struct PhysicalComponent
     bool        active;
     glm::vec3   position;
     glm::vec3   rotation;
+    glm::vec3   velocity;
+    glm::vec3   angularVelocity;
     
-    void update( EntityCollection& entities )
+    PhysicalComponent( EntityId _id, bool _active = true )
+        : entityId( _id )
+        , active( _active )
+    {
+    }
+
+    
+    void update( EntityCollection& entities, double step )
     {
         if ( !active )
             return;
+        
+        position += velocity;
+        rotation += angularVelocity;
         
         Entity& entity = entities[ entityId ];
         entity.position = position;
