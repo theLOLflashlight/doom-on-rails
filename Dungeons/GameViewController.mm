@@ -83,7 +83,7 @@
     
     _CurrentChannel = 0;
     
-    NSData *GBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"GunSoundEffect_1" ofType:@"mp3"]];
+    NSData *GBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"GunSoundEffect_1" ofType:@"wav"]];
     
     for(int i = 0; i < MAX_CHANNELS; i++) {
         
@@ -91,10 +91,8 @@
         
         [GunSoundEffects[i] prepareToPlay];
        
-        NSLog(@" %d", i);
+
     }
-
-
 }
 
 - (void)viewDidLayoutSubviews
