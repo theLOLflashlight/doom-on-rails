@@ -152,6 +152,7 @@ Game::Game( GLKView* view )
     {
         GraphicalComponent level( "level" );
         level.model = &_level;
+        level.translucent = true;
         level.program = _program.get();
         
         _graphics.push_back( level );
@@ -162,12 +163,13 @@ Game::Game( GLKView* view )
         
         _physics.push_back( level );
     }
-    
+
     {
         GraphicalComponent enemies( "enemies" );
         enemies.model = &_enemies;
         enemies.translucent = true;
         enemies.program = _program.get();
+        
         enemies.delegate = [](GraphicalComponent* gfx, EntityCollection& entities, glm::mat4 view, glm::mat4 proj)
         {
             glUniform4fv( gfx->program->find_uniform( "uColor" ), 1, &gfx->color[ 0 ] );

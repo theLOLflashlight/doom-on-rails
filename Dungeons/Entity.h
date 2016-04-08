@@ -82,6 +82,12 @@ struct Entity
 
 typedef std::unordered_map< EntityId, Entity > EntityCollection;
 
+template< typename F, typename S >
+struct Pair
+{
+    F first;
+    S second;
+};
 
 struct GraphicalComponent
 {
@@ -151,6 +157,27 @@ struct PhysicalComponent
         Entity& entity = entities[ entityId ];
         entity.position = position;
         entity.rotation = rotation;
+    }
+};
+
+
+struct HealthComponent
+{
+    EntityId    entityId;
+    float       health;
+    
+    HealthComponent( EntityId _id, float maxHealth )
+        : entityId( _id )
+        , health( maxHealth )
+    {
+    }
+    
+    void update( EntityCollection& entities )
+    {
+        if ( health <= 0 )
+        {
+            
+        }
     }
 };
 

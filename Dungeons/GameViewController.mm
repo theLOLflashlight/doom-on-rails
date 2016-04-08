@@ -14,10 +14,13 @@
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 #define MAX_CHANNELS 30
 
+#define BULLET_MIN 1000
+#define BULLET_MAX 4000
+
 @interface GameViewController ()
 {
     Game*       _game;
-    int         _bulletCount;
+    int         _bulletId;
     
     //AVAudioPlayer *GunSoundEffects;
     AVAudioPlayer *GunSoundEffects[MAX_CHANNELS];
@@ -46,6 +49,8 @@
         vec3 touchPos1 = unProject( vec3( mouse.x, -mouse.y, 1 ), view, proj, viewport );
         
         [self spawn_projectile: touchPos0  velocity: normalize( touchPos1 - touchPos0 )];
+        
+        //[self explosionAt: _game->_eyepos];
     }
 }
 
@@ -72,7 +77,7 @@
     
     _game = new Game( (GLKView*) self.view );
     
-    _bulletCount = 0;
+    _bulletId = BULLET_MIN;
     
     _CurrentChannel = 0;
     
@@ -142,26 +147,39 @@
     [EAGLContext setCurrentContext:self.context];
 }
 
+-(void) explosionAt:(glm::vec3) pos
+             radius:(float)     radius
+{
+    for ( auto& ntt : _game->_entities )
+    {
+        if ( glm::distance( ntt.second.position, pos ) < radius )
+        {
+            GraphicalComponent* gfx = _game->findGraphicalComponent( ntt.first );
+            if ( gfx )
+                gfx->color = glm::vec4( 1, 0, 0, 1 );
+        }
+    }
+}
+
 #pragma mark - GLKView and GLKViewController delegate methods
 
 - (void) spawn_projectile:( glm::vec3 )pos velocity:( glm::vec3 ) vel
 {
+    const EntityId bulletId = _bulletId++;
     {
-        GraphicalComponent bullet( 100 + _bulletCount );
+        GraphicalComponent bullet( bulletId );
         bullet.program = _game->_program.get();
         bullet.model = &_game->_model;
         
         _game->_graphics.push_back( bullet );
     }
     {
-        PhysicalComponent bullet( 100 + _bulletCount );
+        PhysicalComponent bullet( bulletId );
         bullet.position = pos;
         bullet.velocity = vel;
         
         _game->_physics.push_back( bullet );
     }
-    
-    _bulletCount++;
     
     [GunSoundEffects[_CurrentChannel] play];
     
