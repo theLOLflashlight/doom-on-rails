@@ -169,7 +169,7 @@
     {
         GraphicalComponent bullet( bulletId );
         bullet.program = _game->_program.get();
-        bullet.model = &_game->_model;
+        bullet.sprite = &_game->_model;
         
         _game->_graphics.push_back( bullet );
     }
