@@ -60,7 +60,7 @@
     [super viewDidLoad];
     
     self.context = [[EAGLContext alloc] initWithAPI: kEAGLRenderingAPIOpenGLES3];
-
+    
     if (!self.context) {
         NSLog(@"Failed to create ES context");
     }
@@ -126,7 +126,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-
+    
     if ([self isViewLoaded] && ([[self view] window] == nil))
     {
         self.view = nil;
@@ -138,7 +138,7 @@
         }
         self.context = nil;
     }
-
+    
     // Dispose of any resources that can be recreated.
 }
 
@@ -177,7 +177,7 @@
 }
 
 - (void) glkView:(GLKView *)view
-         drawInRect:(CGRect)rect
+      drawInRect:(CGRect)rect
 {
     _game->render();
 }
