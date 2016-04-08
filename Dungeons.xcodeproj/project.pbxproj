@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		444220B71CB6FABC00A8B1E3 /* GunSoundEffect_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 444220B61CB6FABC00A8B1E3 /* GunSoundEffect_1.mp3 */; };
 		445332001CB5BD3B004DC43B /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445331FF1CB5BD3B004DC43B /* MainViewController.m */; };
 		445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */ = {isa = PBXBuildFile; fileRef = 445332041CB5BD81004DC43B /* ButtonPress.wav */; };
 		445332071CB5BD81004DC43B /* DOOM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 445332051CB5BD81004DC43B /* DOOM.mp3 */; };
@@ -16,6 +15,7 @@
 		4453320E1CB5BD9C004DC43B /* SoundOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4453320A1CB5BD9C004DC43B /* SoundOn.png */; };
 		4453320F1CB5BD9C004DC43B /* Start.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4453320B1CB5BD9C004DC43B /* Start.gif */; };
 		445332111CB5C48E004DC43B /* Logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 445332101CB5C48E004DC43B /* Logout.png */; };
+		44F1AC4B1CB74AF3002557C5 /* GunSoundEffect_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44F1AC4A1CB74AF3002557C5 /* GunSoundEffect_1.wav */; };
 		532ECA701CADA9F8001BB153 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532ECA6F1CADA9F8001BB153 /* OpenGLES.framework */; };
 		532ECA881CADBDBD001BB153 /* DemoRail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA761CADBDBD001BB153 /* DemoRail.mtl */; };
 		532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA771CADBDBD001BB153 /* DemoRail.obj */; };
@@ -78,7 +78,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		444220B61CB6FABC00A8B1E3 /* GunSoundEffect_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GunSoundEffect_1.mp3; sourceTree = "<group>"; };
 		445331FF1CB5BD3B004DC43B /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		445332011CB5BD44004DC43B /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		445332041CB5BD81004DC43B /* ButtonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonPress.wav; sourceTree = "<group>"; };
@@ -88,6 +87,7 @@
 		4453320A1CB5BD9C004DC43B /* SoundOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SoundOn.png; sourceTree = "<group>"; };
 		4453320B1CB5BD9C004DC43B /* Start.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Start.gif; sourceTree = "<group>"; };
 		445332101CB5C48E004DC43B /* Logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logout.png; sourceTree = "<group>"; };
+		44F1AC4A1CB74AF3002557C5 /* GunSoundEffect_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GunSoundEffect_1.wav; sourceTree = "<group>"; };
 		532ECA6F1CADA9F8001BB153 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		532ECA741CADB02B001BB153 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		532ECA761CADBDBD001BB153 /* DemoRail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DemoRail.mtl; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 		445332021CB5BD5E004DC43B /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				444220B61CB6FABC00A8B1E3 /* GunSoundEffect_1.mp3 */,
+				44F1AC4A1CB74AF3002557C5 /* GunSoundEffect_1.wav */,
 				445332041CB5BD81004DC43B /* ButtonPress.wav */,
 				445332051CB5BD81004DC43B /* DOOM.mp3 */,
 			);
@@ -417,7 +417,7 @@
 				TargetAttributes = {
 					53C6791C1CA22E62007C7945 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = QBSFJ43NUJ;
+						DevelopmentTeam = GFW8XR3YY5;
 					};
 				};
 			};
@@ -471,6 +471,7 @@
 				5385DE721CA3365100F1A323 /* water in Resources */,
 				5385DE701CA3365100F1A323 /* Skybox.vs in Resources */,
 				532ECA951CADBDBD001BB153 /* Level0Layout in Resources */,
+				44F1AC4B1CB74AF3002557C5 /* GunSoundEffect_1.wav in Resources */,
 				5385DE671CA3365100F1A323 /* MyShader.vs in Resources */,
 				532ECA8A1CADBDBD001BB153 /* Level0_Textures in Resources */,
 				5385DE961CA370F200F1A323 /* crate.obj in Resources */,
@@ -486,7 +487,6 @@
 				532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */,
 				5385DE741CA3365100F1A323 /* WaterShader.vs in Resources */,
 				532ECA8E1CADBDBD001BB153 /* Level0All.mtl in Resources */,
-				444220B71CB6FABC00A8B1E3 /* GunSoundEffect_1.mp3 in Resources */,
 				532ECA991CADBDBD001BB153 /* Level0Rail.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -648,7 +648,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Lee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dungeons/Dungeons-Bridging-Header.h";
@@ -678,7 +678,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Lee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dungeons/Dungeons-Bridging-Header.h";

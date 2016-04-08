@@ -12,6 +12,7 @@
 #import "Game.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
+#define MAX_CHANNELS 30
 
 @interface GameViewController ()
 {
@@ -59,7 +60,7 @@
     [super viewDidLoad];
     
     self.context = [[EAGLContext alloc] initWithAPI: kEAGLRenderingAPIOpenGLES3];
-
+    
     if (!self.context) {
         NSLog(@"Failed to create ES context");
     }
@@ -81,15 +82,23 @@
     _projectileVelocity = glm::vec3();
     _bulletCount = 0;
     
-    NSData *GBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"GunSoundEffect_1" ofType:@"mp3"]];
-    GunSoundEffects = [[AVAudioPlayer alloc]initWithData:GBSoundPath error:nil];
-    [GunSoundEffects prepareToPlay];
+    _CurrentChannel = 0;
+    
+    NSData *GBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"GunSoundEffect_1" ofType:@"wav"]];
+    
+    for(int i = 0; i < MAX_CHANNELS; i++) {
+        
+        GunSoundEffects[i] = [[AVAudioPlayer alloc]initWithData:GBSoundPath error:nil];
+        
+        [GunSoundEffects[i] prepareToPlay];
+       
 
+    }
 }
 
 - (void)viewDidLayoutSubviews
 {
-    NSLog(@"dd");
+   
 //        UIBlurEffect *blurEffect = [UIBlurEffect s];
 //        UIVisualEffectView *blurEffectView = UIVisualEffectView( effect: blurEffect );
 //        UIVisualEffectView *vibeEffectView = UIVisualEffectView( effect: UIVibrancyEffect( forBlurEffect: blurEffect ) );
@@ -116,7 +125,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-
+    
     if ([self isViewLoaded] && ([[self view] window] == nil))
     {
         self.view = nil;
@@ -128,7 +137,7 @@
         }
         self.context = nil;
     }
-
+    
     // Dispose of any resources that can be recreated.
 }
 
@@ -167,7 +176,14 @@
     //_projectile->position = pos;
     //_projectileVelocity = vel;
     
-    [GunSoundEffects play];
+    [GunSoundEffects[_CurrentChannel] play];
+    
+    _CurrentChannel ++;
+    
+    if(_CurrentChannel == MAX_CHANNELS)
+    {
+        _CurrentChannel = 0;
+    }
     
 }
 
@@ -178,7 +194,7 @@
 }
 
 - (void) glkView:(GLKView *)view
-         drawInRect:(CGRect)rect
+      drawInRect:(CGRect)rect
 {
     _game->render();
 }
