@@ -77,6 +77,10 @@
 		53C6793F1CA22E62007C7945 /* DungeonsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C6793E1CA22E62007C7945 /* DungeonsTests.m */; };
 		53C6794A1CA22E62007C7945 /* DungeonsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C679491CA22E62007C7945 /* DungeonsUITests.m */; };
 		53C679581CA22F35007C7945 /* glm in Resources */ = {isa = PBXBuildFile; fileRef = 53C679571CA22F35007C7945 /* glm */; };
+		81E9B3FA1CB72C8000122C7B /* GunSoundEffect_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81E9B3F61CB72C8000122C7B /* GunSoundEffect_2.mp3 */; };
+		81E9B3FB1CB72C8000122C7B /* GunSoundEffect_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81E9B3F71CB72C8000122C7B /* GunSoundEffect_3.mp3 */; };
+		81E9B3FC1CB72C8000122C7B /* GunSoundEffect_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81E9B3F81CB72C8000122C7B /* GunSoundEffect_4.mp3 */; };
+		81E9B3FD1CB72C8000122C7B /* GunSoundEffect_5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81E9B3F91CB72C8000122C7B /* GunSoundEffect_5.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -202,6 +206,10 @@
 		53C679491CA22E62007C7945 /* DungeonsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DungeonsUITests.m; sourceTree = "<group>"; };
 		53C6794B1CA22E62007C7945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53C679571CA22F35007C7945 /* glm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = glm; sourceTree = "<group>"; };
+		81E9B3F61CB72C8000122C7B /* GunSoundEffect_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GunSoundEffect_2.mp3; sourceTree = "<group>"; };
+		81E9B3F71CB72C8000122C7B /* GunSoundEffect_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GunSoundEffect_3.mp3; sourceTree = "<group>"; };
+		81E9B3F81CB72C8000122C7B /* GunSoundEffect_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GunSoundEffect_4.mp3; sourceTree = "<group>"; };
+		81E9B3F91CB72C8000122C7B /* GunSoundEffect_5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GunSoundEffect_5.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +243,10 @@
 		445332021CB5BD5E004DC43B /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				81E9B3F61CB72C8000122C7B /* GunSoundEffect_2.mp3 */,
+				81E9B3F71CB72C8000122C7B /* GunSoundEffect_3.mp3 */,
+				81E9B3F81CB72C8000122C7B /* GunSoundEffect_4.mp3 */,
+				81E9B3F91CB72C8000122C7B /* GunSoundEffect_5.mp3 */,
 				444220B61CB6FABC00A8B1E3 /* GunSoundEffect_1.mp3 */,
 				445332041CB5BD81004DC43B /* ButtonPress.wav */,
 				445332051CB5BD81004DC43B /* DOOM.mp3 */,
@@ -555,6 +567,7 @@
 				532ECA8B1CADBDBD001BB153 /* Level0.mtl in Resources */,
 				5385DE661CA3365100F1A323 /* MyShader.fs in Resources */,
 				532ECA8C1CADBDBD001BB153 /* Level0.obj in Resources */,
+				81E9B3FB1CB72C8000122C7B /* GunSoundEffect_3.mp3 in Resources */,
 				532ECA881CADBDBD001BB153 /* DemoRail.mtl in Resources */,
 				53C6792F1CA22E62007C7945 /* Main.storyboard in Resources */,
 				532ECA901CADBDBD001BB153 /* Level0EnemyPos in Resources */,
@@ -574,6 +587,7 @@
 				53C679341CA22E62007C7945 /* LaunchScreen.storyboard in Resources */,
 				4453320E1CB5BD9C004DC43B /* SoundOn.png in Resources */,
 				532ECA961CADBDBD001BB153 /* Level0Layout.mtl in Resources */,
+				81E9B3FA1CB72C8000122C7B /* GunSoundEffect_2.mp3 in Resources */,
 				5385DE6E1CA3365100F1A323 /* skybox in Resources */,
 				5385DE721CA3365100F1A323 /* water in Resources */,
 				5385DE701CA3365100F1A323 /* Skybox.vs in Resources */,
@@ -585,7 +599,9 @@
 				532ECA8D1CADBDBD001BB153 /* Level0All in Resources */,
 				53C679271CA22E62007C7945 /* Shader.fs in Resources */,
 				532ECA921CADBDBD001BB153 /* Level0EnemyPos.obj in Resources */,
+				81E9B3FC1CB72C8000122C7B /* GunSoundEffect_4.mp3 in Resources */,
 				5385DE731CA3365100F1A323 /* WaterShader.fs in Resources */,
+				81E9B3FD1CB72C8000122C7B /* GunSoundEffect_5.mp3 in Resources */,
 				5385DE5B1CA3365100F1A323 /* crate in Resources */,
 				4453320C1CB5BD9C004DC43B /* BGT1.gif in Resources */,
 				445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */,

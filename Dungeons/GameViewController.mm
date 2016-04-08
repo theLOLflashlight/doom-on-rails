@@ -82,8 +82,8 @@
     
     
     
-    NSData *GBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"GunSoundEffect_1" ofType:@"mp3"]];
     for(int i = 0; i < SFXINSTANCES; i++) {
+        NSData *GBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"GunSoundEffect_1", i] ofType:@"mp3"]];
         GunSoundEffects[i] = [[AVAudioPlayer alloc]initWithData:GBSoundPath error:nil];
         [GunSoundEffects[i] prepareToPlay];
     }
