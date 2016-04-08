@@ -12,6 +12,7 @@
 #import "Game.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
+#define SFXINSTANCES 5
 
 @interface GameViewController ()
 {
@@ -19,7 +20,8 @@
     Entity*     _projectile;
     glm::vec3   _projectileVelocity;
     
-    AVAudioPlayer *GunSoundEffects;
+    AVAudioPlayer *GunSoundEffects[SFXINSTANCES];
+    int _currSound;
 }
 
 @property (strong, nonatomic) EAGLContext* context;
@@ -57,7 +59,7 @@
     [super viewDidLoad];
     
     self.context = [[EAGLContext alloc] initWithAPI: kEAGLRenderingAPIOpenGLES3];
-
+    
     if (!self.context) {
         NSLog(@"Failed to create ES context");
     }
@@ -78,24 +80,28 @@
     //_projectile = &_game->_entities[ 0 ];
     //_projectileVelocity = glm::vec3();
     
-    NSData *GBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"GunSoundEffect_1" ofType:@"mp3"]];
-    GunSoundEffects = [[AVAudioPlayer alloc]initWithData:GBSoundPath error:nil];
-    [GunSoundEffects prepareToPlay];
-
+    
+    
+    for(int i = 0; i < SFXINSTANCES; i++) {
+        NSData *GBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"GunSoundEffect_1", i] ofType:@"mp3"]];
+        GunSoundEffects[i] = [[AVAudioPlayer alloc]initWithData:GBSoundPath error:nil];
+        [GunSoundEffects[i] prepareToPlay];
+    }
+    _currSound = 0;
 }
 
 - (void)viewDidLayoutSubviews
 {
     NSLog(@"dd");
-//        UIBlurEffect *blurEffect = [UIBlurEffect s];
-//        UIVisualEffectView *blurEffectView = UIVisualEffectView( effect: blurEffect );
-//        UIVisualEffectView *vibeEffectView = UIVisualEffectView( effect: UIVibrancyEffect( forBlurEffect: blurEffect ) );
-//        
-//        blurEffectView.frame = Hud.bounds
-//        vibeEffectView.frame = Hud.bounds
-//        
-//        blurEffectView.addSubview( vibeEffectView )
-//        Hud.insertSubview( blurEffectView, atIndex: 0 )
+    //        UIBlurEffect *blurEffect = [UIBlurEffect s];
+    //        UIVisualEffectView *blurEffectView = UIVisualEffectView( effect: blurEffect );
+    //        UIVisualEffectView *vibeEffectView = UIVisualEffectView( effect: UIVibrancyEffect( forBlurEffect: blurEffect ) );
+    //
+    //        blurEffectView.frame = Hud.bounds
+    //        vibeEffectView.frame = Hud.bounds
+    //
+    //        blurEffectView.addSubview( vibeEffectView )
+    //        Hud.insertSubview( blurEffectView, atIndex: 0 )
     
 }
 
@@ -113,7 +119,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-
+    
     if ([self isViewLoaded] && ([[self view] window] == nil))
     {
         self.view = nil;
@@ -125,7 +131,7 @@
         }
         self.context = nil;
     }
-
+    
     // Dispose of any resources that can be recreated.
 }
 
@@ -146,7 +152,9 @@
     //_projectile->position = pos;
     //_projectileVelocity = vel;
     
-    [GunSoundEffects play];
+    [GunSoundEffects[_currSound++] play];
+    if(_currSound == SFXINSTANCES)
+        _currSound = 0;
     
 }
 
@@ -157,7 +165,7 @@
 }
 
 - (void) glkView:(GLKView *)view
-         drawInRect:(CGRect)rect
+      drawInRect:(CGRect)rect
 {
     _game->render();
 }
