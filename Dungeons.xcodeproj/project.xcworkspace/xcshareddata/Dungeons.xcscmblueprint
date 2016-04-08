@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "84B3FD117A23CA3E7B77304EA4DCE4EC6EA6BA6B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "84B3FD117A23CA3E7B77304EA4DCE4EC6EA6BA6B" : 0,
+    "212B3BFE1808EACCB1E2A14E22DFCB7CDD935801" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "275F230C-246A-4A31-86E4-2DC268C47BCA",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "84B3FD117A23CA3E7B77304EA4DCE4EC6EA6BA6B" : "doom-on-rails\/",
+    "212B3BFE1808EACCB1E2A14E22DFCB7CDD935801" : "Documents\/D&Doom2\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Dungeons",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Dungeons.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/theLOLflashlight\/D-Doom.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "212B3BFE1808EACCB1E2A14E22DFCB7CDD935801"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/theLOLflashlight\/doom-on-rails",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "84B3FD117A23CA3E7B77304EA4DCE4EC6EA6BA6B"
+    }
+  ]
+}
