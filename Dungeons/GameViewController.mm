@@ -22,6 +22,29 @@
     
     AVAudioPlayer *GunSoundEffects[SFXINSTANCES];
     int _currSound;
+    
+    //For swipe action.
+    CGFloat _maxRadius;
+    //var _maxTranslationY : CGFloat = 0;
+    CGFloat _prevTranslationX; //for drawing lines
+    CGFloat _prevTranslationY;
+    NSMutableArray *_translationPoints;
+    bool _noSwipe;
+    bool _swipeHit;
+    
+    CGRect screenSize;// : CGRect = UIScreen.mainScreen().bounds;
+    CGSize imageSize;// = CGSize(width: 200, height: 200); //arbitrary initialization
+    UIImageView * _imageView;// = UIImageView();
+    
+    UIBezierPath* _myBezier;// = UIBezierPath();
+    CGFloat bezierDuration;// = Float(1); //duration of bezier on screen (in seconds)
+    
+    //to track swipe running or not
+    CGFloat _currBezierDuration;// = -0.00001; //hard-coded time below 0
+    bool _currSwipeDrawn;// = false;
+    
+    
+    AVAudioPlayer *soundPlayer, *soundPlayer2;
 }
 
 @property (strong, nonatomic) EAGLContext* context;
@@ -64,10 +87,16 @@
         NSLog(@"Failed to create ES context");
     }
     
-    //Q2 - double tap
+    //Handle tap: Shoot projectile
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     tapGesture.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:tapGesture];
+    
+    //Handle pan: Swipe
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture)];
+    [panGesture setMinimumNumberOfTouches:1];
+    [panGesture setMaximumNumberOfTouches:1];
+    [self.view addGestureRecognizer:panGesture];
     
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
@@ -77,17 +106,26 @@
     
     _game = new Game( (GLKView*) self.view );
     
-    //_projectile = &_game->_entities[ 0 ];
-    //_projectileVelocity = glm::vec3();
+    _projectile = &_game->_entities[ 0 ];
+    _projectileVelocity = glm::vec3();
     
     
     
+    NSData *GBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"GunSoundEffect_1" ofType:@"mp3"]];
     for(int i = 0; i < SFXINSTANCES; i++) {
-        NSData *GBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"GunSoundEffect_1", i] ofType:@"mp3"]];
         GunSoundEffects[i] = [[AVAudioPlayer alloc]initWithData:GBSoundPath error:nil];
         [GunSoundEffects[i] prepareToPlay];
     }
+    
+    //Initialization of variables
     _currSound = 0;
+    screenSize = [[UIScreen mainScreen] bounds];// : CGRect = UIScreen.mainScreen().bounds;
+    imageSize = CGSizeMake(200, 200);// = CGSize(width: 200, height: 200); //arbitrary initialization
+    _myBezier = [UIBezierPath alloc];// = UIBezierPath();
+    bezierDuration = 1;// = Float(1); //duration of bezier on screen (in seconds)
+    //to track swipe running or not
+    _currBezierDuration= -0.00001;// = -0.00001; //hard-coded time below 0
+    _currSwipeDrawn = false;// = false;
 }
 
 - (void)viewDidLayoutSubviews
@@ -103,6 +141,49 @@
     //        blurEffectView.addSubview( vibeEffectView )
     //        Hud.insertSubview( blurEffectView, atIndex: 0 )
     
+}
+
+- (void)handlePanGesture: (UIPanGestureRecognizer *)recognizer {
+    CGPoint translation = [recognizer translationInView:self.view];
+    CGPoint location = [recognizer locationInView:self.view];
+    
+    //Actually, just get furthest radius from the origin.
+    GLKVector2 radiusVec = GLKVector2Make(translation.x, translation.y);
+    CGFloat radLength = GLKVector2Length(radiusVec);
+    
+    if(recognizer.state == UIGestureRecognizerStateBegan) {
+        _maxRadius = 0;
+        _noSwipe = false;
+        [_translationPoints removeAllObjects];
+    }
+    if(recognizer.state == UIGestureRecognizerStateEnded) {
+        _noSwipe = false;
+        if(radLength >= 80) { //valid swipe
+            NSString *swipeSound;
+            NSString *swipeSoundExt = @"mp3";
+            if(_swipeHit) {
+                swipeSound = @"sword-clash1";
+            }
+            else {
+                swipeSound = @"swipe_whiff";
+            }
+            if(NSString *path = [[NSBundle mainBundle] pathForResource:swipeSound ofType: swipeSoundExt]) { //J: Not sure about this conversion from swift
+                NSURL *soundURL = [NSURL fileURLWithPath:path]; //Can check this code later ...
+                
+                NSError *error;
+                try {
+                    soundPlayer2 = [[AVAudioPlayer alloc] initWithContentsOfURL:(NSURL *)soundURL
+                                                                          error:nil];
+                    [soundPlayer2 prepareToPlay];
+                    [soundPlayer2 play];
+                }
+                catch(NSException *exception) {
+                }
+            }
+            _currBezierDuration = bezierDuration;
+            _currSwipeDrawn = true;
+        }
+    }
 }
 
 - (void)dealloc
@@ -149,19 +230,20 @@
 - (void) spawn_projectile:( glm::vec3 )pos velocity:( glm::vec3 ) vel
 {
     //const glm::mat4 view = glm::lookAt( _game->_eyepos, _game->_eyelook, glm::vec3( 0, 1, 0 ) );
-    //_projectile->position = pos;
-    //_projectileVelocity = vel;
+    _projectile->position = pos;
+    _projectileVelocity = vel;
     
     [GunSoundEffects[_currSound++] play];
-    if(_currSound == SFXINSTANCES)
+    if(_currSound == SFXINSTANCES) {
         _currSound = 0;
+    }
     
 }
 
 - (void) update
 {
     _game->update( self.timeSinceLastUpdate );
-    //_projectile->position += _projectileVelocity;
+    _projectile->position += _projectileVelocity;
 }
 
 - (void) glkView:(GLKView *)view
