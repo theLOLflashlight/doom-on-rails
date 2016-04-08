@@ -17,12 +17,11 @@
 @interface GameViewController ()
 {
     Game*       _game;
-    Entity*     _projectile;
-    glm::vec3   _projectileVelocity;
-    
     int         _bulletCount;
     
-    AVAudioPlayer *GunSoundEffects;
+    //AVAudioPlayer *GunSoundEffects;
+    AVAudioPlayer *GunSoundEffects[MAX_CHANNELS];
+    int _CurrentChannel;
 }
 
 @property (strong, nonatomic) EAGLContext* context;
@@ -78,8 +77,6 @@
     
     _game = new Game( (GLKView*) self.view );
     
-    _projectile = &_game->_entities[ "bullet" ];
-    _projectileVelocity = glm::vec3();
     _bulletCount = 0;
     
     _CurrentChannel = 0;
@@ -171,11 +168,6 @@
     
     _bulletCount++;
     
-    
-    //const glm::mat4 view = glm::lookAt( _game->_eyepos, _game->_eyelook, glm::vec3( 0, 1, 0 ) );
-    //_projectile->position = pos;
-    //_projectileVelocity = vel;
-    
     [GunSoundEffects[_CurrentChannel] play];
     
     _CurrentChannel ++;
@@ -190,7 +182,6 @@
 - (void) update
 {
     _game->update( self.timeSinceLastUpdate );
-    //_projectile->position += _projectileVelocity;
 }
 
 - (void) glkView:(GLKView *)view
