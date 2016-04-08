@@ -12,7 +12,7 @@
 #import "Game.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
-#define MAX_CHANNELS 10
+#define MAX_CHANNELS 30
 
 @interface GameViewController ()
 {
