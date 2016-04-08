@@ -18,6 +18,64 @@ public:
 
     void render() const;
     void update( double );
+    
+    glm::mat4 viewMatrix() const
+    {
+        return glm::lookAt( _eyepos, _eyelook, glm::vec3( 0, 1, 0 ) );
+    }
+    
+    glm::mat4 projMatrix() const
+    {
+        const auto width = _width / 2;
+        const auto height = _height / 2;
+        const float aspectRatio = width / height;
+        
+        return glm::perspective< float >( glm::radians( 80.0f ), aspectRatio, 0.1, 1000 );
+    }
+    
+    glm::vec4 viewport() const
+    {
+        const auto width = _width / 2;
+        const auto height = _height / 2;
+
+        return glm::vec4( 0, -height, width, height );
+    }
+    
+    GraphicalComponent* findGraphicalComponent( EntityId _id )
+    {
+        for ( auto& drawable : _graphics )
+            if ( drawable.entityId == _id )
+                return &drawable;
+        
+        return nullptr;
+    }
+    
+    const GraphicalComponent* findGraphicalComponent( EntityId _id ) const
+    {
+        for ( auto& drawable : _graphics )
+            if ( drawable.entityId == _id )
+                return &drawable;
+        
+        return nullptr;
+    }
+    
+    PhysicalComponent* findPhysicalComponent( EntityId _id )
+    {
+        for ( auto& physible : _physics )
+            if ( physible.entityId == _id )
+                return &physible;
+        
+        return nullptr;
+    }
+    
+    const PhysicalComponent* findPhysicalComponent( EntityId _id ) const
+    {
+        for ( auto& physible : _physics )
+            if ( physible.entityId == _id )
+                return &physible;
+        
+        return nullptr;
+    }
 
 //private:
 

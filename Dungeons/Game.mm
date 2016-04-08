@@ -398,10 +398,8 @@ void Game::render() const
     vec3 eyepos = _eyepos;
     vec3 eyelook = _eyelook;
     
-    const mat4 view = lookAt( eyepos, eyelook, vec3( 0, 1, 0 ) );
-
-    const float aspectRatio = _width / _height;
-    const mat4 proj = perspective< float >( radians( 80.0f ), aspectRatio, 0.1, 1000 );
+    const mat4 view = viewMatrix();
+    const mat4 proj = projMatrix();
 
     glActiveTexture( GL_TEXTURE0 );
     glBindTexture( GL_TEXTURE_2D, 0 );
