@@ -10,6 +10,7 @@
 #import <OpenGLES/ES3/glext.h>
 #import <AVFoundation/AVFoundation.h>
 #import "Game.h"
+#include "ios_path.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 #define MAX_CHANNELS 30
@@ -21,6 +22,7 @@
 {
     Game*       _game;
     int         _bulletId;
+    Model*      _projectileSprite;
     
     //AVAudioPlayer *GunSoundEffects;
     AVAudioPlayer *GunSoundEffects[MAX_CHANNELS];
@@ -76,6 +78,14 @@
     [EAGLContext setCurrentContext:self.context];
     
     _game = new Game( (GLKView*) self.view );
+    
+    auto fireball = std::make_shared<GLTexture>( ios_path( "Fireball.png" ) );
+    
+    _projectileSprite = new Model( ObjMesh( ios_path( "crate.obj" ) ), _game->_program );
+    for ( auto& texture : _projectileSprite->_mesh.textures )
+    {
+        texture.material->map_Kd = fireball;
+    }
     
     _bulletId = BULLET_MIN;
     
@@ -169,7 +179,8 @@
     {
         GraphicalComponent bullet( bulletId );
         bullet.program = _game->_program.get();
-        bullet.sprite = &_game->_model;
+        bullet.sprite = _projectileSprite;
+        bullet.translucent = true;
         
         _game->_graphics.push_back( bullet );
     }

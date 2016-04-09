@@ -207,11 +207,14 @@ struct GraphicalComponent
             
             mod *= BillboardPoint( vec3( 0, 0, 0 ), vec3( row( view, 2 ) ), vec3( column( view, 1 ) ) );
             
+            mod = scale( mod, vec3( 1, 1, 0 ) );
+            
             //mod *= BillboardAxisY( vec3( 0, 0, 0 ), vec3( row( view, 2 ) ) );
             
             //mod = lookAt( ntt.position, vec3( row( view, 2 ) ), vec3( column( view, 1 ) ) );
-            
+            glEnable( GL_BLEND );
             sprite->render( mod, view, proj, GL_TRIANGLES );
+            glDisable( GL_BLEND );
         }
     }
 };
