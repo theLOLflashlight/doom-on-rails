@@ -16,7 +16,6 @@
 		4453320F1CB5BD9C004DC43B /* Start.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4453320B1CB5BD9C004DC43B /* Start.gif */; };
 		445332111CB5C48E004DC43B /* Logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 445332101CB5C48E004DC43B /* Logout.png */; };
 		44F1AC4B1CB74AF3002557C5 /* GunSoundEffect_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44F1AC4A1CB74AF3002557C5 /* GunSoundEffect_1.wav */; };
-		44F1AC4F1CB7542A002557C5 /* Fireball.png in Resources */ = {isa = PBXBuildFile; fileRef = 44F1AC4E1CB7542A002557C5 /* Fireball.png */; };
 		532ECA701CADA9F8001BB153 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532ECA6F1CADA9F8001BB153 /* OpenGLES.framework */; };
 		532ECA881CADBDBD001BB153 /* DemoRail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA761CADBDBD001BB153 /* DemoRail.mtl */; };
 		532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA771CADBDBD001BB153 /* DemoRail.obj */; };
@@ -67,6 +66,7 @@
 		5385DE911CA3545200F1A323 /* stb_image_aug.c in Sources */ = {isa = PBXBuildFile; fileRef = 5385DE831CA3429000F1A323 /* stb_image_aug.c */; };
 		5385DE941CA359B700F1A323 /* ios_path.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5385DE931CA359B700F1A323 /* ios_path.mm */; };
 		5385DE961CA370F200F1A323 /* crate.obj in Resources */ = {isa = PBXBuildFile; fileRef = 5385DE951CA370F200F1A323 /* crate.obj */; };
+		53ADE88F1CB8887800DD3588 /* Fireball.png in Resources */ = {isa = PBXBuildFile; fileRef = 53ADE88E1CB8887800DD3588 /* Fireball.png */; };
 		53C679221CA22E62007C7945 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C679211CA22E62007C7945 /* main.m */; };
 		53C679251CA22E62007C7945 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C679241CA22E62007C7945 /* AppDelegate.m */; };
 		53C679271CA22E62007C7945 /* Shader.fs in Resources */ = {isa = PBXBuildFile; fileRef = 53C679261CA22E62007C7945 /* Shader.fs */; };
@@ -89,7 +89,6 @@
 		4453320B1CB5BD9C004DC43B /* Start.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Start.gif; sourceTree = "<group>"; };
 		445332101CB5C48E004DC43B /* Logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logout.png; sourceTree = "<group>"; };
 		44F1AC4A1CB74AF3002557C5 /* GunSoundEffect_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GunSoundEffect_1.wav; sourceTree = "<group>"; };
-		44F1AC4E1CB7542A002557C5 /* Fireball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fireball.png; sourceTree = "<group>"; };
 		532ECA6F1CADA9F8001BB153 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		532ECA741CADB02B001BB153 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		532ECA761CADBDBD001BB153 /* DemoRail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DemoRail.mtl; sourceTree = "<group>"; };
@@ -166,6 +165,7 @@
 		5385DE921CA3580F00F1A323 /* ios_path.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = ios_path.h; sourceTree = "<group>"; };
 		5385DE931CA359B700F1A323 /* ios_path.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ios_path.mm; sourceTree = "<group>"; };
 		5385DE951CA370F200F1A323 /* crate.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = crate.obj; sourceTree = "<group>"; };
+		53ADE88E1CB8887800DD3588 /* Fireball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fireball.png; sourceTree = "<group>"; };
 		53C6791D1CA22E62007C7945 /* Dungeons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dungeons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53C679211CA22E62007C7945 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		53C679231CA22E62007C7945 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -208,7 +208,7 @@
 		445332031CB5BD68004DC43B /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
-				44F1AC4E1CB7542A002557C5 /* Fireball.png */,
+				53ADE88E1CB8887800DD3588 /* Fireball.png */,
 				445332101CB5C48E004DC43B /* Logout.png */,
 				445332081CB5BD9C004DC43B /* BGT1.gif */,
 				445332091CB5BD9C004DC43B /* SoundOff.png */,
@@ -451,7 +451,6 @@
 				532ECA8B1CADBDBD001BB153 /* Level0.mtl in Resources */,
 				5385DE661CA3365100F1A323 /* MyShader.fs in Resources */,
 				532ECA8C1CADBDBD001BB153 /* Level0.obj in Resources */,
-				44F1AC4F1CB7542A002557C5 /* Fireball.png in Resources */,
 				532ECA881CADBDBD001BB153 /* DemoRail.mtl in Resources */,
 				53C6792F1CA22E62007C7945 /* Main.storyboard in Resources */,
 				532ECA901CADBDBD001BB153 /* Level0EnemyPos in Resources */,
@@ -484,6 +483,7 @@
 				53C679271CA22E62007C7945 /* Shader.fs in Resources */,
 				532ECA921CADBDBD001BB153 /* Level0EnemyPos.obj in Resources */,
 				5385DE731CA3365100F1A323 /* WaterShader.fs in Resources */,
+				53ADE88F1CB8887800DD3588 /* Fireball.png in Resources */,
 				5385DE5B1CA3365100F1A323 /* crate in Resources */,
 				4453320C1CB5BD9C004DC43B /* BGT1.gif in Resources */,
 				445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */,
@@ -652,7 +652,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Andrew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dungeons/Dungeons-Bridging-Header.h";
@@ -682,7 +682,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Andrew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dungeons/Dungeons-Bridging-Header.h";
