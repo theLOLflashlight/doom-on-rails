@@ -88,7 +88,7 @@ public:
     GLProgram::ptr_t        _program;
     
     Model                   _model, _level, _enemies;
-    ObjMesh                 _rail;
+    ObjMesh                 _rail, _camera;
     
     mutable EntityCollection            _entities;
     std::vector< GraphicalComponent >   _graphics;

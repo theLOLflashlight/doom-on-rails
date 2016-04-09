@@ -90,7 +90,8 @@ Game::Game( GLKView* view )
     , _model( ObjMesh( ios_path( "crate.obj" ) ), _program )
     , _level( ObjMesh( ios_path( "Level0Layout.obj" ) ), _program )
     , _enemies( ObjMesh( ios_path( "Level0EnemyPos.obj" ) ), _program )
-    , _rail( ios_path( "DemoRail.obj" ) )
+    , _rail( ios_path( "Level0Rail.obj" ) )
+    , _camera( ios_path( "Level0Camera.obj" ) )
 
     , _entities( {
 #if DEMO

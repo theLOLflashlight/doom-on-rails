@@ -10,6 +10,10 @@
 		030281401CB8817D000989A1 /* Level0Layout.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 0302813D1CB8817D000989A1 /* Level0Layout.mtl */; };
 		030281411CB8817D000989A1 /* Level0Layout.obj in Resources */ = {isa = PBXBuildFile; fileRef = 0302813E1CB8817D000989A1 /* Level0Layout.obj */; };
 		030281421CB8817D000989A1 /* level0texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 0302813F1CB8817D000989A1 /* level0texture.png */; };
+		030281451CB88E67000989A1 /* Level0Rail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 030281431CB88E67000989A1 /* Level0Rail.mtl */; };
+		030281461CB88E67000989A1 /* Level0Rail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 030281441CB88E67000989A1 /* Level0Rail.obj */; };
+		030281491CB8949B000989A1 /* Level0Camera.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 030281471CB8949B000989A1 /* Level0Camera.mtl */; };
+		0302814A1CB8949B000989A1 /* Level0Camera.obj in Resources */ = {isa = PBXBuildFile; fileRef = 030281481CB8949B000989A1 /* Level0Camera.obj */; };
 		445332001CB5BD3B004DC43B /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445331FF1CB5BD3B004DC43B /* MainViewController.m */; };
 		445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */ = {isa = PBXBuildFile; fileRef = 445332041CB5BD81004DC43B /* ButtonPress.wav */; };
 		445332071CB5BD81004DC43B /* DOOM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 445332051CB5BD81004DC43B /* DOOM.mp3 */; };
@@ -21,16 +25,12 @@
 		44F1AC4B1CB74AF3002557C5 /* GunSoundEffect_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44F1AC4A1CB74AF3002557C5 /* GunSoundEffect_1.wav */; };
 		44F1AC4F1CB7542A002557C5 /* Fireball.png in Resources */ = {isa = PBXBuildFile; fileRef = 44F1AC4E1CB7542A002557C5 /* Fireball.png */; };
 		532ECA701CADA9F8001BB153 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532ECA6F1CADA9F8001BB153 /* OpenGLES.framework */; };
-		532ECA881CADBDBD001BB153 /* DemoRail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA761CADBDBD001BB153 /* DemoRail.mtl */; };
-		532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA771CADBDBD001BB153 /* DemoRail.obj */; };
 		532ECA8A1CADBDBD001BB153 /* Level0_Textures in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA781CADBDBD001BB153 /* Level0_Textures */; };
 		532ECA901CADBDBD001BB153 /* Level0EnemyPos in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA7E1CADBDBD001BB153 /* Level0EnemyPos */; };
 		532ECA911CADBDBD001BB153 /* Level0EnemyPos.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA7F1CADBDBD001BB153 /* Level0EnemyPos.mtl */; };
 		532ECA921CADBDBD001BB153 /* Level0EnemyPos.obj in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA801CADBDBD001BB153 /* Level0EnemyPos.obj */; };
 		532ECA931CADBDBD001BB153 /* Level0EnemyRail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA811CADBDBD001BB153 /* Level0EnemyRail.mtl */; };
 		532ECA941CADBDBD001BB153 /* Level0EnemyRail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA821CADBDBD001BB153 /* Level0EnemyRail.obj */; };
-		532ECA981CADBDBD001BB153 /* Level0Rail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA861CADBDBD001BB153 /* Level0Rail.mtl */; };
-		532ECA991CADBDBD001BB153 /* Level0Rail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA871CADBDBD001BB153 /* Level0Rail.obj */; };
 		5385DE2F1CA3339200F1A323 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5385DE2E1CA3339200F1A323 /* GLKit.framework */; };
 		5385DE5B1CA3365100F1A323 /* crate in Resources */ = {isa = PBXBuildFile; fileRef = 5385DE301CA3365100F1A323 /* crate */; };
 		5385DE5C1CA3365100F1A323 /* crate.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 5385DE311CA3365100F1A323 /* crate.mtl */; };
@@ -77,6 +77,10 @@
 		0302813D1CB8817D000989A1 /* Level0Layout.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0Layout.mtl; sourceTree = "<group>"; };
 		0302813E1CB8817D000989A1 /* Level0Layout.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0Layout.obj; sourceTree = "<group>"; };
 		0302813F1CB8817D000989A1 /* level0texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level0texture.png; sourceTree = "<group>"; };
+		030281431CB88E67000989A1 /* Level0Rail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0Rail.mtl; sourceTree = "<group>"; };
+		030281441CB88E67000989A1 /* Level0Rail.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0Rail.obj; sourceTree = "<group>"; };
+		030281471CB8949B000989A1 /* Level0Camera.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0Camera.mtl; sourceTree = "<group>"; };
+		030281481CB8949B000989A1 /* Level0Camera.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0Camera.obj; sourceTree = "<group>"; };
 		445331FF1CB5BD3B004DC43B /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		445332011CB5BD44004DC43B /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		445332041CB5BD81004DC43B /* ButtonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonPress.wav; sourceTree = "<group>"; };
@@ -90,16 +94,12 @@
 		44F1AC4E1CB7542A002557C5 /* Fireball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fireball.png; sourceTree = "<group>"; };
 		532ECA6F1CADA9F8001BB153 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		532ECA741CADB02B001BB153 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
-		532ECA761CADBDBD001BB153 /* DemoRail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DemoRail.mtl; sourceTree = "<group>"; };
-		532ECA771CADBDBD001BB153 /* DemoRail.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DemoRail.obj; sourceTree = "<group>"; };
 		532ECA781CADBDBD001BB153 /* Level0_Textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Level0_Textures; sourceTree = "<group>"; };
 		532ECA7E1CADBDBD001BB153 /* Level0EnemyPos */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Level0EnemyPos; sourceTree = "<group>"; };
 		532ECA7F1CADBDBD001BB153 /* Level0EnemyPos.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyPos.mtl; sourceTree = "<group>"; };
 		532ECA801CADBDBD001BB153 /* Level0EnemyPos.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyPos.obj; sourceTree = "<group>"; };
 		532ECA811CADBDBD001BB153 /* Level0EnemyRail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyRail.mtl; sourceTree = "<group>"; };
 		532ECA821CADBDBD001BB153 /* Level0EnemyRail.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyRail.obj; sourceTree = "<group>"; };
-		532ECA861CADBDBD001BB153 /* Level0Rail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0Rail.mtl; sourceTree = "<group>"; };
-		532ECA871CADBDBD001BB153 /* Level0Rail.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0Rail.obj; sourceTree = "<group>"; };
 		5385DE2E1CA3339200F1A323 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		5385DE301CA3365100F1A323 /* crate */ = {isa = PBXFileReference; lastKnownFileType = folder; path = crate; sourceTree = "<group>"; };
 		5385DE311CA3365100F1A323 /* crate.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = crate.mtl; sourceTree = "<group>"; };
@@ -188,6 +188,10 @@
 		0302813C1CB88126000989A1 /* Level0 */ = {
 			isa = PBXGroup;
 			children = (
+				030281471CB8949B000989A1 /* Level0Camera.mtl */,
+				030281481CB8949B000989A1 /* Level0Camera.obj */,
+				030281431CB88E67000989A1 /* Level0Rail.mtl */,
+				030281441CB88E67000989A1 /* Level0Rail.obj */,
 				0302813D1CB8817D000989A1 /* Level0Layout.mtl */,
 				0302813E1CB8817D000989A1 /* Level0Layout.obj */,
 				0302813F1CB8817D000989A1 /* level0texture.png */,
@@ -255,16 +259,12 @@
 			isa = PBXGroup;
 			children = (
 				0302813C1CB88126000989A1 /* Level0 */,
-				532ECA761CADBDBD001BB153 /* DemoRail.mtl */,
-				532ECA771CADBDBD001BB153 /* DemoRail.obj */,
 				532ECA781CADBDBD001BB153 /* Level0_Textures */,
 				532ECA7E1CADBDBD001BB153 /* Level0EnemyPos */,
 				532ECA7F1CADBDBD001BB153 /* Level0EnemyPos.mtl */,
 				532ECA801CADBDBD001BB153 /* Level0EnemyPos.obj */,
 				532ECA811CADBDBD001BB153 /* Level0EnemyRail.mtl */,
 				532ECA821CADBDBD001BB153 /* Level0EnemyRail.obj */,
-				532ECA861CADBDBD001BB153 /* Level0Rail.mtl */,
-				532ECA871CADBDBD001BB153 /* Level0Rail.obj */,
 			);
 			name = Levels;
 			sourceTree = "<group>";
@@ -442,12 +442,12 @@
 			files = (
 				5385DE6F1CA3365100F1A323 /* Skybox.fs in Resources */,
 				5385DE661CA3365100F1A323 /* MyShader.fs in Resources */,
+				0302814A1CB8949B000989A1 /* Level0Camera.obj in Resources */,
 				44F1AC4F1CB7542A002557C5 /* Fireball.png in Resources */,
-				532ECA881CADBDBD001BB153 /* DemoRail.mtl in Resources */,
 				53C6792F1CA22E62007C7945 /* Main.storyboard in Resources */,
 				532ECA901CADBDBD001BB153 /* Level0EnemyPos in Resources */,
 				030281411CB8817D000989A1 /* Level0Layout.obj in Resources */,
-				532ECA981CADBDBD001BB153 /* Level0Rail.mtl in Resources */,
+				030281461CB88E67000989A1 /* Level0Rail.obj in Resources */,
 				53C679291CA22E62007C7945 /* Shader.vs in Resources */,
 				532ECA931CADBDBD001BB153 /* Level0EnemyRail.mtl in Resources */,
 				4453320F1CB5BD9C004DC43B /* Start.gif in Resources */,
@@ -476,10 +476,10 @@
 				5385DE5B1CA3365100F1A323 /* crate in Resources */,
 				4453320C1CB5BD9C004DC43B /* BGT1.gif in Resources */,
 				445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */,
+				030281491CB8949B000989A1 /* Level0Camera.mtl in Resources */,
+				030281451CB88E67000989A1 /* Level0Rail.mtl in Resources */,
 				532ECA941CADBDBD001BB153 /* Level0EnemyRail.obj in Resources */,
-				532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */,
 				5385DE741CA3365100F1A323 /* WaterShader.vs in Resources */,
-				532ECA991CADBDBD001BB153 /* Level0Rail.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
