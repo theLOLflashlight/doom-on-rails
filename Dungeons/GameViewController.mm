@@ -79,13 +79,7 @@
     
     _game = new Game( (GLKView*) self.view );
     
-    auto fireball = std::make_shared<GLTexture>( ios_path( "Level0EnemyPos/enemy2.png" ) );
-    
-    _projectileSprite = new Model( ObjMesh( ios_path( "crate.obj" ) ), _game->_program );
-    for ( auto& texture : _projectileSprite->_mesh.textures )
-    {
-        texture.material->map_Kd = fireball;
-    }
+    _projectileSprite = new Model( ObjMesh( ios_path( "fireball.obj" ) ), _game->_program );
     
     _bulletId = BULLET_MIN;
     

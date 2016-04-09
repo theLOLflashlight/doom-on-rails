@@ -90,7 +90,8 @@ Game::Game( GLKView* view )
     , _model( ObjMesh( ios_path( "crate.obj" ) ), _program )
     , _level( ObjMesh( ios_path( "Level0Layout.obj" ) ), _program )
     , _enemies( ObjMesh( ios_path( "Level0EnemyPos.obj" ) ), _program )
-    , _rail( ios_path( "DemoRail.obj" ) )
+    , _rail( ObjMesh( ios_path( "DemoRail.obj" ) ).rail )
+    , _raillook( _rail.data, 1 )
 
     , _entities( {
 #if DEMO
@@ -117,12 +118,12 @@ Game::Game( GLKView* view )
     } )
 
     , _skybox_texture( SOIL_load_OGL_cubemap(
-        ios_path( "skybox/right.tga" ),
-        ios_path( "skybox/left.tga" ),
-        ios_path( "skybox/top.tga" ),
-        ios_path( "skybox/bottom.tga" ),
-        ios_path( "skybox/back.tga" ),
-        ios_path( "skybox/front.tga" ),
+        ios_path( "skybox/mar_ft.tga" ),
+        ios_path( "skybox/mar_bk.tga" ),
+        ios_path( "skybox/mar_up.tga" ),
+        ios_path( "skybox/mar_dn.tga" ),
+        ios_path( "skybox/mar_rt.tga" ),
+        ios_path( "skybox/mar_lf.tga" ),
         SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID,
         SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT ) )
 
@@ -319,12 +320,15 @@ Game::Game( GLKView* view )
     //_water_program.validate();
     
 #if !DEMO
-    size_t railsize = _rail.rail.size();
+    /*size_t railsize = _rail.rail.size();
     _eyepos = _rail.rail[ _railidx % railsize ];
     _eyelook = _rail.rail[ (_railidx + 1) % railsize ];
-    _eyelook2 = _rail.rail[ (_railidx + 3) % railsize ];
+    _eyelook2 = _rail.rail[ (_railidx + 3) % railsize ];*/
 #endif
 }
+
+
+
 
 
 void Game::update( double step )
@@ -341,7 +345,7 @@ void Game::update( double step )
     _eyelook = vec3();
 #else
     
-    size_t railsize = _rail.rail.size();
+    /*size_t railsize = _rail.rail.size();
     
     _eyelook = _rail.rail[ (_railidx + 1) % railsize ];
     _eyelook2 = _rail.rail[ (_railidx + 3) % railsize ];
@@ -365,10 +369,10 @@ void Game::update( double step )
     }
     
     eyepos.y -= 0.5;
-    eyelook.y -= 0.5;
+    eyelook.y -= 0.5;*/
     
-    _eyepos = eyepos;
-    _eyelook = eyelook;
+    _eyepos = _rail[ time ];
+    _eyelook = _raillook[ time ];
 #endif
     
     float waveFactor = (time / 10);

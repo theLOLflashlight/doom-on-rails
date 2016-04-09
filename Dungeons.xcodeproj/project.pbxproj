@@ -67,6 +67,9 @@
 		5385DE941CA359B700F1A323 /* ios_path.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5385DE931CA359B700F1A323 /* ios_path.mm */; };
 		5385DE961CA370F200F1A323 /* crate.obj in Resources */ = {isa = PBXBuildFile; fileRef = 5385DE951CA370F200F1A323 /* crate.obj */; };
 		53ADE88F1CB8887800DD3588 /* Fireball.png in Resources */ = {isa = PBXBuildFile; fileRef = 53ADE88E1CB8887800DD3588 /* Fireball.png */; };
+		53ADE8951CB88DDF00DD3588 /* fireball.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53ADE8921CB88DDF00DD3588 /* fireball.mtl */; };
+		53ADE8961CB88DDF00DD3588 /* fireball.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53ADE8931CB88DDF00DD3588 /* fireball.obj */; };
+		53ADE8981CB88E4200DD3588 /* fireball in Resources */ = {isa = PBXBuildFile; fileRef = 53ADE8971CB88E4200DD3588 /* fireball */; };
 		53C679221CA22E62007C7945 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C679211CA22E62007C7945 /* main.m */; };
 		53C679251CA22E62007C7945 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C679241CA22E62007C7945 /* AppDelegate.m */; };
 		53C679271CA22E62007C7945 /* Shader.fs in Resources */ = {isa = PBXBuildFile; fileRef = 53C679261CA22E62007C7945 /* Shader.fs */; };
@@ -166,6 +169,9 @@
 		5385DE931CA359B700F1A323 /* ios_path.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ios_path.mm; sourceTree = "<group>"; };
 		5385DE951CA370F200F1A323 /* crate.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = crate.obj; sourceTree = "<group>"; };
 		53ADE88E1CB8887800DD3588 /* Fireball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fireball.png; sourceTree = "<group>"; };
+		53ADE8921CB88DDF00DD3588 /* fireball.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fireball.mtl; sourceTree = "<group>"; };
+		53ADE8931CB88DDF00DD3588 /* fireball.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fireball.obj; sourceTree = "<group>"; };
+		53ADE8971CB88E4200DD3588 /* fireball */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fireball; sourceTree = "<group>"; };
 		53C6791D1CA22E62007C7945 /* Dungeons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dungeons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53C679211CA22E62007C7945 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		53C679231CA22E62007C7945 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -244,6 +250,7 @@
 		532ECA731CADAC79001BB153 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				53ADE8971CB88E4200DD3588 /* fireball */,
 				5385DE511CA3365100F1A323 /* skybox */,
 				5385DE581CA3365100F1A323 /* water */,
 				5385DE301CA3365100F1A323 /* crate */,
@@ -363,6 +370,8 @@
 				5385DE321CA3365100F1A323 /* Entity.cpp */,
 				5385DE311CA3365100F1A323 /* crate.mtl */,
 				5385DE951CA370F200F1A323 /* crate.obj */,
+				53ADE8921CB88DDF00DD3588 /* fireball.mtl */,
+				53ADE8931CB88DDF00DD3588 /* fireball.obj */,
 				53C679261CA22E62007C7945 /* Shader.fs */,
 				53C679281CA22E62007C7945 /* Shader.vs */,
 				53C679301CA22E62007C7945 /* Assets.xcassets */,
@@ -476,6 +485,7 @@
 				532ECA951CADBDBD001BB153 /* Level0Layout in Resources */,
 				44F1AC4B1CB74AF3002557C5 /* GunSoundEffect_1.wav in Resources */,
 				5385DE671CA3365100F1A323 /* MyShader.vs in Resources */,
+				53ADE8951CB88DDF00DD3588 /* fireball.mtl in Resources */,
 				532ECA8A1CADBDBD001BB153 /* Level0_Textures in Resources */,
 				5385DE961CA370F200F1A323 /* crate.obj in Resources */,
 				5385DE891CA3429000F1A323 /* original in Resources */,
@@ -483,9 +493,11 @@
 				53C679271CA22E62007C7945 /* Shader.fs in Resources */,
 				532ECA921CADBDBD001BB153 /* Level0EnemyPos.obj in Resources */,
 				5385DE731CA3365100F1A323 /* WaterShader.fs in Resources */,
+				53ADE8961CB88DDF00DD3588 /* fireball.obj in Resources */,
 				53ADE88F1CB8887800DD3588 /* Fireball.png in Resources */,
 				5385DE5B1CA3365100F1A323 /* crate in Resources */,
 				4453320C1CB5BD9C004DC43B /* BGT1.gif in Resources */,
+				53ADE8981CB88E4200DD3588 /* fireball in Resources */,
 				445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */,
 				532ECA941CADBDBD001BB153 /* Level0EnemyRail.obj in Resources */,
 				532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */,
