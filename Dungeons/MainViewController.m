@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import "MainViewController.h"
+#import "GameViewController.h"
 
 @interface MainViewController()
 {
@@ -59,6 +60,11 @@
         [self.SoundButtonEffect setImage:SoundButtonImage forState:(UIControlStateNormal)];
     }
     
+    
+    GameViewController *gvc = [[GameViewController alloc] init];
+    //gvc.data = _label.text; // Set the exposed property
+    //[self.navigationController pushViewController:secondViewController animated:YES];
+    
 }
 
 //J: For shake method. This is in contrast to in Swift where this were put into the GameViewController.
@@ -84,6 +90,9 @@
     {
         [ButtonSound prepareToPlay];
         [ButtonSound play];
+        
+        //Disable the main menu sound.
+        [BGSound pause];
     }
     
 }
