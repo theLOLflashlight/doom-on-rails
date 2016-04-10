@@ -97,6 +97,45 @@ Game::Game( GLKView* view )
 }
 
 
+void Game::offsetEyelook() {
+    using namespace glm;
+    /*
+    //for animationProgress of shake
+    if(_animationProgress > 1) {
+        _animationProgress = 1;
+    }
+    if(_animationProgress < 1) {
+        _animationProgress += 1.0 / 45.0;
+        float shakeMag;
+        if(_animationProgress < 0.70) {
+            shakeMag = 0.9 * 0.4;
+        }
+        else {
+            shakeMag = (0.9 - (_animationProgress - 0.7) * 0.9 / 0.3) * 0.4; //after reaching 0.7 progress (when sound starts to dwindle), linearly decrease max magnitude to 0
+        }
+        //modelViewMatrix = GLKMatrix4Translate(modelViewMatrix, Float(arc4random())*shakeMag, Float(arc4random())*shakeMag, 0);
+        //GLKVector3Make(position.x + Float(arc4random())*shakeMag, position.y + Float(arc4random())*shakeMag, position.z + Float(arc4random())*shakeMag);
+        //horizontalAngle += (arc4random() / UINT32_MAX) * shakeMag;
+        //verticalAngle += (arc4random() / UINT32_MAX) * shakeMag;
+        
+        mat4 rotMatrix;
+        
+        rotMatrix = rotate( rotMatrix, arc4random() * shakeMag, vec3 {0, 1, 0} );
+        
+        //auto v =
+    }
+     */
+    if(_animationProgress > 1) {
+        _animationProgress = 1;
+    }
+    if(_animationProgress < 1) {
+        _animationProgress += 1.0 / 45.0;
+        //if(_animationProgress <= )
+    }
+    //ambientComponent =
+}
+
+
 void Game::update( double step )
 {
     _currTime += step;
