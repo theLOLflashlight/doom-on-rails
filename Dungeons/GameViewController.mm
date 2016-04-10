@@ -182,7 +182,7 @@
     [self.view addGestureRecognizer:tapGesture];
     
     //Handle pan: Swipe
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture)];
     [panGesture setMinimumNumberOfTouches:1];
     [panGesture setMaximumNumberOfTouches:1];
     [self.view addGestureRecognizer:panGesture];
