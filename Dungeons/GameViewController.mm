@@ -25,6 +25,8 @@
 
 @interface GameViewController ()
 {
+    bool SoundSwitch;
+    
     Game*       _game;
     int         _bulletId;
     Model*      _projectileSprite;
@@ -173,6 +175,8 @@
 
 - (void)viewDidLoad
 {
+    SoundSwitch = true;
+    
     [super viewDidLoad];
     
     self.context = [[EAGLContext alloc] initWithAPI: kEAGLRenderingAPIOpenGLES3];
@@ -233,6 +237,10 @@
     self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", 0];
     self.Health.text =[[NSString alloc] initWithFormat: @"%d", 100];
     self.Armor.text =[[NSString alloc] initWithFormat: @"%d", 100];
+        
+        
+    UIImage *SoundButtonImage = [UIImage imageNamed:@"SoundOn.png"];
+    [self.SoundButtonEffects setImage:SoundButtonImage forState:(UIControlStateNormal)];
 
     }
     
@@ -670,5 +678,18 @@
 }
 
 - (IBAction)SoundButton:(UIButton *)sender {
+    
+    if (SoundSwitch) {
+        
+        UIImage *SoundButtonImage = [UIImage imageNamed:@"SoundOff.png"];
+        [self.SoundButtonEffects setImage:SoundButtonImage forState:(UIControlStateNormal)];
+        SoundSwitch = false;
+    }
+    else
+    {
+        UIImage *SoundButtonImage = [UIImage imageNamed:@"SoundOn.png"];
+        [self.SoundButtonEffects setImage:SoundButtonImage forState:(UIControlStateNormal)];
+        SoundSwitch = true;
+    }
 }
 @end
