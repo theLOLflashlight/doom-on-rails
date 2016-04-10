@@ -162,40 +162,71 @@ inline glm::vec3 extract_eye_pos( glm::mat4 model, glm::mat4 view )
     //return vec4( (model * view)[3] );
 }
 
-struct GraphicalComponent
+struct BehavioralComponent
 {
-    using Delegate = std::function< void(GraphicalComponent*, EntityCollection&, glm::mat4, glm::mat4) >;
+    using Delegate = std::function< void(BehavioralComponent*, EntityCollection&) >;
     
     EntityId    entityId;
-    bool        visible;
-    bool        translucent;
+    bool        enabled;
+    Delegate    functor;
+    
+    explicit BehavioralComponent( EntityId _id, bool _enabled = true )
+        : entityId( _id )
+        , enabled( _enabled )
+    {
+    }
+    
+    void update( EntityCollection& entities )
+    {
+        if ( !enabled )
+            return;
+        
+        if ( functor )
+            functor( this, entities );
+    }
+};
+
+struct GraphicalComponent
+{
+    enum Visibility
+    {
+        INVISIBLE = 0,
+        VISIBLE,
+        TRANSLUCENT
+    };
+    
+    EntityId    entityId;
+    Visibility  visibility;
     GLProgram*  program = 0;
     Model*      model   = 0;
     Model*      sprite  = 0;
     glm::vec4   color   = { 1, 1, 1, 0 };
     
-    Delegate    delegate;
-    
-    GraphicalComponent( EntityId _id, bool _visible = true )
+    explicit GraphicalComponent( EntityId _id, Visibility _visibility = VISIBLE )
         : entityId( _id )
-        , visible( _visible )
+        , visibility( _visibility )
     {
     }
+    
+    GraphicalComponent( EntityId _id, bool _visible )
+        : entityId( _id )
+        , visibility( _visible ? VISIBLE : INVISIBLE )
+    {
+    }
+
     
     void update( EntityCollection& entities, glm::mat4 view, glm::mat4 proj )
     {
         using namespace glm;
-        if ( !visible )
-            return;
         
-        if ( delegate )
-        {
-            delegate( this, entities, view, proj );
+        if ( visibility == INVISIBLE )
             return;
-        }
         
         if ( program )
             glUniform4fv( program->find_uniform( "uColor" ), 1, &color[ 0 ] );
+        
+        if ( visibility == TRANSLUCENT )
+            glEnable( GL_BLEND );
         
         if ( model )
             model->render( entities[ entityId ].transform_matrix(), view, proj, GL_TRIANGLES );
@@ -213,42 +244,36 @@ struct GraphicalComponent
             //mod *= BillboardAxisY( vec3( 0, 0, 0 ), vec3( row( view, 2 ) ) );
             
             //mod = lookAt( ntt.position, vec3( row( view, 2 ) ), vec3( column( view, 1 ) ) );
-            glEnable( GL_BLEND );
+            
             sprite->render( mod, view, proj, GL_TRIANGLES );
-            glDisable( GL_BLEND );
         }
+        
+        if ( visibility == TRANSLUCENT )
+            glDisable( GL_BLEND );
     }
 };
 
 struct PhysicalComponent
 {
-    EntityId            entityId;
-    bool                active;
-    btCollisionObject*  body;
+    EntityId        entityId;
+    bool            active;
+    btRigidBody*    body;
     
-    /*glm::vec3   position;
-    glm::vec3   rotation;
-    glm::vec3   velocity;
-    glm::vec3   angularVelocity;*/
-    
-    PhysicalComponent( EntityId _id, bool _active = true )
+    explicit PhysicalComponent( EntityId _id, bool _active = true )
         : entityId( _id )
         , active( _active )
     {
     }
-
     
     void update( EntityCollection& entities )
     {
         if ( !active )
             return;
         
-        decltype(auto) trans = body->getWorldTransform();
+        btTransform trans;
+        body->getMotionState()->getWorldTransform( trans );
         
         btVector3 pos = trans.getOrigin();
-        //pos.get128();
-        //position += velocity;
-        //rotation += angularVelocity;
         
         Entity& entity = entities[ entityId ];
         entity.position = glm::vec3( pos.x(), pos.y(), pos.z() );

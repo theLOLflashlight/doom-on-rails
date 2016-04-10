@@ -86,7 +86,14 @@ public:
     
     PhysicalComponent*          findPhysicalComponent( EntityId _id );
     const PhysicalComponent*    findPhysicalComponent( EntityId _id ) const;
+    
+    BehavioralComponent*        findBehavioralComponent( EntityId _id );
+    const BehavioralComponent*  findBehavioralComponent( EntityId _id ) const;
 
+    void addComponent( GraphicalComponent component );
+    void addComponent( PhysicalComponent component );
+    void addComponent( BehavioralComponent component );
+    
     void draw_scene( glm::mat4 view, glm::mat4 proj, bool drawWater = false ) const;
 
     
@@ -99,9 +106,14 @@ public:
     Model                   _level, _enemies;
     Rail                    _rail, _raillook;
     
+    template< typename Component >
+    using ComponentCollection = std::vector< Component >;
+    
     mutable EntityCollection            _entities;
-    std::vector< GraphicalComponent >   _graphics;
-    std::vector< PhysicalComponent >    _physics;
+    
+    ComponentCollection< GraphicalComponent >   _graphics;
+    ComponentCollection< PhysicalComponent >    _physics;
+    ComponentCollection< BehavioralComponent >  _behaviors;
 
     Skybox                  _skybox;
     Water                   _water;

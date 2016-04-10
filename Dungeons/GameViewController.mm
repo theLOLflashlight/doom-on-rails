@@ -615,43 +615,24 @@
 {
     const EntityId bulletId = _bulletId++;
     {
-        GraphicalComponent bullet( bulletId );
+        GraphicalComponent bullet( bulletId, GraphicalComponent::TRANSLUCENT );
         bullet.program = _game->_program.get();
         bullet.sprite = _projectileSprite;
-        bullet.translucent = true;
         
-        _game->_graphics.push_back( bullet );
+        _game->addComponent( bullet );
     }
     {
         PhysicalComponent bullet( bulletId );
         
-        auto shape = new btSphereShape( 0.5 );
-        
-        // change this to start sphere in a different location
         auto motionState = new btDefaultMotionState(
-                                                    btTransform( btQuaternion( 0,0,0,1 ), btVector3( pos.x, pos.y, pos.z ) ) );
+            btTransform( btQuaternion( 0,0,0,1 ), btVector3( pos.x, pos.y, pos.z ) ) );
         
-        btScalar mass = 1;
-        btVector3 inertia( 0, 0, 0 );
+        static btSphereShape SPHERE_SHAPE( 0.5 );
+        bullet.body = new btRigidBody( 1, motionState, &SPHERE_SHAPE );
+        bullet.body->setLinearVelocity( { vel.x, vel.y, vel.z } );
         
-        shape->calculateLocalInertia( mass, inertia );
-        
-        btRigidBody::btRigidBodyConstructionInfo rigidBodyCI( mass, motionState, shape, inertia );
-        
-        rigidBodyCI.m_restitution = 1;
-        
-        auto rigidBody = new btRigidBody( rigidBodyCI );
-        
-        bullet.body = rigidBody;
-        [_physics addRigidBody: rigidBody];
-        
-        rigidBody->setLinearVelocity( { vel.x, vel.y, vel.z } );
-        //rigidBody->applyCentralForce( { vel.x, vel.y, vel.z } );
-        
-        //bullet.position = pos;
-        //bullet.velocity = vel;
-        
-        _game->_physics.push_back( bullet );
+        [_physics addRigidBody: bullet.body];
+        _game->addComponent( bullet );
     }
     
     [GunSoundEffects[_CurrentChannel] play];

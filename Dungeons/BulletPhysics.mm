@@ -29,7 +29,7 @@
 
 @implementation BulletPhysics
 
-- (instancetype)init
+- (instancetype) init
 {
     self = [super init];
     if (self) {
@@ -70,22 +70,8 @@
     return self;
 }
 
-- (void)dealloc
+- (void) dealloc
 {
-    /*dynamicsWorld->removeRigidBody(fallRigidBody);
-    delete fallRigidBody->getMotionState();
-    delete fallRigidBody;
-    
-    dynamicsWorld->removeRigidBody(groundRigidBody);
-    delete groundRigidBody->getMotionState();
-    delete groundRigidBody;
-    
-    
-    delete fallShape;
-    
-    delete groundShape;*/
-    
-    
     delete dynamicsWorld;
     delete solver;
     delete collisionConfiguration;
@@ -102,11 +88,6 @@
 -(void) update:(float) elapsedTime
 {
     dynamicsWorld->stepSimulation( elapsedTime, 10 );
-    
-    //btTransform trans;
-    //fallRigidBody->getMotionState()->getWorldTransform(trans);
-    
-    //NSLog(@"%f\t%f\n", elapsedTime*1000, trans.getOrigin().getY());
 }
 
 
