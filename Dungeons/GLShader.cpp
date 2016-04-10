@@ -49,7 +49,7 @@ GLException::status_t GLShader::compile()
         
         glGetShaderInfoLog( glHandle, logLength, &logLength, log );
         printf( "Shader compile log: %s\n", log );
-        delete log;
+        delete[] log;
     }
     return status;
 }

@@ -2,7 +2,7 @@
 
 #include "SOIL.h"
 #include "ios_path.h"
-#define DEMO 0
+#define DEMO 1
 
 using namespace glm;
 using namespace gl_enums::usage;
@@ -76,11 +76,6 @@ const vec3 WATER_VERTICES[] = {
 };
 
 
-Game::~Game()
-{
-}
-
-
 Game::Game( GLKView* view )
     : _view( ([view bindDrawable], view) )
 
@@ -90,19 +85,31 @@ Game::Game( GLKView* view )
     , _startTime( 0 )
     , _currTime( _startTime )
 
-    , _program( new GLProgram( ios_path( "MyShader.vs" ), ios_path( "MyShader.fs" ),
-                              "aPosition", "aNormal", "aTexCoord" ) )
+    , _program( new GLProgram( ios_path( "MyShader.vs" ), ios_path( "MyShader.fs" ), "aPosition", "aNormal", "aTexCoord" ) )
 
     , _model( ObjMesh( ios_path( "crate.obj" ) ), _program )
     , _level( ObjMesh( ios_path( "Level0Layout.obj" ) ), _program )
     , _enemies( ObjMesh( ios_path( "Level0EnemyPos.obj" ) ), _program )
     , _rail( ios_path( "DemoRail.obj" ) )
+
     , _entities( {
 #if DEMO
-        Entity( &_model, vec3( 2, -.75, 0 ) ),
-        Entity( &_model, vec3( 0, .75, 2 ) ),
-        Entity( &_model, vec3( 0, 2, 0 ) )
+        { "crate0", Entity(vec3( 2, -.75, 0 )) },
+        { "crate1", Entity(vec3( 0, .75, 2 )) },
+        { "crate2", Entity(vec3( 0, 2, 0 )) }
+#else
+        { "crate", Entity() }
 #endif
+    } )
+    , _graphics( {
+        { "crate0" },
+        { "crate1" },
+        { "crate2" }
+    } )
+    , _physics( {
+        { "crate0" },
+        { "crate1" },
+        { "crate2" }
     } )
 
     , _skybox_texture( SOIL_load_OGL_cubemap(
@@ -126,9 +133,17 @@ Game::Game( GLKView* view )
                    _water_program.make_vert_attribute< vec3 >( "aPosition" ) )
 {
 #if DEMO
-    _entities[ 0 ].color = vec4( 0, 0, 1, 0.1 );
-    _entities[ 1 ].color = vec4( 1, 0, 0, 0.1 );
-    _entities[ 2 ].color = vec4( 0, 1, 0, 0.1 );
+    _graphics[ 0 ].model = &_model;
+    _graphics[ 0 ].program = _program.get();
+    _graphics[ 0 ].color = vec4( 0, 0, 1, 0.1 );
+    
+    _graphics[ 1 ].model = &_model;
+    _graphics[ 1 ].program = _program.get();
+    _graphics[ 1 ].color = vec4( 1, 0, 0, 0.1 );
+    
+    _graphics[ 2 ].model = &_model;
+    _graphics[ 2 ].program = _program.get();
+    _graphics[ 2 ].color = vec4( 0, 1, 0, 0.1 );
 #endif
     
     glBindTexture( GL_TEXTURE_CUBE_MAP, _skybox_texture );
@@ -145,63 +160,68 @@ Game::Game( GLKView* view )
     
     // REFLECT
     
+    // COLOR TEXTURE
     glGenTextures( 1, &_water_reflect_texture );
     glBindTexture( GL_TEXTURE_2D, _water_reflect_texture );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-    glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA8_OES, _width/2, _height/2, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr );
+    glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, _width/2, _height/2, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr );
     glBindTexture( GL_TEXTURE_2D, 0 );
     
+    // DEPTH BUFFER
+    glGenRenderbuffers( 1, &_water_reflect_render_buffer );
+    glBindRenderbuffer( GL_RENDERBUFFER, _water_reflect_render_buffer );
+    glRenderbufferStorage( GL_RENDERBUFFER, GL_DEPTH_COMPONENT32F, _width, _height );
+    glBindRenderbuffer( GL_RENDERBUFFER, 0 );
+    
+    // FRAME BUFFER
     glGenFramebuffers( 1, &_water_reflect_fbo );
     glBindFramebuffer( GL_FRAMEBUFFER, _water_reflect_fbo );
     glFramebufferTexture2D( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _water_reflect_texture, 0 );
     
+    glFramebufferRenderbuffer( GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _water_reflect_render_buffer );
     
-    glGenRenderbuffers( 1, &_water_render_buffer );
-    glBindRenderbuffer( GL_RENDERBUFFER, _water_render_buffer );
-    glRenderbufferStorage( GL_RENDERBUFFER, GL_DEPTH_COMPONENT24_OES, _width, _height );
-    glFramebufferRenderbuffer( GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _water_render_buffer );
-
     status = glCheckFramebufferStatus( GL_FRAMEBUFFER );
+    glBindFramebuffer( GL_FRAMEBUFFER, 0 );
     if ( status != GL_FRAMEBUFFER_COMPLETE )
         throw status;
-    
-    glBindRenderbuffer( GL_RENDERBUFFER, 0 );
-    glBindFramebuffer( GL_FRAMEBUFFER, 0 );
 
     // REFRACT
     
+    // COLOR TEXTURE
     glGenTextures( 1, &_water_refract_texture );
     glBindTexture( GL_TEXTURE_2D, _water_refract_texture );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-    glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA8_OES, _width * .75, _height * .75, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr );
+    glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, _width * .75, _height * .75, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr );
     glBindTexture( GL_TEXTURE_2D, 0 );
     
-    
+    // DEPTH TEXTURE
     glGenTextures( 1, &_water_refract_depth_texture );
     glBindTexture( GL_TEXTURE_2D, _water_refract_depth_texture );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-    // we do not want to wrap, this will cause incorrect shadows to be rendered
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    // set up the depth compare function to check the shadow depth in hardware
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC_EXT, GL_LEQUAL);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE_EXT, GL_COMPARE_REF_TO_TEXTURE_EXT);
-    glTexImage2D( GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, _width * .75, _height * .75, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr );
+    glTexImage2D( GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, _width * .75, _height * .75, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr );
     glBindTexture( GL_TEXTURE_2D, 0 );
     
+    // DEPTH BUFFER
+    glGenRenderbuffers( 1, &_water_refract_render_buffer );
+    glBindRenderbuffer( GL_RENDERBUFFER, _water_refract_render_buffer );
+    glRenderbufferStorage( GL_RENDERBUFFER, GL_DEPTH_COMPONENT32F, _width, _height );
+    glBindRenderbuffer( GL_RENDERBUFFER, 0 );
+
+    // FRAME BUFFER
     glGenFramebuffers( 1, &_water_refract_fbo );
     glBindFramebuffer( GL_FRAMEBUFFER, _water_refract_fbo );
     glFramebufferTexture2D( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _water_refract_texture, 0 );
-    //glFramebufferTexture2D( GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, _water_refract_depth_texture, 0 );
+    glFramebufferTexture2D( GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, _water_refract_depth_texture, 0 );
+    
+    glFramebufferRenderbuffer( GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _water_refract_render_buffer );
     
     status = glCheckFramebufferStatus( GL_FRAMEBUFFER );
+    glBindFramebuffer( GL_FRAMEBUFFER, 0 );
     if ( status != GL_FRAMEBUFFER_COMPLETE )
         throw status;
-    
-    glBindFramebuffer( GL_FRAMEBUFFER, 0 );
     
     [_view bindDrawable];
     glClearColor( 0, 0, 0, 1 );
@@ -233,10 +253,6 @@ Game::Game( GLKView* view )
     glUniform4fv( _program->find_uniform( "uDiffuseColor" ), 1, &diffuseComponent[0] );
     glUniform4fv( _program->find_uniform( "uSpecularColor" ), 1, &specularComponent[0] );
     glUniform1f( _program->find_uniform( "uShininess" ), shininess );
-
-    const vec4 waterPlane( 0, 1, 0, 0 );
-
-    glUniform4fv( _program->find_uniform( "uWaterPlane" ), 1, &waterPlane[0] );
 
     mat4 waterModel;
 
@@ -317,8 +333,11 @@ void Game::update( double step )
     glUniform3fv( _water_program.find_uniform( "uEyePosition" ), 1, &_eyepos[0] );
     glUseProgram( 0 );
     
-    for ( int i = 0; i < _entities.size(); i++ )
-        _entities[ i ].rotation[ i % 3 ] += step * 2;
+#if DEMO
+    _entities[ "crate0" ].rotation.x += step * 2;
+    _entities[ "crate1" ].rotation.y += step * 2;
+    _entities[ "crate2" ].rotation.z += step * 2;
+#endif
 }
 
 
@@ -343,30 +362,36 @@ void Game::render() const
     glBindTexture( GL_TEXTURE_2D, 0 );
     [_view bindDrawable];
     
-    glDisable( GL_CLIP_DISTANCE(0) );
-    glDisable( GL_CLIP_DISTANCE(1) );
-
-
+    
+    glEnable( GL_CLIP_DISTANCE(0) );
+    
     // Render refLEction.
     glBindFramebuffer( GL_FRAMEBUFFER, _water_reflect_fbo );
     glViewport( 0, 0, (int) _width/2, (int) _height/2 );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-    glEnable( GL_CLIP_DISTANCE(0) );
+    
     eyepos.y = -eyepos.y;
     eyelook.y = -eyelook.y;
+    
+    _program->bind();
+    glUniform4f( _program->find_uniform( "uWaterPlane" ), 0, 1, 0, 0 );
+    glUseProgram( 0 );
+    
     draw_scene( lookAt( eyepos, eyelook, vec3( 0, 1, 0 ) ), proj );
-    glDisable( GL_CLIP_DISTANCE(0) );
-    [_view bindDrawable];
 
 
     // Render refRAction
     glBindFramebuffer( GL_FRAMEBUFFER, _water_refract_fbo );
     glViewport( 0, 0, (int) (_width * .75), (int) (_height * .75) );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-    //glEnable( GL_CLIP_DISTANCE(1) );
+    
+    _program->bind();
+    glUniform4f( _program->find_uniform( "uWaterPlane" ), 0, -1, 0, 0 );
+    glUseProgram( 0 );
+    
     draw_scene( view, proj );
-    //glDisable( GL_CLIP_DISTANCE(1) );
-    [_view bindDrawable];
+    
+    glDisable( GL_CLIP_DISTANCE(0) );
 
 
     // Draw our scene.
@@ -390,8 +415,8 @@ void Game::render() const
     
     _model.render( mat4(), view, proj );
 
-    for ( const Entity& entity : _entities )
-        entity.render( view, proj );
+    for ( auto drawable : _graphics )
+        drawable.update( _entities, view, proj );
     
 #if !DEMO
     glUniform4f( _program->find_uniform( "uColor" ), 1, 1, 1, 0 );
@@ -404,14 +429,19 @@ void Game::render() const
     //glDisable( GL_CULL_FACE );
     glActiveTexture( GL_TEXTURE0 );
     glBindTexture( GL_TEXTURE_2D, _water_reflect_texture );
+    
     glActiveTexture( GL_TEXTURE1 );
     glBindTexture( GL_TEXTURE_2D, _water_refract_texture );
+    
     glActiveTexture( GL_TEXTURE2 );
     glBindTexture( GL_TEXTURE_2D, _water_refract_depth_texture );
+    
     glActiveTexture( GL_TEXTURE3 );
     glBindTexture( GL_TEXTURE_2D, _water_dudv.glHandle );
+    
     glActiveTexture( GL_TEXTURE4 );
     glBindTexture( GL_TEXTURE_2D, _water_normal.glHandle );
+    
     
     glUniformMatrix4fv( _water_program.find_uniform( "uViewMatrix" ), 1, GL_FALSE, &view[ 0 ][ 0 ] );
     glUniformMatrix4fv( _water_program.find_uniform( "uProjMatrix" ), 1, GL_FALSE, &proj[ 0 ][ 0 ] );
@@ -450,8 +480,8 @@ void Game::draw_scene( glm::mat4 view, glm::mat4 proj ) const
 
     _model.render( mat4(), view, proj );
 
-    for ( const Entity& entity : _entities )
-        entity.render( view, proj );
+    for ( auto drawable : _graphics )
+        drawable.update( _entities, view, proj );
     
 #if !DEMO
     glUniform4f( _program->find_uniform( "uColor" ), 1, 1, 1, 0 );

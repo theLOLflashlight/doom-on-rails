@@ -6,13 +6,21 @@
 #include <vector>
 #include <memory>
 
-
-
-class Model
+struct Sprite
 {
-public:
+    GLTexture::ptr_t    _texture;
+    int                 _width;
+    int                 _height;
+    
+    void render( glm::mat4 model,
+                 glm::mat4 view,
+                 glm::mat4 proj ) const;
 
-    explicit Model( const ObjMesh& mesh, GLProgram::ptr_t program );// , std::string vert, std::string frag );
+};
+
+struct Model
+{
+    Model( const ObjMesh& mesh, GLProgram::ptr_t program );// , std::string vert, std::string frag );
 
     //void render() const;
     void render( glm::mat4 model,

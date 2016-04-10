@@ -15,7 +15,6 @@ class Game
 public:
 
     Game( GLKView* view );
-    ~Game();
 
     void render() const;
     void update( double );
@@ -32,7 +31,10 @@ public:
     
     Model                   _model, _level, _enemies;
     ObjMesh                 _rail;
-    std::vector< Entity >   _entities;
+    
+    mutable EntityCollection            _entities;
+    std::vector< GraphicalComponent >   _graphics;
+    std::vector< PhysicalComponent >    _physics;
 
     GLHandle                _skybox_texture;
     GLProgram               _skybox_program;
@@ -51,7 +53,8 @@ public:
     GLHandle                _water_refract_depth_texture;
     GLHandle                _water_refract_fbo;
     
-    GLHandle                _water_render_buffer;
+    GLHandle                _water_reflect_render_buffer;
+    GLHandle                _water_refract_render_buffer;
     
     glm::vec3               _eyepos, _eyepos0, _eyelook, _eyelook2;
     int                     _railidx = 0;
