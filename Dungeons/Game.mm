@@ -361,9 +361,9 @@ void Game::offsetEyelook() {
     }
     if(_animationProgress < 1) {
         _animationProgress += 1.0 / 45.0;
-        if(_animationProgress <= )
+        //if(_animationProgress <= )
     }
-    ambientComponent =
+    //ambientComponent =
 }
 
 
