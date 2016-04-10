@@ -87,10 +87,6 @@
 		81C0A3241CB9EC5F0086E9FA /* shooting_star.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81C0A31D1CB9EC5F0086E9FA /* shooting_star.wav */; };
 		81C0A3251CB9EC5F0086E9FA /* swipe_whiff.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81C0A31E1CB9EC5F0086E9FA /* swipe_whiff.mp3 */; };
 		81C0A3261CB9EC5F0086E9FA /* sword-clash1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81C0A31F1CB9EC5F0086E9FA /* sword-clash1.mp3 */; };
-		81E9B3FA1CB72C8000122C7B /* GunSoundEffect_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81E9B3F61CB72C8000122C7B /* GunSoundEffect_2.mp3 */; };
-		81E9B3FB1CB72C8000122C7B /* GunSoundEffect_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81E9B3F71CB72C8000122C7B /* GunSoundEffect_3.mp3 */; };
-		81E9B3FC1CB72C8000122C7B /* GunSoundEffect_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81E9B3F81CB72C8000122C7B /* GunSoundEffect_4.mp3 */; };
-		81E9B3FD1CB72C8000122C7B /* GunSoundEffect_5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81E9B3F91CB72C8000122C7B /* GunSoundEffect_5.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -206,10 +202,6 @@
 		81C0A31D1CB9EC5F0086E9FA /* shooting_star.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = shooting_star.wav; path = Assets.xcassets/shooting_star.wav; sourceTree = "<group>"; };
 		81C0A31E1CB9EC5F0086E9FA /* swipe_whiff.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = swipe_whiff.mp3; path = Assets.xcassets/swipe_whiff.mp3; sourceTree = "<group>"; };
 		81C0A31F1CB9EC5F0086E9FA /* sword-clash1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "sword-clash1.mp3"; path = "Assets.xcassets/sword-clash1.mp3"; sourceTree = "<group>"; };
-		81E9B3F61CB72C8000122C7B /* GunSoundEffect_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GunSoundEffect_2.mp3; sourceTree = "<group>"; };
-		81E9B3F71CB72C8000122C7B /* GunSoundEffect_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GunSoundEffect_3.mp3; sourceTree = "<group>"; };
-		81E9B3F81CB72C8000122C7B /* GunSoundEffect_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GunSoundEffect_4.mp3; sourceTree = "<group>"; };
-		81E9B3F91CB72C8000122C7B /* GunSoundEffect_5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GunSoundEffect_5.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,11 +228,6 @@
 				81C0A31D1CB9EC5F0086E9FA /* shooting_star.wav */,
 				81C0A31E1CB9EC5F0086E9FA /* swipe_whiff.mp3 */,
 				81C0A31F1CB9EC5F0086E9FA /* sword-clash1.mp3 */,
-				81E9B3F61CB72C8000122C7B /* GunSoundEffect_2.mp3 */,
-				81E9B3F71CB72C8000122C7B /* GunSoundEffect_3.mp3 */,
-				81E9B3F81CB72C8000122C7B /* GunSoundEffect_4.mp3 */,
-				81E9B3F91CB72C8000122C7B /* GunSoundEffect_5.mp3 */,
-				444220B61CB6FABC00A8B1E3 /* GunSoundEffect_1.mp3 */,
 				44F1AC4A1CB74AF3002557C5 /* GunSoundEffect_1.wav */,
 				445332041CB5BD81004DC43B /* ButtonPress.wav */,
 				445332051CB5BD81004DC43B /* DOOM.mp3 */,
@@ -548,7 +535,6 @@
 				532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */,
 				5385DE741CA3365100F1A323 /* WaterShader.vs in Resources */,
 				532ECA8E1CADBDBD001BB153 /* Level0All.mtl in Resources */,
-				444220B71CB6FABC00A8B1E3 /* GunSoundEffect_1.mp3 in Resources */,
 				81C0A3251CB9EC5F0086E9FA /* swipe_whiff.mp3 in Resources */,
 				532ECA991CADBDBD001BB153 /* Level0Rail.obj in Resources */,
 			);

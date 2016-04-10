@@ -34,7 +34,7 @@
                                 <rect key="frame" x="0.0" y="630" width="600" height="90"/>
                                 <connections>
                                     <action selector="Login:" destination="rZz-8N-SCI" eventType="touchUpInside" id="RQH-M7-9wv"/>
-                                    <segue destination="BV1-FR-VrT" kind="showDetail" action="showViewController:sender:" id="JEP-ZT-spM"/>
+                                    <segue destination="BV1-FR-VrT" kind="showDetail" identifier="MainToGame" action="showViewController:sender:" id="JEP-ZT-spM"/>
                                 </connections>
                             </button>
                             <webView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o8y-Pk-AgF">

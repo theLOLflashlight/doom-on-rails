@@ -61,10 +61,23 @@
     }
     
     
-    GameViewController *gvc = [[GameViewController alloc] init];
-    //gvc.data = _label.text; // Set the exposed property
-    //[self.navigationController pushViewController:secondViewController animated:YES];
-    
+    //GameViewController *gvc = [[GameViewController alloc] init];
+    //gvc.MusicOn = SoundSwitch; // Set the exposed property
+    //[self.navigationController pushViewController:gvc animated:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Make sure your segue name in storyboard is the same as this line
+    if ([[segue identifier] isEqualToString:@"MainToGame"])
+    {
+        // Get reference to the destination view controller
+        GameViewController *vc = [segue destinationViewController];
+        
+        // Pass any objects to the view controller here, like...
+        vc.MusicOn = SoundSwitch;
+        //[vc setMyObjectHere:object];
+    }
 }
 
 //J: For shake method. This is in contrast to in Swift where this were put into the GameViewController.
