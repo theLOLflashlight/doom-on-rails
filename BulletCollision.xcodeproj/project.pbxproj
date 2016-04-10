@@ -795,7 +795,7 @@
 				CONFIGURATION_BUILD_DIR = ../../lib;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
-				HEADER_SEARCH_PATHS = ./Bullet3D;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Bullet3D";
 				INFOPLIST_FILE = ../../Test/Info.plist;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = BulletCollision_xcode4_x64_debug;
@@ -814,7 +814,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
-				HEADER_SEARCH_PATHS = ./Bullet3D;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Bullet3D";
 				INFOPLIST_FILE = ../../Test/Info.plist;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = BulletCollision_xcode4;
@@ -857,7 +857,7 @@
 				CONFIGURATION_BUILD_DIR = ../../lib;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
-				HEADER_SEARCH_PATHS = ./Bullet3D;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Bullet3D";
 				INFOPLIST_FILE = ../../Test/Info.plist;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = BulletCollision_xcode4_debug;
@@ -876,7 +876,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
-				HEADER_SEARCH_PATHS = ./Bullet3D;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Bullet3D";
 				INFOPLIST_FILE = ../../Test/Info.plist;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = BulletCollision_xcode4_x64_release;

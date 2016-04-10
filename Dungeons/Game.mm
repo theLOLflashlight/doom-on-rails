@@ -56,9 +56,8 @@ Game::Game( GLKView* view )
     
     // Setup level
     {
-        GraphicalComponent level( "level" );
+        GraphicalComponent level( "level", GraphicalComponent::TRANSLUCENT );
         level.model = &_level;
-        level.translucent = true;
         level.program = _program.get();
         
         _graphics.push_back( level );
@@ -72,19 +71,18 @@ Game::Game( GLKView* view )
 
     // Setup enemies
     {
-        GraphicalComponent enemies( "enemies" );
+        GraphicalComponent enemies( "enemies", GraphicalComponent::TRANSLUCENT );
         enemies.model = &_enemies;
-        enemies.translucent = true;
         enemies.program = _program.get();
         
-        enemies.delegate = [](GraphicalComponent* gfx, EntityCollection& entities, glm::mat4 view, glm::mat4 proj)
+        /*enemies.delegate = [](GraphicalComponent* gfx, EntityCollection& entities, glm::mat4 view, glm::mat4 proj)
         {
             glUniform4fv( gfx->program->find_uniform( "uColor" ), 1, &gfx->color[ 0 ] );
             
             glEnable( GL_BLEND );
             gfx->model->render( entities[ gfx->entityId ].transform_matrix(), view, proj );
             glDisable( GL_BLEND );
-        };
+        };*/
         
         _graphics.push_back( enemies );
     }
@@ -229,6 +227,40 @@ const PhysicalComponent* Game::findPhysicalComponent( EntityId _id ) const
             return &physible;
     
     return nullptr;
+}
+
+BehavioralComponent* Game::findBehavioralComponent( EntityId _id )
+{
+    for ( auto& behavior : _behaviors )
+        if ( behavior.entityId == _id )
+            return &behavior;
+    
+    return nullptr;
+}
+
+const BehavioralComponent* Game::findBehavioralComponent( EntityId _id ) const
+{
+    for ( auto& behavior : _behaviors )
+        if ( behavior.entityId == _id )
+            return &behavior;
+    
+    return nullptr;
+}
+
+
+void Game::addComponent( GraphicalComponent component )
+{
+    _graphics.push_back( component );
+}
+
+void Game::addComponent( PhysicalComponent component )
+{
+    _physics.push_back( component );
+}
+
+void Game::addComponent( BehavioralComponent component )
+{
+    _behaviors.push_back( component );
 }
 
 
