@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import "MainViewController.h"
+#import "GameViewController.h"
 
 @interface MainViewController()
 {
@@ -59,7 +60,36 @@
         [self.SoundButtonEffect setImage:SoundButtonImage forState:(UIControlStateNormal)];
     }
     
+    
+    //GameViewController *gvc = [[GameViewController alloc] init];
+    //gvc.MusicOn = SoundSwitch; // Set the exposed property
+    //[self.navigationController pushViewController:gvc animated:YES];
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Make sure your segue name in storyboard is the same as this line
+    if ([[segue identifier] isEqualToString:@"MainToGame"])
+    {
+        // Get reference to the destination view controller
+        GameViewController *vc = [segue destinationViewController];
+        
+        // Pass any objects to the view controller here, like...
+        vc.MusicOn = SoundSwitch;
+        //[vc setMyObjectHere:object];
+    }
+}
+
+//J: For shake method. This is in contrast to in Swift where this were put into the GameViewController.
+-(BOOL)canBecomeFirstResponder {
+    return YES;
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self becomeFirstResponder];
+}
+
+//J: End for shake method
 
 - (void)didReceiveMemoryWarning {
     
@@ -73,6 +103,9 @@
     {
         [ButtonSound prepareToPlay];
         [ButtonSound play];
+        
+        //Disable the main menu sound.
+        [BGSound pause];
     }
     
 }

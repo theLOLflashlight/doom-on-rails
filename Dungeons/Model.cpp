@@ -56,3 +56,36 @@ void Model::render
         }
     }
 }
+
+void Sprite::render(glm::mat4 model, glm::mat4 view, glm::mat4 proj) const
+{
+    /*glBegin(GL_TRIANGLE_FAN);
+    glVertex3f(10, -12, 0);
+    glVertex3f(10, 12, 0);
+    glVertex3f(-10, 12, 0);
+    glVertex3f(-10, -12, 0);
+    glEnd();*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

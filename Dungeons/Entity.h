@@ -3,6 +3,7 @@
 #include "Model.h"
 
 #include "glm/glm.hpp"
+#include "glhelp.h"
 
 #include <functional>
 #include <unordered_map>
@@ -24,9 +25,6 @@ struct EntityId
     EntityId( const char (&entityName)[ N ] )
     {
         std::strncpy( (char*) &bitPattern, entityName, sizeof( bitPattern ) );
-        
-        if ( std::strlen( entityName ) > 8 )
-            std::printf( "Warning: EntityId initialized with overlength name \"%s\".", entityName );
     }
 };
 
@@ -83,14 +81,99 @@ struct Entity
 typedef std::unordered_map< EntityId, Entity > EntityCollection;
 
 
+inline void CreateBillboardMatrix( glm::mat4& bbmat, glm::vec3 right, glm::vec3 up, glm::vec3 look, glm::vec3 pos )
+{
+    bbmat[0][0] = right.x;
+    bbmat[0][1] = right.y;
+    bbmat[0][2] = right.z;
+    bbmat[0][3] = 0;
+    bbmat[1][0] = up.x;
+    bbmat[1][1] = up.y;
+    bbmat[1][2] = up.z;
+    bbmat[1][3] = 0;
+    bbmat[2][0] = look.x;
+    bbmat[2][1] = look.y;
+    bbmat[2][2] = look.z;
+    bbmat[2][3] = 0;
+    // Add the translation in as well.
+    bbmat[3][0] = pos.x;
+    bbmat[3][1] = pos.y;
+    bbmat[3][2] = pos.z;
+    bbmat[3][3] = 1;
+}
+
+inline glm::mat4 BillboardPoint( glm::vec3 pos, glm::vec3 camPos, glm::vec3 camUp )
+{	// create the look vector: pos -> camPos
+    glm::vec3	look	= glm::normalize( camPos - pos );
+    
+    // right hand rule cross products
+    glm::vec3	right	= glm::cross( camUp, look );
+    glm::vec3	up		= glm::cross( look, right );
+    
+    glm::mat4	bbmat;
+    CreateBillboardMatrix( bbmat, right, up, look, pos );
+    
+    // apply the billboard
+    return bbmat;
+}
+
+inline glm::mat4 BillboardAxisY( glm::vec3 pos, glm::vec3 camPos )
+{	// create the look vector: pos -> camPos
+    glm::vec3	look	= camPos - pos;
+    look.y = 0;
+    look = glm::normalize( look );
+
+    
+    // right hand rule cross products
+    glm::vec3	up		= glm::vec3( 0, 1, 0 );
+    glm::vec3	right	= glm::cross( up, look );
+    
+    glm::mat4	bbmat;
+    CreateBillboardMatrix( bbmat, right, up, look, pos );
+    
+    // apply the billboard
+    return bbmat;
+}
+
+inline glm::mat4 BillboardAxis( glm::vec3 pos, glm::vec3 camPos, glm::vec3 axis )
+{	// create the look vector: pos -> camPos
+    glm::vec3	look	= glm::normalize( camPos - pos );
+    
+    // right hand rule cross products
+    glm::vec3	up		= axis;
+    glm::vec3	right	= glm::normalize( glm::cross( up, look ) );
+    look = glm::cross( right, up );
+    
+    glm::mat4	bbmat;
+    CreateBillboardMatrix( bbmat, right, up, look, pos );
+    
+    // apply the billboard
+    return bbmat;
+}
+
+inline glm::vec3 extract_eye_pos( glm::mat4 model, glm::mat4 view )
+{
+    using namespace glm;
+    mat4 model_view = view * model;
+    vec4 d          = vec4( vec3( model_view[3] ), 1 );
+    
+    return vec3( -d * model_view );
+    //return vec4( (model * view)[3] );
+}
+
 struct GraphicalComponent
 {
+    using Delegate = std::function< void(GraphicalComponent*, EntityCollection&, glm::mat4, glm::mat4) >;
+    
     EntityId    entityId;
     bool        visible;
+    bool        translucent;
     GLProgram*  program = 0;
     Model*      model   = 0;
-    Sprite*     sprite  = 0;
+    Model*      sprite  = 0;
     glm::vec4   color   = { 1, 1, 1, 0 };
+    
+    Delegate    delegate;
     
     GraphicalComponent( EntityId _id, bool _visible = true )
         : entityId( _id )
@@ -98,20 +181,41 @@ struct GraphicalComponent
     {
     }
     
-    //std::function< void(GraphicsComponent*, glm::mat4, glm::mat4, glm::mat4) > delegate;
-    
-    void update( EntityCollection& entities, glm::mat4 _view, glm::mat4 _proj )
+    void update( EntityCollection& entities, glm::mat4 view, glm::mat4 proj )
     {
+        using namespace glm;
         if ( !visible )
             return;
+        
+        if ( delegate )
+        {
+            delegate( this, entities, view, proj );
+            return;
+        }
         
         if ( program )
             glUniform4fv( program->find_uniform( "uColor" ), 1, &color[ 0 ] );
         
         if ( model )
-            model->render( entities[ entityId ].transform_matrix(), _view, _proj, GL_TRIANGLES );
+            model->render( entities[ entityId ].transform_matrix(), view, proj, GL_TRIANGLES );
         
-        //delegate( this, model, view, proj );
+        if ( sprite )
+        {
+            Entity ntt = entities[ entityId ];
+
+            mat4 mod = ntt.transform_matrix();
+            
+            mod *= BillboardPoint( vec3( 0, 0, 0 ), vec3( row( view, 2 ) ), vec3( column( view, 1 ) ) );
+            
+            mod = scale( mod, vec3( 1, 1, 0 ) );
+            
+            //mod *= BillboardAxisY( vec3( 0, 0, 0 ), vec3( row( view, 2 ) ) );
+            
+            //mod = lookAt( ntt.position, vec3( row( view, 2 ) ), vec3( column( view, 1 ) ) );
+            glEnable( GL_BLEND );
+            sprite->render( mod, view, proj, GL_TRIANGLES );
+            glDisable( GL_BLEND );
+        }
     }
 };
 
@@ -121,15 +225,48 @@ struct PhysicalComponent
     bool        active;
     glm::vec3   position;
     glm::vec3   rotation;
+    glm::vec3   velocity;
+    glm::vec3   angularVelocity;
     
-    void update( EntityCollection& entities )
+    PhysicalComponent( EntityId _id, bool _active = true )
+        : entityId( _id )
+        , active( _active )
+    {
+    }
+
+    
+    void update( EntityCollection& entities, double step )
     {
         if ( !active )
             return;
         
+        position += velocity;
+        rotation += angularVelocity;
+        
         Entity& entity = entities[ entityId ];
         entity.position = position;
         entity.rotation = rotation;
+    }
+};
+
+
+struct HealthComponent
+{
+    EntityId    entityId;
+    float       health;
+    
+    HealthComponent( EntityId _id, float maxHealth )
+        : entityId( _id )
+        , health( maxHealth )
+    {
+    }
+    
+    void update( EntityCollection& entities )
+    {
+        if ( health <= 0 )
+        {
+            
+        }
     }
 };
 

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		444220B71CB6FABC00A8B1E3 /* GunSoundEffect_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 444220B61CB6FABC00A8B1E3 /* GunSoundEffect_1.mp3 */; };
 		445332001CB5BD3B004DC43B /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445331FF1CB5BD3B004DC43B /* MainViewController.m */; };
 		445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */ = {isa = PBXBuildFile; fileRef = 445332041CB5BD81004DC43B /* ButtonPress.wav */; };
 		445332071CB5BD81004DC43B /* DOOM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 445332051CB5BD81004DC43B /* DOOM.mp3 */; };
@@ -16,6 +15,7 @@
 		4453320E1CB5BD9C004DC43B /* SoundOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4453320A1CB5BD9C004DC43B /* SoundOn.png */; };
 		4453320F1CB5BD9C004DC43B /* Start.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4453320B1CB5BD9C004DC43B /* Start.gif */; };
 		445332111CB5C48E004DC43B /* Logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 445332101CB5C48E004DC43B /* Logout.png */; };
+		44F1AC4B1CB74AF3002557C5 /* GunSoundEffect_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44F1AC4A1CB74AF3002557C5 /* GunSoundEffect_1.wav */; };
 		532ECA701CADA9F8001BB153 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532ECA6F1CADA9F8001BB153 /* OpenGLES.framework */; };
 		532ECA881CADBDBD001BB153 /* DemoRail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA761CADBDBD001BB153 /* DemoRail.mtl */; };
 		532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA771CADBDBD001BB153 /* DemoRail.obj */; };
@@ -66,6 +66,10 @@
 		5385DE911CA3545200F1A323 /* stb_image_aug.c in Sources */ = {isa = PBXBuildFile; fileRef = 5385DE831CA3429000F1A323 /* stb_image_aug.c */; };
 		5385DE941CA359B700F1A323 /* ios_path.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5385DE931CA359B700F1A323 /* ios_path.mm */; };
 		5385DE961CA370F200F1A323 /* crate.obj in Resources */ = {isa = PBXBuildFile; fileRef = 5385DE951CA370F200F1A323 /* crate.obj */; };
+		53ADE88F1CB8887800DD3588 /* Fireball.png in Resources */ = {isa = PBXBuildFile; fileRef = 53ADE88E1CB8887800DD3588 /* Fireball.png */; };
+		53ADE8951CB88DDF00DD3588 /* fireball.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53ADE8921CB88DDF00DD3588 /* fireball.mtl */; };
+		53ADE8961CB88DDF00DD3588 /* fireball.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53ADE8931CB88DDF00DD3588 /* fireball.obj */; };
+		53ADE8981CB88E4200DD3588 /* fireball in Resources */ = {isa = PBXBuildFile; fileRef = 53ADE8971CB88E4200DD3588 /* fireball */; };
 		53C679221CA22E62007C7945 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C679211CA22E62007C7945 /* main.m */; };
 		53C679251CA22E62007C7945 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C679241CA22E62007C7945 /* AppDelegate.m */; };
 		53C679271CA22E62007C7945 /* Shader.fs in Resources */ = {isa = PBXBuildFile; fileRef = 53C679261CA22E62007C7945 /* Shader.fs */; };
@@ -75,14 +79,17 @@
 		53C679311CA22E62007C7945 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53C679301CA22E62007C7945 /* Assets.xcassets */; };
 		53C679341CA22E62007C7945 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53C679321CA22E62007C7945 /* LaunchScreen.storyboard */; };
 		53C679581CA22F35007C7945 /* glm in Resources */ = {isa = PBXBuildFile; fileRef = 53C679571CA22F35007C7945 /* glm */; };
-		81E9B3FA1CB72C8000122C7B /* GunSoundEffect_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81E9B3F61CB72C8000122C7B /* GunSoundEffect_2.mp3 */; };
-		81E9B3FB1CB72C8000122C7B /* GunSoundEffect_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81E9B3F71CB72C8000122C7B /* GunSoundEffect_3.mp3 */; };
-		81E9B3FC1CB72C8000122C7B /* GunSoundEffect_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81E9B3F81CB72C8000122C7B /* GunSoundEffect_4.mp3 */; };
-		81E9B3FD1CB72C8000122C7B /* GunSoundEffect_5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81E9B3F91CB72C8000122C7B /* GunSoundEffect_5.mp3 */; };
+		81C0A3181CB9C6860086E9FA /* GameCppVariables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C0A3161CB9C6860086E9FA /* GameCppVariables.cpp */; };
+		81C0A3201CB9EC5F0086E9FA /* 'flyby'.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81C0A3191CB9EC5F0086E9FA /* 'flyby'.wav */; };
+		81C0A3211CB9EC5F0086E9FA /* footsteps_gravel_01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81C0A31A1CB9EC5F0086E9FA /* footsteps_gravel_01.mp3 */; };
+		81C0A3221CB9EC5F0086E9FA /* footsteps_gravel.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81C0A31B1CB9EC5F0086E9FA /* footsteps_gravel.wav */; };
+		81C0A3231CB9EC5F0086E9FA /* magic-quake2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81C0A31C1CB9EC5F0086E9FA /* magic-quake2.mp3 */; };
+		81C0A3241CB9EC5F0086E9FA /* shooting_star.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81C0A31D1CB9EC5F0086E9FA /* shooting_star.wav */; };
+		81C0A3251CB9EC5F0086E9FA /* swipe_whiff.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81C0A31E1CB9EC5F0086E9FA /* swipe_whiff.mp3 */; };
+		81C0A3261CB9EC5F0086E9FA /* sword-clash1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81C0A31F1CB9EC5F0086E9FA /* sword-clash1.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		444220B61CB6FABC00A8B1E3 /* GunSoundEffect_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GunSoundEffect_1.mp3; sourceTree = "<group>"; };
 		445331FF1CB5BD3B004DC43B /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		445332011CB5BD44004DC43B /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		445332041CB5BD81004DC43B /* ButtonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonPress.wav; sourceTree = "<group>"; };
@@ -92,6 +99,7 @@
 		4453320A1CB5BD9C004DC43B /* SoundOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SoundOn.png; sourceTree = "<group>"; };
 		4453320B1CB5BD9C004DC43B /* Start.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Start.gif; sourceTree = "<group>"; };
 		445332101CB5C48E004DC43B /* Logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logout.png; sourceTree = "<group>"; };
+		44F1AC4A1CB74AF3002557C5 /* GunSoundEffect_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GunSoundEffect_1.wav; sourceTree = "<group>"; };
 		532ECA6F1CADA9F8001BB153 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		532ECA741CADB02B001BB153 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		532ECA761CADBDBD001BB153 /* DemoRail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DemoRail.mtl; sourceTree = "<group>"; };
@@ -168,6 +176,10 @@
 		5385DE921CA3580F00F1A323 /* ios_path.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = ios_path.h; sourceTree = "<group>"; };
 		5385DE931CA359B700F1A323 /* ios_path.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ios_path.mm; sourceTree = "<group>"; };
 		5385DE951CA370F200F1A323 /* crate.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = crate.obj; sourceTree = "<group>"; };
+		53ADE88E1CB8887800DD3588 /* Fireball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fireball.png; sourceTree = "<group>"; };
+		53ADE8921CB88DDF00DD3588 /* fireball.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fireball.mtl; sourceTree = "<group>"; };
+		53ADE8931CB88DDF00DD3588 /* fireball.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fireball.obj; sourceTree = "<group>"; };
+		53ADE8971CB88E4200DD3588 /* fireball */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fireball; sourceTree = "<group>"; };
 		53C6791D1CA22E62007C7945 /* Dungeons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dungeons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53C679211CA22E62007C7945 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		53C679231CA22E62007C7945 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -181,10 +193,15 @@
 		53C679331CA22E62007C7945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		53C679351CA22E62007C7945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53C679571CA22F35007C7945 /* glm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = glm; sourceTree = "<group>"; };
-		81E9B3F61CB72C8000122C7B /* GunSoundEffect_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GunSoundEffect_2.mp3; sourceTree = "<group>"; };
-		81E9B3F71CB72C8000122C7B /* GunSoundEffect_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GunSoundEffect_3.mp3; sourceTree = "<group>"; };
-		81E9B3F81CB72C8000122C7B /* GunSoundEffect_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GunSoundEffect_4.mp3; sourceTree = "<group>"; };
-		81E9B3F91CB72C8000122C7B /* GunSoundEffect_5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GunSoundEffect_5.mp3; sourceTree = "<group>"; };
+		81C0A3161CB9C6860086E9FA /* GameCppVariables.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameCppVariables.cpp; sourceTree = "<group>"; };
+		81C0A3171CB9C6860086E9FA /* GameCppVariables.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameCppVariables.hpp; sourceTree = "<group>"; };
+		81C0A3191CB9EC5F0086E9FA /* 'flyby'.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "'flyby'.wav"; path = "Assets.xcassets/'flyby'.wav"; sourceTree = "<group>"; };
+		81C0A31A1CB9EC5F0086E9FA /* footsteps_gravel_01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = footsteps_gravel_01.mp3; path = Assets.xcassets/footsteps_gravel_01.mp3; sourceTree = "<group>"; };
+		81C0A31B1CB9EC5F0086E9FA /* footsteps_gravel.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = footsteps_gravel.wav; path = Assets.xcassets/footsteps_gravel.wav; sourceTree = "<group>"; };
+		81C0A31C1CB9EC5F0086E9FA /* magic-quake2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "magic-quake2.mp3"; path = "Assets.xcassets/magic-quake2.mp3"; sourceTree = "<group>"; };
+		81C0A31D1CB9EC5F0086E9FA /* shooting_star.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = shooting_star.wav; path = Assets.xcassets/shooting_star.wav; sourceTree = "<group>"; };
+		81C0A31E1CB9EC5F0086E9FA /* swipe_whiff.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = swipe_whiff.mp3; path = Assets.xcassets/swipe_whiff.mp3; sourceTree = "<group>"; };
+		81C0A31F1CB9EC5F0086E9FA /* sword-clash1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "sword-clash1.mp3"; path = "Assets.xcassets/sword-clash1.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,11 +221,14 @@
 		445332021CB5BD5E004DC43B /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				81E9B3F61CB72C8000122C7B /* GunSoundEffect_2.mp3 */,
-				81E9B3F71CB72C8000122C7B /* GunSoundEffect_3.mp3 */,
-				81E9B3F81CB72C8000122C7B /* GunSoundEffect_4.mp3 */,
-				81E9B3F91CB72C8000122C7B /* GunSoundEffect_5.mp3 */,
-				444220B61CB6FABC00A8B1E3 /* GunSoundEffect_1.mp3 */,
+				81C0A3191CB9EC5F0086E9FA /* 'flyby'.wav */,
+				81C0A31A1CB9EC5F0086E9FA /* footsteps_gravel_01.mp3 */,
+				81C0A31B1CB9EC5F0086E9FA /* footsteps_gravel.wav */,
+				81C0A31C1CB9EC5F0086E9FA /* magic-quake2.mp3 */,
+				81C0A31D1CB9EC5F0086E9FA /* shooting_star.wav */,
+				81C0A31E1CB9EC5F0086E9FA /* swipe_whiff.mp3 */,
+				81C0A31F1CB9EC5F0086E9FA /* sword-clash1.mp3 */,
+				44F1AC4A1CB74AF3002557C5 /* GunSoundEffect_1.wav */,
 				445332041CB5BD81004DC43B /* ButtonPress.wav */,
 				445332051CB5BD81004DC43B /* DOOM.mp3 */,
 			);
@@ -218,6 +238,7 @@
 		445332031CB5BD68004DC43B /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
+				53ADE88E1CB8887800DD3588 /* Fireball.png */,
 				445332101CB5C48E004DC43B /* Logout.png */,
 				445332081CB5BD9C004DC43B /* BGT1.gif */,
 				445332091CB5BD9C004DC43B /* SoundOff.png */,
@@ -253,6 +274,7 @@
 		532ECA731CADAC79001BB153 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				53ADE8971CB88E4200DD3588 /* fireball */,
 				5385DE511CA3365100F1A323 /* skybox */,
 				5385DE581CA3365100F1A323 /* water */,
 				5385DE301CA3365100F1A323 /* crate */,
@@ -372,6 +394,8 @@
 				5385DE321CA3365100F1A323 /* Entity.cpp */,
 				5385DE311CA3365100F1A323 /* crate.mtl */,
 				5385DE951CA370F200F1A323 /* crate.obj */,
+				53ADE8921CB88DDF00DD3588 /* fireball.mtl */,
+				53ADE8931CB88DDF00DD3588 /* fireball.obj */,
 				53C679261CA22E62007C7945 /* Shader.fs */,
 				53C679281CA22E62007C7945 /* Shader.vs */,
 				53C679301CA22E62007C7945 /* Assets.xcassets */,
@@ -383,6 +407,8 @@
 				5385DE751CA3366800F1A323 /* Renderer */,
 				5385DE8C1CA3429600F1A323 /* SOIL */,
 				53C679201CA22E62007C7945 /* Supporting Files */,
+				81C0A3161CB9C6860086E9FA /* GameCppVariables.cpp */,
+				81C0A3171CB9C6860086E9FA /* GameCppVariables.hpp */,
 			);
 			path = Dungeons;
 			sourceTree = "<group>";
@@ -460,13 +486,14 @@
 				532ECA8B1CADBDBD001BB153 /* Level0.mtl in Resources */,
 				5385DE661CA3365100F1A323 /* MyShader.fs in Resources */,
 				532ECA8C1CADBDBD001BB153 /* Level0.obj in Resources */,
-				81E9B3FB1CB72C8000122C7B /* GunSoundEffect_3.mp3 in Resources */,
 				532ECA881CADBDBD001BB153 /* DemoRail.mtl in Resources */,
 				53C6792F1CA22E62007C7945 /* Main.storyboard in Resources */,
 				532ECA901CADBDBD001BB153 /* Level0EnemyPos in Resources */,
+				81C0A3221CB9EC5F0086E9FA /* footsteps_gravel.wav in Resources */,
 				532ECA981CADBDBD001BB153 /* Level0Rail.mtl in Resources */,
 				53C679291CA22E62007C7945 /* Shader.vs in Resources */,
 				532ECA931CADBDBD001BB153 /* Level0EnemyRail.mtl in Resources */,
+				81C0A3241CB9EC5F0086E9FA /* shooting_star.wav in Resources */,
 				532ECA971CADBDBD001BB153 /* Level0Layout.obj in Resources */,
 				4453320F1CB5BD9C004DC43B /* Start.gif in Resources */,
 				4453320D1CB5BD9C004DC43B /* SoundOff.png in Resources */,
@@ -477,32 +504,38 @@
 				5385DE5C1CA3365100F1A323 /* crate.mtl in Resources */,
 				445332071CB5BD81004DC43B /* DOOM.mp3 in Resources */,
 				53C679581CA22F35007C7945 /* glm in Resources */,
+				81C0A3261CB9EC5F0086E9FA /* sword-clash1.mp3 in Resources */,
 				53C679341CA22E62007C7945 /* LaunchScreen.storyboard in Resources */,
+				81C0A3201CB9EC5F0086E9FA /* 'flyby'.wav in Resources */,
 				4453320E1CB5BD9C004DC43B /* SoundOn.png in Resources */,
 				532ECA961CADBDBD001BB153 /* Level0Layout.mtl in Resources */,
-				81E9B3FA1CB72C8000122C7B /* GunSoundEffect_2.mp3 in Resources */,
 				5385DE6E1CA3365100F1A323 /* skybox in Resources */,
 				5385DE721CA3365100F1A323 /* water in Resources */,
 				5385DE701CA3365100F1A323 /* Skybox.vs in Resources */,
 				532ECA951CADBDBD001BB153 /* Level0Layout in Resources */,
+				44F1AC4B1CB74AF3002557C5 /* GunSoundEffect_1.wav in Resources */,
 				5385DE671CA3365100F1A323 /* MyShader.vs in Resources */,
+				53ADE8951CB88DDF00DD3588 /* fireball.mtl in Resources */,
 				532ECA8A1CADBDBD001BB153 /* Level0_Textures in Resources */,
 				5385DE961CA370F200F1A323 /* crate.obj in Resources */,
 				5385DE891CA3429000F1A323 /* original in Resources */,
 				532ECA8D1CADBDBD001BB153 /* Level0All in Resources */,
 				53C679271CA22E62007C7945 /* Shader.fs in Resources */,
 				532ECA921CADBDBD001BB153 /* Level0EnemyPos.obj in Resources */,
-				81E9B3FC1CB72C8000122C7B /* GunSoundEffect_4.mp3 in Resources */,
 				5385DE731CA3365100F1A323 /* WaterShader.fs in Resources */,
-				81E9B3FD1CB72C8000122C7B /* GunSoundEffect_5.mp3 in Resources */,
+				53ADE8961CB88DDF00DD3588 /* fireball.obj in Resources */,
+				53ADE88F1CB8887800DD3588 /* Fireball.png in Resources */,
 				5385DE5B1CA3365100F1A323 /* crate in Resources */,
 				4453320C1CB5BD9C004DC43B /* BGT1.gif in Resources */,
+				53ADE8981CB88E4200DD3588 /* fireball in Resources */,
 				445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */,
 				532ECA941CADBDBD001BB153 /* Level0EnemyRail.obj in Resources */,
+				81C0A3231CB9EC5F0086E9FA /* magic-quake2.mp3 in Resources */,
+				81C0A3211CB9EC5F0086E9FA /* footsteps_gravel_01.mp3 in Resources */,
 				532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */,
 				5385DE741CA3365100F1A323 /* WaterShader.vs in Resources */,
 				532ECA8E1CADBDBD001BB153 /* Level0All.mtl in Resources */,
-				444220B71CB6FABC00A8B1E3 /* GunSoundEffect_1.mp3 in Resources */,
+				81C0A3251CB9EC5F0086E9FA /* swipe_whiff.mp3 in Resources */,
 				532ECA991CADBDBD001BB153 /* Level0Rail.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -515,6 +548,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5385DE5F1CA3365100F1A323 /* GLHandle.cpp in Sources */,
+				81C0A3181CB9C6860086E9FA /* GameCppVariables.cpp in Sources */,
 				5385DE5D1CA3365100F1A323 /* Entity.cpp in Sources */,
 				5385DE8F1CA3543200F1A323 /* image_helper.c in Sources */,
 				5385DE631CA3365100F1A323 /* GLVertexBuffer.cpp in Sources */,
@@ -664,7 +698,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Andrew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dungeons/Dungeons-Bridging-Header.h";
@@ -694,7 +728,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Andrew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dungeons/Dungeons-Bridging-Header.h";
