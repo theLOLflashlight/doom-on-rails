@@ -244,6 +244,14 @@
     //[NSDate?](count: 64, repeatedValue: nil)
 }
 
+//Starts upon appear
+- (void)viewDidAppear:(BOOL)animated {
+    //play looping sound
+    if(_MusicOn) {
+        [self ThemeSound];
+    }
+}
+
 - (void)viewDidLayoutSubviews
 {
    
