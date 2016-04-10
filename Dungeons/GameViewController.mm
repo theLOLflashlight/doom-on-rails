@@ -10,6 +10,7 @@
 #import <OpenGLES/ES3/glext.h>
 #import <AVFoundation/AVFoundation.h>
 #import "Game.h"
+#import "BulletPhysics.h"
 #import "GameCppVariables.hpp"
 #include "ios_path.h"
 
@@ -143,6 +144,7 @@
 }
 
 @property (strong, nonatomic) EAGLContext* context;
+@property (strong, nonatomic) BulletPhysics* physics;
 
 @end
 
@@ -163,7 +165,7 @@
         vec3 touchPos0 = unProject( vec3( mouse.x, -mouse.y, 0 ), view, proj, viewport );
         vec3 touchPos1 = unProject( vec3( mouse.x, -mouse.y, 1 ), view, proj, viewport );
         
-        [self spawn_projectile: touchPos0  velocity: normalize( touchPos1 - touchPos0 )];
+        [self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f];
         
         //[self explosionAt: _game->_eyepos];
     }
@@ -179,7 +181,21 @@
         NSLog(@"Failed to create ES context");
     }
     
-    //Handle tap: Shoot projectile
+    _physics = [[BulletPhysics alloc] init];
+    
+    
+    auto groundShape = new btStaticPlaneShape( btVector3( 0, 1, 0 ), 0 );
+    
+    
+    auto groundMotionState = new btDefaultMotionState();
+    
+    btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI( 0, groundMotionState, groundShape, btVector3(0,0,0) );
+    
+    auto groundRigidBody = new btRigidBody(groundRigidBodyCI);
+    [_physics addRigidBody: groundRigidBody];
+    
+    
+    //Q2 - double tap
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     tapGesture.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:tapGesture];
@@ -190,6 +206,7 @@
     [panGesture setMaximumNumberOfTouches:1];
     [self.view addGestureRecognizer:panGesture];
     
+    //play looping sound
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
@@ -575,8 +592,32 @@
     }
     {
         PhysicalComponent bullet( bulletId );
-        bullet.position = pos;
-        bullet.velocity = vel;
+        
+        auto shape = new btSphereShape( 0.5 );
+        
+        // change this to start sphere in a different location
+        auto motionState = new btDefaultMotionState(
+                                                    btTransform( btQuaternion( 0,0,0,1 ), btVector3( pos.x, pos.y, pos.z ) ) );
+        
+        btScalar mass = 1;
+        btVector3 inertia( 0, 0, 0 );
+        
+        shape->calculateLocalInertia( mass, inertia );
+        
+        btRigidBody::btRigidBodyConstructionInfo rigidBodyCI( mass, motionState, shape, inertia );
+        
+        rigidBodyCI.m_restitution = 1;
+        
+        auto rigidBody = new btRigidBody( rigidBodyCI );
+        
+        bullet.body = rigidBody;
+        [_physics addRigidBody: rigidBody];
+        
+        rigidBody->setLinearVelocity( { vel.x, vel.y, vel.z } );
+        //rigidBody->applyCentralForce( { vel.x, vel.y, vel.z } );
+        
+        //bullet.position = pos;
+        //bullet.velocity = vel;
         
         _game->_physics.push_back( bullet );
     }
@@ -627,6 +668,7 @@
 
 - (void) update
 {
+    [_physics update: self.timeSinceLastUpdate];
     _game->update( self.timeSinceLastUpdate );
     [self cameraMovement];
     

@@ -15,6 +15,5 @@
 }
 
 @property (weak, nonatomic) IBOutlet UIView *HUD;
-@property (nonatomic) bool MusicOn;
 
 @end
