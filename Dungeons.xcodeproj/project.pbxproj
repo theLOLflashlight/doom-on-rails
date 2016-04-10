@@ -47,8 +47,8 @@
 		5385DE631CA3365100F1A323 /* GLVertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5385DE3F1CA3365100F1A323 /* GLVertexBuffer.cpp */; };
 		5385DE641CA3365100F1A323 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5385DE421CA3365100F1A323 /* Model.cpp */; };
 		5385DE651CA3365100F1A323 /* ObjMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5385DE441CA3365100F1A323 /* ObjMesh.cpp */; };
-		5385DE661CA3365100F1A323 /* MyShader.fs in Resources */ = {isa = PBXBuildFile; fileRef = 5385DE461CA3365100F1A323 /* MyShader.fs */; };
-		5385DE671CA3365100F1A323 /* MyShader.vs in Resources */ = {isa = PBXBuildFile; fileRef = 5385DE471CA3365100F1A323 /* MyShader.vs */; };
+		5385DE661CA3365100F1A323 /* ModelShader.fs in Resources */ = {isa = PBXBuildFile; fileRef = 5385DE461CA3365100F1A323 /* ModelShader.fs */; };
+		5385DE671CA3365100F1A323 /* ModelShader.vs in Resources */ = {isa = PBXBuildFile; fileRef = 5385DE471CA3365100F1A323 /* ModelShader.vs */; };
 		5385DE6C1CA3365100F1A323 /* ShaderInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5385DE4D1CA3365100F1A323 /* ShaderInterface.cpp */; };
 		5385DE6D1CA3365100F1A323 /* ShaderLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5385DE4F1CA3365100F1A323 /* ShaderLoader.cpp */; };
 		5385DE6E1CA3365100F1A323 /* skybox in Resources */ = {isa = PBXBuildFile; fileRef = 5385DE511CA3365100F1A323 /* skybox */; };
@@ -93,6 +93,8 @@
 		53F05FB21CB9FA0C007F3023 /* shooting_star.wav in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FAB1CB9FA0C007F3023 /* shooting_star.wav */; };
 		53F05FB31CB9FA0C007F3023 /* swipe_whiff.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FAC1CB9FA0C007F3023 /* swipe_whiff.mp3 */; };
 		53F05FB41CB9FA0C007F3023 /* sword-clash1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FAD1CB9FA0C007F3023 /* sword-clash1.mp3 */; };
+		53F05FB91CBB08BA007F3023 /* SpriteShader.vs in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FB81CBB08BA007F3023 /* SpriteShader.vs */; };
+		53F05FBB1CBB08C8007F3023 /* SpriteShader.fs in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FBA1CBB08C8007F3023 /* SpriteShader.fs */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,8 +195,8 @@
 		5385DE431CA3365100F1A323 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		5385DE441CA3365100F1A323 /* ObjMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjMesh.cpp; sourceTree = "<group>"; };
 		5385DE451CA3365100F1A323 /* ObjMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjMesh.h; sourceTree = "<group>"; };
-		5385DE461CA3365100F1A323 /* MyShader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = MyShader.fs; sourceTree = "<group>"; };
-		5385DE471CA3365100F1A323 /* MyShader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = MyShader.vs; sourceTree = "<group>"; };
+		5385DE461CA3365100F1A323 /* ModelShader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ModelShader.fs; sourceTree = "<group>"; };
+		5385DE471CA3365100F1A323 /* ModelShader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ModelShader.vs; sourceTree = "<group>"; };
 		5385DE4A1CA3365100F1A323 /* gl_types.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gl_types.hpp; sourceTree = "<group>"; };
 		5385DE4D1CA3365100F1A323 /* ShaderInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderInterface.cpp; sourceTree = "<group>"; };
 		5385DE4E1CA3365100F1A323 /* ShaderInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderInterface.h; sourceTree = "<group>"; };
@@ -260,6 +262,8 @@
 		53F05FAB1CB9FA0C007F3023 /* shooting_star.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = shooting_star.wav; path = Assets.xcassets/shooting_star.wav; sourceTree = "<group>"; };
 		53F05FAC1CB9FA0C007F3023 /* swipe_whiff.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = swipe_whiff.mp3; path = Assets.xcassets/swipe_whiff.mp3; sourceTree = "<group>"; };
 		53F05FAD1CB9FA0C007F3023 /* sword-clash1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "sword-clash1.mp3"; path = "Assets.xcassets/sword-clash1.mp3"; sourceTree = "<group>"; };
+		53F05FB81CBB08BA007F3023 /* SpriteShader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SpriteShader.vs; sourceTree = "<group>"; };
+		53F05FBA1CBB08C8007F3023 /* SpriteShader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SpriteShader.fs; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,13 +286,6 @@
 		445332021CB5BD5E004DC43B /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				81C0A3191CB9EC5F0086E9FA /* 'flyby'.wav */,
-				81C0A31A1CB9EC5F0086E9FA /* footsteps_gravel_01.mp3 */,
-				81C0A31B1CB9EC5F0086E9FA /* footsteps_gravel.wav */,
-				81C0A31C1CB9EC5F0086E9FA /* magic-quake2.mp3 */,
-				81C0A31D1CB9EC5F0086E9FA /* shooting_star.wav */,
-				81C0A31E1CB9EC5F0086E9FA /* swipe_whiff.mp3 */,
-				81C0A31F1CB9EC5F0086E9FA /* sword-clash1.mp3 */,
 				44F1AC4A1CB74AF3002557C5 /* GunSoundEffect_1.wav */,
 				53F05FA71CB9FA0C007F3023 /* 'flyby'.wav */,
 				53F05FA81CB9FA0C007F3023 /* footsteps_gravel_01.mp3 */,
@@ -330,8 +327,10 @@
 		532ECA721CADAB21001BB153 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				5385DE461CA3365100F1A323 /* MyShader.fs */,
-				5385DE471CA3365100F1A323 /* MyShader.vs */,
+				5385DE461CA3365100F1A323 /* ModelShader.fs */,
+				5385DE471CA3365100F1A323 /* ModelShader.vs */,
+				53F05FBA1CBB08C8007F3023 /* SpriteShader.fs */,
+				53F05FB81CBB08BA007F3023 /* SpriteShader.vs */,
 				5385DE521CA3365100F1A323 /* Skybox.fs */,
 				5385DE531CA3365100F1A323 /* Skybox.vs */,
 				5385DE591CA3365100F1A323 /* WaterShader.fs */,
@@ -624,7 +623,7 @@
 			files = (
 				5385DE6F1CA3365100F1A323 /* Skybox.fs in Resources */,
 				532ECA8B1CADBDBD001BB153 /* Level0.mtl in Resources */,
-				5385DE661CA3365100F1A323 /* MyShader.fs in Resources */,
+				5385DE661CA3365100F1A323 /* ModelShader.fs in Resources */,
 				532ECA8C1CADBDBD001BB153 /* Level0.obj in Resources */,
 				53F05F951CB9F5AB007F3023 /* Bullet3D in Resources */,
 				532ECA881CADBDBD001BB153 /* DemoRail.mtl in Resources */,
@@ -656,7 +655,7 @@
 				5385DE701CA3365100F1A323 /* Skybox.vs in Resources */,
 				532ECA951CADBDBD001BB153 /* Level0Layout in Resources */,
 				44F1AC4B1CB74AF3002557C5 /* GunSoundEffect_1.wav in Resources */,
-				5385DE671CA3365100F1A323 /* MyShader.vs in Resources */,
+				5385DE671CA3365100F1A323 /* ModelShader.vs in Resources */,
 				53ADE8951CB88DDF00DD3588 /* fireball.mtl in Resources */,
 				532ECA8A1CADBDBD001BB153 /* Level0_Textures in Resources */,
 				5385DE961CA370F200F1A323 /* crate.obj in Resources */,
@@ -670,14 +669,15 @@
 				53ADE88F1CB8887800DD3588 /* Fireball.png in Resources */,
 				5385DE5B1CA3365100F1A323 /* crate in Resources */,
 				53F05FAF1CB9FA0C007F3023 /* footsteps_gravel_01.mp3 in Resources */,
+				53F05FBB1CBB08C8007F3023 /* SpriteShader.fs in Resources */,
 				4453320C1CB5BD9C004DC43B /* BGT1.gif in Resources */,
 				53ADE8981CB88E4200DD3588 /* fireball in Resources */,
+				53F05FB91CBB08BA007F3023 /* SpriteShader.vs in Resources */,
 				445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */,
 				532ECA941CADBDBD001BB153 /* Level0EnemyRail.obj in Resources */,
 				532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */,
 				5385DE741CA3365100F1A323 /* WaterShader.vs in Resources */,
 				532ECA8E1CADBDBD001BB153 /* Level0All.mtl in Resources */,
-				81C0A3251CB9EC5F0086E9FA /* swipe_whiff.mp3 in Resources */,
 				532ECA991CADBDBD001BB153 /* Level0Rail.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

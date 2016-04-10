@@ -215,7 +215,7 @@
     
     _game = new Game( (GLKView*) self.view );
     
-    _projectileSprite = new Model( ObjMesh( ios_path( "fireball.obj" ) ), _game->_program );
+    _projectileSprite = new Model( ObjMesh( ios_path( "fireball.obj" ) ), &_game->_program );
     
     _bulletId = BULLET_MIN;
     
@@ -616,7 +616,7 @@
     const EntityId bulletId = _bulletId++;
     {
         GraphicalComponent bullet( bulletId, GraphicalComponent::TRANSLUCENT );
-        bullet.program = _game->_program.get();
+        bullet.program = &_game->_program;
         bullet.sprite = _projectileSprite;
         
         _game->addComponent( bullet );

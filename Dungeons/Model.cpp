@@ -7,7 +7,7 @@ using std::make_shared;
 using glm::vec3;
 using glm::vec2;
 
-Model::Model( const ObjMesh& mesh, GLProgram::ptr_t program )
+Model::Model( const ObjMesh& mesh, GLProgram* program )
     : _mesh( mesh )
     , _program( program )
     , _buffer( _mesh.data(), _mesh.size(), STATIC_DRAW,

@@ -82,9 +82,10 @@ struct Entity
 typedef std::unordered_map< EntityId, Entity > EntityCollection;
 
 
-inline void CreateBillboardMatrix( glm::mat4& bbmat, glm::vec3 right, glm::vec3 up, glm::vec3 look, glm::vec3 pos )
+inline glm::mat4 CreateBillboardMatrix( glm::vec3 right, glm::vec3 up, glm::vec3 look, glm::vec3 pos )
 {
-    bbmat[0][0] = right.x;
+    return glm::mat4( glm::mat4x3( right, up, look, pos ) );
+    /*bbmat[0][0] = right.x;
     bbmat[0][1] = right.y;
     bbmat[0][2] = right.z;
     bbmat[0][3] = 0;
@@ -100,7 +101,7 @@ inline void CreateBillboardMatrix( glm::mat4& bbmat, glm::vec3 right, glm::vec3 
     bbmat[3][0] = pos.x;
     bbmat[3][1] = pos.y;
     bbmat[3][2] = pos.z;
-    bbmat[3][3] = 1;
+    bbmat[3][3] = 1;*/
 }
 
 inline glm::mat4 BillboardPoint( glm::vec3 pos, glm::vec3 camPos, glm::vec3 camUp )
@@ -112,7 +113,7 @@ inline glm::mat4 BillboardPoint( glm::vec3 pos, glm::vec3 camPos, glm::vec3 camU
     glm::vec3	up		= glm::cross( look, right );
     
     glm::mat4	bbmat;
-    CreateBillboardMatrix( bbmat, right, up, look, pos );
+    return CreateBillboardMatrix( right, up, look, pos );
     
     // apply the billboard
     return bbmat;
@@ -123,14 +124,13 @@ inline glm::mat4 BillboardAxisY( glm::vec3 pos, glm::vec3 camPos )
     glm::vec3	look	= camPos - pos;
     look.y = 0;
     look = glm::normalize( look );
-
     
     // right hand rule cross products
     glm::vec3	up		= glm::vec3( 0, 1, 0 );
     glm::vec3	right	= glm::cross( up, look );
     
     glm::mat4	bbmat;
-    CreateBillboardMatrix( bbmat, right, up, look, pos );
+    return CreateBillboardMatrix( right, up, look, pos );
     
     // apply the billboard
     return bbmat;
@@ -146,7 +146,7 @@ inline glm::mat4 BillboardAxis( glm::vec3 pos, glm::vec3 camPos, glm::vec3 axis 
     look = glm::cross( right, up );
     
     glm::mat4	bbmat;
-    CreateBillboardMatrix( bbmat, right, up, look, pos );
+    return CreateBillboardMatrix( right, up, look, pos );
     
     // apply the billboard
     return bbmat;
@@ -161,30 +161,6 @@ inline glm::vec3 extract_eye_pos( glm::mat4 model, glm::mat4 view )
     return vec3( -d * model_view );
     //return vec4( (model * view)[3] );
 }
-
-struct BehavioralComponent
-{
-    using Delegate = std::function< void(BehavioralComponent*, EntityCollection&) >;
-    
-    EntityId    entityId;
-    bool        enabled;
-    Delegate    functor;
-    
-    explicit BehavioralComponent( EntityId _id, bool _enabled = true )
-        : entityId( _id )
-        , enabled( _enabled )
-    {
-    }
-    
-    void update( EntityCollection& entities )
-    {
-        if ( !enabled )
-            return;
-        
-        if ( functor )
-            functor( this, entities );
-    }
-};
 
 struct GraphicalComponent
 {
@@ -299,6 +275,31 @@ struct HealthComponent
         {
             
         }
+    }
+};
+
+
+struct BehavioralComponent
+{
+    using Delegate = std::function< void(BehavioralComponent*, EntityCollection&) >;
+    
+    EntityId    entityId;
+    bool        enabled;
+    Delegate    functor;
+    
+    explicit BehavioralComponent( EntityId _id, bool _enabled = true )
+        : entityId( _id )
+        , enabled( _enabled )
+    {
+    }
+    
+    void update( EntityCollection& entities )
+    {
+        if ( !enabled )
+            return;
+        
+        if ( functor )
+            functor( this, entities );
     }
 };
 

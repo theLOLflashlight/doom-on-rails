@@ -101,7 +101,7 @@ public:
     GLfloat                 _width, _height;
     double                  _startTime, _currTime;
     
-    GLProgram::ptr_t        _program;
+    mutable GLProgram       _program, _spriteProgram;
     
     Model                   _level, _enemies;
     Rail                    _rail, _raillook;

@@ -21,7 +21,7 @@ struct Sprite
 
 struct Model
 {
-    Model( const ObjMesh& mesh, GLProgram::ptr_t program );// , std::string vert, std::string frag );
+    Model( const ObjMesh& mesh, GLProgram* program );// , std::string vert, std::string frag );
 
     //void render() const;
     void render( glm::mat4 model,
@@ -31,6 +31,6 @@ struct Model
 
     ObjMesh             _mesh;
     GLVertexBuffer      _buffer;
-    GLProgram::ptr_t    _program;
+    GLProgram*          _program;
 };
 
