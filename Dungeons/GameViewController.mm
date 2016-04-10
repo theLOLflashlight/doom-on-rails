@@ -479,39 +479,7 @@
         }
     }
 }
-/* Currently not used
-- (void) cameraMovement
-{
-    float horizontalAngle = _baseHorizontalAngle + currHorizontalAngle;
-    float verticalAngle = _baseVerticalAngle + currVerticalAngle;
-    
-    //for animationProgress of shake
-    if(GCV.animationProgress > 1) {
-        GCV.animationProgress = 1;
-    }
-    if(GCV.animationProgress < 1) {
-        GCV.animationProgress += 1.0 / 45.0;
-        float shakeMag;
-        if(GCV.animationProgress < 0.70) {
-            shakeMag = 0.9 * 0.4;
-        }
-        else {
-            shakeMag = (0.9 - (GCV.animationProgress - 0.7) * 0.9 / 0.3) * 0.4; //after reaching 0.7 progress (when sound starts to dwindle), linearly decrease max magnitude to 0
-        }
-        //modelViewMatrix = GLKMatrix4Translate(modelViewMatrix, Float(arc4random())*shakeMag, Float(arc4random())*shakeMag, 0);
-        //GLKVector3Make(position.x + Float(arc4random())*shakeMag, position.y + Float(arc4random())*shakeMag, position.z + Float(arc4random())*shakeMag);
-        horizontalAngle += (arc4random() / UINT32_MAX) * shakeMag;
-        verticalAngle += (arc4random() / UINT32_MAX) * shakeMag;
-    }
-    
-    GCV.direction = GLKVector3Make(cosf(verticalAngle) * sinf(horizontalAngle),
-                               sinf(verticalAngle),
-                               cosf(verticalAngle) * cosf(horizontalAngle));
-    
-    GCV.horizontalMovement = GLKVector3Make(sinf(horizontalAngle - M_PI_2), 0, cosf(horizontalAngle - M_PI_2));
-    //print("horizontalAngle: \(horizontalAngle); verticalAngle: \(verticalAngle)");
-}
- */
+
 
 //Jacob: Shake input handler
 -(void) motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
@@ -624,10 +592,43 @@
     
 }
 
+//No longer usable due to horizontalAngle and verticalAngle no longer existing in the _eyeLook variable
+- (void) cameraMovement
+{
+    float horizontalAngle = _baseHorizontalAngle + currHorizontalAngle;
+    float verticalAngle = _baseVerticalAngle + currVerticalAngle;
+    
+    //for animationProgress of shake
+    if(GCV.animationProgress > 1) {
+        GCV.animationProgress = 1;
+    }
+    if(GCV.animationProgress < 1) {
+        GCV.animationProgress += 1.0 / 45.0;
+        float shakeMag;
+        if(GCV.animationProgress < 0.70) {
+            shakeMag = 0.9 * 0.4;
+        }
+        else {
+            shakeMag = (0.9 - (GCV.animationProgress - 0.7) * 0.9 / 0.3) * 0.4; //after reaching 0.7 progress (when sound starts to dwindle), linearly decrease max magnitude to 0
+        }
+        //modelViewMatrix = GLKMatrix4Translate(modelViewMatrix, Float(arc4random())*shakeMag, Float(arc4random())*shakeMag, 0);
+        //GLKVector3Make(position.x + Float(arc4random())*shakeMag, position.y + Float(arc4random())*shakeMag, position.z + Float(arc4random())*shakeMag);
+        horizontalAngle += (arc4random() / UINT32_MAX) * shakeMag;
+        verticalAngle += (arc4random() / UINT32_MAX) * shakeMag;
+    }
+    
+    GCV.direction = {cosf(verticalAngle) * sinf(horizontalAngle),
+        sinf(verticalAngle),
+        cosf(verticalAngle) * cosf(horizontalAngle)};
+    //_eyelook = GCV.direction;
+    //GCV.horizontalMovement = GLKVector3Make(sinf(horizontalAngle - M_PI_2), 0, cosf(horizontalAngle - M_PI_2));
+    //print("horizontalAngle: \(horizontalAngle); verticalAngle: \(verticalAngle)");
+}
+
 - (void) update
 {
     _game->update( self.timeSinceLastUpdate );
-    
+    [self cameraMovement];
     
     //update line
     /* //Not yet implemented

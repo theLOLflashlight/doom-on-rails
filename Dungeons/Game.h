@@ -73,6 +73,7 @@ public:
     Game( GLKView* view );
 
     void render() const;
+    void offsetEyelook ();
     void update( double );
     
     glm::mat4 viewMatrix() const
@@ -170,9 +171,10 @@ public:
     GLHandle                _water_reflect_render_buffer;
     GLHandle                _water_refract_render_buffer;
     
-    glm::vec3               _eyepos, _eyepos0, _eyelook, _eyelook2;
+    glm::vec3               _eyepos, _eyepos0, _eyelook, _eyelook2, _eyelookOffset;
     int                     _railidx = 0;
     double                  _time = 0;
+    double                  _animationProgress = 1;
 
 };
 
