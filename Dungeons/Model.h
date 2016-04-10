@@ -6,6 +6,7 @@
 #include <vector>
 #include <memory>
 
+
 struct Sprite
 {
     GLTexture::ptr_t    _texture;

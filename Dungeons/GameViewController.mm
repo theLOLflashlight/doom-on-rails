@@ -20,8 +20,8 @@
 @interface GameViewController ()
 {
     Game*       _game;
-    Entity*     _projectile;
-    glm::vec3   _projectileVelocity;
+    int         _bulletId;
+    Model*      _projectileSprite;
     
     AVAudioPlayer *GunSoundEffects[SFXINSTANCES];
     int _currSound;
@@ -148,21 +148,18 @@
     if (sender.state == UIGestureRecognizerStateRecognized)
     {
         using namespace glm;
-        
-        const auto width = _game->_width / 2;
-        const auto height = _game->_height / 2;
-        const float aspectRatio = width / height;
-        
         const CGPoint mouse = [sender locationInView:self.view];
         
-        const mat4 view = lookAt( _game->_eyepos, _game->_eyelook, vec3( 0, 1, 0 ) );
-        const mat4 proj = perspective< float >( radians( 80.0f ), aspectRatio, 0.1, 1000 );
-        const vec4 viewport( 0, -height, width, height );
+        const mat4 view = _game->viewMatrix();
+        const mat4 proj = _game->projMatrix();
+        const vec4 viewport = _game->viewport();
         
         vec3 touchPos0 = unProject( vec3( mouse.x, -mouse.y, 0 ), view, proj, viewport );
         vec3 touchPos1 = unProject( vec3( mouse.x, -mouse.y, 1 ), view, proj, viewport );
         
         [self spawn_projectile: touchPos0  velocity: normalize( touchPos1 - touchPos0 )];
+        
+        //[self explosionAt: _game->_eyepos];
     }
 }
 
@@ -201,7 +198,10 @@
     NSData *GBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"GunSoundEffect_1" ofType:@"mp3"]];
     for(int i = 0; i < SFXINSTANCES; i++) {
         GunSoundEffects[i] = [[AVAudioPlayer alloc]initWithData:GBSoundPath error:nil];
+        
         [GunSoundEffects[i] prepareToPlay];
+       
+
     }
     
     //Initialization of variables
@@ -219,16 +219,16 @@
 
 - (void)viewDidLayoutSubviews
 {
-    NSLog(@"dd");
-    //        UIBlurEffect *blurEffect = [UIBlurEffect s];
-    //        UIVisualEffectView *blurEffectView = UIVisualEffectView( effect: blurEffect );
-    //        UIVisualEffectView *vibeEffectView = UIVisualEffectView( effect: UIVibrancyEffect( forBlurEffect: blurEffect ) );
-    //
-    //        blurEffectView.frame = Hud.bounds
-    //        vibeEffectView.frame = Hud.bounds
-    //
-    //        blurEffectView.addSubview( vibeEffectView )
-    //        Hud.insertSubview( blurEffectView, atIndex: 0 )
+   
+//        UIBlurEffect *blurEffect = [UIBlurEffect s];
+//        UIVisualEffectView *blurEffectView = UIVisualEffectView( effect: blurEffect );
+//        UIVisualEffectView *vibeEffectView = UIVisualEffectView( effect: UIVibrancyEffect( forBlurEffect: blurEffect ) );
+//        
+//        blurEffectView.frame = Hud.bounds
+//        vibeEffectView.frame = Hud.bounds
+//        
+//        blurEffectView.addSubview( vibeEffectView )
+//        Hud.insertSubview( blurEffectView, atIndex: 0 )
     
 }
 
@@ -589,6 +589,20 @@
 - (void)tearDownGL
 {
     [EAGLContext setCurrentContext:self.context];
+}
+
+-(void) explosionAt:(glm::vec3) pos
+             radius:(float)     radius
+{
+    for ( auto& ntt : _game->_entities )
+    {
+        if ( glm::distance( ntt.second.position, pos ) < radius )
+        {
+            GraphicalComponent* gfx = _game->findGraphicalComponent( ntt.first );
+            if ( gfx )
+                gfx->color = glm::vec4( 1, 0, 0, 1 );
+        }
+    }
 }
 
 #pragma mark - GLKView and GLKViewController delegate methods
