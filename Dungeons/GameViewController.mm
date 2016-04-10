@@ -229,6 +229,10 @@
         
         [GunSoundEffects[i] prepareToPlay];
        
+        
+    self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", 0];
+    self.Health.text =[[NSString alloc] initWithFormat: @"%d", 100];
+    self.Armor.text =[[NSString alloc] initWithFormat: @"%d", 100];
 
     }
     

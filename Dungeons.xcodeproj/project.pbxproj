@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4442C95E1CBAF9900097FD98 /* Shooter_Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 4442C95D1CBAF9900097FD98 /* Shooter_Menu.png */; };
+		4442C9601CBB0A690097FD98 /* Gun.png in Resources */ = {isa = PBXBuildFile; fileRef = 4442C95F1CBB0A690097FD98 /* Gun.png */; };
 		445332001CB5BD3B004DC43B /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445331FF1CB5BD3B004DC43B /* MainViewController.m */; };
 		445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */ = {isa = PBXBuildFile; fileRef = 445332041CB5BD81004DC43B /* ButtonPress.wav */; };
 		445332071CB5BD81004DC43B /* DOOM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 445332051CB5BD81004DC43B /* DOOM.mp3 */; };
@@ -141,6 +143,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4442C95D1CBAF9900097FD98 /* Shooter_Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shooter_Menu.png; sourceTree = "<group>"; };
+		4442C95F1CBB0A690097FD98 /* Gun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gun.png; sourceTree = "<group>"; };
 		445331FF1CB5BD3B004DC43B /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		445332011CB5BD44004DC43B /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		445332041CB5BD81004DC43B /* ButtonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonPress.wav; sourceTree = "<group>"; };
@@ -282,13 +286,6 @@
 		445332021CB5BD5E004DC43B /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				81C0A3191CB9EC5F0086E9FA /* 'flyby'.wav */,
-				81C0A31A1CB9EC5F0086E9FA /* footsteps_gravel_01.mp3 */,
-				81C0A31B1CB9EC5F0086E9FA /* footsteps_gravel.wav */,
-				81C0A31C1CB9EC5F0086E9FA /* magic-quake2.mp3 */,
-				81C0A31D1CB9EC5F0086E9FA /* shooting_star.wav */,
-				81C0A31E1CB9EC5F0086E9FA /* swipe_whiff.mp3 */,
-				81C0A31F1CB9EC5F0086E9FA /* sword-clash1.mp3 */,
 				44F1AC4A1CB74AF3002557C5 /* GunSoundEffect_1.wav */,
 				53F05FA71CB9FA0C007F3023 /* 'flyby'.wav */,
 				53F05FA81CB9FA0C007F3023 /* footsteps_gravel_01.mp3 */,
@@ -306,6 +303,8 @@
 		445332031CB5BD68004DC43B /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
+				4442C95F1CBB0A690097FD98 /* Gun.png */,
+				4442C95D1CBAF9900097FD98 /* Shooter_Menu.png */,
 				53ADE88E1CB8887800DD3588 /* Fireball.png */,
 				445332101CB5C48E004DC43B /* Logout.png */,
 				445332081CB5BD9C004DC43B /* BGT1.gif */,
@@ -648,6 +647,7 @@
 				53F05FB31CB9FA0C007F3023 /* swipe_whiff.mp3 in Resources */,
 				445332071CB5BD81004DC43B /* DOOM.mp3 in Resources */,
 				53C679581CA22F35007C7945 /* glm in Resources */,
+				4442C95E1CBAF9900097FD98 /* Shooter_Menu.png in Resources */,
 				53C679341CA22E62007C7945 /* LaunchScreen.storyboard in Resources */,
 				4453320E1CB5BD9C004DC43B /* SoundOn.png in Resources */,
 				532ECA961CADBDBD001BB153 /* Level0Layout.mtl in Resources */,
@@ -673,11 +673,11 @@
 				4453320C1CB5BD9C004DC43B /* BGT1.gif in Resources */,
 				53ADE8981CB88E4200DD3588 /* fireball in Resources */,
 				445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */,
+				4442C9601CBB0A690097FD98 /* Gun.png in Resources */,
 				532ECA941CADBDBD001BB153 /* Level0EnemyRail.obj in Resources */,
 				532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */,
 				5385DE741CA3365100F1A323 /* WaterShader.vs in Resources */,
 				532ECA8E1CADBDBD001BB153 /* Level0All.mtl in Resources */,
-				81C0A3251CB9EC5F0086E9FA /* swipe_whiff.mp3 in Resources */,
 				532ECA991CADBDBD001BB153 /* Level0Rail.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

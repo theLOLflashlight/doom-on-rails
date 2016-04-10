@@ -17,4 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIView *HUD;
 @property (nonatomic) bool MusicOn;
 
+@property (weak, nonatomic) IBOutlet UILabel *KillNumber;
+@property (weak, nonatomic) IBOutlet UILabel *Health;
+@property (weak, nonatomic) IBOutlet UILabel *Armor;
+
 @end
