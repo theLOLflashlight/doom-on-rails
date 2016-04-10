@@ -9,8 +9,12 @@
 #ifndef ios_path_h
 #define ios_path_h
 
+#include <string>
+
 const char* ios_path( const char* path );
 
 const char* ios_path( const char* path, const char* type );
+
+const char* ios_path( std::string path );
 
 #endif /* ios_path_h */

@@ -1,84 +1,17 @@
 #include "Game.h"
-
-#include "SOIL.h"
 #include "ios_path.h"
-#define DEMO 1
 
 using namespace glm;
-using namespace gl_enums::usage;
 using std::shared_ptr;
 using std::make_shared;
 using std::string;
 using std::vector;
 
-const float SKYBOX_SIZE = 500;
-const vec3 SKYBOX_VERTICES[] = {
-    vec3( -SKYBOX_SIZE,  SKYBOX_SIZE, -SKYBOX_SIZE ),
-    vec3( -SKYBOX_SIZE, -SKYBOX_SIZE, -SKYBOX_SIZE ),
-    vec3(  SKYBOX_SIZE, -SKYBOX_SIZE, -SKYBOX_SIZE ),
-    vec3(  SKYBOX_SIZE, -SKYBOX_SIZE, -SKYBOX_SIZE ),
-    vec3(  SKYBOX_SIZE,  SKYBOX_SIZE, -SKYBOX_SIZE ),
-    vec3( -SKYBOX_SIZE,  SKYBOX_SIZE, -SKYBOX_SIZE ),
-
-    vec3( -SKYBOX_SIZE, -SKYBOX_SIZE,  SKYBOX_SIZE ),
-    vec3( -SKYBOX_SIZE, -SKYBOX_SIZE, -SKYBOX_SIZE ),
-    vec3( -SKYBOX_SIZE,  SKYBOX_SIZE, -SKYBOX_SIZE ),
-    vec3( -SKYBOX_SIZE,  SKYBOX_SIZE, -SKYBOX_SIZE ),
-    vec3( -SKYBOX_SIZE,  SKYBOX_SIZE,  SKYBOX_SIZE ),
-    vec3( -SKYBOX_SIZE, -SKYBOX_SIZE,  SKYBOX_SIZE ),
-
-    vec3( SKYBOX_SIZE, -SKYBOX_SIZE, -SKYBOX_SIZE ),
-    vec3( SKYBOX_SIZE, -SKYBOX_SIZE,  SKYBOX_SIZE ),
-    vec3( SKYBOX_SIZE,  SKYBOX_SIZE,  SKYBOX_SIZE ),
-    vec3( SKYBOX_SIZE,  SKYBOX_SIZE,  SKYBOX_SIZE ),
-    vec3( SKYBOX_SIZE,  SKYBOX_SIZE, -SKYBOX_SIZE ),
-    vec3( SKYBOX_SIZE, -SKYBOX_SIZE, -SKYBOX_SIZE ),
-
-    vec3( -SKYBOX_SIZE, -SKYBOX_SIZE,  SKYBOX_SIZE ),
-    vec3( -SKYBOX_SIZE,  SKYBOX_SIZE,  SKYBOX_SIZE ),
-    vec3(  SKYBOX_SIZE,  SKYBOX_SIZE,  SKYBOX_SIZE ),
-    vec3(  SKYBOX_SIZE,  SKYBOX_SIZE,  SKYBOX_SIZE ),
-    vec3(  SKYBOX_SIZE, -SKYBOX_SIZE,  SKYBOX_SIZE ),
-    vec3( -SKYBOX_SIZE, -SKYBOX_SIZE,  SKYBOX_SIZE ),
-
-    vec3( -SKYBOX_SIZE,  SKYBOX_SIZE, -SKYBOX_SIZE ),
-    vec3(  SKYBOX_SIZE,  SKYBOX_SIZE, -SKYBOX_SIZE ),
-    vec3(  SKYBOX_SIZE,  SKYBOX_SIZE,  SKYBOX_SIZE ),
-    vec3(  SKYBOX_SIZE,  SKYBOX_SIZE,  SKYBOX_SIZE ),
-    vec3( -SKYBOX_SIZE,  SKYBOX_SIZE,  SKYBOX_SIZE ),
-    vec3( -SKYBOX_SIZE,  SKYBOX_SIZE, -SKYBOX_SIZE ),
-
-    vec3( -SKYBOX_SIZE, -SKYBOX_SIZE, -SKYBOX_SIZE ),
-    vec3( -SKYBOX_SIZE, -SKYBOX_SIZE,  SKYBOX_SIZE ),
-    vec3(  SKYBOX_SIZE, -SKYBOX_SIZE, -SKYBOX_SIZE ),
-    vec3(  SKYBOX_SIZE, -SKYBOX_SIZE, -SKYBOX_SIZE ),
-    vec3( -SKYBOX_SIZE, -SKYBOX_SIZE,  SKYBOX_SIZE ),
-    vec3(  SKYBOX_SIZE, -SKYBOX_SIZE,  SKYBOX_SIZE )
-};
-
-const float WATER_SIZE = SKYBOX_SIZE;
-
-const vec3 WATER_QUAD[] = {
-    vec3( -WATER_SIZE, 0, -WATER_SIZE ),
-    vec3( -WATER_SIZE, 0,  WATER_SIZE ),
-    vec3(  WATER_SIZE, 0,  WATER_SIZE ),
-    vec3(  WATER_SIZE, 0, -WATER_SIZE )
-};
-
-const vec3 WATER_VERTICES[] = {
-    vec3( -WATER_SIZE, 0, -WATER_SIZE ),
-    vec3( -WATER_SIZE, 0,  WATER_SIZE ),
-    vec3(  WATER_SIZE, 0,  WATER_SIZE ),
-    
-    vec3(  WATER_SIZE, 0,  WATER_SIZE ),
-    vec3(  WATER_SIZE, 0, -WATER_SIZE ),
-    vec3( -WATER_SIZE, 0, -WATER_SIZE )
-};
-
-
 Game::Game( GLKView* view )
+    // we need to bind the view drawable before our shaders load
     : _view( ([view bindDrawable], view) )
 
+    // why do these need to be doubled??
     , _width( _view.bounds.size.width * 2 )
     , _height( _view.bounds.size.height * 2 )
 
@@ -87,199 +20,119 @@ Game::Game( GLKView* view )
 
     , _program( new GLProgram( ios_path( "MyShader.vs" ), ios_path( "MyShader.fs" ), "aPosition", "aNormal", "aTexCoord" ) )
 
-    , _model( ObjMesh( ios_path( "crate.obj" ) ), _program )
     , _level( ObjMesh( ios_path( "Level0Layout.obj" ) ), _program )
     , _enemies( ObjMesh( ios_path( "Level0EnemyPos.obj" ) ), _program )
-    , _rail( ios_path( "DemoRail.obj" ) )
 
-    , _entities( {
-#if DEMO
-        { "crate0", Entity(vec3( 2, -.75, 0 )) },
-        { "crate1", Entity(vec3( 0, .75, 2 )) },
-        { "crate2", Entity(vec3( 0, 2, 0 )) }
-#else
-        { "crate", Entity() }
-#endif
-    } )
-    , _graphics( {
-        { "crate0" },
-        { "crate1" },
-        { "crate2" }
-    } )
-    , _physics( {
-        { "crate0" },
-        { "crate1" },
-        { "crate2" }
-    } )
+    , _rail( ObjMesh( ios_path( "DemoRail.obj" ) ).rail )
+    , _raillook( _rail.data, 1 )
 
-    , _skybox_texture( SOIL_load_OGL_cubemap(
-        ios_path( "skybox/right.tga" ),
-        ios_path( "skybox/left.tga" ),
-        ios_path( "skybox/top.tga" ),
-        ios_path( "skybox/bottom.tga" ),
-        ios_path( "skybox/back.tga" ),
-        ios_path( "skybox/front.tga" ),
-        SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT ) )
-
-    , _skybox_program( ios_path( "Skybox.vs" ), ios_path( "Skybox.fs" ), "aPosition" )
-    , _skybox_buffer( SKYBOX_VERTICES, 36, STATIC_DRAW,
-        _skybox_program.make_vert_attribute< vec3 >( "aPosition" ) )
-
-    , _water_dudv( ios_path( "water/water_dudv.png" ) )
-    , _water_normal( ios_path( "water/water_normal.png" ) )
-    , _water_program( ios_path( "WaterShader.vs" ), ios_path( "WaterShader.fs" ), "aPosition" )
-    , _water_quad( WATER_VERTICES, 6, STATIC_DRAW,
-                   _water_program.make_vert_attribute< vec3 >( "aPosition" ) )
+    //, _skybox( "mar", vec3( 0.766, 0.259, 0.643 ), vec4( 1, 1, 0, 0.5 ) )
+    , _skybox( "goldrush", vec3( 0.342, 0.866, -0.940 ), vec4( 1, 1, 0.8, 0.5 ) )
+    , _water( vec4( 0, 0.3, 0.5, 1 ), _width, _height )
 {
-#if DEMO
-    _graphics[ 0 ].model = &_model;
-    _graphics[ 0 ].program = _program.get();
-    _graphics[ 0 ].color = vec4( 0, 0, 1, 0.1 );
+    _water.setSun( _skybox.sunPosition, _skybox.sunColor );
     
-    _graphics[ 1 ].model = &_model;
-    _graphics[ 1 ].program = _program.get();
-    _graphics[ 1 ].color = vec4( 1, 0, 0, 0.1 );
-    
-    _graphics[ 2 ].model = &_model;
-    _graphics[ 2 ].program = _program.get();
-    _graphics[ 2 ].color = vec4( 0, 1, 0, 0.1 );
-#endif
-    
-    glBindTexture( GL_TEXTURE_CUBE_MAP, _skybox_texture );
-    glTexParameteri( GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-    glTexParameteri( GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
-    glBindTexture( GL_TEXTURE_CUBE_MAP, 0 );
-
-    //glGenFramebuffers( 3, &_water_fbo );
-
-    //glBindFramebuffer( GL_FRAMEBUFFER, _water_reflect_fbo );
-    //glBindFramebuffer( GL_FRAMEBUFFER, _water_refract_fbo );
-    
-    GLenum status;
-    
-    // REFLECT
-    
-    // COLOR TEXTURE
-    glGenTextures( 1, &_water_reflect_texture );
-    glBindTexture( GL_TEXTURE_2D, _water_reflect_texture );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-    glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, _width/2, _height/2, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr );
-    glBindTexture( GL_TEXTURE_2D, 0 );
-    
-    // DEPTH BUFFER
-    glGenRenderbuffers( 1, &_water_reflect_render_buffer );
-    glBindRenderbuffer( GL_RENDERBUFFER, _water_reflect_render_buffer );
-    glRenderbufferStorage( GL_RENDERBUFFER, GL_DEPTH_COMPONENT32F, _width, _height );
-    glBindRenderbuffer( GL_RENDERBUFFER, 0 );
-    
-    // FRAME BUFFER
-    glGenFramebuffers( 1, &_water_reflect_fbo );
-    glBindFramebuffer( GL_FRAMEBUFFER, _water_reflect_fbo );
-    glFramebufferTexture2D( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _water_reflect_texture, 0 );
-    
-    glFramebufferRenderbuffer( GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _water_reflect_render_buffer );
-    
-    status = glCheckFramebufferStatus( GL_FRAMEBUFFER );
-    glBindFramebuffer( GL_FRAMEBUFFER, 0 );
-    if ( status != GL_FRAMEBUFFER_COMPLETE )
-        throw status;
-
-    // REFRACT
-    
-    // COLOR TEXTURE
-    glGenTextures( 1, &_water_refract_texture );
-    glBindTexture( GL_TEXTURE_2D, _water_refract_texture );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-    glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, _width * .75, _height * .75, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr );
-    glBindTexture( GL_TEXTURE_2D, 0 );
-    
-    // DEPTH TEXTURE
-    glGenTextures( 1, &_water_refract_depth_texture );
-    glBindTexture( GL_TEXTURE_2D, _water_refract_depth_texture );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-    glTexImage2D( GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, _width * .75, _height * .75, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr );
-    glBindTexture( GL_TEXTURE_2D, 0 );
-    
-    // DEPTH BUFFER
-    glGenRenderbuffers( 1, &_water_refract_render_buffer );
-    glBindRenderbuffer( GL_RENDERBUFFER, _water_refract_render_buffer );
-    glRenderbufferStorage( GL_RENDERBUFFER, GL_DEPTH_COMPONENT32F, _width, _height );
-    glBindRenderbuffer( GL_RENDERBUFFER, 0 );
-
-    // FRAME BUFFER
-    glGenFramebuffers( 1, &_water_refract_fbo );
-    glBindFramebuffer( GL_FRAMEBUFFER, _water_refract_fbo );
-    glFramebufferTexture2D( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _water_refract_texture, 0 );
-    glFramebufferTexture2D( GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, _water_refract_depth_texture, 0 );
-    
-    glFramebufferRenderbuffer( GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _water_refract_render_buffer );
-    
-    status = glCheckFramebufferStatus( GL_FRAMEBUFFER );
-    glBindFramebuffer( GL_FRAMEBUFFER, 0 );
-    if ( status != GL_FRAMEBUFFER_COMPLETE )
-        throw status;
-    
+    // Setup view
     [_view bindDrawable];
     glClearColor( 0, 0, 0, 1 );
-    
-    //glMatrixMode( GL_PROJECTION );
-    //gluPerspective( 75, _width / _height, 1, 3000 );
     glViewport( 0, 0, _width, _height );
-    //glMatrixMode( GL_MODELVIEW );
-
-    //glEnable( GL_BLEND );
     glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-
-    // AU: Astronomical Unit. (in meters.)
-    const float AU = 1.496e+11f;
-
-    vec3    sunPosition = normalize( vec3( -1, 1, -1 ) ) * AU;
-    vec4    ambientComponent( 0.5, 0.5, 0.5, 1.0 );
-    vec4    diffuseComponent( 0.5, 0.5, 0.1, 0.1 );
-    vec4    specularComponent( 1, 1, 1, 1 );
-    glm::float_t shininess = 10.0;
     
-    _program->bind();
-    glUniform3fv( _program->find_uniform( "uSunPosition" ), 1, &sunPosition[0] );
-    //glUniform3fv( _program->find_uniform( "uSunColor" ), 1, &sunColor[0] );
-    //glUniform3fv( _program->find_uniform( "uLightPosition" ), 1, &diffuseLightPosition[0] );
-    glUniform4fv( _program->find_uniform( "uAmbientColor" ), 1, &ambientComponent[0] );
-    glUniform4fv( _program->find_uniform( "uDiffuseColor" ), 1, &diffuseComponent[0] );
-    glUniform4fv( _program->find_uniform( "uSpecularColor" ), 1, &specularComponent[0] );
-    glUniform1f( _program->find_uniform( "uShininess" ), shininess );
-
-    mat4 waterModel;
-
-    _water_program.bind();
-    glUniform3fv( _water_program.find_uniform( "uSunPosition" ), 1, &sunPosition[0] );
-    glUniform3fv( _water_program.find_uniform( "uSunColor" ), 1, &specularComponent[0] );
-    glUniform1i( _water_program.find_uniform( "uTextureRefle" ), 0 );
-    glUniform1i( _water_program.find_uniform( "uTextureRefra" ), 1 );
-    glUniform1i( _water_program.find_uniform( "uMapDepth" ), 2 );
-    glUniform1i( _water_program.find_uniform( "uMapDuDv" ), 3 );
-    glUniform1i( _water_program.find_uniform( "uMapNormal" ), 4 );
-
-    glUniform4f( _water_program.find_uniform( "uColor" ), 0, 0.1, 1, 1 );
-    glUniformMatrix4fv( _water_program.find_uniform( "uModelMatrix" ), 1, GL_FALSE, &waterModel[ 0 ][ 0 ] );
+    // Setup main shader
+    {
+        vec4    ambientComponent( 0.5, 0.5, 0.5, 1.0 );
+        vec4    diffuseComponent( 1, 1, 0.1, 0.1 );
+        vec4    specularComponent( 1, 1, 0, 0.1 );
+        float   shininess = 10.0;
+        
+        _program->bind();
+        glUniform3fv( _program->find_uniform( "uSunPosition" ), 1, &_skybox.sunPosition[0] );
+        glUniform4fv( _program->find_uniform( "uAmbientColor" ), 1, &ambientComponent[0] );
+        glUniform4fv( _program->find_uniform( "uDiffuseColor" ), 1, &_skybox.sunColor[0] );
+        glUniform4fv( _program->find_uniform( "uSpecularColor" ), 1, &specularComponent[0] );
+        glUniform1f( _program->find_uniform( "uShininess" ), shininess );
+        glUseProgram( 0 );
+    }
     
-    glUseProgram( 0 );
-    
-    //_program->validate();
-    //_skybox_program.validate();
-    //_water_program.validate();
-    
-#if !DEMO
-    size_t railsize = _rail.rail.size();
-    _eyepos = _rail.rail[ _railidx % railsize ];
-    _eyelook = _rail.rail[ (_railidx + 1) % railsize ];
-    _eyelook2 = _rail.rail[ (_railidx + 3) % railsize ];
-#endif
+    // Setup level
+    {
+        GraphicalComponent level( "level" );
+        level.model = &_level;
+        level.translucent = true;
+        level.program = _program.get();
+        
+        _graphics.push_back( level );
+    }
+    {
+        PhysicalComponent level( "level", false );
+        _physics.push_back( level );
+        
+        _entities[ "level" ].position = vec3( 0, -0.1, 0 );
+    }
+
+    // Setup enemies
+    {
+        GraphicalComponent enemies( "enemies" );
+        enemies.model = &_enemies;
+        enemies.translucent = true;
+        enemies.program = _program.get();
+        
+        enemies.delegate = [](GraphicalComponent* gfx, EntityCollection& entities, glm::mat4 view, glm::mat4 proj)
+        {
+            glUniform4fv( gfx->program->find_uniform( "uColor" ), 1, &gfx->color[ 0 ] );
+            
+            glEnable( GL_BLEND );
+            gfx->model->render( entities[ gfx->entityId ].transform_matrix(), view, proj );
+            glDisable( GL_BLEND );
+        };
+        
+        _graphics.push_back( enemies );
+    }
+    {
+        PhysicalComponent enemies( "enemies", false );
+        _physics.push_back( enemies );
+        
+        _entities[ "enemies" ].position = vec3( 0, -0.1, 0 );
+    }
+}
+
+
+void Game::offsetEyelook() {
+    using namespace glm;
+    /*
+    //for animationProgress of shake
+    if(_animationProgress > 1) {
+        _animationProgress = 1;
+    }
+    if(_animationProgress < 1) {
+        _animationProgress += 1.0 / 45.0;
+        float shakeMag;
+        if(_animationProgress < 0.70) {
+            shakeMag = 0.9 * 0.4;
+        }
+        else {
+            shakeMag = (0.9 - (_animationProgress - 0.7) * 0.9 / 0.3) * 0.4; //after reaching 0.7 progress (when sound starts to dwindle), linearly decrease max magnitude to 0
+        }
+        //modelViewMatrix = GLKMatrix4Translate(modelViewMatrix, Float(arc4random())*shakeMag, Float(arc4random())*shakeMag, 0);
+        //GLKVector3Make(position.x + Float(arc4random())*shakeMag, position.y + Float(arc4random())*shakeMag, position.z + Float(arc4random())*shakeMag);
+        //horizontalAngle += (arc4random() / UINT32_MAX) * shakeMag;
+        //verticalAngle += (arc4random() / UINT32_MAX) * shakeMag;
+        
+        mat4 rotMatrix;
+        
+        rotMatrix = rotate( rotMatrix, arc4random() * shakeMag, vec3 {0, 1, 0} );
+        
+        //auto v =
+    }
+     */
+    if(_animationProgress > 1) {
+        _animationProgress = 1;
+    }
+    if(_animationProgress < 1) {
+        _animationProgress += 1.0 / 45.0;
+        //if(_animationProgress <= )
+    }
+    //ambientComponent =
 }
 
 
@@ -288,56 +141,18 @@ void Game::update( double step )
     _currTime += step;
     const double time = _currTime - _startTime;
     
-#if DEMO
-    const float eyedist = 5;
-    //_eyepos = vec3( eyedist, eyedist * sin( time ) / 2, eyedist );/*
-    _eyepos.x = eyedist * sin( time / 2 );
-    _eyepos.y = 0.1 + eyedist / 4 + eyedist / 4 * sin( time / 6 );
-    _eyepos.z = eyedist * cos( time / 2 );//*/
-    _eyelook = vec3();
-#else
+    _eyepos = _rail[ time ];// - vec3( 0, 0.5, 0 );
+    _eyelook = _raillook[ time ];// - vec3( 0, 0.5, 0 );
     
-    size_t railsize = _rail.rail.size();
     
-    _eyelook = _rail.rail[ (_railidx + 1) % railsize ];
-    _eyelook2 = _rail.rail[ (_railidx + 3) % railsize ];
+    //_eyepos += vec3( 1, 1, 1 );
+    //_eyelook += vec3( 1, 1, 1 );
     
-    vec3 eyepos = _rail.rail[ _railidx ];
-    if ( eyepos.x != _eyepos0.x || eyepos.y != _eyepos0.y || eyepos.z != _eyepos0.z )
-    {
-        _eyepos0 = eyepos;
-        _time = time;
-    }
     
-    float a = (time - _time) / length( _eyelook - _eyelook2 ) * 6;
-    vec3 eyelook = glm::mix( _eyelook, _eyelook2, a );
+    _water.update( time / 10, _eyepos );
     
-    a = (time - _time) / length( _eyepos0 - _eyelook ) * 6;
-    
-    eyepos = glm::mix( _eyepos0, _eyelook, a );
-    if ( a > 1 ) {
-        _railidx += 2;
-        _railidx %= railsize;
-    }
-    
-    eyepos.y -= 0.5;
-    eyelook.y -= 0.5;
-    
-    _eyepos = eyepos;
-    _eyelook = eyelook;
-#endif
-    
-    float waveFactor = (time / 10);
-    _water_program.bind();
-    glUniform1f( _water_program.find_uniform( "uDuDvFactor" ), waveFactor );
-    glUniform3fv( _water_program.find_uniform( "uEyePosition" ), 1, &_eyepos[0] );
-    glUseProgram( 0 );
-    
-#if DEMO
-    _entities[ "crate0" ].rotation.x += step * 2;
-    _entities[ "crate1" ].rotation.y += step * 2;
-    _entities[ "crate2" ].rotation.z += step * 2;
-#endif
+    for ( auto& physable : _physics )
+        physable.update( _entities );
 }
 
 
@@ -353,141 +168,131 @@ void Game::render() const
     vec3 eyepos = _eyepos;
     vec3 eyelook = _eyelook;
     
-    const mat4 view = lookAt( eyepos, eyelook, vec3( 0, 1, 0 ) );
-
-    const float aspectRatio = _width / _height;
-    const mat4 proj = perspective< float >( radians( 80.0f ), aspectRatio, 0.1, 1000 );
-
-    glActiveTexture( GL_TEXTURE0 );
-    glBindTexture( GL_TEXTURE_2D, 0 );
-    [_view bindDrawable];
+    const mat4 view = viewMatrix();
+    const mat4 proj = projMatrix();
     
-    
-    glEnable( GL_CLIP_DISTANCE(0) );
-    
-    // Render refLEction.
-    glBindFramebuffer( GL_FRAMEBUFFER, _water_reflect_fbo );
-    glViewport( 0, 0, (int) _width/2, (int) _height/2 );
-    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-    
-    eyepos.y = -eyepos.y;
-    eyelook.y = -eyelook.y;
-    
-    _program->bind();
-    glUniform4f( _program->find_uniform( "uWaterPlane" ), 0, 1, 0, 0 );
-    glUseProgram( 0 );
-    
-    draw_scene( lookAt( eyepos, eyelook, vec3( 0, 1, 0 ) ), proj );
-
-
-    // Render refRAction
-    glBindFramebuffer( GL_FRAMEBUFFER, _water_refract_fbo );
-    glViewport( 0, 0, (int) (_width * .75), (int) (_height * .75) );
-    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-    
-    _program->bind();
-    glUniform4f( _program->find_uniform( "uWaterPlane" ), 0, -1, 0, 0 );
-    glUseProgram( 0 );
-    
-    draw_scene( view, proj );
-    
-    glDisable( GL_CLIP_DISTANCE(0) );
-
+    // Draw to water buffers.
+    {
+        glEnable( GL_CLIP_DISTANCE(0) );
+        
+        // Render refLEction.
+        eyepos.y = -eyepos.y;
+        eyelook.y = -eyelook.y;
+        
+        _water.bindReflection( _program.get(), _width, _height );
+        draw_scene( lookAt( eyepos, eyelook, vec3( 0, 1, 0 ) ), proj );
+        
+        // Render refRAction
+        _water.bindRefraction( _program.get(), _width, _height );
+        draw_scene( view, proj );
+        
+        glDisable( GL_CLIP_DISTANCE(0) );
+    }
 
     // Draw our scene.
-    glEnable( GL_CULL_FACE );
     [_view bindDrawable];
-    glViewport( 0, 0, (int) _width, (int) _height );
-    //draw_scene( view, proj );
-    _skybox_program.bind();
-    glUniformMatrix4fv( _skybox_program.find_uniform( "uViewMatrix" ), 1, GL_FALSE, &view[ 0 ][ 0 ] );
-    glUniformMatrix4fv( _skybox_program.find_uniform( "uProjMatrix" ), 1, GL_FALSE, &proj[ 0 ][ 0 ] );
-    
-    glUniform1i( _skybox_program.find_uniform( "uTexture" ), 0 );
-    glActiveTexture( GL_TEXTURE0 );
-    glBindTexture( GL_TEXTURE_CUBE_MAP, _skybox_texture );
-    _skybox_buffer.draw( GL_TRIANGLES, 0, 36 );
-    
-    _program->bind();
-    glUniformMatrix4fv( _program->find_uniform( "uViewMatrix" ), 1, GL_FALSE, &view[ 0 ][ 0 ] );
-    glUniformMatrix4fv( _program->find_uniform( "uProjMatrix" ), 1, GL_FALSE, &proj[ 0 ][ 0 ] );
-    glUniform4f( _program->find_uniform( "uColor" ), 1, 1, 1, 0 );
-    
-    _model.render( mat4(), view, proj );
-
-    for ( auto drawable : _graphics )
-        drawable.update( _entities, view, proj );
-    
-#if !DEMO
-    glUniform4f( _program->find_uniform( "uColor" ), 1, 1, 1, 0 );
-    _level.render( translate( mat4(), vec3( 0, -0.1, 0 ) ), view, proj );
-#endif
-
-    
-    // Draw water.
-    _water_program.bind();
-    //glDisable( GL_CULL_FACE );
-    glActiveTexture( GL_TEXTURE0 );
-    glBindTexture( GL_TEXTURE_2D, _water_reflect_texture );
-    
-    glActiveTexture( GL_TEXTURE1 );
-    glBindTexture( GL_TEXTURE_2D, _water_refract_texture );
-    
-    glActiveTexture( GL_TEXTURE2 );
-    glBindTexture( GL_TEXTURE_2D, _water_refract_depth_texture );
-    
-    glActiveTexture( GL_TEXTURE3 );
-    glBindTexture( GL_TEXTURE_2D, _water_dudv.glHandle );
-    
-    glActiveTexture( GL_TEXTURE4 );
-    glBindTexture( GL_TEXTURE_2D, _water_normal.glHandle );
-    
-    
-    glUniformMatrix4fv( _water_program.find_uniform( "uViewMatrix" ), 1, GL_FALSE, &view[ 0 ][ 0 ] );
-    glUniformMatrix4fv( _water_program.find_uniform( "uProjMatrix" ), 1, GL_FALSE, &proj[ 0 ][ 0 ] );
-
-    //glEnable( GL_BLEND );
-    //glDisable( GL_DEPTH_TEST );
-    //_water_quad.draw( GL_QUADS, 0, 4 );
-    _water_quad.draw( GL_TRIANGLES, 0, 6 );
-    //glEnable( GL_DEPTH_TEST );
-    //glDisable( GL_BLEND );
-    //glEnable( GL_CULL_FACE );
-    
-#if !DEMO
-    glEnable( GL_BLEND );
-    _enemies.render( translate( mat4(), vec3( 0, -0.1, 0 ) ), view, proj );
-    glDisable( GL_BLEND );
-#endif
+    draw_scene( view, proj, true );
 }
 
 
-void Game::draw_scene( glm::mat4 view, glm::mat4 proj ) const
+void Game::draw_scene( glm::mat4 view, glm::mat4 proj, bool drawWater ) const
 {
-    _skybox_program.bind();
-    glUniformMatrix4fv( _skybox_program.find_uniform( "uViewMatrix" ), 1, GL_FALSE, &view[ 0 ][ 0 ] );
-    glUniformMatrix4fv( _skybox_program.find_uniform( "uProjMatrix" ), 1, GL_FALSE, &proj[ 0 ][ 0 ] );
-
-    glUniform1i( _skybox_program.find_uniform( "uTexture" ), 0 );
-    glActiveTexture( GL_TEXTURE0 );
-    glBindTexture( GL_TEXTURE_CUBE_MAP, _skybox_texture );
-    _skybox_buffer.draw( GL_TRIANGLES, 0, 36 );
-
+    _skybox.render( view, proj );
+    
     _program->bind();
     glUniformMatrix4fv( _program->find_uniform( "uViewMatrix" ), 1, GL_FALSE, &view[ 0 ][ 0 ] );
     glUniformMatrix4fv( _program->find_uniform( "uProjMatrix" ), 1, GL_FALSE, &proj[ 0 ][ 0 ] );
     glUniform4f( _program->find_uniform( "uColor" ), 1, 1, 1, 0 );
 
-    _model.render( mat4(), view, proj );
-
+    if ( drawWater )
+        _water.render( view, proj );
+    
     for ( auto drawable : _graphics )
         drawable.update( _entities, view, proj );
-    
-#if !DEMO
-    glUniform4f( _program->find_uniform( "uColor" ), 1, 1, 1, 0 );
-    _level.render( translate( mat4(), vec3( 0, -0.1, 0 ) ), view, proj );
-    glEnable( GL_BLEND );
-    _enemies.render( translate( mat4(), vec3( 0, -0.1, 0 ) ), view, proj );
-    glDisable( GL_BLEND );
-#endif
 }
+
+
+glm::mat4 Game::viewMatrix() const
+{
+    return glm::lookAt( _eyepos, _eyelook, glm::vec3( 0, 1, 0 ) );
+}
+
+glm::mat4 Game::projMatrix() const
+{
+    const auto width = _width / 2;
+    const auto height = _height / 2;
+    const float aspectRatio = width / height;
+    
+    return glm::perspective< float >( glm::radians( 80.0f ), aspectRatio, 0.1, 1000 );
+}
+
+glm::vec4 Game::viewport() const
+{
+    const auto width = _width / 2;
+    const auto height = _height / 2;
+    
+    return glm::vec4( 0, -height, width, height );
+}
+
+GraphicalComponent* Game::findGraphicalComponent( EntityId _id )
+{
+    for ( auto& drawable : _graphics )
+        if ( drawable.entityId == _id )
+            return &drawable;
+    
+    return nullptr;
+}
+
+const GraphicalComponent* Game::findGraphicalComponent( EntityId _id ) const
+{
+    for ( auto& drawable : _graphics )
+        if ( drawable.entityId == _id )
+            return &drawable;
+    
+    return nullptr;
+}
+
+PhysicalComponent* Game::findPhysicalComponent( EntityId _id )
+{
+    for ( auto& physible : _physics )
+        if ( physible.entityId == _id )
+            return &physible;
+    
+    return nullptr;
+}
+
+const PhysicalComponent* Game::findPhysicalComponent( EntityId _id ) const
+{
+    for ( auto& physible : _physics )
+        if ( physible.entityId == _id )
+            return &physible;
+    
+    return nullptr;
+}
+
+
+/*size_t railsize = _rail.rail.size();
+ 
+ _eyelook = _rail.rail[ (_railidx + 1) % railsize ];
+ _eyelook2 = _rail.rail[ (_railidx + 3) % railsize ];
+ 
+ vec3 eyepos = _rail.rail[ _railidx ];
+ if ( eyepos.x != _eyepos0.x || eyepos.y != _eyepos0.y || eyepos.z != _eyepos0.z )
+ {
+ _eyepos0 = eyepos;
+ _time = time;
+ }
+ 
+ float a = (time - _time) / length( _eyelook - _eyelook2 ) * 6;
+ vec3 eyelook = glm::mix( _eyelook, _eyelook2, a );
+ 
+ a = (time - _time) / length( _eyepos0 - _eyelook ) * 6;
+ 
+ eyepos = glm::mix( _eyepos0, _eyelook, a );
+ if ( a > 1 ) {
+ _railidx += 2;
+ _railidx %= railsize;
+ }
+ 
+ eyepos.y -= 0.5;
+ eyelook.y -= 0.5;*/
