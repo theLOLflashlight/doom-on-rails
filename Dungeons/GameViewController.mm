@@ -185,15 +185,11 @@
     [self.view addGestureRecognizer:tapGesture];
     
     //Handle pan: Swipe
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture)];
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
     [panGesture setMinimumNumberOfTouches:1];
     [panGesture setMaximumNumberOfTouches:1];
     [self.view addGestureRecognizer:panGesture];
     
-    //play looping sound
-    if(SoundSwitch) {
-        [self ThemeSound];
-    }
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
@@ -229,6 +225,14 @@
     _currSwipeDrawn = false;// = false;
     
     //[NSDate?](count: 64, repeatedValue: nil)
+}
+
+//Starts upon appear
+- (void)viewDidAppear:(BOOL)animated {
+    //play looping sound
+    if(_MusicOn) {
+        [self ThemeSound];
+    }
 }
 
 - (void)viewDidLayoutSubviews
