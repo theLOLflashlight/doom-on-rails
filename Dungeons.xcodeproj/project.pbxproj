@@ -280,6 +280,7 @@
 				81E9B3F81CB72C8000122C7B /* GunSoundEffect_4.mp3 */,
 				81E9B3F91CB72C8000122C7B /* GunSoundEffect_5.mp3 */,
 				444220B61CB6FABC00A8B1E3 /* GunSoundEffect_1.mp3 */,
+				44F1AC4A1CB74AF3002557C5 /* GunSoundEffect_1.wav */,
 				445332041CB5BD81004DC43B /* ButtonPress.wav */,
 				445332051CB5BD81004DC43B /* DOOM.mp3 */,
 			);

@@ -17,6 +17,10 @@
 #define SFXINSTANCES 5
 #define NSPoint CGPoint
 #define NSUInteger UInt
+#define MAX_CHANNELS 30
+
+#define BULLET_MIN 1000
+#define BULLET_MAX 4000
 
 @interface GameViewController ()
 {
@@ -24,8 +28,9 @@
     int         _bulletId;
     Model*      _projectileSprite;
     
-    AVAudioPlayer *GunSoundEffects[SFXINSTANCES];
-    int _currSound;
+    //AVAudioPlayer *GunSoundEffects;
+    AVAudioPlayer *GunSoundEffects[MAX_CHANNELS];
+    int _CurrentChannel;
     
     //For swipe action.
     CGFloat _maxRadius;
@@ -188,6 +193,10 @@
     [panGesture setMaximumNumberOfTouches:1];
     [self.view addGestureRecognizer:panGesture];
     
+    //play looping sound
+    if(SoundSwitch) {
+        [self ThemeSound];
+    }
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
@@ -196,11 +205,16 @@
     
     _game = new Game( (GLKView*) self.view );
     
-    _projectile = &_game->_entities[ 0 ];
-    _projectileVelocity = glm::vec3();
+    _projectileSprite = new Model( ObjMesh( ios_path( "fireball.obj" ) ), _game->_program );
     
-    NSData *GBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"GunSoundEffect_1" ofType:@"mp3"]];
-    for(int i = 0; i < SFXINSTANCES; i++) {
+    _bulletId = BULLET_MIN;
+    
+    _CurrentChannel = 0;
+    
+    NSData *GBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"GunSoundEffect_1" ofType:@"wav"]];
+    
+    for(int i = 0; i < MAX_CHANNELS; i++) {
+        
         GunSoundEffects[i] = [[AVAudioPlayer alloc]initWithData:GBSoundPath error:nil];
         
         [GunSoundEffects[i] prepareToPlay];
@@ -209,7 +223,6 @@
     }
     
     //Initialization of variables
-    _currSound = 0;
     screenSize = [[UIScreen mainScreen] bounds];// : CGRect = UIScreen.mainScreen().bounds;
     imageSize = CGSizeMake(200, 200);// = CGSize(width: 200, height: 200); //arbitrary initialization
     _myBezier = [[UIBezierPath alloc] init];// = UIBezierPath();
@@ -464,22 +477,6 @@
         catch(NSException *exception) {
         }
     }
-    
-    //Original Swift code
-    /*
-    if let path = NSBundle.mainBundle().pathForResource("footsteps_gravel", ofType: "wav") {
-        let soundURL = NSURL(fileURLWithPath:path)
-        
-        var error:NSError?
-        do {
-            themePlayer = try AVAudioPlayer(contentsOfURL: soundURL);
-            themePlayer.prepareToPlay()
-            themePlayer.numberOfLoops = -1;
-            themePlayer.play()
-        }
-        catch {
-        }
-    }*/
 }
 /* Currently not used
 - (void) cameraMovement
@@ -536,21 +533,6 @@
             catch(NSException *exception) {
             }
         }
-        /*
-        if let path = NSBundle.mainBundle().pathForResource("magic-quake2", ofType: "mp3") {
-            let soundURL = NSURL(fileURLWithPath:path)
-            
-            var error:NSError?
-            do {
-                soundPlayer = try AVAudioPlayer(contentsOfURL: soundURL);
-                soundPlayer.prepareToPlay()
-                //No loops
-                soundPlayer.play()
-            }
-            catch {
-            }
-        }
-        */
         
         //Right now, it simply shakes the camera, but maybe shaking the world instead could be considered?
     }
@@ -634,9 +616,13 @@
     
     _CurrentChannel ++;
     
-    [GunSoundEffects[_currSound++] play];
-    if(_currSound == SFXINSTANCES) {
-        _currSound = 0;
+    [GunSoundEffects[_CurrentChannel] play];
+    
+    _CurrentChannel ++;
+    
+    if(_CurrentChannel == MAX_CHANNELS)
+    {
+        _CurrentChannel = 0;
     }
     
 }
@@ -644,7 +630,6 @@
 - (void) update
 {
     _game->update( self.timeSinceLastUpdate );
-    _projectile->position += _projectileVelocity;
     
     
     //update line
