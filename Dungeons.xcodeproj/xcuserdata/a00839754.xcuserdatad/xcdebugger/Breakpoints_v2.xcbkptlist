@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "634"
             endingLineNumber = "634"
-            landmarkName = "-spawn_projectile:velocity:"
+            landmarkName = "-cameraMovement"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -142,7 +142,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "301"
-            endingLineNumber = "301">
+            endingLineNumber = "301"
+            landmarkName = "Game::addComponent( BehavioralComponent component )"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -156,7 +158,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "302"
-            endingLineNumber = "302">
+            endingLineNumber = "302"
+            landmarkName = "Game::addComponent( BehavioralComponent component )"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
