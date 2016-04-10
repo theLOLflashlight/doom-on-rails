@@ -107,20 +107,7 @@ public:
     Skybox                  _skybox;
     Water                   _water;
     
-    GLHandle                _water_reflect_texture;
-    GLHandle                _water_reflect_fbo;
-    
-    GLHandle                _water_refract_texture;
-    GLHandle                _water_refract_depth_texture;
-    GLHandle                _water_refract_fbo;
-    
-    GLHandle                _water_reflect_render_buffer;
-    GLHandle                _water_refract_render_buffer;
-    
-    glm::vec3               _eyepos, _eyepos0, _eyelook, _eyelook2, _eyelookOffset;
-    int                     _railidx = 0;
-    double                  _time = 0;
-    double                  _animationProgress = 1;
-
+    glm::vec3               _eyepos, _eyelook;
+    double                  _animationProgress;
 };
 

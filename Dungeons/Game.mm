@@ -145,20 +145,8 @@ void Game::update( double step )
     _eyelook = _raillook[ time ];// - vec3( 0, 0.5, 0 );
     
     
-    eyepos = glm::mix( _eyepos0, _eyelook, a );
-    if ( a > 1 ) {
-        _railidx += 2;
-        _railidx %= railsize;
-    }
-    
-    eyepos.y -= 0.5;
-    eyelook.y -= 0.5;*/
-    
-    _eyepos = _rail[ time ];
-    _eyelook = _raillook[ time ];
-    
-    
-#endif
+    //_eyepos += vec3( 1, 1, 1 );
+    //_eyelook += vec3( 1, 1, 1 );
     
     
     _water.update( time / 10, _eyepos );
