@@ -10,6 +10,7 @@
 #import <OpenGLES/ES3/glext.h>
 #import <AVFoundation/AVFoundation.h>
 #import "Game.h"
+#import "BulletPhysics.h"
 #include "ios_path.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
@@ -30,6 +31,7 @@
 }
 
 @property (strong, nonatomic) EAGLContext* context;
+@property (strong, nonatomic) BulletPhysics* physics;
 
 @end
 
@@ -65,6 +67,8 @@
     if (!self.context) {
         NSLog(@"Failed to create ES context");
     }
+    
+    _physics = [[BulletPhysics alloc] init];
     
     //Q2 - double tap
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
@@ -179,9 +183,9 @@
         _game->_graphics.push_back( bullet );
     }
     {
-        PhysicalComponent bullet( bulletId );
-        bullet.position = pos;
-        bullet.velocity = vel;
+        PhysicalComponent bullet( bulletId, false );
+        //bullet.position = pos;
+        //bullet.velocity = vel;
         
         _game->_physics.push_back( bullet );
     }

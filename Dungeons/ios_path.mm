@@ -29,3 +29,8 @@ const char* ios_path( const char* name )
     return [path cStringUsingEncoding:1];
 }
 
+const char* ios_path( std::string path )
+{
+    return ios_path( path.c_str() );
+}
+

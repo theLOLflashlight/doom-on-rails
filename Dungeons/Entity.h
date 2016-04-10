@@ -4,6 +4,7 @@
 
 #include "glm/glm.hpp"
 #include "glhelp.h"
+#include "btBulletDynamicsCommon.h"
 
 #include <functional>
 #include <unordered_map>
@@ -221,12 +222,14 @@ struct GraphicalComponent
 
 struct PhysicalComponent
 {
-    EntityId    entityId;
-    bool        active;
-    glm::vec3   position;
+    EntityId            entityId;
+    bool                active;
+    btCollisionObject*  body;
+    
+    /*glm::vec3   position;
     glm::vec3   rotation;
     glm::vec3   velocity;
-    glm::vec3   angularVelocity;
+    glm::vec3   angularVelocity;*/
     
     PhysicalComponent( EntityId _id, bool _active = true )
         : entityId( _id )
@@ -240,12 +243,16 @@ struct PhysicalComponent
         if ( !active )
             return;
         
-        position += velocity;
-        rotation += angularVelocity;
+        decltype(auto) trans = body->getWorldTransform();
+        
+        btVector3 pos = trans.getOrigin();
+        //pos.get128();
+        //position += velocity;
+        //rotation += angularVelocity;
         
         Entity& entity = entities[ entityId ];
-        entity.position = position;
-        entity.rotation = rotation;
+        entity.position = glm::vec3( pos.x(), pos.y(), pos.z() );
+        //entity.rotation = rotation;
     }
 };
 

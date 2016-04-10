@@ -72,7 +72,7 @@ void main()
     vec3 specHigh = uSunColor * specular * REFLECTIVITY * depthClamp;
 
     out_Color = mix( refleColor, refraColor, fresnl );
-    out_Color = mix( out_Color, vec4( 0.0, 0.3, 0.5, 1.0 ), 0.2 ) + vec4( specHigh, 0.0 );
+    out_Color = mix( out_Color, uColor, 0.2 ) + vec4( specHigh, 0.0 );
     
     //out_Color = vec4( depthClamp );
 }
