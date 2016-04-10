@@ -75,7 +75,8 @@ public:
     Game( GLKView* view );
 
     void render() const;
-    void update( double step );
+    void offsetEyelook ();
+    void update( double );
     
     glm::mat4 viewMatrix() const;
     glm::mat4 projMatrix() const;
@@ -119,5 +120,6 @@ public:
     Water                   _water;
     
     glm::vec3               _eyepos, _eyelook;
+    double                  _animationProgress;
 };
 
