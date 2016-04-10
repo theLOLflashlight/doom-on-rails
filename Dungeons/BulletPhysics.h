@@ -11,6 +11,8 @@
 
 @interface BulletPhysics: NSObject
 
--(void)Update:(float)elapsedTime;
+-(void) update:(float) elapsedTime;
+
+-(void) addRigidBody:(btRigidBody*) body;
 
 @end

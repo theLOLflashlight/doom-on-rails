@@ -26,7 +26,8 @@ Game::Game( GLKView* view )
     , _rail( ObjMesh( ios_path( "DemoRail.obj" ) ).rail )
     , _raillook( _rail.data, 1 )
 
-    , _skybox( "goldrush", vec3( 0.643, 0.259, 0.766 ), vec4( 1, 1, 0, 0.5 ) )
+    //, _skybox( "mar", vec3( 0.766, 0.259, 0.643 ), vec4( 1, 1, 0, 0.5 ) )
+    , _skybox( "goldrush", vec3( 0.342, 0.866, -0.940 ), vec4( 1, 1, 0.8, 0.5 ) )
     , _water( vec4( 0, 0.3, 0.5, 1 ), _width, _height )
 {
     _water.setSun( _skybox.sunPosition, _skybox.sunColor );
@@ -47,7 +48,7 @@ Game::Game( GLKView* view )
         _program->bind();
         glUniform3fv( _program->find_uniform( "uSunPosition" ), 1, &_skybox.sunPosition[0] );
         glUniform4fv( _program->find_uniform( "uAmbientColor" ), 1, &ambientComponent[0] );
-        glUniform4fv( _program->find_uniform( "uDiffuseColor" ), 1, &diffuseComponent[0] );
+        glUniform4fv( _program->find_uniform( "uDiffuseColor" ), 1, &_skybox.sunColor[0] );
         glUniform4fv( _program->find_uniform( "uSpecularColor" ), 1, &specularComponent[0] );
         glUniform1f( _program->find_uniform( "uShininess" ), shininess );
         glUseProgram( 0 );
@@ -101,8 +102,8 @@ void Game::update( double step )
     _currTime += step;
     const double time = _currTime - _startTime;
     
-    _eyepos = _rail[ time ] - vec3( 0, 0.5, 0 );
-    _eyelook = _raillook[ time ] - vec3( 0, 0.5, 0 );
+    _eyepos = _rail[ time ];// - vec3( 0, 0.5, 0 );
+    _eyelook = _raillook[ time ];// - vec3( 0, 0.5, 0 );
     
     
     //_eyepos += vec3( 1, 1, 1 );
@@ -112,7 +113,7 @@ void Game::update( double step )
     _water.update( time / 10, _eyepos );
     
     for ( auto& physable : _physics )
-        physable.update( _entities, step );
+        physable.update( _entities );
 }
 
 

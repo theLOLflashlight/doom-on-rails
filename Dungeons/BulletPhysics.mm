@@ -11,20 +11,19 @@
 
 @interface BulletPhysics()
 {
-    btBroadphaseInterface *broadphase;
-    btDefaultCollisionConfiguration *collisionConfiguration;
-    btCollisionDispatcher *dispatcher;
-    btSequentialImpulseConstraintSolver *solver;
-    btDiscreteDynamicsWorld *dynamicsWorld;
-    btCollisionShape *groundShape;
+    btBroadphaseInterface*                  broadphase;
+    btDefaultCollisionConfiguration*        collisionConfiguration;
+    btCollisionDispatcher*                  dispatcher;
+    btSequentialImpulseConstraintSolver*    solver;
+    btDiscreteDynamicsWorld*                dynamicsWorld;
+
+    /*btCollisionShape *groundShape;
     btCollisionShape *fallShape;
     btDefaultMotionState *groundMotionState;
     btRigidBody *groundRigidBody;
     btDefaultMotionState *fallMotionState;
-    btRigidBody *fallRigidBody;
+    btRigidBody *fallRigidBody;*/
 }
-
--(void)Update:(float)elapsedTime;
 
 @end
 
@@ -46,7 +45,7 @@
         dynamicsWorld->setGravity(btVector3(0,-10,0));
         
         
-        groundShape = new btStaticPlaneShape(btVector3(0,1,0),1);
+        /*groundShape = new btStaticPlaneShape(btVector3(0,1,0),1);
         
         fallShape = new btSphereShape(1);
         
@@ -64,7 +63,7 @@
         fallShape->calculateLocalInertia(mass,fallInertia);
         btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass,fallMotionState,fallShape,fallInertia);
         fallRigidBody = new btRigidBody(fallRigidBodyCI);
-        dynamicsWorld->addRigidBody(fallRigidBody);
+        dynamicsWorld->addRigidBody(fallRigidBody);*/
         
         NSLog(@"Starting bullet physics...\n");
     }
@@ -73,7 +72,7 @@
 
 - (void)dealloc
 {
-    dynamicsWorld->removeRigidBody(fallRigidBody);
+    /*dynamicsWorld->removeRigidBody(fallRigidBody);
     delete fallRigidBody->getMotionState();
     delete fallRigidBody;
     
@@ -84,7 +83,7 @@
     
     delete fallShape;
     
-    delete groundShape;
+    delete groundShape;*/
     
     
     delete dynamicsWorld;
@@ -95,14 +94,19 @@
     NSLog(@"Ending bullet physics...\n");
 }
 
--(void)Update:(float)elapsedTime
+-(void) addRigidBody:(btRigidBody*) body
 {
-    dynamicsWorld->stepSimulation(1/60.f,10);
+    dynamicsWorld->addRigidBody( body );
+}
+
+-(void) update:(float) elapsedTime
+{
+    dynamicsWorld->stepSimulation( elapsedTime, 10 );
     
-    btTransform trans;
-    fallRigidBody->getMotionState()->getWorldTransform(trans);
+    //btTransform trans;
+    //fallRigidBody->getMotionState()->getWorldTransform(trans);
     
-    NSLog(@"%f\t%f\n", elapsedTime*1000, trans.getOrigin().getY());
+    //NSLog(@"%f\t%f\n", elapsedTime*1000, trans.getOrigin().getY());
 }
 
 

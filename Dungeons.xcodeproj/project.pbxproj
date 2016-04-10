@@ -86,6 +86,13 @@
 		53F05F901CB9C5F9007F3023 /* Skybox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 53F05F8E1CB9C5F9007F3023 /* Skybox.cpp */; };
 		53F05F931CB9D667007F3023 /* Water.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 53F05F911CB9D667007F3023 /* Water.cpp */; };
 		53F05F951CB9F5AB007F3023 /* Bullet3D in Resources */ = {isa = PBXBuildFile; fileRef = 53F05F941CB9F5AB007F3023 /* Bullet3D */; };
+		53F05FAE1CB9FA0C007F3023 /* 'flyby'.wav in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FA71CB9FA0C007F3023 /* 'flyby'.wav */; };
+		53F05FAF1CB9FA0C007F3023 /* footsteps_gravel_01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FA81CB9FA0C007F3023 /* footsteps_gravel_01.mp3 */; };
+		53F05FB01CB9FA0C007F3023 /* footsteps_gravel.wav in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FA91CB9FA0C007F3023 /* footsteps_gravel.wav */; };
+		53F05FB11CB9FA0C007F3023 /* magic-quake2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FAA1CB9FA0C007F3023 /* magic-quake2.mp3 */; };
+		53F05FB21CB9FA0C007F3023 /* shooting_star.wav in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FAB1CB9FA0C007F3023 /* shooting_star.wav */; };
+		53F05FB31CB9FA0C007F3023 /* swipe_whiff.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FAC1CB9FA0C007F3023 /* swipe_whiff.mp3 */; };
+		53F05FB41CB9FA0C007F3023 /* sword-clash1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FAD1CB9FA0C007F3023 /* sword-clash1.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -246,6 +253,13 @@
 		53F05F911CB9D667007F3023 /* Water.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Water.cpp; sourceTree = "<group>"; };
 		53F05F921CB9D667007F3023 /* Water.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Water.hpp; sourceTree = "<group>"; };
 		53F05F941CB9F5AB007F3023 /* Bullet3D */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Bullet3D; sourceTree = "<group>"; };
+		53F05FA71CB9FA0C007F3023 /* 'flyby'.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "'flyby'.wav"; path = "Assets.xcassets/'flyby'.wav"; sourceTree = "<group>"; };
+		53F05FA81CB9FA0C007F3023 /* footsteps_gravel_01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = footsteps_gravel_01.mp3; path = Assets.xcassets/footsteps_gravel_01.mp3; sourceTree = "<group>"; };
+		53F05FA91CB9FA0C007F3023 /* footsteps_gravel.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = footsteps_gravel.wav; path = Assets.xcassets/footsteps_gravel.wav; sourceTree = "<group>"; };
+		53F05FAA1CB9FA0C007F3023 /* magic-quake2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "magic-quake2.mp3"; path = "Assets.xcassets/magic-quake2.mp3"; sourceTree = "<group>"; };
+		53F05FAB1CB9FA0C007F3023 /* shooting_star.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = shooting_star.wav; path = Assets.xcassets/shooting_star.wav; sourceTree = "<group>"; };
+		53F05FAC1CB9FA0C007F3023 /* swipe_whiff.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = swipe_whiff.mp3; path = Assets.xcassets/swipe_whiff.mp3; sourceTree = "<group>"; };
+		53F05FAD1CB9FA0C007F3023 /* sword-clash1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "sword-clash1.mp3"; path = "Assets.xcassets/sword-clash1.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,19 +282,14 @@
 		445332021CB5BD5E004DC43B /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				81C0A3191CB9EC5F0086E9FA /* 'flyby'.wav */,
-				81C0A31A1CB9EC5F0086E9FA /* footsteps_gravel_01.mp3 */,
-				81C0A31B1CB9EC5F0086E9FA /* footsteps_gravel.wav */,
-				81C0A31C1CB9EC5F0086E9FA /* magic-quake2.mp3 */,
-				81C0A31D1CB9EC5F0086E9FA /* shooting_star.wav */,
-				81C0A31E1CB9EC5F0086E9FA /* swipe_whiff.mp3 */,
-				81C0A31F1CB9EC5F0086E9FA /* sword-clash1.mp3 */,
-				81E9B3F61CB72C8000122C7B /* GunSoundEffect_2.mp3 */,
-				81E9B3F71CB72C8000122C7B /* GunSoundEffect_3.mp3 */,
-				81E9B3F81CB72C8000122C7B /* GunSoundEffect_4.mp3 */,
-				81E9B3F91CB72C8000122C7B /* GunSoundEffect_5.mp3 */,
-				444220B61CB6FABC00A8B1E3 /* GunSoundEffect_1.mp3 */,
 				44F1AC4A1CB74AF3002557C5 /* GunSoundEffect_1.wav */,
+				53F05FA71CB9FA0C007F3023 /* 'flyby'.wav */,
+				53F05FA81CB9FA0C007F3023 /* footsteps_gravel_01.mp3 */,
+				53F05FA91CB9FA0C007F3023 /* footsteps_gravel.wav */,
+				53F05FAA1CB9FA0C007F3023 /* magic-quake2.mp3 */,
+				53F05FAB1CB9FA0C007F3023 /* shooting_star.wav */,
+				53F05FAC1CB9FA0C007F3023 /* swipe_whiff.mp3 */,
+				53F05FAD1CB9FA0C007F3023 /* sword-clash1.mp3 */,
 				445332041CB5BD81004DC43B /* ButtonPress.wav */,
 				445332051CB5BD81004DC43B /* DOOM.mp3 */,
 			);
@@ -468,8 +477,6 @@
 				5385DE751CA3366800F1A323 /* Renderer */,
 				5385DE8C1CA3429600F1A323 /* SOIL */,
 				53C679201CA22E62007C7945 /* Supporting Files */,
-				81C0A3161CB9C6860086E9FA /* GameCppVariables.cpp */,
-				81C0A3171CB9C6860086E9FA /* GameCppVariables.hpp */,
 			);
 			path = Dungeons;
 			sourceTree = "<group>";
@@ -615,25 +622,26 @@
 				53F05F951CB9F5AB007F3023 /* Bullet3D in Resources */,
 				532ECA881CADBDBD001BB153 /* DemoRail.mtl in Resources */,
 				53C6792F1CA22E62007C7945 /* Main.storyboard in Resources */,
+				53F05FB01CB9FA0C007F3023 /* footsteps_gravel.wav in Resources */,
 				532ECA901CADBDBD001BB153 /* Level0EnemyPos in Resources */,
-				81C0A3221CB9EC5F0086E9FA /* footsteps_gravel.wav in Resources */,
 				532ECA981CADBDBD001BB153 /* Level0Rail.mtl in Resources */,
 				53C679291CA22E62007C7945 /* Shader.vs in Resources */,
 				532ECA931CADBDBD001BB153 /* Level0EnemyRail.mtl in Resources */,
-				81C0A3241CB9EC5F0086E9FA /* shooting_star.wav in Resources */,
 				532ECA971CADBDBD001BB153 /* Level0Layout.obj in Resources */,
 				4453320F1CB5BD9C004DC43B /* Start.gif in Resources */,
+				53F05FB41CB9FA0C007F3023 /* sword-clash1.mp3 in Resources */,
 				4453320D1CB5BD9C004DC43B /* SoundOff.png in Resources */,
+				53F05FB21CB9FA0C007F3023 /* shooting_star.wav in Resources */,
+				53F05FB11CB9FA0C007F3023 /* magic-quake2.mp3 in Resources */,
 				532ECA8F1CADBDBD001BB153 /* Level0All.obj in Resources */,
 				532ECA911CADBDBD001BB153 /* Level0EnemyPos.mtl in Resources */,
 				53C679311CA22E62007C7945 /* Assets.xcassets in Resources */,
 				445332111CB5C48E004DC43B /* Logout.png in Resources */,
 				5385DE5C1CA3365100F1A323 /* crate.mtl in Resources */,
+				53F05FB31CB9FA0C007F3023 /* swipe_whiff.mp3 in Resources */,
 				445332071CB5BD81004DC43B /* DOOM.mp3 in Resources */,
 				53C679581CA22F35007C7945 /* glm in Resources */,
-				81C0A3261CB9EC5F0086E9FA /* sword-clash1.mp3 in Resources */,
 				53C679341CA22E62007C7945 /* LaunchScreen.storyboard in Resources */,
-				81C0A3201CB9EC5F0086E9FA /* 'flyby'.wav in Resources */,
 				4453320E1CB5BD9C004DC43B /* SoundOn.png in Resources */,
 				532ECA961CADBDBD001BB153 /* Level0Layout.mtl in Resources */,
 				5385DE6E1CA3365100F1A323 /* skybox in Resources */,
@@ -649,21 +657,19 @@
 				532ECA8D1CADBDBD001BB153 /* Level0All in Resources */,
 				53C679271CA22E62007C7945 /* Shader.fs in Resources */,
 				532ECA921CADBDBD001BB153 /* Level0EnemyPos.obj in Resources */,
+				53F05FAE1CB9FA0C007F3023 /* 'flyby'.wav in Resources */,
 				5385DE731CA3365100F1A323 /* WaterShader.fs in Resources */,
 				53ADE8961CB88DDF00DD3588 /* fireball.obj in Resources */,
 				53ADE88F1CB8887800DD3588 /* Fireball.png in Resources */,
 				5385DE5B1CA3365100F1A323 /* crate in Resources */,
+				53F05FAF1CB9FA0C007F3023 /* footsteps_gravel_01.mp3 in Resources */,
 				4453320C1CB5BD9C004DC43B /* BGT1.gif in Resources */,
 				53ADE8981CB88E4200DD3588 /* fireball in Resources */,
 				445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */,
 				532ECA941CADBDBD001BB153 /* Level0EnemyRail.obj in Resources */,
-				81C0A3231CB9EC5F0086E9FA /* magic-quake2.mp3 in Resources */,
-				81C0A3211CB9EC5F0086E9FA /* footsteps_gravel_01.mp3 in Resources */,
 				532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */,
 				5385DE741CA3365100F1A323 /* WaterShader.vs in Resources */,
 				532ECA8E1CADBDBD001BB153 /* Level0All.mtl in Resources */,
-				444220B71CB6FABC00A8B1E3 /* GunSoundEffect_1.mp3 in Resources */,
-				81C0A3251CB9EC5F0086E9FA /* swipe_whiff.mp3 in Resources */,
 				532ECA991CADBDBD001BB153 /* Level0Rail.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -676,7 +682,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5385DE5F1CA3365100F1A323 /* GLHandle.cpp in Sources */,
-				81C0A3181CB9C6860086E9FA /* GameCppVariables.cpp in Sources */,
 				5385DE5D1CA3365100F1A323 /* Entity.cpp in Sources */,
 				5385DE8F1CA3543200F1A323 /* image_helper.c in Sources */,
 				5385DE631CA3365100F1A323 /* GLVertexBuffer.cpp in Sources */,

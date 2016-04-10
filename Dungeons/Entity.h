@@ -238,7 +238,7 @@ struct PhysicalComponent
     }
 
     
-    void update( EntityCollection& entities, double step )
+    void update( EntityCollection& entities )
     {
         if ( !active )
             return;
