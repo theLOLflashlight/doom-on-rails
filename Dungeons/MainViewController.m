@@ -61,6 +61,17 @@
     
 }
 
+//J: For shake method. This is in contrast to in Swift where this were put into the GameViewController.
+-(BOOL)canBecomeFirstResponder {
+    return YES;
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self becomeFirstResponder];
+}
+
+//J: End for shake method
+
 - (void)didReceiveMemoryWarning {
     
     [super didReceiveMemoryWarning];
