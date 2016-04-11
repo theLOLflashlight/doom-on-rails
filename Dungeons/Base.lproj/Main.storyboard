@@ -167,7 +167,7 @@
                                 <rect key="frame" x="153" y="630" width="294" height="60"/>
                                 <state key="normal" image="Continue.png"/>
                                 <connections>
-                                    <segue destination="BV1-FR-VrT" kind="show" id="scL-5J-FdB"/>
+                                    <segue destination="BV1-FR-VrT" kind="show" identifier="GameToEnd" id="scL-5J-FdB"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kills :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9Q-ZR-YJB">
