@@ -237,6 +237,13 @@
     
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    if(_MusicOn) {
+        [themePlayer stop];
+    }
+}
+
 - (void)viewDidLayoutSubviews
 {
    
