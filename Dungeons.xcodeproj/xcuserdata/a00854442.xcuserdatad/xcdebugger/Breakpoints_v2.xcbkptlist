@@ -15,8 +15,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "91"
             endingLineNumber = "91"
-            landmarkName = "@interface GameViewController()"
-            landmarkType = "2">
+            landmarkName = "physics"
+            landmarkType = "19">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -230,7 +230,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Dungeons/GameViewController.mm"

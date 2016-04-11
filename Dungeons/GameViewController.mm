@@ -187,7 +187,7 @@
     BehavioralComponent endGame( "endGame" );
     endGame.functor = [self](BehavioralComponent*, EntityCollection&, double time)
     {
-        if ( time > 3 )
+        if ( time > 64 )
         {
             //[self performSegueWithIdentifier:@"EndScreen" sender:nil];
             //abort();
@@ -195,6 +195,7 @@
             EndViewController *myController = [[EndViewController alloc] init];
             
             [self presentViewController:myController animated:YES completion:nil];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     };
     _game->addComponent( endGame );
