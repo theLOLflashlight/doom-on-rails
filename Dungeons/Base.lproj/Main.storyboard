@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rZz-8N-SCI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="PaD-vu-ghh">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -162,10 +162,18 @@
                                     <segue destination="rZz-8N-SCI" kind="show" id="vpU-i5-Raj"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eoX-ze-X2I">
+                                <rect key="frame" x="153" y="630" width="294" height="60"/>
+                                <state key="normal" image="Continue.png"/>
+                                <connections>
+                                    <segue destination="BV1-FR-VrT" kind="show" id="scL-5J-FdB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
                             <constraint firstItem="EYl-xf-Vl7" firstAttribute="height" secondItem="FQw-Qs-x9z" secondAttribute="height" id="FiR-mX-4HY"/>
+                            <constraint firstItem="eoX-ze-X2I" firstAttribute="centerX" secondItem="FQw-Qs-x9z" secondAttribute="centerX" id="HF3-Wj-b0q"/>
                             <constraint firstItem="EYl-xf-Vl7" firstAttribute="centerY" secondItem="FQw-Qs-x9z" secondAttribute="centerY" id="Sgq-mk-wn1"/>
                             <constraint firstItem="EYl-xf-Vl7" firstAttribute="centerX" secondItem="FQw-Qs-x9z" secondAttribute="centerX" id="li8-KF-Hoh"/>
                             <constraint firstItem="EYl-xf-Vl7" firstAttribute="width" secondItem="FQw-Qs-x9z" secondAttribute="width" id="pXg-F5-d2P"/>
@@ -178,6 +186,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Continue.png" width="240" height="60"/>
         <image name="Ending.jpg" width="1920" height="1080"/>
         <image name="Gun.png" width="940" height="525"/>
         <image name="Logout.png" width="64" height="64"/>
@@ -185,5 +194,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="vpU-i5-Raj"/>
+        <segue reference="scL-5J-FdB"/>
     </inferredMetricsTieBreakers>
 </document>

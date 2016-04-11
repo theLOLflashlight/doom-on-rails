@@ -436,7 +436,6 @@
             AmmoNumber = 10;
              ReLoad = false;
         }
-        
     }
     
     self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", 0];
