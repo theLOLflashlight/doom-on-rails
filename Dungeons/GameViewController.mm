@@ -27,6 +27,10 @@
 {
     bool SoundSwitch;
     
+    bool ReLoad;
+    int AmmoNumber;
+    AVAudioPlayer *ReloadSound;
+    
     Game*       _game;
     int         _bulletId;
     Sprite*     _projectileSprite;
@@ -167,15 +171,31 @@
         vec3 touchPos0 = unProject( vec3( mouse.x, -mouse.y, 0 ), view, proj, viewport );
         vec3 touchPos1 = unProject( vec3( mouse.x, -mouse.y, 1 ), view, proj, viewport );
         
-        [self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f];
+        if(AmmoNumber>0)
+        {
+            [self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f];
+            
+            AmmoNumber --;
+        }
         
         //[self explosionAt: _game->_eyepos];
+      
+        if(AmmoNumber == 0)
+        {
+            ReLoad = true;
+            
+            [ReloadSound setVolume:10];
+            [ReloadSound play];
+        }
     }
 }
 
 - (void)viewDidLoad
 {
     SoundSwitch = true;
+    ReLoad = false;
+    
+    AmmoNumber = 5;
     
     [super viewDidLoad];
     
@@ -233,16 +253,10 @@
     
     for(int i = 0; i < MAX_CHANNELS; i++) {
         
-        GunSoundEffects[i] = [[AVAudioPlayer alloc]initWithData:GBSoundPath error:nil];
+    GunSoundEffects[i] = [[AVAudioPlayer alloc]initWithData:GBSoundPath error:nil];
         
-        [GunSoundEffects[i] prepareToPlay];
+    [GunSoundEffects[i] prepareToPlay];
        
-        
-    self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", 0];
-    self.Health.text =[[NSString alloc] initWithFormat: @"%d", 100];
-    self.Armor.text =[[NSString alloc] initWithFormat: @"%d", 100];
-        
-        
     UIImage *SoundButtonImage = [UIImage imageNamed:@"SoundOn.png"];
     [self.SoundButtonEffects setImage:SoundButtonImage forState:(UIControlStateNormal)];
 
@@ -256,6 +270,19 @@
     //to track swipe running or not
     _currBezierDuration= -0.00001;// = -0.00001; //hard-coded time below 0
     _currSwipeDrawn = false;// = false;
+    BehavioralComponent enemy("enemy");
+    
+    
+    self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", 0];
+    self.Health.text =[[NSString alloc] initWithFormat: @"%d", 100];
+    self.Ammo.text =[[NSString alloc] initWithFormat: @"%d", AmmoNumber];
+    
+    NSData *RlSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"reload" ofType:@"mp3"]];
+    ReloadSound = [[AVAudioPlayer alloc]initWithData:RlSoundPath error:nil];
+    
+    [ReloadSound prepareToPlay];
+    
+    
     
     //[NSDate?](count: 64, repeatedValue: nil)
 }
@@ -675,6 +702,25 @@
     UIImage image = [drawSwipeLine size:imageSize]
     _imageView.image = image
      */
+    
+    if(ReLoad)
+    {
+        if(![ReloadSound isPlaying])
+        {
+            AmmoNumber = 5;
+             ReLoad = false;
+        }
+        
+    }
+    
+
+    
+    
+    self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", 0];
+    self.Health.text =[[NSString alloc] initWithFormat: @"%d", 100];
+    self.Ammo.text =[[NSString alloc] initWithFormat: @"%d", AmmoNumber];
+    
+    
 }
 
 - (void) glkView:(GLKView *)view

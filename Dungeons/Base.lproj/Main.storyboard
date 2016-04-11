@@ -104,14 +104,8 @@
                                 <color key="textColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWN-Qi-tah">
-                                <rect key="frame" x="585" y="660" width="110" height="60"/>
-                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="55"/>
-                                <color key="textColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSd-Be-Ydg">
-                                <rect key="frame" x="685" y="660" width="60" height="60"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWN-Qi-tah" userLabel="Ammo">
+                                <rect key="frame" x="610" y="660" width="110" height="60"/>
                                 <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="55"/>
                                 <color key="textColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -135,7 +129,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="Armor" destination="nWN-Qi-tah" id="TGa-Gu-nOr"/>
+                        <outlet property="Ammo" destination="nWN-Qi-tah" id="9bM-PR-Bbx"/>
                         <outlet property="Health" destination="cnS-ez-hyX" id="DnK-Ou-Gkh"/>
                         <outlet property="KillNumber" destination="oD2-g1-YCx" id="pfe-qu-jbI"/>
                         <outlet property="SoundButtonEffects" destination="0Lk-UQ-Wow" id="vnn-qW-DP6"/>

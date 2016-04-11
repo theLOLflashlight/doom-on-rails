@@ -11,7 +11,7 @@
 
 @interface GameViewController : GLKViewController
 {
-    
+
 }
 
 @property (weak, nonatomic) IBOutlet UIView *HUD;
@@ -19,7 +19,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *KillNumber;
 @property (weak, nonatomic) IBOutlet UILabel *Health;
-@property (weak, nonatomic) IBOutlet UILabel *Armor;
+@property (weak, nonatomic) IBOutlet UILabel *Ammo;
 
 - (IBAction)SoundButton:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UIButton *SoundButtonEffects;
