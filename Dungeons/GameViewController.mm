@@ -12,6 +12,7 @@
 #import "Game.h"
 #import "BulletPhysics.h"
 #import "GameCppVariables.hpp"
+#import "EndViewController.h"
 #include "ios_path.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
@@ -169,11 +170,16 @@
     _game = new Game( (GLKView*) self.view, _physics, "Level0Layout.obj", "Level0EnemyAPos.obj", "Level0EnemyBPos.obj", "DemoRail.obj" );
     
     BehavioralComponent endGame( "endGame" );
-    endGame.functor = [&](BehavioralComponent*, EntityCollection&, double time)
+    endGame.functor = [self](BehavioralComponent*, EntityCollection&, double time)
     {
-        if ( time > (63 * 1000) )
+        if ( time > 3 )
         {
-            abort();
+            //[self performSegueWithIdentifier:@"EndScreen" sender:nil];
+            //abort();
+            
+            EndViewController *myController = [[EndViewController alloc] init];
+            
+            [self presentViewController:myController animated:YES completion:nil];
         }
     };
     _game->addComponent( endGame );

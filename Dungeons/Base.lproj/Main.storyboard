@@ -133,6 +133,7 @@
                         <outlet property="Health" destination="cnS-ez-hyX" id="DnK-Ou-Gkh"/>
                         <outlet property="KillNumber" destination="oD2-g1-YCx" id="pfe-qu-jbI"/>
                         <outlet property="SoundButtonEffects" destination="0Lk-UQ-Wow" id="vnn-qW-DP6"/>
+                        <segue destination="PaD-vu-ghh" kind="show" identifier="EndScreen" id="xsr-5l-O6d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
@@ -143,7 +144,7 @@
         <!--End View Controller-->
         <scene sceneID="xfN-Xn-Fk6">
             <objects>
-                <viewController id="PaD-vu-ghh" customClass="EndViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="endview" id="PaD-vu-ghh" customClass="EndViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dKI-Bk-uMf"/>
                         <viewControllerLayoutGuide type="bottom" id="Jvn-9Q-0IB"/>
@@ -208,7 +209,7 @@
         <image name="Shooter_Menu.png" width="1600" height="120"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vpU-i5-Raj"/>
         <segue reference="scL-5J-FdB"/>
+        <segue reference="vpU-i5-Raj"/>
     </inferredMetricsTieBreakers>
 </document>
