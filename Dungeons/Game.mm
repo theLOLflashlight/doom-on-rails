@@ -29,8 +29,11 @@ Game::Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::s
     , _rail( ObjMesh( ios_path( railName ) ).rail )
     , _raillook( _rail.data, 1 )
 
-    //, _skybox( "mar", vec3( 0.766, 0.259, 0.643 ), vec4( 1, 1, 0, 0.5 ) )
-    , _skybox( "goldrush", vec3( 0.342, 0.866, -0.940 ), vec4( 1, 1, 0.8, 0.5 ) )
+    //, _skybox( "goldrush", vec3( 0.342, 0.866, -0.940 ), vec4( 1, 1, 0.8, 0.5 ) )
+    , _skybox( "mar", vec3( 0.766, 0.259, 0.643 ), vec4( 1, 1, 0, 0.5 ) )
+    //, _skybox( "cp", vec3( 0.342, 0.866, -0.940 ), vec4( 0, 0.5, 1, 0.5 ) )
+    //, _skybox( "mercury", vec3( 0, 1, 0 ), vec4( 1, 0.2, 0, 0.5 ) )
+
     , _water( vec4( 0, 0.3, 0.5, 1 ), _width, _height )
 {
     _water.setSun( _skybox.sunPosition, _skybox.sunColor );
@@ -241,7 +244,7 @@ void Game::update( double step )
     std::vector<EntityId> badIds;
     
     for ( auto pair : _entities )
-        if ( pair.second.position.y < -0.2 )
+        if ( pair.second.position.y < -5 )
             badIds.push_back( pair.first );
     
     for ( auto _id : badIds )
