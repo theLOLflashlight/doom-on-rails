@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Skybox.hpp"
 #include "Water.hpp"
+#include "BulletPhysics.h"
 
 #include <UIKit/UIKit.h>
 #include <GLKit/GLKit.h>
@@ -72,7 +73,7 @@ class Game
 {
 public:
 
-    Game( GLKView* view );
+    Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::string redEnemies, std::string greenEnemies, std::string railName );
 
     void render() const;
     void offsetEyelook ();
@@ -99,12 +100,13 @@ public:
 
     
     GLKView*                _view;
+    BulletPhysics*          _world;
     GLfloat                 _width, _height;
     double                  _startTime, _currTime;
     
     mutable GLProgram       _program, _spriteProgram;
     
-    Model                   _level, _enemies;
+    Model                   _level;//, _enemies;
     Rail                    _rail, _raillook;
     
     template< typename Component >

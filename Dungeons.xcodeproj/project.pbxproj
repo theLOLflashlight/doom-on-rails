@@ -100,6 +100,8 @@
 		53F05FB41CB9FA0C007F3023 /* sword-clash1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FAD1CB9FA0C007F3023 /* sword-clash1.mp3 */; };
 		53F05FB91CBB08BA007F3023 /* SpriteShader.vs in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FB81CBB08BA007F3023 /* SpriteShader.vs */; };
 		53F05FBB1CBB08C8007F3023 /* SpriteShader.fs in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FBA1CBB08C8007F3023 /* SpriteShader.fs */; };
+		53F05FC41CBB4497007F3023 /* Level0EnemyPosRail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FC21CBB4497007F3023 /* Level0EnemyPosRail.mtl */; };
+		53F05FC51CBB4497007F3023 /* Level0EnemyPosRail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FC31CBB4497007F3023 /* Level0EnemyPosRail.obj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -275,6 +277,8 @@
 		53F05FAD1CB9FA0C007F3023 /* sword-clash1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "sword-clash1.mp3"; path = "Assets.xcassets/sword-clash1.mp3"; sourceTree = "<group>"; };
 		53F05FB81CBB08BA007F3023 /* SpriteShader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SpriteShader.vs; sourceTree = "<group>"; };
 		53F05FBA1CBB08C8007F3023 /* SpriteShader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SpriteShader.fs; sourceTree = "<group>"; };
+		53F05FC21CBB4497007F3023 /* Level0EnemyPosRail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyPosRail.mtl; sourceTree = "<group>"; };
+		53F05FC31CBB4497007F3023 /* Level0EnemyPosRail.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyPosRail.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -368,6 +372,8 @@
 		532ECA9A1CADBDC5001BB153 /* Levels */ = {
 			isa = PBXGroup;
 			children = (
+				53F05FC21CBB4497007F3023 /* Level0EnemyPosRail.mtl */,
+				53F05FC31CBB4497007F3023 /* Level0EnemyPosRail.obj */,
 				532ECA761CADBDBD001BB153 /* DemoRail.mtl */,
 				532ECA771CADBDBD001BB153 /* DemoRail.obj */,
 				532ECA781CADBDBD001BB153 /* Level0_Textures */,
@@ -573,7 +579,7 @@
 				TargetAttributes = {
 					53C6791C1CA22E62007C7945 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = GFW8XR3YY5;
+						DevelopmentTeam = QBSFJ43NUJ;
 					};
 				};
 			};
@@ -651,6 +657,7 @@
 				532ECA981CADBDBD001BB153 /* Level0Rail.mtl in Resources */,
 				53C679291CA22E62007C7945 /* Shader.vs in Resources */,
 				532ECA931CADBDBD001BB153 /* Level0EnemyRail.mtl in Resources */,
+				53F05FC41CBB4497007F3023 /* Level0EnemyPosRail.mtl in Resources */,
 				532ECA971CADBDBD001BB153 /* Level0Layout.obj in Resources */,
 				4453320F1CB5BD9C004DC43B /* Start.gif in Resources */,
 				53F05FB41CB9FA0C007F3023 /* sword-clash1.mp3 in Resources */,
@@ -662,6 +669,7 @@
 				53C679311CA22E62007C7945 /* Assets.xcassets in Resources */,
 				445332111CB5C48E004DC43B /* Logout.png in Resources */,
 				5385DE5C1CA3365100F1A323 /* crate.mtl in Resources */,
+				53F05FC51CBB4497007F3023 /* Level0EnemyPosRail.obj in Resources */,
 				53F05FB31CB9FA0C007F3023 /* swipe_whiff.mp3 in Resources */,
 				445332071CB5BD81004DC43B /* DOOM.mp3 in Resources */,
 				53C679581CA22F35007C7945 /* glm in Resources */,
@@ -882,7 +890,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Lee;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Andrew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dungeons/Dungeons-Bridging-Header.h";
@@ -913,7 +921,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Lee;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Andrew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dungeons/Dungeons-Bridging-Header.h";

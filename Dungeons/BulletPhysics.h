@@ -15,4 +15,6 @@
 
 -(void) addRigidBody:(btRigidBody*) body;
 
+-(void) addCollisionObject:(btCollisionObject*) obj;
+
 @end

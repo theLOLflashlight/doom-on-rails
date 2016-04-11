@@ -175,7 +175,8 @@ struct GraphicalComponent
     Visibility  visibility;
     GLProgram*  program = 0;
     Model*      model   = 0;
-    Model*      sprite  = 0;
+    Sprite*     sprite  = 0;
+    glm::vec3   spriteAxis = { 0, 0, 0 };
     glm::vec4   color   = { 1, 1, 1, 0 };
     
     explicit GraphicalComponent( EntityId _id, Visibility _visibility = VISIBLE )
@@ -199,13 +200,16 @@ struct GraphicalComponent
             return;
         
         if ( program )
+        {
+            program->bind();
             glUniform4fv( program->find_uniform( "uColor" ), 1, &color[ 0 ] );
+        }
         
         if ( visibility == TRANSLUCENT )
             glEnable( GL_BLEND );
         
         if ( model )
-            model->render( entities[ entityId ].transform_matrix(), view, proj, GL_TRIANGLES );
+            model->render( entities[ entityId ].transform_matrix(), GL_TRIANGLES );
         
         if ( sprite )
         {
@@ -213,15 +217,20 @@ struct GraphicalComponent
 
             mat4 mod = ntt.transform_matrix();
             
-            mod *= BillboardPoint( vec3( 0, 0, 0 ), vec3( row( view, 2 ) ), vec3( column( view, 1 ) ) );
+            mod = scale( mod, vec3( sprite->_width, sprite->_height, sprite->_width ) );
             
-            mod = scale( mod, vec3( 1, 1, 0 ) );
+            glUniformMatrix4fv( program->find_uniform( "uModelMatrix" ), 1, GL_FALSE, (float*)&mod );
+            glUniform3fv( program->find_uniform( "uSpriteAxis" ), 1, &spriteAxis[0] );
+            
+            //mod *= BillboardPoint( vec3( 0, 0, 0 ), vec3( row( view, 2 ) ), vec3( column( view, 1 ) ) );
+            
+            //mod = scale( mod, vec3( 1, 1, 0 ) );
             
             //mod *= BillboardAxisY( vec3( 0, 0, 0 ), vec3( row( view, 2 ) ) );
             
             //mod = lookAt( ntt.position, vec3( row( view, 2 ) ), vec3( column( view, 1 ) ) );
             
-            sprite->render( mod, view, proj, GL_TRIANGLES );
+            sprite->render();
         }
         
         if ( visibility == TRANSLUCENT )
@@ -281,7 +290,7 @@ struct HealthComponent
 
 struct BehavioralComponent
 {
-    using Delegate = std::function< void(BehavioralComponent*, EntityCollection&) >;
+    using Delegate = std::function< void(BehavioralComponent*, EntityCollection&, double) >;
     
     EntityId    entityId;
     bool        enabled;
@@ -293,13 +302,13 @@ struct BehavioralComponent
     {
     }
     
-    void update( EntityCollection& entities )
+    void update( EntityCollection& entities, double time )
     {
         if ( !enabled )
             return;
         
         if ( functor )
-            functor( this, entities );
+            functor( this, entities, time );
     }
 };
 

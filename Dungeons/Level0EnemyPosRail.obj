@@ -1,0 +1,462 @@
+# Alias OBJ Model File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+# File units = meters
+
+mtllib Level0EnemyPosRail.mtl
+
+g Mesh1 Group1 Model
+
+v 13.3936 1.553e-016 -30.97
+v 7.39359 1.553e-016 -30.97
+l 1 2
+
+g Mesh2 Group1 Model
+
+v 13.7604 16.8 -0.5
+v 13.7604 16.8 0.5
+l 3 4
+
+g Mesh3 Group1 Model
+
+v 11.235 9 -14.97
+v 8.235 9 -14.97
+l 5 6
+
+g Mesh4 Group1 Model
+
+v -26.97 0 29.97
+v -26.97 0 30.97
+l 7 8
+
+g Mesh5 Group1 Model
+
+v 29.97 0 19.47
+v 31.47 0 19.47
+l 9 10
+
+g Mesh6 Group1 Model
+
+v 11.235 9 -17.97
+v 8.235 9 -17.97
+l 11 12
+
+g Mesh7 Group1 Model
+
+v -2.5 9 -28.97
+v -2.5 9 -27.97
+l 13 14
+
+g Mesh8 Group1 Model
+
+v -12.5 0 19.5041
+v -14.5 0 19.5041
+l 15 16
+
+g Mesh9 Group1 Model
+
+v -23.97 0 29.97
+v -23.97 0 30.97
+l 17 18
+
+g Mesh10 Group1 Model
+
+v 19.1209 1.80478e-016 19.4769
+v 19.0995 9.02389e-017 20.9654
+l 19 20
+
+g Mesh11 Group1 Model
+
+v 29.97 0 13.47
+v 31.47 0 13.47
+l 21 22
+
+g Mesh12 Group1 Model
+
+v -30.47 0 21.5645
+v -30.47 0 19.5645
+l 23 24
+
+g Mesh13 Group1 Model
+
+v 29.97 0 4.47
+v 31.47 0 4.47
+l 25 26
+
+g Mesh14 Group1 Model
+
+v -15 0 29.97
+v -15 0 30.97
+l 27 28
+
+g Mesh15 Group1 Model
+
+v 22.795 0 -27.97
+v 22.795 0 -29.97
+l 29 30
+
+g Mesh16 Group1 Model
+
+v 29.97 0 16.47
+v 31.47 0 16.47
+l 31 32
+
+g Mesh17 Group1 Model
+
+v 29.97 0 1.4925
+v 29.97 0 4.62023e-014
+l 33 34
+
+g Mesh18 Group1 Model
+
+v 0.5 0 -22.97
+v -0.5 0 -22.97
+l 35 36
+
+g Mesh19 Group1 Model
+
+v -31.47 0 21.5645
+v -31.47 0 23.5645
+l 37 38
+
+g Mesh20 Group1 Model
+
+v -30.97 0 -6.5
+v -30.97 0 -7.5
+l 39 40
+
+g Mesh21 Group1 Model
+
+v -36.97 0 13.4192
+v -36.97 0 16.9192
+l 41 42
+
+g Mesh22 Group1 Model
+
+v -22.47 0 29.97
+v -22.47 0 28.97
+l 43 44
+
+g Mesh23 Group1 Model
+
+v 11.235 9 -11.97
+v 8.235 9 -11.97
+l 45 46
+
+g Mesh24 Group1 Model
+
+v 11.235 9 -23.97
+v 8.235 9 -23.97
+l 47 48
+
+g Mesh25 Group1 Model
+
+v 36.6158 0 -3
+v 37.6158 0 -3
+l 49 50
+
+g Mesh26 Group1 Model
+
+v 11.235 9 -20.97
+v 8.235 9 -20.97
+l 51 52
+
+g Mesh27 Group1 Model
+
+v 31.0536 0 -3
+v 32.0536 0 -3
+l 53 54
+
+g Mesh28 Group1 Model
+
+v -31.72 0 11.6692
+v -31.72 0 15.1692
+l 55 56
+
+g Mesh29 Group1 Model
+
+v -3.5 9 -28.97
+v -3.5 9 -27.9904
+l 57 58
+
+g Mesh30 Group1 Model
+
+v 13.3936 1.553e-016 -34.97
+v 7.39359 1.553e-016 -34.97
+l 59 60
+
+g Mesh31 Group1 Model
+
+v -17.97 0 29.97
+v -17.97 0 30.97
+l 61 62
+
+g Mesh32 Group1 Model
+
+v -36.97 0 11.6692
+v -34.4345 0 14.2047
+l 63 64
+
+g Mesh33 Group1 Model
+
+v -19.47 0 29.97
+v -19.47 0 28.97
+l 65 66
+
+g Mesh34 Group1 Model
+
+v -31.97 0 -15.235
+v -31.97 0 -13.235
+l 67 68
+
+g Mesh35 Group1 Model
+
+v -4.75 0 32.8349
+v -4.75 0 34.2673
+l 69 70
+
+g Mesh36 Group1 Model
+
+v -12.4103 19.97 0.5
+v -12.4103 19.97 -0.5
+l 71 72
+
+g Mesh37 Group1 Model
+
+v 28.47 0 5.97
+v 29.97 0 5.97
+l 73 74
+
+g Mesh38 Group1 Model
+
+v 0.5 18.15 12.4286
+v -0.5 18.15 12.4286
+l 75 76
+
+g Mesh39 Group1 Model
+
+v 29.97 0 7.47
+v 31.47 0 7.47
+l 77 78
+
+g Mesh40 Group1 Model
+
+v 13.3936 1.553e-016 -32.97
+v 7.39359 1.553e-016 -32.97
+l 79 80
+
+g Mesh41 Group1 Model
+
+v 28.47 0 17.97
+v 29.97 0 17.97
+l 81 82
+
+g Mesh42 Group1 Model
+
+v -32.97 0 -0.5
+v -32.97 0 1.5
+l 83 84
+
+g Mesh43 Group1 Model
+
+v 28.47 0 8.97
+v 29.97 0 8.97
+l 85 86
+
+g Mesh44 Group1 Model
+
+v 29.97 0 10.47
+v 31.47 0 10.47
+l 87 88
+
+g Mesh45 Group1 Model
+
+v 13.3936 1.553e-016 -36.97
+v 7.39359 1.553e-016 -36.97
+l 89 90
+
+g Mesh46 Group1 Model
+
+v -31.97 0 -2.5
+v -31.97 0 -0.5
+l 91 92
+
+g Mesh47 Group1 Model
+
+v 28.47 0 14.97
+v 29.97 0 14.97
+l 93 94
+
+g Mesh48 Group1 Model
+
+v 28.47 0 11.97
+v 29.97 0 11.97
+l 95 96
+
+g Mesh49 Group1 Model
+
+v -31.97 0 -6.5
+v -31.97 0 -4.5
+l 97 98
+
+g Mesh50 Group1 Model
+
+v 30.97 0 -14.97
+v 28.97 0 -14.97
+l 99 100
+
+g Mesh51 Group1 Model
+
+v -19.7783 2.25597e-016 11.109
+v -19.111 1.35358e-016 12.0147
+l 101 102
+
+g Mesh52 Group1 Model
+
+v -30.97 0 -4.5
+v -30.97 0 -2.5
+l 103 104
+
+g Mesh53 Group1 Model
+
+v 30.97 0 -10.97
+v 28.97 0 -10.97
+l 105 106
+
+g Mesh54 Group1 Model
+
+v -22.4476 1.35358e-016 7.48617
+v -21.7803 2.25597e-016 8.39187
+l 107 108
+
+g Mesh55 Group1 Model
+
+v 30.97 0 -18.97
+v 28.97 0 -18.97
+l 109 110
+
+g Mesh56 Group1 Model
+
+v 28.47 0 20.97
+v 29.97 0 20.97
+l 111 112
+
+g Mesh57 Group1 Model
+
+v 0.5 0 -11.1458
+v -0.5 0 -11.1458
+l 113 114
+
+g Mesh58 Group1 Model
+
+v 30.97 0 -22.97
+v 28.97 0 -22.97
+l 115 116
+
+g Mesh59 Group1 Model
+
+v -25.47 0 28.97
+v -25.47 0 29.97
+l 117 118
+
+g Mesh60 Group1 Model
+
+v 28.47 0 2.985
+v 29.97 0 2.985
+l 119 120
+
+g Mesh61 Group1 Model
+
+v 15.9346 9.02389e-017 13.4011
+v 17.0109 1.80478e-016 14.4341
+l 121 122
+
+g Mesh62 Group1 Model
+
+v -15.1732 0 21.1773
+v -16.3046 0 22.3086
+l 123 124
+
+g Mesh63 Group1 Model
+
+v -16.485 0 28.97
+v -16.485 0 29.97
+l 125 126
+
+g Mesh64 Group1 Model
+
+v -30.97 0 -13.235
+v -30.97 0 -11.235
+l 127 128
+
+g Mesh65 Group1 Model
+
+v 28.47 0 23.97
+v 29.97 0 23.97
+l 129 130
+
+g Mesh66 Group1 Model
+
+v -0.5 0 -24.97
+v 0.5 0 -24.97
+l 131 132
+
+g Mesh67 Group1 Model
+
+v 22.143 2.70717e-016 16.5
+v 23.6327 2.25597e-016 16.5
+l 133 134
+
+g Mesh68 Group1 Model
+
+v -20.97 0 29.97
+v -20.97 0 30.97
+l 135 136
+
+g Mesh69 Group1 Model
+
+v 29.97 0 25.47
+v 31.47 0 25.47
+l 137 138
+
+g Mesh70 Group1 Model
+
+v 30.97 0 -26.97
+v 28.97 0 -26.97
+l 139 140
+
+g Mesh71 Group1 Model
+
+v -32.97 0 -9.235
+v -32.97 0 -8.235
+l 141 142
+
+g Mesh72 Group1 Model
+
+v 29.97 0 22.47
+v 31.47 0 22.47
+l 143 144
+
+g Mesh73 Group1 Model
+
+v -31.97 0 -11.235
+v -31.97 0 -9.235
+l 145 146
+
+g Mesh74 Group1 Model
+
+v -32.97 0 -17.235
+v -32.97 0 -15.235
+l 147 148
+
+g Mesh75 Group1 Model
+
+v -4.75 3.88961e-017 37.2145
+v -4.75 7.77922e-017 38.7292
+l 149 150
+
+g Mesh76 Group1 Model
+
+v -29.47 0 21.5645
+v -29.47 0 23.5645
+l 151 152
+
