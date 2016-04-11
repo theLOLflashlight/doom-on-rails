@@ -21,7 +21,7 @@
 #define MAX_CHANNELS 30
 
 #define BULLET_MIN 1000
-#define BULLET_MAX 4000
+#define BULLET_MAX 3000
 
 @interface GameViewController ()
 {

@@ -417,6 +417,9 @@ void Game::addComponent( BehavioralComponent component )
 
 void Game::destroyEntity( EntityId _id )
 {
+    if ( _id.bitPattern >= 3000 && _id.bitPattern < 7000 )
+        ;// Increment kill count
+    
     for ( int i = 0; i < _graphics.size(); i++ )
         if ( _graphics[ i ].entityId == _id )
             _graphics.erase( _graphics.begin() + i-- );
