@@ -65,6 +65,12 @@ struct Rail
         
         return pos;
     }
+    
+    bool isAtEnd()
+    {
+        return !(_idx < (data.size() - 1));
+    }
+    
 };
 
 
@@ -127,5 +133,7 @@ public:
     
     glm::vec3               _eyepos, _eyelook;
     double                  _animationProgress;
+    
+    bool                    _endOfLevel;
 };
 

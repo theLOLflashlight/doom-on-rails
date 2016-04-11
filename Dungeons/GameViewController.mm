@@ -168,6 +168,16 @@
     
     _game = new Game( (GLKView*) self.view, _physics, "Level0Layout.obj", "Level0EnemyAPos.obj", "Level0EnemyBPos.obj", "DemoRail.obj" );
     
+    BehavioralComponent endGame( "endGame" );
+    endGame.functor = [&](BehavioralComponent*, EntityCollection&, double time)
+    {
+        if ( time > (63 * 1000) )
+        {
+            abort();
+        }
+    };
+    _game->addComponent( endGame );
+    
     _game->killCountPtr = &KillNumber;
     
     _projectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_spriteProgram );
