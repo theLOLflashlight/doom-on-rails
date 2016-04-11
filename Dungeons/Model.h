@@ -5,28 +5,28 @@
 
 #include <vector>
 #include <memory>
+#include <string>
 
 
 struct Sprite
 {
-    GLTexture::ptr_t    _texture;
-    int                 _width;
-    int                 _height;
+    GLTexture      _texture;
+    GLVertexBuffer _buffer;
+    int          _width = 1;
+    int          _height = 1;
     
-    void render( glm::mat4 model,
-                 glm::mat4 view,
-                 glm::mat4 proj ) const;
+    Sprite( std::string texture, GLProgram* program );
+    
+    void render() const;
 
 };
 
 struct Model
 {
-    Model( const ObjMesh& mesh, GLProgram* program );// , std::string vert, std::string frag );
+    Model( const ObjMesh& mesh, GLProgram* program );
 
     //void render() const;
     void render( glm::mat4 model,
-                 glm::mat4 view,
-                 glm::mat4 proj,
                  GLenum    mode = GL_TRIANGLES ) const;
 
     ObjMesh             _mesh;

@@ -29,7 +29,7 @@
     
     Game*       _game;
     int         _bulletId;
-    Model*      _projectileSprite;
+    Sprite*     _projectileSprite;
     
     //AVAudioPlayer *GunSoundEffects;
     AVAudioPlayer *GunSoundEffects[MAX_CHANNELS];
@@ -219,7 +219,11 @@
     
     _game = new Game( (GLKView*) self.view );
     
-    _projectileSprite = new Model( ObjMesh( ios_path( "fireball.obj" ) ), &_game->_program );
+    
+    //_projectileSprite = new Model( ObjMesh( ios_path( "fireball.obj" ) ), &_game->_program );
+    
+    _projectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_spriteProgram );
+    
     
     _bulletId = BULLET_MIN;
     
@@ -596,8 +600,9 @@
     const EntityId bulletId = _bulletId++;
     {
         GraphicalComponent bullet( bulletId, GraphicalComponent::TRANSLUCENT );
-        bullet.program = &_game->_program;
+        bullet.program = &_game->_spriteProgram;
         bullet.sprite = _projectileSprite;
+        //bullet.spriteAxis = glm::vec3( 0, 1, 0 );
         
         _game->addComponent( bullet );
     }

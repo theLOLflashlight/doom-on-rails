@@ -2,7 +2,6 @@
 #extension GL_APPLE_clip_distance : require
 
 in          vec3        aPosition;
-in          vec3        aNormal;
 in          vec2        aTexCoord;
 
 out         vec2        vTexCoord;
@@ -13,6 +12,8 @@ uniform     mat4        uProjMatrix;
 
 uniform     vec4        uAmbientColor;
 uniform     vec4        uDiffuseColor;
+
+uniform     vec3        uSpriteAxis;
 
 uniform     vec4        uWaterPlane;
 
@@ -43,7 +44,12 @@ mat4 billboard_axis( vec3 pos, vec3 eyePos, vec3 axis )
 void main()
 {
     mat4 view = uViewMatrix;
-    mat4 billboardMatrix = billboard_point( vec3(0,0,0), vec3( transpose(view)[2] ), vec3( view[1] ) );
+    
+    mat4 billboardMatrix;
+    if ( length( uSpriteAxis ) == 0.0 )
+        billboardMatrix = billboard_point( vec3(0,0,0), vec3( transpose(view)[2] ), vec3( view[1] ) );
+    else
+        billboardMatrix = billboard_axis( vec3(0,0,0), vec3( transpose(view)[2] ), normalize( uSpriteAxis ) );
     
     mat4 model = uModelMatrix * billboardMatrix;
     

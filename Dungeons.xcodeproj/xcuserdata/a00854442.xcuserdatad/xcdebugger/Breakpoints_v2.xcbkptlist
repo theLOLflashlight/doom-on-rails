@@ -105,54 +105,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Dungeons/Model.cpp"
-            timestampString = "481148533.322871"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "Model::render ( glm::mat4 model, glm::mat4 view, glm::mat4 proj, GLenum mode )"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Model::render(glm::tmat4x4&lt;float, (glm::precision)0&gt;, glm::tmat4x4&lt;float, (glm::precision)0&gt;, glm::tmat4x4&lt;float, (glm::precision)0&gt;, unsigned int) const"
-                  moduleName = "Dungeons"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/a00854442/Desktop/Dungeons/Dungeons/Model.cpp"
-                  timestampString = "482022930.067042"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "57"
-                  endingLineNumber = "57"
-                  offsetFromSymbolStart = "904">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Model::render(glm::tmat4x4&lt;float, (glm::precision)0&gt;, glm::tmat4x4&lt;float, (glm::precision)0&gt;, glm::tmat4x4&lt;float, (glm::precision)0&gt;, unsigned int) const"
-                  moduleName = "Dungeons"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/a00854442/Desktop/Dungeons/Dungeons/Model.cpp"
-                  timestampString = "482022930.067109"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "57"
-                  endingLineNumber = "57"
-                  offsetFromSymbolStart = "916">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Dungeons/GLTexture.cpp"
             timestampString = "481150208.985371"
             startingColumnNumber = "9223372036854775807"

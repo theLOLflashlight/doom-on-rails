@@ -20,7 +20,7 @@ Game::Game( GLKView* view )
     , _currTime( _startTime )
 
     , _program( ios_path( "ModelShader.vs" ), ios_path( "ModelShader.fs" ), "aPosition", "aNormal", "aTexCoord" )
-    , _spriteProgram( ios_path( "SpriteShader.vs" ), ios_path( "SpriteShader.fs" ), "aPosition", "aNormal", "aTexCoord" )
+    , _spriteProgram( ios_path( "SpriteShader.vs" ), ios_path( "SpriteShader.fs" ), "aPosition", "aTexCoord" )
 
     , _level( ObjMesh( ios_path( "Level0Layout.obj" ) ), &_program )
     , _enemies( ObjMesh( ios_path( "Level0EnemyPos.obj" ) ), &_program )
@@ -34,29 +34,38 @@ Game::Game( GLKView* view )
 {
     _water.setSun( _skybox.sunPosition, _skybox.sunColor );
     
-    // Setup view
+    // Set up view
     [_view bindDrawable];
     glClearColor( 0, 0, 0, 1 );
     glViewport( 0, 0, _width, _height );
     glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
     
-    // Setup main shader
+    // Set up main shader
     {
         vec4    ambientComponent( 0.5, 0.5, 0.5, 1.0 );
-        vec4    diffuseComponent( 1, 1, 0.1, 0.1 );
-        vec4    specularComponent( 1, 1, 0, 0.1 );
         float   shininess = 10.0;
         
         _program.bind();
         glUniform3fv( _program.find_uniform( "uSunPosition" ), 1, &_skybox.sunPosition[0] );
         glUniform4fv( _program.find_uniform( "uAmbientColor" ), 1, &ambientComponent[0] );
         glUniform4fv( _program.find_uniform( "uDiffuseColor" ), 1, &_skybox.sunColor[0] );
-        glUniform4fv( _program.find_uniform( "uSpecularColor" ), 1, &specularComponent[0] );
+        glUniform4fv( _program.find_uniform( "uSpecularColor" ), 1, &_skybox.sunColor[0] );
         glUniform1f( _program.find_uniform( "uShininess" ), shininess );
         glUseProgram( 0 );
     }
     
-    // Setup level
+    // Set up sprite shader
+    {
+        vec4    ambientComponent( 0.5, 0.5, 0.5, 1.0 );
+        
+        _spriteProgram.bind();
+        glUniform4fv( _program.find_uniform( "uAmbientColor" ), 1, &ambientComponent[0] );
+        glUniform4fv( _program.find_uniform( "uDiffuseColor" ), 1, &_skybox.sunColor[0] );
+        glUseProgram( 0 );
+    }
+
+    
+    // Set up level
     {
         GraphicalComponent level( "level", GraphicalComponent::TRANSLUCENT );
         level.model = &_level;
@@ -71,20 +80,11 @@ Game::Game( GLKView* view )
         _entities[ "level" ].position = vec3( 0, -0.1, 0 );
     }
 
-    // Setup enemies
+    // Set up enemies
     {
         GraphicalComponent enemies( "enemies", GraphicalComponent::TRANSLUCENT );
         enemies.model = &_enemies;
         enemies.program = &_program;
-        
-        /*enemies.delegate = [](GraphicalComponent* gfx, EntityCollection& entities, glm::mat4 view, glm::mat4 proj)
-        {
-            glUniform4fv( gfx->program->find_uniform( "uColor" ), 1, &gfx->color[ 0 ] );
-            
-            glEnable( GL_BLEND );
-            gfx->model->render( entities[ gfx->entityId ].transform_matrix(), view, proj );
-            glDisable( GL_BLEND );
-        };*/
         
         _graphics.push_back( enemies );
     }
@@ -144,6 +144,14 @@ void Game::update( double step )
     _eyepos = _rail[ time ];// - vec3( 0, 0.5, 0 );
     _eyelook = _raillook[ time ];// - vec3( 0, 0.5, 0 );
     
+    /*BehavioralComponent enemy( "enemy" );
+    enemy.functor = [&](BehavioralComponent* c, EntityCollection& entities, double time )
+    {
+        Entity& ntt = entities[ c->entityId ];
+        
+        ntt.position = _rail[ time ];
+    };*/
+    
     
     //_eyepos += vec3( 1, 1, 1 );
     //_eyelook += vec3( 1, 1, 1 );
@@ -152,7 +160,7 @@ void Game::update( double step )
     _water.update( time / 10, _eyepos );
     
     for ( auto& behavior : _behaviors )
-        behavior.update( _entities );
+        behavior.update( _entities, time );
     
     for ( auto& physable : _physics )
         physable.update( _entities );
@@ -182,11 +190,24 @@ void Game::render() const
         eyepos.y = -eyepos.y;
         eyelook.y = -eyelook.y;
         
-        _water.bindReflection( &_program, _width, _height );
+        _water.bindReflection(_width, _height );
+        
+        _program.bind();
+        glUniform4f( _program.find_uniform( "uWaterPlane" ), 0, 1, 0, 0 );
+        _spriteProgram.bind();
+        glUniform4f( _spriteProgram.find_uniform( "uWaterPlane" ), 0, 1, 0, 0 );
+        glUseProgram( 0 );
+
         draw_scene( lookAt( eyepos, eyelook, vec3( 0, 1, 0 ) ), proj );
         
         // Render refRAction
-        _water.bindRefraction( &_program, _width, _height );
+        _water.bindRefraction( _width, _height );
+        _program.bind();
+        glUniform4f( _program.find_uniform( "uWaterPlane" ), 0, -1, 0, 0 );
+        _spriteProgram.bind();
+        glUniform4f( _spriteProgram.find_uniform( "uWaterPlane" ), 0, -1, 0, 0 );
+        glUseProgram( 0 );
+        
         draw_scene( view, proj );
         
         glDisable( GL_CLIP_DISTANCE(0) );
@@ -206,6 +227,10 @@ void Game::draw_scene( glm::mat4 view, glm::mat4 proj, bool drawWater ) const
     glUniformMatrix4fv( _program.find_uniform( "uViewMatrix" ), 1, GL_FALSE, &view[ 0 ][ 0 ] );
     glUniformMatrix4fv( _program.find_uniform( "uProjMatrix" ), 1, GL_FALSE, &proj[ 0 ][ 0 ] );
     glUniform4f( _program.find_uniform( "uColor" ), 1, 1, 1, 0 );
+    
+    _spriteProgram.bind();
+    glUniformMatrix4fv( _spriteProgram.find_uniform( "uViewMatrix" ), 1, GL_FALSE, &view[ 0 ][ 0 ] );
+    glUniformMatrix4fv( _spriteProgram.find_uniform( "uProjMatrix" ), 1, GL_FALSE, &proj[ 0 ][ 0 ] );
 
     if ( drawWater )
         _water.render( view, proj );
