@@ -7,6 +7,7 @@
 //
 
 #import "GameViewController.h"
+#import "EndViewController.h"
 #import <OpenGLES/ES3/glext.h>
 #import <AVFoundation/AVFoundation.h>
 #import "Game.h"
@@ -91,6 +92,22 @@
 @end
 
 @implementation GameViewController
+
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Make sure your segue name in storyboard is the same as this line
+    if ([[segue identifier] isEqualToString:@"GameToEnd"])
+    {
+        // Get reference to the destination view controller
+        EndViewController *vc = [segue destinationViewController];
+        
+        // Pass any objects to the view controller here, like...
+        vc.KillSum.text = [NSString stringWithFormat:@"%d", KillNumber];
+        //[vc setMyObjectHere:object];
+    }
+}
 
 //Tap handling - spawn projectile
 - (void) handleTapGesture:(UITapGestureRecognizer *)sender

@@ -16,7 +16,9 @@
     
 }
 
+@property (nonatomic) int kills;
 @property (weak, nonatomic) IBOutlet UILabel *KillSum;
+
 
 @end
 
