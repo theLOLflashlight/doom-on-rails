@@ -88,7 +88,6 @@
 }
 
 @property (strong, nonatomic) EAGLContext* context;
-@property (strong, nonatomic) BulletPhysics* physics;
 
 @end
 
@@ -161,8 +160,6 @@
         NSLog(@"Failed to create ES context");
     }
     
-    _physics = [[BulletPhysics alloc] init];
-    
     //auto groundShape = new btStaticPlaneShape( btVector3( 0, 1, 0 ), 0 );
     //auto groundMotionState = new btDefaultMotionState();
     //btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI( 0, groundMotionState, groundShape, btVector3(0,0,0) );
@@ -182,20 +179,25 @@
     
     [EAGLContext setCurrentContext:self.context];
     
-    _game = new Game( (GLKView*) self.view, _physics, "Level0Layout.obj", "Level0EnemyAPos.obj", "Level0EnemyBPos.obj", "DemoRail.obj" );
+    _game = new Game( (GLKView*) self.view, "Level0Layout.obj", "Level0EnemyAPos.obj", "Level0EnemyBPos.obj", "DemoRail.obj" );
     
     BehavioralComponent endGame( "endGame" );
     endGame.functor = [self](BehavioralComponent*, EntityCollection&, double time)
     {
         if ( time > 64 )
         {
-            //[self performSegueWithIdentifier:@"EndScreen" sender:nil];
-            //abort();
+            EndViewController* endController = [self.storyboard instantiateViewControllerWithIdentifier: @"EndViewController"];
             
-            EndViewController *myController = [[EndViewController alloc] init];
+            endController.kills = Kills;
             
-            [self presentViewController:myController animated:YES completion:nil];
-            [self dismissViewControllerAnimated:YES completion:nil];
+            //[self.navigationController pushViewController: endController animated: YES];
+            [self dismissViewControllerAnimated: YES completion: ^() {
+                [self presentViewController: endController animated: YES completion: nil];
+            }];
+            //EndViewController *myController = [[EndViewController alloc] init];
+            
+            //[self presentViewController:myController animated:YES completion:nil];
+            //[self dismissViewControllerAnimated:YES completion:nil];
         }
     };
     _game->addComponent( endGame );
@@ -448,7 +450,6 @@
 
 - (void) update
 {
-    [_physics update: self.timeSinceLastUpdate];
     _game->update( self.timeSinceLastUpdate );
     [self cameraMovement];
     

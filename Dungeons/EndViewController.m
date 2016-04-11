@@ -26,6 +26,8 @@
     NSData *GBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"AND HIS NAME IS JOHN CENA" ofType:@"mp3"]];
     BGSound = [[AVAudioPlayer alloc]initWithData:GBSoundPath error:nil];
     
+    _KillSum.text = [NSString stringWithFormat: @"%d", _kills];
+    
     [BGSound prepareToPlay];
     [BGSound play];
 }

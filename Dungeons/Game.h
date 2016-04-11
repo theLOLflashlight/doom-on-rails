@@ -79,7 +79,7 @@ class Game
 {
 public:
 
-    Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::string redEnemies, std::string greenEnemies, std::string railName );
+    Game( GLKView* view, std::string levelName, std::string redEnemies, std::string greenEnemies, std::string railName );
 
     int* killCountPtr;
     

@@ -144,7 +144,7 @@
         <!--End View Controller-->
         <scene sceneID="xfN-Xn-Fk6">
             <objects>
-                <viewController storyboardIdentifier="endview" id="PaD-vu-ghh" customClass="EndViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EndViewController" id="PaD-vu-ghh" customClass="EndViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dKI-Bk-uMf"/>
                         <viewControllerLayoutGuide type="bottom" id="Jvn-9Q-0IB"/>
@@ -183,7 +183,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="EYl-xf-Vl7" firstAttribute="height" secondItem="FQw-Qs-x9z" secondAttribute="height" id="FiR-mX-4HY"/>
                             <constraint firstItem="eoX-ze-X2I" firstAttribute="centerX" secondItem="FQw-Qs-x9z" secondAttribute="centerX" id="HF3-Wj-b0q"/>

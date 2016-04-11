@@ -7,10 +7,35 @@ using std::make_shared;
 using std::string;
 using std::vector;
 
-Game::Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::string redEnemies, std::string greenEnemies, std::string railName )
+#define VECTOR3( vec ) { vec[0], vec[1], vec[2] }
+#define VECTOR4( vec ) { vec[0], vec[1], vec[2], vec[3] }
+
+btVector3 btVector( glm::vec3 vec )
+{
+    return VECTOR3( vec );
+}
+
+btVector4 btVector( glm::vec4 vec )
+{
+    return VECTOR4( vec );
+}
+
+namespace glm {
+glm::vec3 vec( btVector3 vec )
+{
+    return VECTOR3( vec );
+}
+
+glm::vec4 vec( btVector4 vec )
+{
+    return VECTOR4( vec );
+}
+}
+
+Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::string greenEnemies, std::string railName )
     // we need to bind the view drawable before our shaders load
     : _view( ([view bindDrawable], view) )
-    , _world( physics )
+    , _world( [[BulletPhysics alloc] init] )
 
     // why does this need to be doubled?
     , _width( _view.bounds.size.width * 2 )
@@ -90,7 +115,7 @@ Game::Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::s
             vec3 v1 = _level._mesh[ i + 1 ].aPosition;
             vec3 v2 = _level._mesh[ i + 2 ].aPosition;
             
-            tMesh->addTriangle( { v0.x, v0.y, v0.z }, { v1.x, v1.y, v1.z }, { v2.x, v2.y, v2.z } );
+            tMesh->addTriangle( btVector( v0 ), btVector( v1 ), btVector( v2 ) );
         }
         
         btBvhTriangleMeshShape* levelShape = new btBvhTriangleMeshShape( tMesh, true );
@@ -216,6 +241,8 @@ void Game::update( double step )
 {
     _currTime += step;
     const double time = _currTime - _startTime;
+    
+    [_world update: step];
     
     if(!(_rail.isAtEnd()))
         _eyepos = _rail[ time ];// - vec3( 0, 0.5, 0 );
