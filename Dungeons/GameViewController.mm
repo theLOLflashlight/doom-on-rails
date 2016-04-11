@@ -59,7 +59,6 @@
     CGFloat _currBezierDuration;// = -0.00001; //hard-coded time below 0
     bool _currSwipeDrawn;// = false;
     
-    
     //For camera, swipe
     //Camera stuff
     CGFloat _baseHorizontalAngle, _baseVerticalAngle;
