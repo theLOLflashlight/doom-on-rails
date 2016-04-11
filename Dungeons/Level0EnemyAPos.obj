@@ -1,0 +1,174 @@
+# Alias OBJ Model File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+# File units = meters
+
+mtllib Level0EnemyAPos.mtl
+
+g Mesh1 Group1 Model
+
+v 0.5 18.15 12.4286
+v -0.5 18.15 12.4286
+l 1 2
+
+g Mesh2 Group1 Model
+
+v -31.97 0 -2.5
+v -31.97 0 -0.5
+l 3 4
+
+g Mesh3 Group1 Model
+
+v -25.47 0 28.97
+v -25.47 0 29.97
+l 5 6
+
+g Mesh4 Group1 Model
+
+v -23.97 0 29.97
+v -23.97 0 30.97
+l 7 8
+
+g Mesh5 Group1 Model
+
+v 29.97 0 16.47
+v 31.47 0 16.47
+l 9 10
+
+g Mesh6 Group1 Model
+
+v -12.4103 19.97 0.5
+v -12.4103 19.97 -0.5
+l 11 12
+
+g Mesh7 Group1 Model
+
+v 29.97 0 4.47
+v 31.47 0 4.47
+l 13 14
+
+g Mesh8 Group1 Model
+
+v -22.4476 1.35358e-016 7.48617
+v -21.7803 2.25597e-016 8.39187
+l 15 16
+
+g Mesh9 Group1 Model
+
+v -36.97 0 13.4192
+v -36.97 0 16.9192
+l 17 18
+
+g Mesh10 Group1 Model
+
+v -3.5 9 -28.97
+v -3.5 9 -27.9904
+l 19 20
+
+g Mesh11 Group1 Model
+
+v 28.47 0 14.97
+v 29.97 0 14.97
+l 21 22
+
+g Mesh12 Group1 Model
+
+v 29.97 0 10.47
+v 31.47 0 10.47
+l 23 24
+
+g Mesh13 Group1 Model
+
+v 28.47 0 5.97
+v 29.97 0 5.97
+l 25 26
+
+g Mesh14 Group1 Model
+
+v 28.47 0 20.97
+v 29.97 0 20.97
+l 27 28
+
+g Mesh15 Group1 Model
+
+v -30.47 0 21.5645
+v -30.47 0 19.5645
+l 29 30
+
+g Mesh16 Group1 Model
+
+v 13.3936 1.553e-016 -30.97
+v 7.39359 1.553e-016 -30.97
+l 31 32
+
+g Mesh17 Group1 Model
+
+v 13.7604 16.8 -0.5
+v 13.7604 16.8 0.5
+l 33 34
+
+g Mesh18 Group1 Model
+
+v 13.3936 1.553e-016 -34.97
+v 7.39359 1.553e-016 -34.97
+l 35 36
+
+g Mesh19 Group1 Model
+
+v -17.97 0 29.97
+v -17.97 0 30.97
+l 37 38
+
+g Mesh20 Group1 Model
+
+v 22.795 0 -27.97
+v 22.795 0 -29.97
+l 39 40
+
+g Mesh21 Group1 Model
+
+v -31.97 0 -15.235
+v -31.97 0 -13.235
+l 41 42
+
+g Mesh22 Group1 Model
+
+v 29.97 0 1.4925
+v 29.97 0 4.62023e-014
+l 43 44
+
+g Mesh23 Group1 Model
+
+v -31.97 0 -6.5
+v -31.97 0 -4.5
+l 45 46
+
+g Mesh24 Group1 Model
+
+v 29.97 0 25.47
+v 31.47 0 25.47
+l 47 48
+
+g Mesh25 Group1 Model
+
+v -31.97 0 -11.235
+v -31.97 0 -9.235
+l 49 50
+
+g Mesh26 Group1 Model
+
+v -29.47 0 21.5645
+v -29.47 0 23.5645
+l 51 52
+
+g Mesh27 Group1 Model
+
+v -4.75 3.88961e-017 37.2145
+v -4.75 7.77922e-017 38.7292
+l 53 54
+
+g Mesh28 Group1 Model
+
+v -20.97 0 29.97
+v -20.97 0 30.97
+l 55 56
+

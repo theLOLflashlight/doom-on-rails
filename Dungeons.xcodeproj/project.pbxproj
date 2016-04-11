@@ -101,6 +101,10 @@
 		53F05FBB1CBB08C8007F3023 /* SpriteShader.fs in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FBA1CBB08C8007F3023 /* SpriteShader.fs */; };
 		53F05FC41CBB4497007F3023 /* Level0EnemyPosRail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FC21CBB4497007F3023 /* Level0EnemyPosRail.mtl */; };
 		53F05FC51CBB4497007F3023 /* Level0EnemyPosRail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FC31CBB4497007F3023 /* Level0EnemyPosRail.obj */; };
+		53F05FCD1CBB5B3D007F3023 /* Level0EnemyAPos.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FC91CBB5B3D007F3023 /* Level0EnemyAPos.mtl */; };
+		53F05FCE1CBB5B3D007F3023 /* Level0EnemyAPos.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FCA1CBB5B3D007F3023 /* Level0EnemyAPos.obj */; };
+		53F05FCF1CBB5B3D007F3023 /* Level0EnemyBPos.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FCB1CBB5B3D007F3023 /* Level0EnemyBPos.mtl */; };
+		53F05FD01CBB5B3D007F3023 /* Level0EnemyBPos.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FCC1CBB5B3D007F3023 /* Level0EnemyBPos.obj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -277,6 +281,10 @@
 		53F05FBA1CBB08C8007F3023 /* SpriteShader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SpriteShader.fs; sourceTree = "<group>"; };
 		53F05FC21CBB4497007F3023 /* Level0EnemyPosRail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyPosRail.mtl; sourceTree = "<group>"; };
 		53F05FC31CBB4497007F3023 /* Level0EnemyPosRail.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyPosRail.obj; sourceTree = "<group>"; };
+		53F05FC91CBB5B3D007F3023 /* Level0EnemyAPos.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyAPos.mtl; sourceTree = "<group>"; };
+		53F05FCA1CBB5B3D007F3023 /* Level0EnemyAPos.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyAPos.obj; sourceTree = "<group>"; };
+		53F05FCB1CBB5B3D007F3023 /* Level0EnemyBPos.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyBPos.mtl; sourceTree = "<group>"; };
+		53F05FCC1CBB5B3D007F3023 /* Level0EnemyBPos.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyBPos.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -370,6 +378,10 @@
 			isa = PBXGroup;
 			children = (
 				53F05FC21CBB4497007F3023 /* Level0EnemyPosRail.mtl */,
+				53F05FC91CBB5B3D007F3023 /* Level0EnemyAPos.mtl */,
+				53F05FCA1CBB5B3D007F3023 /* Level0EnemyAPos.obj */,
+				53F05FCB1CBB5B3D007F3023 /* Level0EnemyBPos.mtl */,
+				53F05FCC1CBB5B3D007F3023 /* Level0EnemyBPos.obj */,
 				53F05FC31CBB4497007F3023 /* Level0EnemyPosRail.obj */,
 				532ECA761CADBDBD001BB153 /* DemoRail.mtl */,
 				532ECA771CADBDBD001BB153 /* DemoRail.obj */,
@@ -667,6 +679,7 @@
 				445332111CB5C48E004DC43B /* Logout.png in Resources */,
 				5385DE5C1CA3365100F1A323 /* crate.mtl in Resources */,
 				53F05FC51CBB4497007F3023 /* Level0EnemyPosRail.obj in Resources */,
+				53F05FCF1CBB5B3D007F3023 /* Level0EnemyBPos.mtl in Resources */,
 				53F05FB31CB9FA0C007F3023 /* swipe_whiff.mp3 in Resources */,
 				445332071CB5BD81004DC43B /* DOOM.mp3 in Resources */,
 				53C679581CA22F35007C7945 /* glm in Resources */,
@@ -680,6 +693,7 @@
 				532ECA951CADBDBD001BB153 /* Level0Layout in Resources */,
 				44F1AC4B1CB74AF3002557C5 /* GunSoundEffect_1.wav in Resources */,
 				5385DE671CA3365100F1A323 /* ModelShader.vs in Resources */,
+				53F05FCD1CBB5B3D007F3023 /* Level0EnemyAPos.mtl in Resources */,
 				53ADE8951CB88DDF00DD3588 /* fireball.mtl in Resources */,
 				532ECA8A1CADBDBD001BB153 /* Level0_Textures in Resources */,
 				5385DE961CA370F200F1A323 /* crate.obj in Resources */,
@@ -697,6 +711,7 @@
 				4453320C1CB5BD9C004DC43B /* BGT1.gif in Resources */,
 				53ADE8981CB88E4200DD3588 /* fireball in Resources */,
 				53F05FB91CBB08BA007F3023 /* SpriteShader.vs in Resources */,
+				53F05FD01CBB5B3D007F3023 /* Level0EnemyBPos.obj in Resources */,
 				445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */,
 				4442C9601CBB0A690097FD98 /* Gun.png in Resources */,
 				532ECA941CADBDBD001BB153 /* Level0EnemyRail.obj in Resources */,
@@ -704,6 +719,7 @@
 				5385DE741CA3365100F1A323 /* WaterShader.vs in Resources */,
 				532ECA8E1CADBDBD001BB153 /* Level0All.mtl in Resources */,
 				532ECA991CADBDBD001BB153 /* Level0Rail.obj in Resources */,
+				53F05FCE1CBB5B3D007F3023 /* Level0EnemyAPos.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -175,7 +175,7 @@
     
     [EAGLContext setCurrentContext:self.context];
     
-    _game = new Game( (GLKView*) self.view, _physics, "Level0Layout.obj", "Level0EnemyPosRail.obj", "Level0EnemyPosRail.obj", "DemoRail.obj" );
+    _game = new Game( (GLKView*) self.view, _physics, "Level0Layout.obj", "Level0EnemyAPos.obj", "Level0EnemyBPos.obj", "DemoRail.obj" );
     
     _projectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_spriteProgram );
     
