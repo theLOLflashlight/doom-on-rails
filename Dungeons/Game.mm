@@ -7,9 +7,10 @@ using std::make_shared;
 using std::string;
 using std::vector;
 
-Game::Game( GLKView* view )
+Game::Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::string redEnemies, std::string greenEnemies, std::string railName )
     // we need to bind the view drawable before our shaders load
     : _view( ([view bindDrawable], view) )
+    , _world( physics )
 
     // why does this need to be doubled?
     , _width( _view.bounds.size.width * 2 )
@@ -22,10 +23,10 @@ Game::Game( GLKView* view )
     , _program( ios_path( "ModelShader.vs" ), ios_path( "ModelShader.fs" ), "aPosition", "aNormal", "aTexCoord" )
     , _spriteProgram( ios_path( "SpriteShader.vs" ), ios_path( "SpriteShader.fs" ), "aPosition", "aTexCoord" )
 
-    , _level( ObjMesh( ios_path( "Level0Layout.obj" ) ), &_program )
-    , _enemies( ObjMesh( ios_path( "Level0EnemyPos.obj" ) ), &_program )
+    , _level( ObjMesh( ios_path( levelName ) ), &_program )
+    //, _enemies( ObjMesh( ios_path( "Level0EnemyPos.obj" ) ), &_program )
 
-    , _rail( ObjMesh( ios_path( "DemoRail.obj" ) ).rail )
+    , _rail( ObjMesh( ios_path( railName ) ).rail )
     , _raillook( _rail.data, 1 )
 
     //, _skybox( "mar", vec3( 0.766, 0.259, 0.643 ), vec4( 1, 1, 0, 0.5 ) )
@@ -72,16 +73,63 @@ Game::Game( GLKView* view )
         level.program = &_program;
         
         _graphics.push_back( level );
-    }
-    {
-        PhysicalComponent level( "level", false );
-        _physics.push_back( level );
-        
         _entities[ "level" ].position = vec3( 0, -0.1, 0 );
     }
-
-    // Set up enemies
     {
+        //PhysicalComponent level( "level" );
+        //_physics.push_back( level );
+        
+        btTriangleMesh* tMesh = new btTriangleMesh();
+        
+        for ( int i = 0; i < _level._mesh.size(); i += 3 )
+        {
+            vec3 v0 = _level._mesh[ i + 0 ].aPosition;
+            vec3 v1 = _level._mesh[ i + 1 ].aPosition;
+            vec3 v2 = _level._mesh[ i + 2 ].aPosition;
+            
+            tMesh->addTriangle( { v0.x, v0.y, v0.z }, { v1.x, v1.y, v1.z }, { v2.x, v2.y, v2.z } );
+        }
+        
+        btBvhTriangleMeshShape* levelShape = new btBvhTriangleMeshShape( tMesh, true );
+        
+        auto levelObj = new btCollisionObject();
+        levelObj->setCollisionShape( levelShape );
+        levelObj->setWorldTransform( btTransform( btQuaternion( 0,0,0,1 ), btVector3( 0, -0.1, 0 ) ) );
+        
+        [_world addCollisionObject: levelObj];
+    }
+
+    auto enemiesRail = ObjMesh( ios_path( redEnemies ) ).rail;
+    
+    Sprite* redSprite = new Sprite( ios_path( "Level0All/enemy2.png" ), &_spriteProgram );
+    redSprite->_height = 2;
+    redSprite->_width = 2;
+    
+    
+    for ( int i = 0; i < enemiesRail.size(); i += 2 )
+    {
+        GraphicalComponent enemyG( 3000 + i, GraphicalComponent::TRANSLUCENT );
+        enemyG.sprite = redSprite;
+        enemyG.program = &_spriteProgram;
+        enemyG.spriteAxis = vec3( 0, 1, 0 );
+        
+        addComponent( enemyG );
+        
+        PhysicalComponent enemyP( 3000 + i );
+        
+        vec3 pos = enemiesRail[ i ];
+        
+        auto motionState = new btDefaultMotionState(
+            btTransform( btQuaternion( 0,0,0,1 ), btVector3( pos.x, pos.y + 1, pos.z ) ) );
+        
+        static btSphereShape SPHERE_SHAPE( 1 );
+        enemyP.body = new btRigidBody( 1, motionState, &SPHERE_SHAPE );
+        
+        addComponent( enemyP );
+    }
+    
+    // Set up enemies
+    /*{
         GraphicalComponent enemies( "enemies", GraphicalComponent::TRANSLUCENT );
         enemies.model = &_enemies;
         enemies.program = &_program;
@@ -93,7 +141,7 @@ Game::Game( GLKView* view )
         _physics.push_back( enemies );
         
         _entities[ "enemies" ].position = vec3( 0, -0.1, 0 );
-    }
+    }*/
 }
 
 
@@ -325,6 +373,7 @@ void Game::addComponent( GraphicalComponent component )
 void Game::addComponent( PhysicalComponent component )
 {
     _physics.push_back( component );
+    [_world addRigidBody: component.body];
 }
 
 void Game::addComponent( BehavioralComponent component )

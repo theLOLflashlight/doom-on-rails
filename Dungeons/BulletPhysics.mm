@@ -42,7 +42,7 @@
         
         dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
         
-        dynamicsWorld->setGravity(btVector3(0,-10,0));
+        dynamicsWorld->setGravity(btVector3(0,-9.81,0));
         
         
         /*groundShape = new btStaticPlaneShape(btVector3(0,1,0),1);
@@ -83,6 +83,11 @@
 -(void) addRigidBody:(btRigidBody*) body
 {
     dynamicsWorld->addRigidBody( body );
+}
+
+-(void) addCollisionObject:(btCollisionObject*) obj
+{
+    dynamicsWorld->addCollisionObject( obj );
 }
 
 -(void) update:(float) elapsedTime

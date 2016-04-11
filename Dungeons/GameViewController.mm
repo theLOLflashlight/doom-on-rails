@@ -237,10 +237,7 @@
     
     [EAGLContext setCurrentContext:self.context];
     
-    _game = new Game( (GLKView*) self.view );
-    
-    
-    //_projectileSprite = new Model( ObjMesh( ios_path( "fireball.obj" ) ), &_game->_program );
+    _game = new Game( (GLKView*) self.view, _physics, "Level0Layout.obj", "Level0EnemyPosRail.obj", "Level0EnemyPosRail.obj", "DemoRail.obj" );
     
     _projectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_spriteProgram );
     
@@ -643,7 +640,7 @@
         bullet.body = new btRigidBody( 1, motionState, &SPHERE_SHAPE );
         bullet.body->setLinearVelocity( { vel.x, vel.y, vel.z } );
         
-        [_physics addRigidBody: bullet.body];
+        //[_physics addRigidBody: bullet.body];
         _game->addComponent( bullet );
     }
     

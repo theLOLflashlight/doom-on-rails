@@ -217,6 +217,8 @@ struct GraphicalComponent
 
             mat4 mod = ntt.transform_matrix();
             
+            mod = scale( mod, vec3( sprite->_width, sprite->_height, sprite->_width ) );
+            
             glUniformMatrix4fv( program->find_uniform( "uModelMatrix" ), 1, GL_FALSE, (float*)&mod );
             glUniform3fv( program->find_uniform( "uSpriteAxis" ), 1, &spriteAxis[0] );
             
