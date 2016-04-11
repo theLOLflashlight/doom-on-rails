@@ -109,14 +109,16 @@ Game::Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::s
         
         for ( int i = 0; i < enemiesRail.size(); i += 2 )
         {
-            GraphicalComponent enemyG( 3000 + i, GraphicalComponent::TRANSLUCENT );
+            const EntityId enemyId = 3000 + i;
+            
+            GraphicalComponent enemyG( enemyId, GraphicalComponent::TRANSLUCENT );
             enemyG.sprite = redSprite;
             enemyG.program = &_spriteProgram;
             enemyG.spriteAxis = vec3( 0, 1, 0 );
             
             addComponent( enemyG );
             
-            PhysicalComponent enemyP( 3000 + i );
+            PhysicalComponent enemyP( enemyId );
             
             vec3 pos = enemiesRail[ i ];
             
@@ -125,6 +127,7 @@ Game::Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::s
             
             static btSphereShape SPHERE_SHAPE( 1 );
             enemyP.body = new btRigidBody( 1, motionState, &SPHERE_SHAPE );
+            enemyP.body->setUserPointer( (void*) enemyId.bitPattern );
             
             addComponent( enemyP );
         }
@@ -140,14 +143,16 @@ Game::Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::s
         
         for ( int i = 0; i < enemiesRail.size(); i += 2 )
         {
-            GraphicalComponent enemyG( 5000 + i, GraphicalComponent::TRANSLUCENT );
+            const EntityId enemyId = 5000 + i;
+            
+            GraphicalComponent enemyG( enemyId, GraphicalComponent::TRANSLUCENT );
             enemyG.sprite = greenSprite;
             enemyG.program = &_spriteProgram;
             enemyG.spriteAxis = vec3( 0, 1, 0 );
             
             addComponent( enemyG );
             
-            PhysicalComponent enemyP( 5000 + i );
+            PhysicalComponent enemyP( enemyId );
             
             vec3 pos = enemiesRail[ i ];
             
@@ -156,26 +161,12 @@ Game::Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::s
             
             static btCylinderShape CYLINDER_SHAPE( { 0.5, 1, 0.5 } );
             enemyP.body = new btRigidBody( 1, motionState, &CYLINDER_SHAPE );
+            enemyP.body->setUserPointer( (void*) enemyId.bitPattern );
             
             addComponent( enemyP );
         }
 
     }
-    
-    // Set up enemies
-    /*{
-        GraphicalComponent enemies( "enemies", GraphicalComponent::TRANSLUCENT );
-        enemies.model = &_enemies;
-        enemies.program = &_program;
-        
-        _graphics.push_back( enemies );
-    }
-    {
-        PhysicalComponent enemies( "enemies", false );
-        _physics.push_back( enemies );
-        
-        _entities[ "enemies" ].position = vec3( 0, -0.1, 0 );
-    }*/
 }
 
 
@@ -246,6 +237,15 @@ void Game::update( double step )
     
     for ( auto& physable : _physics )
         physable.update( _entities );
+    
+    std::vector<EntityId> badIds;
+    
+    for ( auto pair : _entities )
+        if ( pair.second.position.y < -0.2 )
+            badIds.push_back( pair.first );
+    
+    for ( auto _id : badIds )
+        destroyEntity( _id );
 }
 
 
@@ -413,6 +413,23 @@ void Game::addComponent( PhysicalComponent component )
 void Game::addComponent( BehavioralComponent component )
 {
     _behaviors.push_back( component );
+}
+
+void Game::destroyEntity( EntityId _id )
+{
+    for ( int i = 0; i < _graphics.size(); i++ )
+        if ( _graphics[ i ].entityId == _id )
+            _graphics.erase( _graphics.begin() + i-- );
+    
+    for ( int i = 0; i < _physics.size(); i++ )
+        if ( _physics[ i ].entityId == _id )
+            _physics.erase( _physics.begin() + i-- );
+    
+    for ( int i = 0; i < _behaviors.size(); i++ )
+        if ( _behaviors[ i ].entityId == _id )
+            _behaviors.erase( _behaviors.begin() + i-- );
+
+    _entities.erase( _id );
 }
 
 

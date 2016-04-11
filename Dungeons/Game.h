@@ -96,6 +96,8 @@ public:
     void addComponent( PhysicalComponent component );
     void addComponent( BehavioralComponent component );
     
+    void destroyEntity( EntityId _id );
+    
     void draw_scene( glm::mat4 view, glm::mat4 proj, bool drawWater = false ) const;
 
     
@@ -106,7 +108,7 @@ public:
     
     mutable GLProgram       _program, _spriteProgram;
     
-    Model                   _level;//, _enemies;
+    Model                   _level;
     Rail                    _rail, _raillook;
     
     template< typename Component >

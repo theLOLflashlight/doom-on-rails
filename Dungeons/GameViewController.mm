@@ -146,17 +146,11 @@
     
     _physics = [[BulletPhysics alloc] init];
     
-    
-    auto groundShape = new btStaticPlaneShape( btVector3( 0, 1, 0 ), 0 );
-    
-    
-    auto groundMotionState = new btDefaultMotionState();
-    
-    btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI( 0, groundMotionState, groundShape, btVector3(0,0,0) );
-    
-    auto groundRigidBody = new btRigidBody(groundRigidBodyCI);
+    //auto groundShape = new btStaticPlaneShape( btVector3( 0, 1, 0 ), 0 );
+    //auto groundMotionState = new btDefaultMotionState();
+    //btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI( 0, groundMotionState, groundShape, btVector3(0,0,0) );
+    //auto groundRigidBody = new btRigidBody(groundRigidBodyCI);
     //[_physics addRigidBody: groundRigidBody];
-    
     
     //tap
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
