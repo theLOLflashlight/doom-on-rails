@@ -11,8 +11,10 @@
 
 @interface GameViewController : GLKViewController
 {
-
+    
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender;
 
 @property (nonatomic) bool MusicOn;
 

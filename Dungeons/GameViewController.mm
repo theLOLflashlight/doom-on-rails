@@ -30,7 +30,7 @@
     
     bool ReLoad;
     int AmmoNumber;
-    int KillNumber;
+    int Kills;
     AVAudioPlayer *ReloadSound;
     
     Game*       _game;
@@ -93,8 +93,6 @@
 
 @implementation GameViewController
 
-
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Make sure your segue name in storyboard is the same as this line
@@ -102,9 +100,9 @@
     {
         // Get reference to the destination view controller
         EndViewController *vc = [segue destinationViewController];
-        
+      
         // Pass any objects to the view controller here, like...
-        vc.KillSum.text = [NSString stringWithFormat:@"%d", KillNumber];
+        vc.KillSum.text = [NSString stringWithFormat:@"%d", Kills];
         //[vc setMyObjectHere:object];
     }
 }
@@ -151,7 +149,7 @@
     _MusicOn = true;
     
     AmmoNumber = 10;
-    KillNumber = 0;
+    Kills = 0;
 
     
     [super viewDidLoad];
@@ -195,7 +193,7 @@
     };
     _game->addComponent( endGame );
     
-    _game->killCountPtr = &KillNumber;
+    _game->killCountPtr = &Kills;
     
     _projectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_spriteProgram );
     
@@ -236,7 +234,7 @@
     BehavioralComponent enemy("enemy");
     
     
-    self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", KillNumber];
+    self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", Kills];
     self.Health.text =[[NSString alloc] initWithFormat: @"%d", 100];
     self.Ammo.text =[[NSString alloc] initWithFormat: @"%d", AmmoNumber];
     
@@ -462,7 +460,7 @@
         }
     }
     
-    self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", KillNumber];
+    self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", Kills];
     self.Health.text =[[NSString alloc] initWithFormat: @"%d", 100];
     self.Ammo.text =[[NSString alloc] initWithFormat: @"%d", AmmoNumber];
 }
