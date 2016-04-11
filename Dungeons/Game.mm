@@ -99,33 +99,67 @@ Game::Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::s
         [_world addCollisionObject: levelObj];
     }
 
-    auto enemiesRail = ObjMesh( ios_path( redEnemies ) ).rail;
-    
-    Sprite* redSprite = new Sprite( ios_path( "Level0All/enemy2.png" ), &_spriteProgram );
-    redSprite->_height = 2;
-    redSprite->_width = 2;
-    
-    
-    for ( int i = 0; i < enemiesRail.size(); i += 2 )
     {
-        GraphicalComponent enemyG( 3000 + i, GraphicalComponent::TRANSLUCENT );
-        enemyG.sprite = redSprite;
-        enemyG.program = &_spriteProgram;
-        enemyG.spriteAxis = vec3( 0, 1, 0 );
+        auto enemiesRail = ObjMesh( ios_path( redEnemies ) ).rail;
         
-        addComponent( enemyG );
+        Sprite* redSprite = new Sprite( ios_path( "Level0All/enemy2.png" ), &_spriteProgram );
+        redSprite->_height = 2;
+        redSprite->_width = 2;
         
-        PhysicalComponent enemyP( 3000 + i );
         
-        vec3 pos = enemiesRail[ i ];
+        for ( int i = 0; i < enemiesRail.size(); i += 2 )
+        {
+            GraphicalComponent enemyG( 3000 + i, GraphicalComponent::TRANSLUCENT );
+            enemyG.sprite = redSprite;
+            enemyG.program = &_spriteProgram;
+            enemyG.spriteAxis = vec3( 0, 1, 0 );
+            
+            addComponent( enemyG );
+            
+            PhysicalComponent enemyP( 3000 + i );
+            
+            vec3 pos = enemiesRail[ i ];
+            
+            auto motionState = new btDefaultMotionState(
+                btTransform( btQuaternion( 0,0,0,1 ), btVector3( pos.x, pos.y + 1, pos.z ) ) );
+            
+            static btSphereShape SPHERE_SHAPE( 1 );
+            enemyP.body = new btRigidBody( 1, motionState, &SPHERE_SHAPE );
+            
+            addComponent( enemyP );
+        }
+
+    }
+    
+    {
+        auto enemiesRail = ObjMesh( ios_path( greenEnemies ) ).rail;
         
-        auto motionState = new btDefaultMotionState(
-            btTransform( btQuaternion( 0,0,0,1 ), btVector3( pos.x, pos.y + 1, pos.z ) ) );
+        Sprite* greenSprite = new Sprite( ios_path( "Level0All/enemy0.png" ), &_spriteProgram );
+        greenSprite->_height = 2;
+        greenSprite->_width = 1;
         
-        static btSphereShape SPHERE_SHAPE( 1 );
-        enemyP.body = new btRigidBody( 1, motionState, &SPHERE_SHAPE );
-        
-        addComponent( enemyP );
+        for ( int i = 0; i < enemiesRail.size(); i += 2 )
+        {
+            GraphicalComponent enemyG( 5000 + i, GraphicalComponent::TRANSLUCENT );
+            enemyG.sprite = greenSprite;
+            enemyG.program = &_spriteProgram;
+            enemyG.spriteAxis = vec3( 0, 1, 0 );
+            
+            addComponent( enemyG );
+            
+            PhysicalComponent enemyP( 5000 + i );
+            
+            vec3 pos = enemiesRail[ i ];
+            
+            auto motionState = new btDefaultMotionState(
+                btTransform( btQuaternion( 0,0,0,1 ), btVector3( pos.x, pos.y + 1, pos.z ) ) );
+            
+            static btCylinderShape CYLINDER_SHAPE( { 0.5, 1, 0.5 } );
+            enemyP.body = new btRigidBody( 1, motionState, &CYLINDER_SHAPE );
+            
+            addComponent( enemyP );
+        }
+
     }
     
     // Set up enemies
