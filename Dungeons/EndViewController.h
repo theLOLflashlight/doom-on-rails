@@ -16,6 +16,7 @@
     
 }
 
+@property (weak, nonatomic) IBOutlet UILabel *KillSum;
 
 @end
 

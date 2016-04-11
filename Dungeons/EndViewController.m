@@ -20,7 +20,8 @@
 
 -(void)viewDidLoad
 {
-
+    
+    self.KillSum.text =[[NSString alloc] initWithFormat: @"%d", 100];
 }
  
 @end

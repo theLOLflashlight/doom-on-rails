@@ -169,6 +169,18 @@
                                     <segue destination="BV1-FR-VrT" kind="show" id="scL-5J-FdB"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kills :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9Q-ZR-YJB">
+                                <rect key="frame" x="300" y="175" width="190" height="95"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="80"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dis-cH-jyH">
+                                <rect key="frame" x="500" y="175" width="190" height="95"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="80"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
@@ -179,6 +191,9 @@
                             <constraint firstItem="EYl-xf-Vl7" firstAttribute="width" secondItem="FQw-Qs-x9z" secondAttribute="width" id="pXg-F5-d2P"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="KillSum" destination="dis-cH-jyH" id="qgI-yj-Sal"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fIU-0i-aN5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
