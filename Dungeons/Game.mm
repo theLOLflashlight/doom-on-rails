@@ -217,8 +217,11 @@ void Game::update( double step )
     _currTime += step;
     const double time = _currTime - _startTime;
     
-    _eyepos = _rail[ time ];// - vec3( 0, 0.5, 0 );
-    _eyelook = _raillook[ time ];// - vec3( 0, 0.5, 0 );
+    if(!(_rail.isAtEnd()))
+        _eyepos = _rail[ time ];// - vec3( 0, 0.5, 0 );
+    
+    if(!(_raillook.isAtEnd()))
+        _eyelook = _raillook[ time ];// - vec3( 0, 0.5, 0 );
     
     /*BehavioralComponent enemy( "enemy" );
     enemy.functor = [&](BehavioralComponent* c, EntityCollection& entities, double time )
