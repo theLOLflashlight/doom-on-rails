@@ -120,7 +120,7 @@
         {
             ReLoad = true;
             
-            [ReloadSound setVolume:10];
+            
             [ReloadSound play];
         }
     }
@@ -134,6 +134,7 @@
     _MusicOn = true;
     
     AmmoNumber = 10;
+
     
     [super viewDidLoad];
     
@@ -157,16 +158,11 @@
     [_physics addRigidBody: groundRigidBody];
     
     
-    //Q2 - double tap
+    //tap
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     tapGesture.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:tapGesture];
-    
-    //Handle pan: Swipe
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
-    [panGesture setMinimumNumberOfTouches:1];
-    [panGesture setMaximumNumberOfTouches:1];
-    [self.view addGestureRecognizer:panGesture];
+
     
     //play looping sound
     GLKView *view = (GLKView *)self.view;
@@ -223,6 +219,7 @@
     NSData *RlSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"reload" ofType:@"mp3"]];
     ReloadSound = [[AVAudioPlayer alloc]initWithData:RlSoundPath error:nil];
     
+    [ReloadSound setVolume:10];
     [ReloadSound prepareToPlay];
     
     
@@ -255,116 +252,6 @@
     
 }
 
-- (void)handlePanGesture: (UIPanGestureRecognizer *)recognizer {
-    CGPoint translation = [recognizer translationInView:self.view];
-    CGPoint location = [recognizer locationInView:self.view];
-    
-    //Actually, just get furthest radius from the origin.
-    GLKVector2 radiusVec = GLKVector2Make(translation.x, translation.y);
-    CGFloat radLength = GLKVector2Length(radiusVec);
-    
-    if(recognizer.state == UIGestureRecognizerStateBegan) {
-        _maxRadius = 0;
-        _noSwipe = false;
-        [_translationPoints removeAllObjects];
-    }
-    if(recognizer.state == UIGestureRecognizerStateEnded) {
-        _noSwipe = false;
-        if(radLength >= 80) { //valid swipe
-            NSString *swipeSound;
-            NSString *swipeSoundExt = @"mp3";
-            if(_swipeHit) {
-                swipeSound = @"sword-clash1";
-            }
-            else {
-                swipeSound = @"swipe_whiff";
-            }
-            
-            if(NSString *path = [[NSBundle mainBundle] pathForResource:swipeSound ofType: swipeSoundExt]) { //J: Not sure about this conversion from swift
-                NSURL *soundURL = [NSURL fileURLWithPath:path]; //Can check this code later ...
-                
-                NSError *error;
-                try { //J: Not sure about this conversion from Swift
-                    soundPlayer2 = [[AVAudioPlayer alloc] initWithContentsOfURL:(NSURL *)soundURL error:nil];
-                    [soundPlayer2 prepareToPlay];
-                    [soundPlayer2 play];
-                }
-                catch(NSException *exception) {
-                }
-            }
-            _currBezierDuration = bezierDuration;
-            _currSwipeDrawn = true;
-        }
-    }
-    
-    
-    if(radLength > _maxRadius) {
-        _maxRadius = radLength;
-    }
-    
-    //cancel gesture if moving backwards from the furthest radius from the origin (as opposed to total translation) by 6px.
-    //So yes, you can zigzag a lot if you wanted to.
-    if(radLength < _maxRadius - 6) {
-        //_noSwipe = true;
-    }
-    
-    //draw line
-    //ie. create the _translationPoints
-    if(!_noSwipe) {
-        //From stackoverflow ...
-        [_translationPoints addObject:[NSValue valueWithCGPoint:CGPointMake(location.x, location.y)]];
-    }
-    //print("radLength: \(radLength); _maxRadius: \(_maxRadius)");
-    
-    
-    
-    //let point: CGPoint = recognizer.translationInView(self.view)
-    
-    
-    if(recognizer.state == UIGestureRecognizerStateBegan) {
-        //_prevHorizontalAngle
-        _baseHorizontalAngle += currHorizontalAngle; //had missed the + increment over the previous ...
-        _baseVerticalAngle += currVerticalAngle;
-        //currhorizontalAngle = 0;
-        //currverticalAngle = 0;
-    }
-    currHorizontalAngle = -translation.x * rotationSpeed;
-    currVerticalAngle = translation.y * rotationSpeed;
-}
-/*
- @IBAction func MoveCamera(sender: UIButton) {
- GameViewController.position = GLKVector3Subtract(GameViewController.position, direction)
- }
- */
-
-//J: Start of Swift code/functions to be converted as of Apr 9
-
-
-
-//Time since the last iteration of calling this method. Original intention is for running the code, and tracking time independently of frame rate.
-//Each place in code calling this is to use a different Int for 'closest-to-accurate' results (though it would not include the time after retrieving the time and updating the time, so the value would be less, or not include the time spent in retrieving the NSDate before retrieving timeDiff, ie. timeDiff would not include such time).
-- (double)timeSinceLastIter: (int)timePointIndex {
-    NSDate *newTime = [[NSDate alloc] init];
-    double timeDiff = 0; //this would be the first time; there would be no time before this one occurred.
-    int lastDateCount = (sizeof(_lastDate) / sizeof(_lastDate[0]));
-    if(timePointIndex < lastDateCount) {
-        if(_lastDate[timePointIndex] != nil) { //if an NSDate exists, then do the following
-            timeDiff = [newTime timeIntervalSinceDate:_lastDate[timePointIndex]]; //Had a "!" in the Swift version, but this is pretty much what Objective-C already does - ie. assume the existence of the object //provided misleading error info - where I declared timeDiff resolved an error of 'not matching array type' apparently
-        }
-    }
-    
-    //if let timeDiff = newTime.timeIntervalSinceDate(_lastDate[timePointIndex]);
-    
-    /* //Not doing this in Objective-C. Simply make a precondition restricting to 64 elements instead.
-    //append array elements such that this array would be long enough to store the element at timePointIndex
-    if(!(timePointIndex < _lastDate.count)) {
-        _lastDate = _lastDate + [NSDate?](count: timePointIndex - (_lastDate.count - 1), repeatedValue: nil);
-    }
-     */
-    _lastDate[timePointIndex] = newTime;
-    return timeDiff;
-}
-
 -(void) ThemeSound {
     if(NSString *path = [[NSBundle mainBundle] pathForResource:@"DOOM" ofType: @"mp3"]) { //J: Not sure about this conversion from swift
         NSURL *soundURL = [NSURL fileURLWithPath:path]; //Can check this code later ...
@@ -389,18 +276,10 @@
         
         GCV.animationProgress = 0; //begins the animation of earthquake
         
-        
-        if(NSString *path = [[NSBundle mainBundle] pathForResource:@"magic-quake2" ofType: @"mp3"]) { //J: Not sure about this conversion from swift
-            NSURL *soundURL = [NSURL fileURLWithPath:path]; //Can check this code later ...
-            
-            NSError *error;
-            try { //J: Not sure about this conversion from Swift
-                soundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:(NSURL *)soundURL error:nil];
-                [soundPlayer prepareToPlay];
-                [soundPlayer play];
-            }
-            catch(NSException *exception) {
-            }
+        if(AmmoNumber != 10)
+        {
+            ReLoad= true;
+            [ReloadSound play];
         }
         
         //Right now, it simply shakes the camera, but maybe shaking the world instead could be considered?
