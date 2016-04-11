@@ -10,6 +10,7 @@
 		4442C95E1CBAF9900097FD98 /* Shooter_Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 4442C95D1CBAF9900097FD98 /* Shooter_Menu.png */; };
 		4442C9601CBB0A690097FD98 /* Gun.png in Resources */ = {isa = PBXBuildFile; fileRef = 4442C95F1CBB0A690097FD98 /* Gun.png */; };
 		4442C9741CBB21C90097FD98 /* reload.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4442C9731CBB21C90097FD98 /* reload.mp3 */; };
+		4442C9821CBB506F0097FD98 /* EndViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4442C9811CBB506F0097FD98 /* EndViewController.m */; };
 		445332001CB5BD3B004DC43B /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445331FF1CB5BD3B004DC43B /* MainViewController.m */; };
 		445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */ = {isa = PBXBuildFile; fileRef = 445332041CB5BD81004DC43B /* ButtonPress.wav */; };
 		445332071CB5BD81004DC43B /* DOOM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 445332051CB5BD81004DC43B /* DOOM.mp3 */; };
@@ -151,6 +152,8 @@
 		4442C95D1CBAF9900097FD98 /* Shooter_Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shooter_Menu.png; sourceTree = "<group>"; };
 		4442C95F1CBB0A690097FD98 /* Gun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gun.png; sourceTree = "<group>"; };
 		4442C9731CBB21C90097FD98 /* reload.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = reload.mp3; sourceTree = "<group>"; };
+		4442C9811CBB506F0097FD98 /* EndViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndViewController.m; sourceTree = "<group>"; };
+		4442C9831CBB50890097FD98 /* EndViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EndViewController.h; sourceTree = "<group>"; };
 		445331FF1CB5BD3B004DC43B /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		445332011CB5BD44004DC43B /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		445332041CB5BD81004DC43B /* ButtonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonPress.wav; sourceTree = "<group>"; };
@@ -473,6 +476,8 @@
 				445331FF1CB5BD3B004DC43B /* MainViewController.m */,
 				53C6792A1CA22E62007C7945 /* GameViewController.h */,
 				53C6792B1CA22E62007C7945 /* GameViewController.mm */,
+				4442C9831CBB50890097FD98 /* EndViewController.h */,
+				4442C9811CBB506F0097FD98 /* EndViewController.m */,
 				5385DE351CA3365100F1A323 /* Game.h */,
 				5385DE341CA3365100F1A323 /* Game.mm */,
 				53F05F8B1CB9B73E007F3023 /* BulletPhysics.h */,
@@ -716,6 +721,7 @@
 				445332001CB5BD3B004DC43B /* MainViewController.m in Sources */,
 				53C679251CA22E62007C7945 /* AppDelegate.m in Sources */,
 				5385DE6C1CA3365100F1A323 /* ShaderInterface.cpp in Sources */,
+				4442C9821CBB506F0097FD98 /* EndViewController.m in Sources */,
 				5385DE941CA359B700F1A323 /* ios_path.mm in Sources */,
 				5385DE621CA3365100F1A323 /* GLTexture.cpp in Sources */,
 				5385DE711CA3365100F1A323 /* Vertex.cpp in Sources */,
