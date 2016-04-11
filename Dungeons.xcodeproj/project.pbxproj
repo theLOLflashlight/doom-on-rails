@@ -718,6 +718,7 @@
 				4453320C1CB5BD9C004DC43B /* BGT1.gif in Resources */,
 				53ADE8981CB88E4200DD3588 /* fireball in Resources */,
 				53F05FB91CBB08BA007F3023 /* SpriteShader.vs in Resources */,
+				53F05FD01CBB5B3D007F3023 /* Level0EnemyBPos.obj in Resources */,
 				4442C98A1CBB61790097FD98 /* Continue.png in Resources */,
 				445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */,
 				4442C9601CBB0A690097FD98 /* Gun.png in Resources */,
