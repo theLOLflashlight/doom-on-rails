@@ -155,7 +155,7 @@
     btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI( 0, groundMotionState, groundShape, btVector3(0,0,0) );
     
     auto groundRigidBody = new btRigidBody(groundRigidBodyCI);
-    [_physics addRigidBody: groundRigidBody];
+    //[_physics addRigidBody: groundRigidBody];
     
     
     //tap
