@@ -75,6 +75,8 @@ public:
 
     Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::string redEnemies, std::string greenEnemies, std::string railName );
 
+    int* killCountPtr;
+    
     void render() const;
     void offsetEyelook ();
     void update( double );

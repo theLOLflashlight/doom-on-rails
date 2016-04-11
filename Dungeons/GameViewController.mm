@@ -29,6 +29,7 @@
     
     bool ReLoad;
     int AmmoNumber;
+    int KillNumber;
     AVAudioPlayer *ReloadSound;
     
     Game*       _game;
@@ -133,6 +134,7 @@
     _MusicOn = true;
     
     AmmoNumber = 10;
+    KillNumber = 0;
 
     
     [super viewDidLoad];
@@ -165,6 +167,8 @@
     [EAGLContext setCurrentContext:self.context];
     
     _game = new Game( (GLKView*) self.view, _physics, "Level0Layout.obj", "Level0EnemyAPos.obj", "Level0EnemyBPos.obj", "DemoRail.obj" );
+    
+    _game->killCountPtr = &KillNumber;
     
     _projectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_spriteProgram );
     
@@ -205,7 +209,7 @@
     BehavioralComponent enemy("enemy");
     
     
-    self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", 0];
+    self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", KillNumber];
     self.Health.text =[[NSString alloc] initWithFormat: @"%d", 100];
     self.Ammo.text =[[NSString alloc] initWithFormat: @"%d", AmmoNumber];
     
@@ -431,7 +435,7 @@
         }
     }
     
-    self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", 0];
+    self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", KillNumber];
     self.Health.text =[[NSString alloc] initWithFormat: @"%d", 100];
     self.Ammo.text =[[NSString alloc] initWithFormat: @"%d", AmmoNumber];
 }
