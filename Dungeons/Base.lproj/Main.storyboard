@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rZz-8N-SCI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="PaD-vu-ghh">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -74,7 +74,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcd-0s-JYa">
-                                <rect key="frame" x="0.0" y="20" width="99" height="31"/>
+                                <rect key="frame" x="0.0" y="20" width="100" height="30"/>
                                 <state key="normal" image="Logout.png"/>
                                 <connections>
                                     <segue destination="rZz-8N-SCI" kind="show" id="4xJ-iI-ezb"/>
@@ -104,14 +104,8 @@
                                 <color key="textColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWN-Qi-tah">
-                                <rect key="frame" x="585" y="660" width="110" height="60"/>
-                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="55"/>
-                                <color key="textColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSd-Be-Ydg">
-                                <rect key="frame" x="685" y="660" width="60" height="60"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWN-Qi-tah" userLabel="Ammo">
+                                <rect key="frame" x="610" y="660" width="110" height="60"/>
                                 <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="55"/>
                                 <color key="textColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -135,7 +129,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="Armor" destination="nWN-Qi-tah" id="TGa-Gu-nOr"/>
+                        <outlet property="Ammo" destination="nWN-Qi-tah" id="9bM-PR-Bbx"/>
                         <outlet property="Health" destination="cnS-ez-hyX" id="DnK-Ou-Gkh"/>
                         <outlet property="KillNumber" destination="oD2-g1-YCx" id="pfe-qu-jbI"/>
                         <outlet property="SoundButtonEffects" destination="0Lk-UQ-Wow" id="vnn-qW-DP6"/>
@@ -146,10 +140,75 @@
             </objects>
             <point key="canvasLocation" x="1126" y="525"/>
         </scene>
+        <!--End View Controller-->
+        <scene sceneID="xfN-Xn-Fk6">
+            <objects>
+                <viewController id="PaD-vu-ghh" customClass="EndViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dKI-Bk-uMf"/>
+                        <viewControllerLayoutGuide type="bottom" id="Jvn-9Q-0IB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FQw-Qs-x9z">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Ending.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="EYl-xf-Vl7">
+                                <rect key="frame" x="180" y="236" width="240" height="128"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZL-ys-Efo">
+                                <rect key="frame" x="0.0" y="20" width="100" height="30"/>
+                                <state key="normal" image="Logout.png"/>
+                                <connections>
+                                    <segue destination="rZz-8N-SCI" kind="show" id="vpU-i5-Raj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eoX-ze-X2I">
+                                <rect key="frame" x="153" y="630" width="294" height="60"/>
+                                <state key="normal" image="Continue.png"/>
+                                <connections>
+                                    <segue destination="BV1-FR-VrT" kind="show" id="scL-5J-FdB"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kills :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9Q-ZR-YJB">
+                                <rect key="frame" x="300" y="175" width="190" height="95"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="80"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dis-cH-jyH">
+                                <rect key="frame" x="500" y="175" width="190" height="95"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="80"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="EYl-xf-Vl7" firstAttribute="height" secondItem="FQw-Qs-x9z" secondAttribute="height" id="FiR-mX-4HY"/>
+                            <constraint firstItem="eoX-ze-X2I" firstAttribute="centerX" secondItem="FQw-Qs-x9z" secondAttribute="centerX" id="HF3-Wj-b0q"/>
+                            <constraint firstItem="EYl-xf-Vl7" firstAttribute="centerY" secondItem="FQw-Qs-x9z" secondAttribute="centerY" id="Sgq-mk-wn1"/>
+                            <constraint firstItem="EYl-xf-Vl7" firstAttribute="centerX" secondItem="FQw-Qs-x9z" secondAttribute="centerX" id="li8-KF-Hoh"/>
+                            <constraint firstItem="EYl-xf-Vl7" firstAttribute="width" secondItem="FQw-Qs-x9z" secondAttribute="width" id="pXg-F5-d2P"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="KillSum" destination="dis-cH-jyH" id="qgI-yj-Sal"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fIU-0i-aN5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1897" y="525"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="Continue.png" width="240" height="60"/>
+        <image name="Ending.jpg" width="1920" height="1080"/>
         <image name="Gun.png" width="940" height="525"/>
         <image name="Logout.png" width="64" height="64"/>
         <image name="Shooter_Menu.png" width="1600" height="120"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="vpU-i5-Raj"/>
+        <segue reference="scL-5J-FdB"/>
+    </inferredMetricsTieBreakers>
 </document>

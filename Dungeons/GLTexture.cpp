@@ -45,7 +45,7 @@ GLTexture & GLTexture::operator=( GLTexture&& move )
     return *this;
 }
 
-void GLTexture::bind( GLint unit )
+void GLTexture::bind( GLint unit ) const
 {
     const GLenum tex_unit = GL_TEXTURE0 + unit;
 #   ifdef _DEBUG
@@ -56,7 +56,7 @@ void GLTexture::bind( GLint unit )
     bind();
 }
 
-void GLTexture::bind()
+void GLTexture::bind() const
 {
     glBindTexture( GL_TEXTURE_2D, glHandle );
 }

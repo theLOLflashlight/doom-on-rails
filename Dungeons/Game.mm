@@ -7,90 +7,168 @@ using std::make_shared;
 using std::string;
 using std::vector;
 
-Game::Game( GLKView* view )
+Game::Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::string redEnemies, std::string greenEnemies, std::string railName )
     // we need to bind the view drawable before our shaders load
     : _view( ([view bindDrawable], view) )
+    , _world( physics )
 
-    // why do these need to be doubled??
+    // why does this need to be doubled?
     , _width( _view.bounds.size.width * 2 )
+    // why does this need to be doubled?
     , _height( _view.bounds.size.height * 2 )
 
     , _startTime( 0 )
     , _currTime( _startTime )
 
-    , _program( new GLProgram( ios_path( "MyShader.vs" ), ios_path( "MyShader.fs" ), "aPosition", "aNormal", "aTexCoord" ) )
+    , _program( ios_path( "ModelShader.vs" ), ios_path( "ModelShader.fs" ), "aPosition", "aNormal", "aTexCoord" )
+    , _spriteProgram( ios_path( "SpriteShader.vs" ), ios_path( "SpriteShader.fs" ), "aPosition", "aTexCoord" )
 
-    , _level( ObjMesh( ios_path( "Level0Layout.obj" ) ), _program )
-    , _enemies( ObjMesh( ios_path( "Level0EnemyPos.obj" ) ), _program )
+    , _level( ObjMesh( ios_path( levelName ) ), &_program )
+    //, _enemies( ObjMesh( ios_path( "Level0EnemyPos.obj" ) ), &_program )
 
-    , _rail( ObjMesh( ios_path( "DemoRail.obj" ) ).rail )
+    , _rail( ObjMesh( ios_path( railName ) ).rail )
     , _raillook( _rail.data, 1 )
 
-    //, _skybox( "mar", vec3( 0.766, 0.259, 0.643 ), vec4( 1, 1, 0, 0.5 ) )
-    , _skybox( "goldrush", vec3( 0.342, 0.866, -0.940 ), vec4( 1, 1, 0.8, 0.5 ) )
+    //, _skybox( "goldrush", vec3( 0.342, 0.866, -0.940 ), vec4( 1, 1, 0.8, 0.5 ) )
+    , _skybox( "mar", vec3( 0.766, 0.259, 0.643 ), vec4( 1, 1, 0, 0.5 ) )
+    //, _skybox( "cp", vec3( 0.342, 0.866, -0.940 ), vec4( 0, 0.5, 1, 0.5 ) )
+    //, _skybox( "mercury", vec3( 0, 1, 0 ), vec4( 1, 0.2, 0, 0.5 ) )
+
     , _water( vec4( 0, 0.3, 0.5, 1 ), _width, _height )
 {
     _water.setSun( _skybox.sunPosition, _skybox.sunColor );
     
-    // Setup view
+    // Set up view
     [_view bindDrawable];
     glClearColor( 0, 0, 0, 1 );
     glViewport( 0, 0, _width, _height );
     glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
     
-    // Setup main shader
+    // Set up main shader
     {
         vec4    ambientComponent( 0.5, 0.5, 0.5, 1.0 );
-        vec4    diffuseComponent( 1, 1, 0.1, 0.1 );
-        vec4    specularComponent( 1, 1, 0, 0.1 );
         float   shininess = 10.0;
         
-        _program->bind();
-        glUniform3fv( _program->find_uniform( "uSunPosition" ), 1, &_skybox.sunPosition[0] );
-        glUniform4fv( _program->find_uniform( "uAmbientColor" ), 1, &ambientComponent[0] );
-        glUniform4fv( _program->find_uniform( "uDiffuseColor" ), 1, &_skybox.sunColor[0] );
-        glUniform4fv( _program->find_uniform( "uSpecularColor" ), 1, &specularComponent[0] );
-        glUniform1f( _program->find_uniform( "uShininess" ), shininess );
+        _program.bind();
+        glUniform3fv( _program.find_uniform( "uSunPosition" ), 1, &_skybox.sunPosition[0] );
+        glUniform4fv( _program.find_uniform( "uAmbientColor" ), 1, &ambientComponent[0] );
+        glUniform4fv( _program.find_uniform( "uDiffuseColor" ), 1, &_skybox.sunColor[0] );
+        glUniform4fv( _program.find_uniform( "uSpecularColor" ), 1, &_skybox.sunColor[0] );
+        glUniform1f( _program.find_uniform( "uShininess" ), shininess );
         glUseProgram( 0 );
     }
     
-    // Setup level
+    // Set up sprite shader
+    {
+        vec4    ambientComponent( 0.5, 0.5, 0.5, 1.0 );
+        
+        _spriteProgram.bind();
+        glUniform4fv( _program.find_uniform( "uAmbientColor" ), 1, &ambientComponent[0] );
+        glUniform4fv( _program.find_uniform( "uDiffuseColor" ), 1, &_skybox.sunColor[0] );
+        glUseProgram( 0 );
+    }
+
+    
+    // Set up level
     {
         GraphicalComponent level( "level", GraphicalComponent::TRANSLUCENT );
         level.model = &_level;
-        level.program = _program.get();
+        level.program = &_program;
         
         _graphics.push_back( level );
-    }
-    {
-        PhysicalComponent level( "level", false );
-        _physics.push_back( level );
-        
         _entities[ "level" ].position = vec3( 0, -0.1, 0 );
     }
-
-    // Setup enemies
     {
-        GraphicalComponent enemies( "enemies", GraphicalComponent::TRANSLUCENT );
-        enemies.model = &_enemies;
-        enemies.program = _program.get();
+        //PhysicalComponent level( "level" );
+        //_physics.push_back( level );
         
-        /*enemies.delegate = [](GraphicalComponent* gfx, EntityCollection& entities, glm::mat4 view, glm::mat4 proj)
+        btTriangleMesh* tMesh = new btTriangleMesh();
+        
+        for ( int i = 0; i < _level._mesh.size(); i += 3 )
         {
-            glUniform4fv( gfx->program->find_uniform( "uColor" ), 1, &gfx->color[ 0 ] );
+            vec3 v0 = _level._mesh[ i + 0 ].aPosition;
+            vec3 v1 = _level._mesh[ i + 1 ].aPosition;
+            vec3 v2 = _level._mesh[ i + 2 ].aPosition;
             
-            glEnable( GL_BLEND );
-            gfx->model->render( entities[ gfx->entityId ].transform_matrix(), view, proj );
-            glDisable( GL_BLEND );
-        };*/
+            tMesh->addTriangle( { v0.x, v0.y, v0.z }, { v1.x, v1.y, v1.z }, { v2.x, v2.y, v2.z } );
+        }
         
-        _graphics.push_back( enemies );
+        btBvhTriangleMeshShape* levelShape = new btBvhTriangleMeshShape( tMesh, true );
+        
+        auto levelObj = new btCollisionObject();
+        levelObj->setCollisionShape( levelShape );
+        levelObj->setWorldTransform( btTransform( btQuaternion( 0,0,0,1 ), btVector3( 0, -0.1, 0 ) ) );
+        
+        [_world addCollisionObject: levelObj];
     }
+
     {
-        PhysicalComponent enemies( "enemies", false );
-        _physics.push_back( enemies );
+        auto enemiesRail = ObjMesh( ios_path( redEnemies ) ).rail;
         
-        _entities[ "enemies" ].position = vec3( 0, -0.1, 0 );
+        Sprite* redSprite = new Sprite( ios_path( "Level0All/enemy2.png" ), &_spriteProgram );
+        redSprite->_height = 2;
+        redSprite->_width = 2;
+        
+        
+        for ( int i = 0; i < enemiesRail.size(); i += 2 )
+        {
+            const EntityId enemyId = 3000 + i;
+            
+            GraphicalComponent enemyG( enemyId, GraphicalComponent::TRANSLUCENT );
+            enemyG.sprite = redSprite;
+            enemyG.program = &_spriteProgram;
+            enemyG.spriteAxis = vec3( 0, 1, 0 );
+            
+            addComponent( enemyG );
+            
+            PhysicalComponent enemyP( enemyId );
+            
+            vec3 pos = enemiesRail[ i ];
+            
+            auto motionState = new btDefaultMotionState(
+                btTransform( btQuaternion( 0,0,0,1 ), btVector3( pos.x, pos.y + 1, pos.z ) ) );
+            
+            static btSphereShape SPHERE_SHAPE( 1 );
+            enemyP.body = new btRigidBody( 1, motionState, &SPHERE_SHAPE );
+            enemyP.body->setUserPointer( (void*) enemyId.bitPattern );
+            
+            addComponent( enemyP );
+        }
+
+    }
+    
+    {
+        auto enemiesRail = ObjMesh( ios_path( greenEnemies ) ).rail;
+        
+        Sprite* greenSprite = new Sprite( ios_path( "Level0All/enemy0.png" ), &_spriteProgram );
+        greenSprite->_height = 2;
+        greenSprite->_width = 1;
+        
+        for ( int i = 0; i < enemiesRail.size(); i += 2 )
+        {
+            const EntityId enemyId = 5000 + i;
+            
+            GraphicalComponent enemyG( enemyId, GraphicalComponent::TRANSLUCENT );
+            enemyG.sprite = greenSprite;
+            enemyG.program = &_spriteProgram;
+            enemyG.spriteAxis = vec3( 0, 1, 0 );
+            
+            addComponent( enemyG );
+            
+            PhysicalComponent enemyP( enemyId );
+            
+            vec3 pos = enemiesRail[ i ];
+            
+            auto motionState = new btDefaultMotionState(
+                btTransform( btQuaternion( 0,0,0,1 ), btVector3( pos.x, pos.y + 1, pos.z ) ) );
+            
+            static btCylinderShape CYLINDER_SHAPE( { 0.5, 1, 0.5 } );
+            enemyP.body = new btRigidBody( 1, motionState, &CYLINDER_SHAPE );
+            enemyP.body->setUserPointer( (void*) enemyId.bitPattern );
+            
+            addComponent( enemyP );
+        }
+
     }
 }
 
@@ -139,8 +217,19 @@ void Game::update( double step )
     _currTime += step;
     const double time = _currTime - _startTime;
     
-    _eyepos = _rail[ time ];// - vec3( 0, 0.5, 0 );
-    _eyelook = _raillook[ time ];// - vec3( 0, 0.5, 0 );
+    if(!(_rail.isAtEnd()))
+        _eyepos = _rail[ time ];// - vec3( 0, 0.5, 0 );
+    
+    if(!(_raillook.isAtEnd()))
+        _eyelook = _raillook[ time ];// - vec3( 0, 0.5, 0 );
+    
+    /*BehavioralComponent enemy( "enemy" );
+    enemy.functor = [&](BehavioralComponent* c, EntityCollection& entities, double time )
+    {
+        Entity& ntt = entities[ c->entityId ];
+        
+        ntt.position = _rail[ time ];
+    };*/
     
     
     //_eyepos += vec3( 1, 1, 1 );
@@ -149,8 +238,20 @@ void Game::update( double step )
     
     _water.update( time / 10, _eyepos );
     
+    for ( auto& behavior : _behaviors )
+        behavior.update( _entities, time );
+    
     for ( auto& physable : _physics )
         physable.update( _entities );
+    
+    std::vector<EntityId> badIds;
+    
+    for ( auto pair : _entities )
+        if ( pair.second.position.y < -5 )
+            badIds.push_back( pair.first );
+    
+    for ( auto _id : badIds )
+        destroyEntity( _id );
 }
 
 
@@ -177,11 +278,24 @@ void Game::render() const
         eyepos.y = -eyepos.y;
         eyelook.y = -eyelook.y;
         
-        _water.bindReflection( _program.get(), _width, _height );
+        _water.bindReflection(_width, _height );
+        
+        _program.bind();
+        glUniform4f( _program.find_uniform( "uWaterPlane" ), 0, 1, 0, 0 );
+        _spriteProgram.bind();
+        glUniform4f( _spriteProgram.find_uniform( "uWaterPlane" ), 0, 1, 0, 0 );
+        glUseProgram( 0 );
+
         draw_scene( lookAt( eyepos, eyelook, vec3( 0, 1, 0 ) ), proj );
         
         // Render refRAction
-        _water.bindRefraction( _program.get(), _width, _height );
+        _water.bindRefraction( _width, _height );
+        _program.bind();
+        glUniform4f( _program.find_uniform( "uWaterPlane" ), 0, -1, 0, 0 );
+        _spriteProgram.bind();
+        glUniform4f( _spriteProgram.find_uniform( "uWaterPlane" ), 0, -1, 0, 0 );
+        glUseProgram( 0 );
+        
         draw_scene( view, proj );
         
         glDisable( GL_CLIP_DISTANCE(0) );
@@ -197,10 +311,14 @@ void Game::draw_scene( glm::mat4 view, glm::mat4 proj, bool drawWater ) const
 {
     _skybox.render( view, proj );
     
-    _program->bind();
-    glUniformMatrix4fv( _program->find_uniform( "uViewMatrix" ), 1, GL_FALSE, &view[ 0 ][ 0 ] );
-    glUniformMatrix4fv( _program->find_uniform( "uProjMatrix" ), 1, GL_FALSE, &proj[ 0 ][ 0 ] );
-    glUniform4f( _program->find_uniform( "uColor" ), 1, 1, 1, 0 );
+    _program.bind();
+    glUniformMatrix4fv( _program.find_uniform( "uViewMatrix" ), 1, GL_FALSE, &view[ 0 ][ 0 ] );
+    glUniformMatrix4fv( _program.find_uniform( "uProjMatrix" ), 1, GL_FALSE, &proj[ 0 ][ 0 ] );
+    glUniform4f( _program.find_uniform( "uColor" ), 1, 1, 1, 0 );
+    
+    _spriteProgram.bind();
+    glUniformMatrix4fv( _spriteProgram.find_uniform( "uViewMatrix" ), 1, GL_FALSE, &view[ 0 ][ 0 ] );
+    glUniformMatrix4fv( _spriteProgram.find_uniform( "uProjMatrix" ), 1, GL_FALSE, &proj[ 0 ][ 0 ] );
 
     if ( drawWater )
         _water.render( view, proj );
@@ -295,11 +413,32 @@ void Game::addComponent( GraphicalComponent component )
 void Game::addComponent( PhysicalComponent component )
 {
     _physics.push_back( component );
+    [_world addRigidBody: component.body];
 }
 
 void Game::addComponent( BehavioralComponent component )
 {
     _behaviors.push_back( component );
+}
+
+void Game::destroyEntity( EntityId _id )
+{
+    if ( _id.bitPattern >= 3000 && _id.bitPattern < 7000 )
+        ++*killCountPtr;// Increment kill count
+    
+    for ( int i = 0; i < _graphics.size(); i++ )
+        if ( _graphics[ i ].entityId == _id )
+            _graphics.erase( _graphics.begin() + i-- );
+    
+    for ( int i = 0; i < _physics.size(); i++ )
+        if ( _physics[ i ].entityId == _id )
+            _physics.erase( _physics.begin() + i-- );
+    
+    for ( int i = 0; i < _behaviors.size(); i++ )
+        if ( _behaviors[ i ].entityId == _id )
+            _behaviors.erase( _behaviors.begin() + i-- );
+
+    _entities.erase( _id );
 }
 
 

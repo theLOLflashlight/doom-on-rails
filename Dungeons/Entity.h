@@ -82,9 +82,10 @@ struct Entity
 typedef std::unordered_map< EntityId, Entity > EntityCollection;
 
 
-inline void CreateBillboardMatrix( glm::mat4& bbmat, glm::vec3 right, glm::vec3 up, glm::vec3 look, glm::vec3 pos )
+inline glm::mat4 CreateBillboardMatrix( glm::vec3 right, glm::vec3 up, glm::vec3 look, glm::vec3 pos )
 {
-    bbmat[0][0] = right.x;
+    return glm::mat4( glm::mat4x3( right, up, look, pos ) );
+    /*bbmat[0][0] = right.x;
     bbmat[0][1] = right.y;
     bbmat[0][2] = right.z;
     bbmat[0][3] = 0;
@@ -100,7 +101,7 @@ inline void CreateBillboardMatrix( glm::mat4& bbmat, glm::vec3 right, glm::vec3 
     bbmat[3][0] = pos.x;
     bbmat[3][1] = pos.y;
     bbmat[3][2] = pos.z;
-    bbmat[3][3] = 1;
+    bbmat[3][3] = 1;*/
 }
 
 inline glm::mat4 BillboardPoint( glm::vec3 pos, glm::vec3 camPos, glm::vec3 camUp )
@@ -112,7 +113,7 @@ inline glm::mat4 BillboardPoint( glm::vec3 pos, glm::vec3 camPos, glm::vec3 camU
     glm::vec3	up		= glm::cross( look, right );
     
     glm::mat4	bbmat;
-    CreateBillboardMatrix( bbmat, right, up, look, pos );
+    return CreateBillboardMatrix( right, up, look, pos );
     
     // apply the billboard
     return bbmat;
@@ -123,14 +124,13 @@ inline glm::mat4 BillboardAxisY( glm::vec3 pos, glm::vec3 camPos )
     glm::vec3	look	= camPos - pos;
     look.y = 0;
     look = glm::normalize( look );
-
     
     // right hand rule cross products
     glm::vec3	up		= glm::vec3( 0, 1, 0 );
     glm::vec3	right	= glm::cross( up, look );
     
     glm::mat4	bbmat;
-    CreateBillboardMatrix( bbmat, right, up, look, pos );
+    return CreateBillboardMatrix( right, up, look, pos );
     
     // apply the billboard
     return bbmat;
@@ -146,7 +146,7 @@ inline glm::mat4 BillboardAxis( glm::vec3 pos, glm::vec3 camPos, glm::vec3 axis 
     look = glm::cross( right, up );
     
     glm::mat4	bbmat;
-    CreateBillboardMatrix( bbmat, right, up, look, pos );
+    return CreateBillboardMatrix( right, up, look, pos );
     
     // apply the billboard
     return bbmat;
@@ -162,30 +162,6 @@ inline glm::vec3 extract_eye_pos( glm::mat4 model, glm::mat4 view )
     //return vec4( (model * view)[3] );
 }
 
-struct BehavioralComponent
-{
-    using Delegate = std::function< void(BehavioralComponent*, EntityCollection&) >;
-    
-    EntityId    entityId;
-    bool        enabled;
-    Delegate    functor;
-    
-    explicit BehavioralComponent( EntityId _id, bool _enabled = true )
-        : entityId( _id )
-        , enabled( _enabled )
-    {
-    }
-    
-    void update( EntityCollection& entities )
-    {
-        if ( !enabled )
-            return;
-        
-        if ( functor )
-            functor( this, entities );
-    }
-};
-
 struct GraphicalComponent
 {
     enum Visibility
@@ -199,7 +175,8 @@ struct GraphicalComponent
     Visibility  visibility;
     GLProgram*  program = 0;
     Model*      model   = 0;
-    Model*      sprite  = 0;
+    Sprite*     sprite  = 0;
+    glm::vec3   spriteAxis = { 0, 0, 0 };
     glm::vec4   color   = { 1, 1, 1, 0 };
     
     explicit GraphicalComponent( EntityId _id, Visibility _visibility = VISIBLE )
@@ -223,13 +200,16 @@ struct GraphicalComponent
             return;
         
         if ( program )
+        {
+            program->bind();
             glUniform4fv( program->find_uniform( "uColor" ), 1, &color[ 0 ] );
+        }
         
         if ( visibility == TRANSLUCENT )
             glEnable( GL_BLEND );
         
         if ( model )
-            model->render( entities[ entityId ].transform_matrix(), view, proj, GL_TRIANGLES );
+            model->render( entities[ entityId ].transform_matrix(), GL_TRIANGLES );
         
         if ( sprite )
         {
@@ -237,15 +217,20 @@ struct GraphicalComponent
 
             mat4 mod = ntt.transform_matrix();
             
-            mod *= BillboardPoint( vec3( 0, 0, 0 ), vec3( row( view, 2 ) ), vec3( column( view, 1 ) ) );
+            mod = scale( mod, vec3( sprite->_width, sprite->_height, sprite->_width ) );
             
-            mod = scale( mod, vec3( 1, 1, 0 ) );
+            glUniformMatrix4fv( program->find_uniform( "uModelMatrix" ), 1, GL_FALSE, (float*)&mod );
+            glUniform3fv( program->find_uniform( "uSpriteAxis" ), 1, &spriteAxis[0] );
+            
+            //mod *= BillboardPoint( vec3( 0, 0, 0 ), vec3( row( view, 2 ) ), vec3( column( view, 1 ) ) );
+            
+            //mod = scale( mod, vec3( 1, 1, 0 ) );
             
             //mod *= BillboardAxisY( vec3( 0, 0, 0 ), vec3( row( view, 2 ) ) );
             
             //mod = lookAt( ntt.position, vec3( row( view, 2 ) ), vec3( column( view, 1 ) ) );
             
-            sprite->render( mod, view, proj, GL_TRIANGLES );
+            sprite->render();
         }
         
         if ( visibility == TRANSLUCENT )
@@ -299,6 +284,31 @@ struct HealthComponent
         {
             
         }
+    }
+};
+
+
+struct BehavioralComponent
+{
+    using Delegate = std::function< void(BehavioralComponent*, EntityCollection&, double) >;
+    
+    EntityId    entityId;
+    bool        enabled;
+    Delegate    functor;
+    
+    explicit BehavioralComponent( EntityId _id, bool _enabled = true )
+        : entityId( _id )
+        , enabled( _enabled )
+    {
+    }
+    
+    void update( EntityCollection& entities, double time )
+    {
+        if ( !enabled )
+            return;
+        
+        if ( functor )
+            functor( this, entities, time );
     }
 };
 

@@ -107,7 +107,7 @@
         //Disable the main menu sound.
         [BGSound pause];
     }
-    
+
 }
 
 - (IBAction)SoundButton:(UIButton *)sender {

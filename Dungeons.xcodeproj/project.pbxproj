@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		4442C95E1CBAF9900097FD98 /* Shooter_Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 4442C95D1CBAF9900097FD98 /* Shooter_Menu.png */; };
 		4442C9601CBB0A690097FD98 /* Gun.png in Resources */ = {isa = PBXBuildFile; fileRef = 4442C95F1CBB0A690097FD98 /* Gun.png */; };
+		4442C9741CBB21C90097FD98 /* reload.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4442C9731CBB21C90097FD98 /* reload.mp3 */; };
+		4442C9821CBB506F0097FD98 /* EndViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4442C9811CBB506F0097FD98 /* EndViewController.m */; };
+		4442C9851CBB59590097FD98 /* Ending.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4442C9841CBB59590097FD98 /* Ending.jpg */; };
+		4442C98A1CBB61790097FD98 /* Continue.png in Resources */ = {isa = PBXBuildFile; fileRef = 4442C9891CBB61790097FD98 /* Continue.png */; };
+		4442C9921CBB76450097FD98 /* AND HIS NAME IS JOHN CENA.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4442C9911CBB76450097FD98 /* AND HIS NAME IS JOHN CENA.mp3 */; };
 		445332001CB5BD3B004DC43B /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445331FF1CB5BD3B004DC43B /* MainViewController.m */; };
 		445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */ = {isa = PBXBuildFile; fileRef = 445332041CB5BD81004DC43B /* ButtonPress.wav */; };
 		445332071CB5BD81004DC43B /* DOOM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 445332051CB5BD81004DC43B /* DOOM.mp3 */; };
@@ -49,8 +54,8 @@
 		5385DE631CA3365100F1A323 /* GLVertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5385DE3F1CA3365100F1A323 /* GLVertexBuffer.cpp */; };
 		5385DE641CA3365100F1A323 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5385DE421CA3365100F1A323 /* Model.cpp */; };
 		5385DE651CA3365100F1A323 /* ObjMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5385DE441CA3365100F1A323 /* ObjMesh.cpp */; };
-		5385DE661CA3365100F1A323 /* MyShader.fs in Resources */ = {isa = PBXBuildFile; fileRef = 5385DE461CA3365100F1A323 /* MyShader.fs */; };
-		5385DE671CA3365100F1A323 /* MyShader.vs in Resources */ = {isa = PBXBuildFile; fileRef = 5385DE471CA3365100F1A323 /* MyShader.vs */; };
+		5385DE661CA3365100F1A323 /* ModelShader.fs in Resources */ = {isa = PBXBuildFile; fileRef = 5385DE461CA3365100F1A323 /* ModelShader.fs */; };
+		5385DE671CA3365100F1A323 /* ModelShader.vs in Resources */ = {isa = PBXBuildFile; fileRef = 5385DE471CA3365100F1A323 /* ModelShader.vs */; };
 		5385DE6C1CA3365100F1A323 /* ShaderInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5385DE4D1CA3365100F1A323 /* ShaderInterface.cpp */; };
 		5385DE6D1CA3365100F1A323 /* ShaderLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5385DE4F1CA3365100F1A323 /* ShaderLoader.cpp */; };
 		5385DE6E1CA3365100F1A323 /* skybox in Resources */ = {isa = PBXBuildFile; fileRef = 5385DE511CA3365100F1A323 /* skybox */; };
@@ -95,6 +100,14 @@
 		53F05FB21CB9FA0C007F3023 /* shooting_star.wav in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FAB1CB9FA0C007F3023 /* shooting_star.wav */; };
 		53F05FB31CB9FA0C007F3023 /* swipe_whiff.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FAC1CB9FA0C007F3023 /* swipe_whiff.mp3 */; };
 		53F05FB41CB9FA0C007F3023 /* sword-clash1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FAD1CB9FA0C007F3023 /* sword-clash1.mp3 */; };
+		53F05FB91CBB08BA007F3023 /* SpriteShader.vs in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FB81CBB08BA007F3023 /* SpriteShader.vs */; };
+		53F05FBB1CBB08C8007F3023 /* SpriteShader.fs in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FBA1CBB08C8007F3023 /* SpriteShader.fs */; };
+		53F05FC41CBB4497007F3023 /* Level0EnemyPosRail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FC21CBB4497007F3023 /* Level0EnemyPosRail.mtl */; };
+		53F05FC51CBB4497007F3023 /* Level0EnemyPosRail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FC31CBB4497007F3023 /* Level0EnemyPosRail.obj */; };
+		53F05FCD1CBB5B3D007F3023 /* Level0EnemyAPos.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FC91CBB5B3D007F3023 /* Level0EnemyAPos.mtl */; };
+		53F05FCE1CBB5B3D007F3023 /* Level0EnemyAPos.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FCA1CBB5B3D007F3023 /* Level0EnemyAPos.obj */; };
+		53F05FCF1CBB5B3D007F3023 /* Level0EnemyBPos.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FCB1CBB5B3D007F3023 /* Level0EnemyBPos.mtl */; };
+		53F05FD01CBB5B3D007F3023 /* Level0EnemyBPos.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FCC1CBB5B3D007F3023 /* Level0EnemyBPos.obj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +158,12 @@
 /* Begin PBXFileReference section */
 		4442C95D1CBAF9900097FD98 /* Shooter_Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shooter_Menu.png; sourceTree = "<group>"; };
 		4442C95F1CBB0A690097FD98 /* Gun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gun.png; sourceTree = "<group>"; };
+		4442C9731CBB21C90097FD98 /* reload.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = reload.mp3; sourceTree = "<group>"; };
+		4442C9811CBB506F0097FD98 /* EndViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndViewController.m; sourceTree = "<group>"; };
+		4442C9831CBB50890097FD98 /* EndViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EndViewController.h; sourceTree = "<group>"; };
+		4442C9841CBB59590097FD98 /* Ending.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Ending.jpg; sourceTree = "<group>"; };
+		4442C9891CBB61790097FD98 /* Continue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Continue.png; sourceTree = "<group>"; };
+		4442C9911CBB76450097FD98 /* AND HIS NAME IS JOHN CENA.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "AND HIS NAME IS JOHN CENA.mp3"; sourceTree = "<group>"; };
 		445331FF1CB5BD3B004DC43B /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		445332011CB5BD44004DC43B /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		445332041CB5BD81004DC43B /* ButtonPress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonPress.wav; sourceTree = "<group>"; };
@@ -197,8 +216,8 @@
 		5385DE431CA3365100F1A323 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		5385DE441CA3365100F1A323 /* ObjMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjMesh.cpp; sourceTree = "<group>"; };
 		5385DE451CA3365100F1A323 /* ObjMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjMesh.h; sourceTree = "<group>"; };
-		5385DE461CA3365100F1A323 /* MyShader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = MyShader.fs; sourceTree = "<group>"; };
-		5385DE471CA3365100F1A323 /* MyShader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = MyShader.vs; sourceTree = "<group>"; };
+		5385DE461CA3365100F1A323 /* ModelShader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ModelShader.fs; sourceTree = "<group>"; };
+		5385DE471CA3365100F1A323 /* ModelShader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ModelShader.vs; sourceTree = "<group>"; };
 		5385DE4A1CA3365100F1A323 /* gl_types.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gl_types.hpp; sourceTree = "<group>"; };
 		5385DE4D1CA3365100F1A323 /* ShaderInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderInterface.cpp; sourceTree = "<group>"; };
 		5385DE4E1CA3365100F1A323 /* ShaderInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderInterface.h; sourceTree = "<group>"; };
@@ -264,6 +283,14 @@
 		53F05FAB1CB9FA0C007F3023 /* shooting_star.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = shooting_star.wav; path = Assets.xcassets/shooting_star.wav; sourceTree = "<group>"; };
 		53F05FAC1CB9FA0C007F3023 /* swipe_whiff.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = swipe_whiff.mp3; path = Assets.xcassets/swipe_whiff.mp3; sourceTree = "<group>"; };
 		53F05FAD1CB9FA0C007F3023 /* sword-clash1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "sword-clash1.mp3"; path = "Assets.xcassets/sword-clash1.mp3"; sourceTree = "<group>"; };
+		53F05FB81CBB08BA007F3023 /* SpriteShader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SpriteShader.vs; sourceTree = "<group>"; };
+		53F05FBA1CBB08C8007F3023 /* SpriteShader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SpriteShader.fs; sourceTree = "<group>"; };
+		53F05FC21CBB4497007F3023 /* Level0EnemyPosRail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyPosRail.mtl; sourceTree = "<group>"; };
+		53F05FC31CBB4497007F3023 /* Level0EnemyPosRail.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyPosRail.obj; sourceTree = "<group>"; };
+		53F05FC91CBB5B3D007F3023 /* Level0EnemyAPos.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyAPos.mtl; sourceTree = "<group>"; };
+		53F05FCA1CBB5B3D007F3023 /* Level0EnemyAPos.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyAPos.obj; sourceTree = "<group>"; };
+		53F05FCB1CBB5B3D007F3023 /* Level0EnemyBPos.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyBPos.mtl; sourceTree = "<group>"; };
+		53F05FCC1CBB5B3D007F3023 /* Level0EnemyBPos.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyBPos.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +313,8 @@
 		445332021CB5BD5E004DC43B /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				4442C9911CBB76450097FD98 /* AND HIS NAME IS JOHN CENA.mp3 */,
+				4442C9731CBB21C90097FD98 /* reload.mp3 */,
 				44F1AC4A1CB74AF3002557C5 /* GunSoundEffect_1.wav */,
 				53F05FA71CB9FA0C007F3023 /* 'flyby'.wav */,
 				53F05FA81CB9FA0C007F3023 /* footsteps_gravel_01.mp3 */,
@@ -303,6 +332,8 @@
 		445332031CB5BD68004DC43B /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
+				4442C9891CBB61790097FD98 /* Continue.png */,
+				4442C9841CBB59590097FD98 /* Ending.jpg */,
 				4442C95F1CBB0A690097FD98 /* Gun.png */,
 				4442C95D1CBAF9900097FD98 /* Shooter_Menu.png */,
 				53ADE88E1CB8887800DD3588 /* Fireball.png */,
@@ -329,8 +360,10 @@
 		532ECA721CADAB21001BB153 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				5385DE461CA3365100F1A323 /* MyShader.fs */,
-				5385DE471CA3365100F1A323 /* MyShader.vs */,
+				5385DE461CA3365100F1A323 /* ModelShader.fs */,
+				5385DE471CA3365100F1A323 /* ModelShader.vs */,
+				53F05FBA1CBB08C8007F3023 /* SpriteShader.fs */,
+				53F05FB81CBB08BA007F3023 /* SpriteShader.vs */,
 				5385DE521CA3365100F1A323 /* Skybox.fs */,
 				5385DE531CA3365100F1A323 /* Skybox.vs */,
 				5385DE591CA3365100F1A323 /* WaterShader.fs */,
@@ -353,6 +386,12 @@
 		532ECA9A1CADBDC5001BB153 /* Levels */ = {
 			isa = PBXGroup;
 			children = (
+				53F05FC21CBB4497007F3023 /* Level0EnemyPosRail.mtl */,
+				53F05FC91CBB5B3D007F3023 /* Level0EnemyAPos.mtl */,
+				53F05FCA1CBB5B3D007F3023 /* Level0EnemyAPos.obj */,
+				53F05FCB1CBB5B3D007F3023 /* Level0EnemyBPos.mtl */,
+				53F05FCC1CBB5B3D007F3023 /* Level0EnemyBPos.obj */,
+				53F05FC31CBB4497007F3023 /* Level0EnemyPosRail.obj */,
 				532ECA761CADBDBD001BB153 /* DemoRail.mtl */,
 				532ECA771CADBDBD001BB153 /* DemoRail.obj */,
 				532ECA781CADBDBD001BB153 /* Level0_Textures */,
@@ -458,6 +497,8 @@
 				445331FF1CB5BD3B004DC43B /* MainViewController.m */,
 				53C6792A1CA22E62007C7945 /* GameViewController.h */,
 				53C6792B1CA22E62007C7945 /* GameViewController.mm */,
+				4442C9831CBB50890097FD98 /* EndViewController.h */,
+				4442C9811CBB506F0097FD98 /* EndViewController.m */,
 				5385DE351CA3365100F1A323 /* Game.h */,
 				5385DE341CA3365100F1A323 /* Game.mm */,
 				53F05F8B1CB9B73E007F3023 /* BulletPhysics.h */,
@@ -556,7 +597,7 @@
 				TargetAttributes = {
 					53C6791C1CA22E62007C7945 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = RX327XMQJX;
+						DevelopmentTeam = QBSFJ43NUJ;
 					};
 				};
 			};
@@ -623,16 +664,18 @@
 			files = (
 				5385DE6F1CA3365100F1A323 /* Skybox.fs in Resources */,
 				532ECA8B1CADBDBD001BB153 /* Level0.mtl in Resources */,
-				5385DE661CA3365100F1A323 /* MyShader.fs in Resources */,
+				5385DE661CA3365100F1A323 /* ModelShader.fs in Resources */,
 				532ECA8C1CADBDBD001BB153 /* Level0.obj in Resources */,
 				53F05F951CB9F5AB007F3023 /* Bullet3D in Resources */,
 				532ECA881CADBDBD001BB153 /* DemoRail.mtl in Resources */,
 				53C6792F1CA22E62007C7945 /* Main.storyboard in Resources */,
 				53F05FB01CB9FA0C007F3023 /* footsteps_gravel.wav in Resources */,
+				4442C9741CBB21C90097FD98 /* reload.mp3 in Resources */,
 				532ECA901CADBDBD001BB153 /* Level0EnemyPos in Resources */,
 				532ECA981CADBDBD001BB153 /* Level0Rail.mtl in Resources */,
 				53C679291CA22E62007C7945 /* Shader.vs in Resources */,
 				532ECA931CADBDBD001BB153 /* Level0EnemyRail.mtl in Resources */,
+				53F05FC41CBB4497007F3023 /* Level0EnemyPosRail.mtl in Resources */,
 				532ECA971CADBDBD001BB153 /* Level0Layout.obj in Resources */,
 				4453320F1CB5BD9C004DC43B /* Start.gif in Resources */,
 				53F05FB41CB9FA0C007F3023 /* sword-clash1.mp3 in Resources */,
@@ -644,6 +687,8 @@
 				53C679311CA22E62007C7945 /* Assets.xcassets in Resources */,
 				445332111CB5C48E004DC43B /* Logout.png in Resources */,
 				5385DE5C1CA3365100F1A323 /* crate.mtl in Resources */,
+				53F05FC51CBB4497007F3023 /* Level0EnemyPosRail.obj in Resources */,
+				53F05FCF1CBB5B3D007F3023 /* Level0EnemyBPos.mtl in Resources */,
 				53F05FB31CB9FA0C007F3023 /* swipe_whiff.mp3 in Resources */,
 				445332071CB5BD81004DC43B /* DOOM.mp3 in Resources */,
 				53C679581CA22F35007C7945 /* glm in Resources */,
@@ -654,9 +699,11 @@
 				5385DE6E1CA3365100F1A323 /* skybox in Resources */,
 				5385DE721CA3365100F1A323 /* water in Resources */,
 				5385DE701CA3365100F1A323 /* Skybox.vs in Resources */,
+				4442C9851CBB59590097FD98 /* Ending.jpg in Resources */,
 				532ECA951CADBDBD001BB153 /* Level0Layout in Resources */,
 				44F1AC4B1CB74AF3002557C5 /* GunSoundEffect_1.wav in Resources */,
-				5385DE671CA3365100F1A323 /* MyShader.vs in Resources */,
+				5385DE671CA3365100F1A323 /* ModelShader.vs in Resources */,
+				53F05FCD1CBB5B3D007F3023 /* Level0EnemyAPos.mtl in Resources */,
 				53ADE8951CB88DDF00DD3588 /* fireball.mtl in Resources */,
 				532ECA8A1CADBDBD001BB153 /* Level0_Textures in Resources */,
 				5385DE961CA370F200F1A323 /* crate.obj in Resources */,
@@ -666,12 +713,17 @@
 				532ECA921CADBDBD001BB153 /* Level0EnemyPos.obj in Resources */,
 				53F05FAE1CB9FA0C007F3023 /* 'flyby'.wav in Resources */,
 				5385DE731CA3365100F1A323 /* WaterShader.fs in Resources */,
+				4442C9921CBB76450097FD98 /* AND HIS NAME IS JOHN CENA.mp3 in Resources */,
 				53ADE8961CB88DDF00DD3588 /* fireball.obj in Resources */,
 				53ADE88F1CB8887800DD3588 /* Fireball.png in Resources */,
 				5385DE5B1CA3365100F1A323 /* crate in Resources */,
 				53F05FAF1CB9FA0C007F3023 /* footsteps_gravel_01.mp3 in Resources */,
+				53F05FBB1CBB08C8007F3023 /* SpriteShader.fs in Resources */,
 				4453320C1CB5BD9C004DC43B /* BGT1.gif in Resources */,
 				53ADE8981CB88E4200DD3588 /* fireball in Resources */,
+				53F05FB91CBB08BA007F3023 /* SpriteShader.vs in Resources */,
+				53F05FD01CBB5B3D007F3023 /* Level0EnemyBPos.obj in Resources */,
+				4442C98A1CBB61790097FD98 /* Continue.png in Resources */,
 				445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */,
 				4442C9601CBB0A690097FD98 /* Gun.png in Resources */,
 				532ECA941CADBDBD001BB153 /* Level0EnemyRail.obj in Resources */,
@@ -679,6 +731,7 @@
 				5385DE741CA3365100F1A323 /* WaterShader.vs in Resources */,
 				532ECA8E1CADBDBD001BB153 /* Level0All.mtl in Resources */,
 				532ECA991CADBDBD001BB153 /* Level0Rail.obj in Resources */,
+				53F05FCE1CBB5B3D007F3023 /* Level0EnemyAPos.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,6 +749,7 @@
 				445332001CB5BD3B004DC43B /* MainViewController.m in Sources */,
 				53C679251CA22E62007C7945 /* AppDelegate.m in Sources */,
 				5385DE6C1CA3365100F1A323 /* ShaderInterface.cpp in Sources */,
+				4442C9821CBB506F0097FD98 /* EndViewController.m in Sources */,
 				5385DE941CA359B700F1A323 /* ios_path.mm in Sources */,
 				5385DE621CA3365100F1A323 /* GLTexture.cpp in Sources */,
 				5385DE711CA3365100F1A323 /* Vertex.cpp in Sources */,
@@ -860,7 +914,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Jacob;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Andrew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dungeons/Dungeons-Bridging-Header.h";
@@ -891,7 +945,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Jacob;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Andrew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dungeons/Dungeons-Bridging-Header.h";

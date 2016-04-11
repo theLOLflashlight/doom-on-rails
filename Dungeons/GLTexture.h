@@ -18,8 +18,8 @@ public:
 
     GLTexture& operator =( GLTexture&& move );
 
-    void bind( GLint unit );
-    void bind();
+    void bind( GLint unit ) const;
+    void bind() const;
 
     struct Exception
         : GLException

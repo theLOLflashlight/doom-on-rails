@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Skybox.hpp"
 #include "Water.hpp"
+#include "BulletPhysics.h"
 
 #include <UIKit/UIKit.h>
 #include <GLKit/GLKit.h>
@@ -64,6 +65,12 @@ struct Rail
         
         return pos;
     }
+    
+    bool isAtEnd()
+    {
+        return !(_idx < (data.size() - 1));
+    }
+    
 };
 
 
@@ -72,8 +79,10 @@ class Game
 {
 public:
 
-    Game( GLKView* view );
+    Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::string redEnemies, std::string greenEnemies, std::string railName );
 
+    int* killCountPtr;
+    
     void render() const;
     void offsetEyelook ();
     void update( double );
@@ -95,16 +104,19 @@ public:
     void addComponent( PhysicalComponent component );
     void addComponent( BehavioralComponent component );
     
+    void destroyEntity( EntityId _id );
+    
     void draw_scene( glm::mat4 view, glm::mat4 proj, bool drawWater = false ) const;
 
     
     GLKView*                _view;
+    BulletPhysics*          _world;
     GLfloat                 _width, _height;
     double                  _startTime, _currTime;
     
-    GLProgram::ptr_t        _program;
+    mutable GLProgram       _program, _spriteProgram;
     
-    Model                   _level, _enemies;
+    Model                   _level;
     Rail                    _rail, _raillook;
     
     template< typename Component >
@@ -121,5 +133,7 @@ public:
     
     glm::vec3               _eyepos, _eyelook;
     double                  _animationProgress;
+    
+    bool                    _endOfLevel;
 };
 

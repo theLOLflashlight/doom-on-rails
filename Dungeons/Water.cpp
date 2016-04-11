@@ -139,26 +139,18 @@ void Water::update( float waveFactor, vec3 eyepos )
     glUseProgram( 0 );
 }
 
-void Water::bindReflection( GLProgram* program, float width, float height ) const
+void Water::bindReflection( float width, float height ) const
 {
     glBindFramebuffer( GL_FRAMEBUFFER, _reflectFbo );
     glViewport( 0, 0, (int) width/2, (int) height/2 );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-    
-    program->bind();
-    glUniform4f( program->find_uniform( "uWaterPlane" ), 0, 1, 0, 0 );
-    glUseProgram( 0 );
 }
 
-void Water::bindRefraction( GLProgram* program, float width, float height ) const
+void Water::bindRefraction( float width, float height ) const
 {
     glBindFramebuffer( GL_FRAMEBUFFER, _refractFbo );
     glViewport( 0, 0, (int) (width * .75), (int) (height * .75) );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-    
-    program->bind();
-    glUniform4f( program->find_uniform( "uWaterPlane" ), 0, -1, 0, 0 );
-    glUseProgram( 0 );
 }
 
 void Water::render( mat4 view, mat4 proj ) const

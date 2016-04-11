@@ -30,8 +30,8 @@ struct Water
     
     void update( float waveFactor, glm::vec3 eyepos );
     
-    void bindReflection( GLProgram* program, float width, float height ) const;
-    void bindRefraction( GLProgram* program, float width, float height ) const;
+    void bindReflection( float width, float height ) const;
+    void bindRefraction( float width, float height ) const;
     
     void render( glm::mat4 view, glm::mat4 proj ) const;
 };
