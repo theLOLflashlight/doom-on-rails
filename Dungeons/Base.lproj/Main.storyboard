@@ -213,6 +213,7 @@
         <image name="Shooter_Menu.png" width="1600" height="120"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="vpU-i5-Raj"/>
         <segue reference="JEP-ZT-spM"/>
         <segue reference="4xJ-iI-ezb"/>
     </inferredMetricsTieBreakers>

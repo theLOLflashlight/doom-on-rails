@@ -21,8 +21,8 @@ class GameCppVariables
 {
 public:
     // Grab the path, make sure to add it to your project!
-    const char* filePath = "footsteps_gravel";
-    std::string sound = ios_path("footsteps_gravel.wav");
+    //const char* filePath = "footsteps_gravel";
+    //std::string sound = ios_path("footsteps_gravel.wav");
     //var audioPlayer = AVAudioPlayer()
     
     //animation for shaking and background color turning brown (due to earthquake)
