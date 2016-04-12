@@ -37,9 +37,5 @@ void main()
     }
 
     out_Color = (Ka + Kd + Ks) * texture( uTexture, vTexCoord );
-    out_Color = mix( out_Color, vec4( uColor.rgb, 1 ), uColor.a );
-    //gl_FragColor = mix( vColor, gl_FragColor, 0.9 );
-    //out_Color.a = 1.0;
-    //gl_FragColor = uColor;
-    
+    out_Color.rgb = mix( out_Color.rgb, uColor.rgb, uColor.a );
 }

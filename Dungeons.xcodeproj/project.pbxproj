@@ -73,6 +73,7 @@
 		5385DE911CA3545200F1A323 /* stb_image_aug.c in Sources */ = {isa = PBXBuildFile; fileRef = 5385DE831CA3429000F1A323 /* stb_image_aug.c */; };
 		5385DE941CA359B700F1A323 /* ios_path.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5385DE931CA359B700F1A323 /* ios_path.mm */; };
 		5385DE961CA370F200F1A323 /* crate.obj in Resources */ = {isa = PBXBuildFile; fileRef = 5385DE951CA370F200F1A323 /* crate.obj */; };
+		539644B81CBC66D800F71E6E /* FireShader.fs in Resources */ = {isa = PBXBuildFile; fileRef = 539644B71CBC66D800F71E6E /* FireShader.fs */; };
 		53ADE88F1CB8887800DD3588 /* Fireball.png in Resources */ = {isa = PBXBuildFile; fileRef = 53ADE88E1CB8887800DD3588 /* Fireball.png */; };
 		53ADE8951CB88DDF00DD3588 /* fireball.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53ADE8921CB88DDF00DD3588 /* fireball.mtl */; };
 		53ADE8961CB88DDF00DD3588 /* fireball.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53ADE8931CB88DDF00DD3588 /* fireball.obj */; };
@@ -249,6 +250,7 @@
 		5385DE921CA3580F00F1A323 /* ios_path.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = ios_path.h; sourceTree = "<group>"; };
 		5385DE931CA359B700F1A323 /* ios_path.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ios_path.mm; sourceTree = "<group>"; };
 		5385DE951CA370F200F1A323 /* crate.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = crate.obj; sourceTree = "<group>"; };
+		539644B71CBC66D800F71E6E /* FireShader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = FireShader.fs; sourceTree = "<group>"; };
 		53ADE88E1CB8887800DD3588 /* Fireball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fireball.png; sourceTree = "<group>"; };
 		53ADE8921CB88DDF00DD3588 /* fireball.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fireball.mtl; sourceTree = "<group>"; };
 		53ADE8931CB88DDF00DD3588 /* fireball.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fireball.obj; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 				5385DE471CA3365100F1A323 /* ModelShader.vs */,
 				53F05FBA1CBB08C8007F3023 /* SpriteShader.fs */,
 				53F05FB81CBB08BA007F3023 /* SpriteShader.vs */,
+				539644B71CBC66D800F71E6E /* FireShader.fs */,
 				5385DE521CA3365100F1A323 /* Skybox.fs */,
 				5385DE531CA3365100F1A323 /* Skybox.vs */,
 				5385DE591CA3365100F1A323 /* WaterShader.fs */,
@@ -676,6 +679,7 @@
 				53C679291CA22E62007C7945 /* Shader.vs in Resources */,
 				532ECA931CADBDBD001BB153 /* Level0EnemyRail.mtl in Resources */,
 				53F05FC41CBB4497007F3023 /* Level0EnemyPosRail.mtl in Resources */,
+				539644B81CBC66D800F71E6E /* FireShader.fs in Resources */,
 				532ECA971CADBDBD001BB153 /* Level0Layout.obj in Resources */,
 				4453320F1CB5BD9C004DC43B /* Start.gif in Resources */,
 				53F05FB41CB9FA0C007F3023 /* sword-clash1.mp3 in Resources */,

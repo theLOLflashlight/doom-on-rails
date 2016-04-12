@@ -17,6 +17,7 @@ uniform     vec3        uSpriteAxis;
 
 uniform     vec4        uWaterPlane;
 
+
 mat4 billboard( vec3 right, vec3 up, vec3 look, vec3 pos )
 {
     return mat4( mat4x3( right, up, look, pos ) );

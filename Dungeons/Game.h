@@ -114,7 +114,7 @@ public:
     GLfloat                 _width, _height;
     double                  _startTime, _currTime;
     
-    mutable GLProgram       _program, _spriteProgram;
+    mutable GLProgram       _program, _spriteProgram, _fireProgram;
     
     Model                   _level;
     Rail                    _rail, _raillook;

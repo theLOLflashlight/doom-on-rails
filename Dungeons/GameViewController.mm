@@ -22,9 +22,6 @@
 #define NSUInteger UInt
 #define MAX_CHANNELS 30
 
-#define BULLET_MIN 1000
-#define BULLET_MAX 3000
-
 @interface GameViewController ()
 {
     bool SoundSwitch;
@@ -189,25 +186,21 @@
             EndViewController* endController = [self.storyboard instantiateViewControllerWithIdentifier: @"EndViewController"];
             
             endController.kills = Kills;
+            [self presentViewController: endController animated: YES completion: nil];
             
-            //[self.navigationController pushViewController: endController animated: YES];
-            [self dismissViewControllerAnimated: YES completion: ^() {
+            /*[self dismissViewControllerAnimated: YES completion: ^() {
                 [self presentViewController: endController animated: YES completion: nil];
-            }];
-            //EndViewController *myController = [[EndViewController alloc] init];
-            
-            //[self presentViewController:myController animated:YES completion:nil];
-            //[self dismissViewControllerAnimated:YES completion:nil];
+            }];*/
         }
     };
     _game->addComponent( endGame );
     
     _game->killCountPtr = &Kills;
     
-    _projectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_spriteProgram );
+    _projectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_fireProgram );
     
     
-    _bulletId = BULLET_MIN;
+    _bulletId = 0;
     
     _CurrentChannel = 0;
     
@@ -215,20 +208,20 @@
     
     for(int i = 0; i < MAX_CHANNELS; i++) {
         
-    GunSoundEffects[i] = [[AVAudioPlayer alloc]initWithData:GBSoundPath error:nil];
+        GunSoundEffects[i] = [[AVAudioPlayer alloc]initWithData:GBSoundPath error:nil];
         
-    [GunSoundEffects[i] prepareToPlay];
-       
-    if (_MusicOn)
-    {
-        UIImage *SoundButtonImage = [UIImage imageNamed:@"SoundOn.png"];
-        [self.SoundButtonEffects setImage:SoundButtonImage forState:(UIControlStateNormal)];
-    }
-    else
-    {
-        UIImage *SoundButtonImage = [UIImage imageNamed:@"SoundOff.png"];
-        [self.SoundButtonEffects setImage:SoundButtonImage forState:(UIControlStateNormal)];
-    }
+        [GunSoundEffects[i] prepareToPlay];
+        
+        if (_MusicOn)
+        {
+            UIImage *SoundButtonImage = [UIImage imageNamed:@"SoundOn.png"];
+            [self.SoundButtonEffects setImage:SoundButtonImage forState:(UIControlStateNormal)];
+        }
+        else
+        {
+            UIImage *SoundButtonImage = [UIImage imageNamed:@"SoundOff.png"];
+            [self.SoundButtonEffects setImage:SoundButtonImage forState:(UIControlStateNormal)];
+        }
 
     }
     
@@ -381,12 +374,12 @@
 
 - (void) spawn_projectile:( glm::vec3 )pos velocity:( glm::vec3 ) vel
 {
-    const EntityId bulletId = _bulletId++;
+    const EntityId bulletId( "bullet", _bulletId++ );
     {
         GraphicalComponent bullet( bulletId, GraphicalComponent::TRANSLUCENT );
-        bullet.program = &_game->_spriteProgram;
+        bullet.program = _projectileSprite->_program;
         bullet.sprite = _projectileSprite;
-        //bullet.spriteAxis = glm::vec3( 0, 1, 0 );
+        //bullet.color = glm::vec4( 0, 1, 0, 0.5 );
         
         _game->addComponent( bullet );
     }

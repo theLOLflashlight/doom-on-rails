@@ -11,9 +11,9 @@ Model::Model( const ObjMesh& mesh, GLProgram* program )
     : _mesh( mesh )
     , _program( program )
     , _buffer( _mesh.data(), _mesh.size(), STATIC_DRAW,
-        program->make_vert_attribute< vec3 >( "aPosition" ),
-        program->make_vert_attribute< vec3 >( "aNormal" ),
-        program->make_vert_attribute< vec2 >( "aTexCoord" ) )
+        _program->make_vert_attribute< vec3 >( "aPosition" ),
+        _program->make_vert_attribute< vec3 >( "aNormal" ),
+        _program->make_vert_attribute< vec2 >( "aTexCoord" ) )
 {
 }
 
@@ -26,7 +26,7 @@ void Model::render
     using namespace glm;
     
     _program->bind();
-    glUniformMatrix4fv( _program->find_uniform( "uModelMatrix" ), 1, GL_FALSE, &model[ 0 ][ 0 ] );
+    glUniformMatrix4fv( _program->find_uniform( "uModelMatrix" ), 1, GL_FALSE, (float*)&model );
 
     //glUniform4f( _program->find_uniform( "uColor" ), 0, 0, 1, 1 );
     //glUniform1i( _program->find_uniform( "uTexture" ), 0 );
@@ -64,20 +64,29 @@ const SpriteVertex SPRITE_VERTICES[] = {
 
 Sprite::Sprite( std::string texture, GLProgram* program )
     : _texture( texture )
+    , _program( program )
     , _buffer( SPRITE_VERTICES, 6, STATIC_DRAW,
-              program->make_vert_attribute< vec3 >( "aPosition" ),
-              program->make_vert_attribute< vec2 >( "aTexCoord" ) )
+               _program->make_vert_attribute< vec3 >( "aPosition" ),
+               _program->make_vert_attribute< vec2 >( "aTexCoord" ) )
 {
-    program->bind();
-    glUniform1i( program->find_uniform( "uTexture" ), 0 );
+    _program->bind();
+    glUniform1i( _program->find_uniform( "uTexture" ), 0 );
     glUseProgram( 0 );
 }
 
-void Sprite::render() const
+void Sprite::render( glm::mat4 model ) const
 {
-    glDisable( GL_CULL_FACE );
+    model = scale( model, vec3( width, height, width ) );
+    
+    _program->bind();
+    glUniformMatrix4fv( _program->find_uniform( "uModelMatrix" ), 1, GL_FALSE, (float*)&model );
+    glUniform3fv( _program->find_uniform( "uSpriteAxis" ), 1, &spriteAxis[0] );
+    
+    
     glActiveTexture( GL_TEXTURE0 );
     _texture.bind();
+    
+    glDisable( GL_CULL_FACE );
     _buffer.draw( GL_TRIANGLES, 0, 6 );
     glEnable( GL_CULL_FACE );
 }
