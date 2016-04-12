@@ -263,9 +263,10 @@ struct Enemy_Basic
     //RedImageOverlay.;
     
     //Using apple's tutorial, ie. https://developer.apple.com/library/ios/documentation/2DDrawing/Conceptual/DrawingPrintingiOS/HandlingImages/Images.html
-    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"RedDamageOverlay" ofType:@"png"];
+    /*NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"RedDamageOverlay" ofType:@"png"];
     UIImage *myImageObj = [[UIImage alloc] initWithContentsOfFile:imagePath];
     _anImage = myImageObj;
+    */
     
     //tap
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
@@ -307,7 +308,7 @@ struct Enemy_Basic
     
     _projectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_spriteProgram );
     _projectileSprite2 = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_spriteProgram );
-    _slashSprite = new Sprite( ios_path( "slashesD4.jpg" ), &_game->_spriteProgram );
+    //_slashSprite = new Sprite( ios_path( "slashesD4.jpg" ), &_game->_spriteProgram );
     _game->killCountPtr = &Kills;
     
     _projectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_fireProgram );
@@ -358,7 +359,7 @@ struct Enemy_Basic
     //to track swipe running or not
     _currBezierDuration= -0.00001;// = -0.00001; //hard-coded time below 0
     _currSwipeDrawn = false;// = false;
-    _imageView.image = [UIImage imageNamed:@"RedDamageOverlay.jpeg"]; //image
+    //_imageView.image = [UIImage imageNamed:@"RedDamageOverlay.jpeg"]; //image
     BehavioralComponent enemy("enemy");
     
     //[NSDate?](count: 64, repeatedValue: nil)
