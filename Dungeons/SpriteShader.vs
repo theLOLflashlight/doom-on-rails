@@ -9,6 +9,7 @@ out         vec2        vTexCoord;
 uniform     mat4        uModelMatrix;
 uniform     mat4        uViewMatrix;
 uniform     mat4        uProjMatrix;
+uniform     vec2        uSpriteSize;
 
 uniform     vec4        uAmbientColor;
 uniform     vec4        uDiffuseColor;
@@ -52,12 +53,14 @@ void main()
     else
         billboardMatrix = billboard_axis( vec3(0,0,0), vec3( transpose(view)[2] ), normalize( uSpriteAxis ) );
     
-    mat4 model = uModelMatrix * billboardMatrix;
+    mat4 model = uModelMatrix;
+    model[0][0] *= uSpriteSize.x;
+    model[1][1] *= uSpriteSize.y;
+    model[2][2] *= uSpriteSize.x;
+    model *= billboardMatrix;
     
     gl_Position = model * vec4( aPosition, 1 );
-    
-    vec4 plane = uWaterPlane;
-    gl_ClipDistance[ 0 ] = dot( gl_Position, vec4( plane.xyz, plane.w + 0.02 ) );
+    gl_ClipDistance[ 0 ] = dot( gl_Position, vec4( uWaterPlane.xyz, uWaterPlane.w + 0.02 ) );
     
     gl_Position = uProjMatrix * uViewMatrix * gl_Position;
     

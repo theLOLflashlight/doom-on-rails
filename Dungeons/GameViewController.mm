@@ -396,6 +396,31 @@
         //[_physics addRigidBody: bullet.body];
         _game->addComponent( bullet );
     }
+    {
+        BehavioralComponent bullet( bulletId );
+        
+        double startTime = -1;
+        bullet.functor = [self, startTime](BehavioralComponent* bc, EntityCollection& entities, double time)
+        mutable {
+            const double MAX_LIFETIME = 3;
+            const EntityId entityId = bc->entityId;
+            
+            if ( startTime < 0 )
+                startTime = time;
+            
+            const double lifetime = time - startTime;
+            
+            if ( lifetime > MAX_LIFETIME - 1 )
+            {
+                float size = MAX_LIFETIME - lifetime;
+                entities[ entityId ].scale = glm::vec3( size, size, size );
+            }
+            
+            if ( lifetime > MAX_LIFETIME )
+                _game->markEntityForDestruction( entityId );
+        };
+        _game->addComponent( bullet );
+    }
     
     [GunSoundEffects[_CurrentChannel] play];
     
