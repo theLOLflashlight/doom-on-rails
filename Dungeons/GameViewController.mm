@@ -56,7 +56,7 @@ struct Enemy_Basic
     
     Game*       _game;
     int         _bulletId;
-    Sprite*      _projectileSprite, *_projectileSprite2;
+    Sprite*      _projectileSprite, *_projectileSprite2, *_slashSprite;
     
     //AVAudioPlayer *GunSoundEffects;
     AVAudioPlayer *GunSoundEffects[MAX_CHANNELS];
@@ -307,6 +307,7 @@ struct Enemy_Basic
     
     _projectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_spriteProgram );
     _projectileSprite2 = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_spriteProgram );
+    _slashSprite = new Sprite( ios_path( "slashesD4.jpg" ), &_game->_spriteProgram );
     _game->killCountPtr = &Kills;
     
     _projectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_fireProgram );
@@ -496,7 +497,7 @@ struct Enemy_Basic
             }
              */
             using namespace glm;
-            const CGPoint mouse = [self midpoint:_translationPoints];
+            const CGPoint mouse = [self midpointEnds:_translationPoints];
             
             const mat4 view = _game->viewMatrix();
             const mat4 proj = _game->projMatrix();
@@ -510,7 +511,7 @@ struct Enemy_Basic
             
             //glm::vec3 fwdDisplacement = glm::normalize(_game->_eyelook - _game->_eyepos) *1.0f;
             //glm::vec3 oPos =_game->_eyepos + fwdDisplacement;
-            [self explosionImpact:createPos velocity:velocity radius:8.0f];
+            [self explosionImpact:createPos velocity:velocity radius:2.0f];
             
             //[self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f homeInOnPlayer:false damage:100];
             
@@ -575,6 +576,28 @@ struct Enemy_Basic
     
     midPoint.x /= pointArray.count;
     midPoint.y /= pointArray.count;
+    
+    return midPoint;
+}
+-(CGPoint) midpointEnds: (NSMutableArray *)pointArray {
+    CGPoint midPoint;
+    int i = 0;
+    //add start and end points and average only those
+    NSValue *locationValue = [pointArray objectAtIndex:i];
+    CGPoint location = locationValue.CGPointValue;
+    midPoint.x += location.x;
+    midPoint.y += location.y;
+    
+    i = pointArray.count - 1;
+    
+    locationValue = [pointArray objectAtIndex:i];
+    location = locationValue.CGPointValue;
+    midPoint.x += location.x;
+    midPoint.y += location.y;
+    
+    
+    midPoint.x /= 2;
+    midPoint.y /= 2;
     
     return midPoint;
 }
@@ -794,14 +817,42 @@ struct Enemy_Basic
                velocity:(glm::vec3) vel
                  radius:(float)     radius
 {
+    //explosion graphic:
+    //position the explosn2 entity
+    glm::vec3 fwdDisplacement = glm::normalize(_game->_eyelook - _game->_eyepos) *1.0f;
+    glm::vec3 oPos =_game->_eyepos + fwdDisplacement;
+    Entity* ntt = &(_game->_entities["explosn2"]);
+    ntt->position = oPos;
     {
         
-        GraphicalComponent explosion( "explosn1", GraphicalComponent::TRANSLUCENT );
+        GraphicalComponent explosion( "explosn2", GraphicalComponent::TRANSLUCENT );
         explosion.program = &_game->_spriteProgram;
         //for enemy projectiles
-        explosion.sprite = _projectileSprite2;
+        explosion.sprite = _slashSprite;
         _game->addComponent(explosion);
     }
+    {
+        BehavioralComponent explosion("explosn2");
+        //explosion.endTimeInCycle = 20;
+        explosion.timeInCycle = 0;
+        int timeInCycle = 0, endTimeInCycle = 20; //check with Andrew about how he stored the time
+        explosion.functor = [self](BehavioralComponent *bc, EntityCollection& entities, double time) {
+            if(bc->timeInCycle == 20) { //end time of explosion
+                _game->markEntityForDestruction(bc->entityId);
+            }
+            
+            //update position of explosion graphic
+            glm::vec3 fwdDisplacement = glm::normalize(_game->_eyelook - _game->_eyepos) *1.0f;
+            glm::vec3 oPos =_game->_eyepos + fwdDisplacement;
+            Entity* ntt = &(_game->_entities[bc->entityId]);
+            ntt->position = oPos;
+            //add fade effect proportional to time in cycle to point of destruction
+            
+            bc->timeInCycle++;
+        };
+    }
+    
+    //explosion physics object:
     {
         //Create explosion entity
         PhysicalComponent explosion("explosn1");
@@ -820,8 +871,10 @@ struct Enemy_Basic
                 _game->markEntityForDestruction(bc->entityId);
                 //[[_toBeDeleted addObject:[[EntityId alloc] initWithFormat:@"%d", bc->entityId]];
                 //_game->destroyEntity(bc->entityId);
+                
             }
             bc->timeInCycle++;
+            //fade - reduce alpha
             
         };
         _game->addComponent(explosion);
@@ -857,6 +910,7 @@ struct Enemy_Basic
     int healthInt = [self.Health.text intValue]; //string to int
     //_anImage = 0.7;
     self.Health.text = [NSString stringWithFormat:@"%d", healthInt - damage]; //int to string to update health
+    //implement flickering of health
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -948,9 +1002,6 @@ struct Enemy_Basic
              */
         }
         //_game->addComponent(bulletBc);
-        
-    }
-    {
         
     }
     {
@@ -1049,6 +1100,15 @@ struct Enemy_Basic
      RedImageOverlay.alpha -= 0.7f / 60.0f;
      }*/
     
+    if(Kills == 1 && getkill)
+    {
+        NSData *RlSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"First Blood" ofType:@"mp3"]];
+        KillsSound = [[AVAudioPlayer alloc]initWithData:RlSoundPath error:nil];
+        [KillsSound prepareToPlay];
+        [KillsSound play];
+        
+        getkill = false;
+    }
     //update overlay and position each update
     
     glm::vec3 oPos =_game->_eyepos + (_game->_eyelook - _game->_eyepos)/3.0f;
@@ -1080,17 +1140,6 @@ struct Enemy_Basic
     //if()
     //BehavioralComponent bc2(_bulletId);
     //pc2 = oPos;
-    
-    if(Kills == 1 && getkill)
-    {
-        NSData *RlSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"First Blood" ofType:@"mp3"]];
-        KillsSound = [[AVAudioPlayer alloc]initWithData:RlSoundPath error:nil];
-        [KillsSound prepareToPlay];
-        [KillsSound play];
-        
-        getkill = false;
-    }
-    
     
     self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", Kills];
     self.Health.text =[[NSString alloc] initWithFormat: @"%d", 100];
