@@ -8,10 +8,19 @@
 #include <string>
 
 
-struct Sprite
+struct Renderable
+{
+    GLProgram* _program;
+    
+    virtual void render( glm::mat4 modelMatrix ) const = 0;
+    
+    explicit Renderable( GLProgram* program ) : _program( program ) {}
+};
+
+
+struct Sprite : Renderable
 {
     GLTexture       _texture;
-    GLProgram*      _program;
     GLVertexBuffer  _buffer;
     
     float           width = 1;
@@ -20,20 +29,18 @@ struct Sprite
     
     Sprite( std::string texture, GLProgram* program );
     
-    void render( glm::mat4 model ) const;
-
+    void render( glm::mat4 modelMatrix ) const;
 };
 
-struct Model
+struct Model : Renderable
 {
+    ObjMesh         _mesh;
+    GLVertexBuffer  _buffer;
+    
+    GLenum           mode = GL_TRIANGLES;
+    
     Model( const ObjMesh& mesh, GLProgram* program );
-
-    //void render() const;
-    void render( glm::mat4 model,
-                 GLenum    mode = GL_TRIANGLES ) const;
-
-    ObjMesh             _mesh;
-    GLProgram*          _program;
-    GLVertexBuffer      _buffer;
+    
+    void render( glm::mat4 modelMatrix ) const;
 };
 

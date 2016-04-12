@@ -103,8 +103,7 @@ Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::s
     // Set up level
     {
         GraphicalComponent level( "level" );
-        level.model = &_level;
-        level.program = &_program;
+        level.asset = &_level;
         
         _graphics.push_back( level );
         _entities[ "level" ].position = vec3( 0, -0.1, 0 );
@@ -146,8 +145,7 @@ Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::s
             const EntityId enemyId( "redemy", i );
             
             GraphicalComponent enemyG( enemyId, GraphicalComponent::TRANSLUCENT );
-            enemyG.sprite = redSprite;
-            enemyG.program = &_spriteProgram;
+            enemyG.asset = redSprite;
             
             addComponent( enemyG );
             
@@ -180,8 +178,7 @@ Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::s
             const EntityId enemyId( "grnemy", i );
             
             GraphicalComponent enemyG( enemyId, GraphicalComponent::TRANSLUCENT );
-            enemyG.sprite = greenSprite;
-            enemyG.program = &_spriteProgram;
+            enemyG.asset = greenSprite;
             
             addComponent( enemyG );
             
@@ -262,12 +259,11 @@ void Game::update( double step )
     glUniform1f( _fireProgram.find_uniform( "uDuDvFactor" ), time );
     glUseProgram( 0 );
     
+    for ( auto& physable : _physics )
+        physable.update( _entities );
     
     for ( auto& behavior : _behaviors )
         behavior.update( _entities, time );
-    
-    for ( auto& physable : _physics )
-        physable.update( _entities );
     
     for ( auto pair : _entities )
         if ( pair.second.position.y < -5 )
@@ -280,18 +276,18 @@ void Game::update( double step )
     
     // Sort our translucent sprites based on distance from camera.
     std::sort( _graphics.begin(), _graphics.end(),
-    [this](const GraphicalComponent& lhs, const GraphicalComponent& rhs)
+    [this](const GraphicalComponent& first, const GraphicalComponent& second)
     {
-        if ( lhs.visibility == GraphicalComponent::TRANSLUCENT
-             && rhs.visibility == GraphicalComponent::TRANSLUCENT )
+        if ( first.visibility == GraphicalComponent::TRANSLUCENT
+             && second.visibility == GraphicalComponent::TRANSLUCENT )
         {
-            vec3 pos1 = _entities[ lhs.entityId ].position;
-            vec3 pos2 = _entities[ rhs.entityId ].position;
+            vec3 pos1 = _entities[ first.entityId ].position;
+            vec3 pos2 = _entities[ second.entityId ].position;
             
             return glm::distance( pos1, _eyepos ) > glm::distance( pos2, _eyepos );
         }
 
-        return rhs.visibility == GraphicalComponent::TRANSLUCENT;
+        return second.visibility == GraphicalComponent::TRANSLUCENT;
     } );
 }
 

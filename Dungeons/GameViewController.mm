@@ -32,8 +32,10 @@
     AVAudioPlayer *ReloadSound;
     
     Game*       _game;
-    int         _bulletId;
+    uint16_t    _bulletId;
+    uint16_t    _bfgId;
     Sprite*     _projectileSprite;
+    Sprite*     _bfgProjectileSprite;
     
     //AVAudioPlayer *GunSoundEffects;
     AVAudioPlayer *GunSoundEffects[MAX_CHANNELS];
@@ -187,10 +189,6 @@
             
             endController.kills = Kills;
             [self presentViewController: endController animated: YES completion: nil];
-            
-            /*[self dismissViewControllerAnimated: YES completion: ^() {
-                [self presentViewController: endController animated: YES completion: nil];
-            }];*/
         }
     };
     _game->addComponent( endGame );
@@ -198,9 +196,12 @@
     _game->killCountPtr = &Kills;
     
     _projectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_fireProgram );
-    
+    _bfgProjectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_fireProgram );
+    _bfgProjectileSprite->width = 4;
+    _bfgProjectileSprite->height = 4;
     
     _bulletId = 0;
+    _bfgId = 0;
     
     _CurrentChannel = 0;
     
@@ -377,9 +378,7 @@
     const EntityId bulletId( "bullet", _bulletId++ );
     {
         GraphicalComponent bullet( bulletId, GraphicalComponent::TRANSLUCENT );
-        bullet.program = _projectileSprite->_program;
-        bullet.sprite = _projectileSprite;
-        //bullet.color = glm::vec4( 0, 1, 0, 0.5 );
+        bullet.asset = _projectileSprite;
         
         _game->addComponent( bullet );
     }
@@ -432,6 +431,66 @@
     }
     
 }
+
+- (void) spawn_bfg_projectile:( glm::vec3 )pos velocity:( glm::vec3 ) vel
+{
+    const EntityId bfgId( "bfg", _bfgId++ );
+    {
+        GraphicalComponent bfg( bfgId, GraphicalComponent::TRANSLUCENT );
+        bfg.asset = _bfgProjectileSprite;
+        bfg.color = glm::vec4( 0, 1, 0, 0.5 );
+        
+        _game->addComponent( bfg );
+    }
+    {
+        PhysicalComponent bfg( bfgId );
+        
+        auto motionState = new btDefaultMotionState(
+            btTransform( btQuaternion( 0,0,0,1 ), btVector3( pos.x, pos.y, pos.z ) ) );
+        
+        static btSphereShape SPHERE_SHAPE( 2 );
+        bfg.body = new btRigidBody( 1, motionState, &SPHERE_SHAPE );
+        bfg.body->setLinearVelocity( { vel.x, vel.y, vel.z } );
+        
+        _game->addComponent( bfg );
+    }
+    {
+        BehavioralComponent bfg( bfgId );
+        
+        double startTime = -1;
+        bfg.functor = [self, startTime](BehavioralComponent* bc, EntityCollection& entities, double time)
+        mutable {
+            const double MAX_LIFETIME = 3;
+            const EntityId entityId = bc->entityId;
+            
+            if ( startTime < 0 )
+                startTime = time;
+            
+            const double lifetime = time - startTime;
+            
+            if ( lifetime > MAX_LIFETIME - 1 )
+            {
+                float size = MAX_LIFETIME - lifetime;
+                entities[ entityId ].scale = glm::vec3( size, size, size );
+            }
+            
+            if ( lifetime > MAX_LIFETIME )
+                _game->markEntityForDestruction( entityId );
+        };
+        _game->addComponent( bfg );
+    }
+    
+    [GunSoundEffects[_CurrentChannel] play];
+    
+    _CurrentChannel ++;
+    
+    if(_CurrentChannel == MAX_CHANNELS)
+    {
+        _CurrentChannel = 0;
+    }
+    
+}
+
 
 //No longer usable due to horizontalAngle and verticalAngle no longer existing in the _eyeLook variable
 - (void) cameraMovement

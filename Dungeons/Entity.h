@@ -116,12 +116,10 @@ struct GraphicalComponent
         TRANSLUCENT
     };
     
-    EntityId    entityId;
-    Visibility  visibility;
-    GLProgram*  program = 0;
-    Model*      model   = 0;
-    Sprite*     sprite  = 0;
-    glm::vec4   color   = { 1, 1, 1, 0 };
+    EntityId        entityId;
+    Visibility      visibility;
+    Renderable*     asset = 0;
+    glm::vec4       color = { 1, 1, 1, 0 };
     
     explicit GraphicalComponent( EntityId _id, Visibility _visibility = VISIBLE )
         : entityId( _id )
@@ -135,32 +133,24 @@ struct GraphicalComponent
     {
     }
 
-    
     void update( EntityCollection& entities, glm::mat4 view, glm::mat4 proj )
     {
-        using namespace glm;
-        
         if ( visibility == INVISIBLE )
             return;
         
-        if ( program ) {
-            program->bind();
-            glUniform4fv( program->find_uniform( "uColor" ), 1, &color[ 0 ] );
+        if ( asset )
+        {
+            asset->_program->bind();
+            glUniform4fv( asset->_program->find_uniform( "uColor" ), 1, &color[ 0 ] );
+            
+            if ( visibility == TRANSLUCENT )
+                glEnable( GL_BLEND );
+            
+            asset->render( entities[ entityId ].transform_matrix() );
+            
+            if ( visibility == TRANSLUCENT )
+                glDisable( GL_BLEND );
         }
-        
-        if ( visibility == TRANSLUCENT )
-            glEnable( GL_BLEND );
-        
-        Entity ntt = entities[ entityId ];
-        
-        if ( model )
-            model->render( ntt.transform_matrix(), GL_TRIANGLES );
-        
-        if ( sprite )
-            sprite->render( ntt.transform_matrix() );
-        
-        if ( visibility == TRANSLUCENT )
-            glDisable( GL_BLEND );
     }
 };
 

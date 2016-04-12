@@ -8,29 +8,21 @@ using glm::vec3;
 using glm::vec2;
 
 Model::Model( const ObjMesh& mesh, GLProgram* program )
-    : _mesh( mesh )
-    , _program( program )
-    , _buffer( _mesh.data(), _mesh.size(), STATIC_DRAW,
+    : Renderable( program )
+    , _mesh( mesh )
+    , _buffer( _mesh.data(), static_cast< GLsizei >( _mesh.size() ), STATIC_DRAW,
         _program->make_vert_attribute< vec3 >( "aPosition" ),
         _program->make_vert_attribute< vec3 >( "aNormal" ),
         _program->make_vert_attribute< vec2 >( "aTexCoord" ) )
 {
 }
 
-void Model::render
-(
-    glm::mat4 model,
-    GLenum    mode
-) const
+void Model::render( glm::mat4 model ) const
 {
     using namespace glm;
     
     _program->bind();
     glUniformMatrix4fv( _program->find_uniform( "uModelMatrix" ), 1, GL_FALSE, (float*)&model );
-
-    //glUniform4f( _program->find_uniform( "uColor" ), 0, 0, 1, 1 );
-    //glUniform1i( _program->find_uniform( "uTexture" ), 0 );
-    //glUniform1i( _program->find_uniform( "uDecal" ), 1 );
 
     glActiveTexture( GL_TEXTURE0 );
     for ( auto texture : _mesh.textures )
@@ -63,8 +55,8 @@ const SpriteVertex SPRITE_VERTICES[] = {
 };
 
 Sprite::Sprite( std::string texture, GLProgram* program )
-    : _texture( texture )
-    , _program( program )
+    : Renderable( program )
+    , _texture( texture )
     , _buffer( SPRITE_VERTICES, 6, STATIC_DRAW,
                _program->make_vert_attribute< vec3 >( "aPosition" ),
                _program->make_vert_attribute< vec2 >( "aTexCoord" ) )
