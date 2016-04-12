@@ -49,6 +49,7 @@ struct Enemy_Basic
     
     int AmmoNumber;
     bool ReLoad;
+    int Kills;
     AVAudioPlayer *ReloadSound;
     
     Game*       _game;
@@ -235,6 +236,8 @@ struct Enemy_Basic
     _MusicOn = true;
     
     AmmoNumber = 10;
+    Kills = 0;
+
     
     
     [super viewDidLoad];
@@ -245,17 +248,10 @@ struct Enemy_Basic
         NSLog(@"Failed to create ES context");
     }
     
-    _physics = [[BulletPhysics alloc] init];
-    
-    
-    auto groundShape = new btStaticPlaneShape( btVector3( 0, 1, 0 ), 0 );
-    
-    
-    auto groundMotionState = new btDefaultMotionState();
-    
-    btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI( 0, groundMotionState, groundShape, btVector3(0,0,0) );
-    
-    auto groundRigidBody = new btRigidBody(groundRigidBodyCI);
+    //auto groundShape = new btStaticPlaneShape( btVector3( 0, 1, 0 ), 0 );
+    //auto groundMotionState = new btDefaultMotionState();
+    //btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI( 0, groundMotionState, groundShape, btVector3(0,0,0) );
+    //auto groundRigidBody = new btRigidBody(groundRigidBodyCI);
     //[_physics addRigidBody: groundRigidBody];
     //RedImageOverlay.alpha = 0;
     //RedImageOverlay.hidden = YES;
@@ -283,10 +279,28 @@ struct Enemy_Basic
     
     _game = new Game( (GLKView*) self.view, "Level0Layout.obj", "Level0EnemyAPos.obj", "Level0EnemyBPos.obj", "DemoRail.obj" );
     
-    //_game->killCountPtr = *KI
+    BehavioralComponent endGame( "endGame" );
+    endGame.functor = [self](BehavioralComponent*, EntityCollection&, double time)
+    {
+        if ( time > 64 )
+        {
+            EndViewController* endController = [self.storyboard instantiateViewControllerWithIdentifier: @"EndViewController"];
+            
+            endController.kills = Kills;
+            [self presentViewController: endController animated: YES completion: nil];
+            
+            /*[self dismissViewControllerAnimated: YES completion: ^() {
+                [self presentViewController: endController animated: YES completion: nil];
+            }];*/
+        }
+    };
+    _game->addComponent( endGame );
     
     _projectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_spriteProgram );
     _projectileSprite2 = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_spriteProgram );
+    _game->killCountPtr = &Kills;
+    
+    _projectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_fireProgram );
     
     
     for ( int i = 3000; i < 5000; i++ )
@@ -301,7 +315,7 @@ struct Enemy_Basic
         _game->addComponent( enemy );
     }
     
-    _bulletId = BULLET_MIN;
+    _bulletId = 0;
     
     _CurrentChannel = 0;
     
@@ -339,7 +353,7 @@ struct Enemy_Basic
     
     //[NSDate?](count: 64, repeatedValue: nil)
     
-    self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", 0];
+    self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", Kills];
     self.Health.text =[[NSString alloc] initWithFormat: @"%d", 100];
     self.Ammo.text =[[NSString alloc] initWithFormat: @"%d", AmmoNumber];
     
@@ -821,7 +835,7 @@ struct Enemy_Basic
             if(bc->timeInCycle == 3) {
                 EntityId nttid = bc->entityId;
                 //[[_toBeDeleted addObject:[[EntityId alloc] initWithFormat:@"%d", bc->entityId]];
-                _//game->destroyEntity(bc->entityId);
+                //_game->destroyEntity(bc->entityId);
             }
             bc->timeInCycle++;
             
@@ -1059,8 +1073,7 @@ struct Enemy_Basic
     //BehavioralComponent bc2(_bulletId);
     //pc2 = oPos;
     
-    
-    self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", 0];
+    self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", Kills];
     self.Health.text =[[NSString alloc] initWithFormat: @"%d", 100];
     self.Ammo.text =[[NSString alloc] initWithFormat: @"%d", AmmoNumber];
 }

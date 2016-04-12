@@ -477,8 +477,8 @@ void deleteEntity( EntityId _id )
 
 void Game::destroyEntity( EntityId _id )
 {
-    if ( _id.bitPattern >= 3000 && _id.bitPattern < 7000 )
-        ;//++*killCountPtr;// Increment kill count
+    if ( EntityId::matchesTag( "redemy", _id ) || EntityId::matchesTag( "grnemy", _id ) )
+        ++*killCountPtr;
     
     for ( int i = 0; i < _graphics.size(); i++ )
         if ( _graphics[ i ].entityId == _id )
