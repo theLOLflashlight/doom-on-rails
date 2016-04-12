@@ -470,6 +470,11 @@ void Game::addComponent( BehavioralComponent component )
     _behaviors.push_back( component );
 }
 
+void deleteEntity( EntityId _id )
+{
+    //_badIds.add;
+}
+
 void Game::destroyEntity( EntityId _id )
 {
     if ( EntityId::matchesTag( "redemy", _id ) || EntityId::matchesTag( "grnemy", _id ) )
