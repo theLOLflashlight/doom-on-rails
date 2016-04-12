@@ -76,10 +76,9 @@ Sprite::Sprite( std::string texture, GLProgram* program )
 
 void Sprite::render( glm::mat4 model ) const
 {
-    model = scale( model, vec3( width, height, width ) );
-    
     _program->bind();
     glUniformMatrix4fv( _program->find_uniform( "uModelMatrix" ), 1, GL_FALSE, (float*)&model );
+    glUniform2f( _program->find_uniform( "uSpriteSize" ), width, height );
     glUniform3fv( _program->find_uniform( "uSpriteAxis" ), 1, &spriteAxis[0] );
     
     
