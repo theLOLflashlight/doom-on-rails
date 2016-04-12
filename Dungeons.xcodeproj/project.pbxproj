@@ -108,6 +108,9 @@
 		53F05FCE1CBB5B3D007F3023 /* Level0EnemyAPos.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FCA1CBB5B3D007F3023 /* Level0EnemyAPos.obj */; };
 		53F05FCF1CBB5B3D007F3023 /* Level0EnemyBPos.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FCB1CBB5B3D007F3023 /* Level0EnemyBPos.mtl */; };
 		53F05FD01CBB5B3D007F3023 /* Level0EnemyBPos.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53F05FCC1CBB5B3D007F3023 /* Level0EnemyBPos.obj */; };
+		81727E421CBB78DA008A3562 /* Fireball2.png in Resources */ = {isa = PBXBuildFile; fileRef = 81727E401CBB78DA008A3562 /* Fireball2.png */; };
+		81727E431CBB78DA008A3562 /* RedDamageOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 81727E411CBB78DA008A3562 /* RedDamageOverlay.png */; };
+		81DC12ED1CBC3BF0004C7658 /* RedDamageOverlay.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 81DC12EC1CBC3BF0004C7658 /* RedDamageOverlay.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -291,6 +294,9 @@
 		53F05FCA1CBB5B3D007F3023 /* Level0EnemyAPos.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyAPos.obj; sourceTree = "<group>"; };
 		53F05FCB1CBB5B3D007F3023 /* Level0EnemyBPos.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyBPos.mtl; sourceTree = "<group>"; };
 		53F05FCC1CBB5B3D007F3023 /* Level0EnemyBPos.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyBPos.obj; sourceTree = "<group>"; };
+		81727E401CBB78DA008A3562 /* Fireball2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Fireball2.png; path = ../../Fireball2.png; sourceTree = "<group>"; };
+		81727E411CBB78DA008A3562 /* RedDamageOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RedDamageOverlay.png; path = ../../RedDamageOverlay.png; sourceTree = "<group>"; };
+		81DC12EC1CBC3BF0004C7658 /* RedDamageOverlay.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = RedDamageOverlay.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,6 +338,9 @@
 		445332031CB5BD68004DC43B /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
+				81727E401CBB78DA008A3562 /* Fireball2.png */,
+				81727E411CBB78DA008A3562 /* RedDamageOverlay.png */,
+				81DC12EC1CBC3BF0004C7658 /* RedDamageOverlay.jpeg */,
 				4442C9891CBB61790097FD98 /* Continue.png */,
 				4442C9841CBB59590097FD98 /* Ending.jpg */,
 				4442C95F1CBB0A690097FD98 /* Gun.png */,
@@ -597,7 +606,7 @@
 				TargetAttributes = {
 					53C6791C1CA22E62007C7945 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = QBSFJ43NUJ;
+						DevelopmentTeam = RX327XMQJX;
 					};
 				};
 			};
@@ -689,6 +698,7 @@
 				5385DE5C1CA3365100F1A323 /* crate.mtl in Resources */,
 				53F05FC51CBB4497007F3023 /* Level0EnemyPosRail.obj in Resources */,
 				53F05FCF1CBB5B3D007F3023 /* Level0EnemyBPos.mtl in Resources */,
+				81DC12ED1CBC3BF0004C7658 /* RedDamageOverlay.jpeg in Resources */,
 				53F05FB31CB9FA0C007F3023 /* swipe_whiff.mp3 in Resources */,
 				445332071CB5BD81004DC43B /* DOOM.mp3 in Resources */,
 				53C679581CA22F35007C7945 /* glm in Resources */,
@@ -705,6 +715,7 @@
 				5385DE671CA3365100F1A323 /* ModelShader.vs in Resources */,
 				53F05FCD1CBB5B3D007F3023 /* Level0EnemyAPos.mtl in Resources */,
 				53ADE8951CB88DDF00DD3588 /* fireball.mtl in Resources */,
+				81727E431CBB78DA008A3562 /* RedDamageOverlay.png in Resources */,
 				532ECA8A1CADBDBD001BB153 /* Level0_Textures in Resources */,
 				5385DE961CA370F200F1A323 /* crate.obj in Resources */,
 				5385DE891CA3429000F1A323 /* original in Resources */,
@@ -714,6 +725,7 @@
 				53F05FAE1CB9FA0C007F3023 /* 'flyby'.wav in Resources */,
 				5385DE731CA3365100F1A323 /* WaterShader.fs in Resources */,
 				4442C9921CBB76450097FD98 /* AND HIS NAME IS JOHN CENA.mp3 in Resources */,
+				81727E421CBB78DA008A3562 /* Fireball2.png in Resources */,
 				53ADE8961CB88DDF00DD3588 /* fireball.obj in Resources */,
 				53ADE88F1CB8887800DD3588 /* Fireball.png in Resources */,
 				5385DE5B1CA3365100F1A323 /* crate in Resources */,
@@ -914,7 +926,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Andrew;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Jacob25;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dungeons/Dungeons-Bridging-Header.h";
@@ -945,7 +957,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Andrew;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Jacob25;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dungeons/Dungeons-Bridging-Header.h";

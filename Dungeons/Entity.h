@@ -293,6 +293,8 @@ struct BehavioralComponent
     using Delegate = std::function< void(BehavioralComponent*, EntityCollection&, double) >;
     
     EntityId    entityId;
+    int         timeInCycle = 0;
+    int         endTimeInCycle = 180;
     bool        enabled;
     Delegate    functor;
     
