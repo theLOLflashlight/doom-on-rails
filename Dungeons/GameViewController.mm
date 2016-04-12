@@ -171,7 +171,10 @@ struct Enemy_Basic
     
     UIImage *_image;
     UIImage *_anImage;
-    NSMutableArray *_toBeDeleted;
+    //NSMutableArray *_toBeDeleted; //no longer used
+    
+    //For explosion
+    //btSphereShape _explosionSphere; //Can ask Andrew how to do this later.
 }
 
 @property (strong, nonatomic) EAGLContext* context;
@@ -212,7 +215,6 @@ struct Enemy_Basic
         if(AmmoNumber>0)
         {
             [self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f homeInOnPlayer:false damage:100];
-            
             AmmoNumber --;
         }
         
@@ -221,8 +223,6 @@ struct Enemy_Basic
         if(AmmoNumber == 0)
         {
             ReLoad = true;
-            
-            
             [ReloadSound play];
         }
     }
@@ -269,6 +269,11 @@ struct Enemy_Basic
     tapGesture.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:tapGesture];
     
+    //Swipe
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+    [panGesture setMinimumNumberOfTouches:1];
+    [panGesture setMaximumNumberOfTouches:1];
+    [self.view addGestureRecognizer:panGesture];
     
     //play looping sound
     GLKView *view = (GLKView *)self.view;
@@ -276,6 +281,7 @@ struct Enemy_Basic
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
     [EAGLContext setCurrentContext:self.context];
+    
     
     _game = new Game( (GLKView*) self.view, "Level0Layout.obj", "Level0EnemyAPos.obj", "Level0EnemyBPos.obj", "DemoRail.obj" );
     
@@ -302,6 +308,7 @@ struct Enemy_Basic
     
     _projectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_fireProgram );
     
+    _translationPoints = [[NSMutableArray alloc] init];
     
     for ( int i = 3000; i < 5000; i++ )
     {
@@ -311,7 +318,6 @@ struct Enemy_Basic
         
         BehavioralComponent enemy( i );
         enemy.functor = Enemy_Basic( _game, self );
-        
         _game->addComponent( enemy );
     }
     
@@ -364,72 +370,12 @@ struct Enemy_Basic
     [ReloadSound prepareToPlay];
     
     //Indexing is disabled;
-    /*
+    
      //BehavioralComponent enemy( "enemy1" ); //basic enemy - shoots projectiles periodically every 3 seconds
      enemy.timeInCycle = 0;
      enemy.endTimeInCycle = 180;
-     enemy.functor = Enemy_Basic{ _game, self};*//*[=](BehavioralComponent* c, EntityCollection& entities)
-                                                  {
-                                                  if(c->timeInCycle >= c->endTimeInCycle) {
-                                                  c->timeInCycle = 0;
-                                                  }
-                                                  c->timeInCycle++; //how to get specific enemy's ...
-                                                  _game->findPhysicalComponent("enemybsc");
-                                                  
-                                                  if(c->timeInCycle == 60) {
-                                                  [self spawn_projectile: c-> velocity: normalize( touchPos1 - touchPos0 ) * 50.0f];
-                                                  }
-                                                  
-                                                  Entity ntt = entities[ c->entityId ];
-                                                  //ntt.position;
-                                                  //_game->_eyepos;
-                                                  
-                                                  PhysicalComponent* phy = _game->findPhysicalComponent( c->entityId );
-                                                  phy->body->getLinearVelocity();
-                                                  };*/
     
-    //enemy.functor = Enemy{};
-    
-    //_game->addComponent( enemy );
-    //enemy
-    //_image = [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"png"]] retain];
-    
-    
-    //Given how it looks like our renderer overrides other typical iOS drawing, using the renderer itself to make the overlay and respective sprite.
-    //GraphicalComponent overlay1("overlay1");
-    /*
-    glm::vec3 oPos =_game->_eyepos + (_game->_eyelook - _game->_eyepos)/3.0f;
-    
-    GraphicalComponent overlay1( "overlay1", GraphicalComponent::TRANSLUCENT );
-    overlay1.program = &_game->_spriteProgram;
-    overlay1.sprite = new Sprite( ios_path("RedDamageOverlay.jpeg"), &_game->_spriteProgram );
-    //overlay1.color = {1, 0, 0, 0.5};
-    
-    _game->addComponent(overlay1);
-    
-    PhysicalComponent overlayP( "overlay1" );
-    auto motionState = new btDefaultMotionState(
-                                                btTransform( btQuaternion( 0,0,0,1 ), btVector3( oPos.x, oPos.y, oPos.z ) ) );
-    static btSphereShape SPHERE_SHAPE( 0.5 );
-    overlayP.body = new btRigidBody( 1, motionState, &SPHERE_SHAPE );
-    _game->addComponent(overlayP);
-    
-    _game->findPhysicalComponent( "overlay1" )->active = false;
-    
-    
-    BehavioralComponent overlayBC("overlay1");
-    overlayBC.functor = [self](BehavioralComponent *bc, EntityCollection& entities, double time) {
-        glm::vec3 oPos =_game->_eyepos + (_game->_eyelook - _game->_eyepos)*0.05f;
-        Entity *ntt = &(entities[bc->entityId]);
-        ntt->position = oPos;
-    };
-    _game->addComponent(overlayBC);
-    
-    //overlay1.color = {1, 0, 0, 0.5};
-    //place overlay in front of the player
-    Entity ntt = _game->_entities["overlay1"];
-    ntt.position = /*_game->_eyelook;*//*oPos; //put it very, very close in front such that anything in between the overlay and the camera would really not matter anyway
-    */
+    //_explosionSphere = btSphereShape(5.0); //Can ask Andrew how to do this later.
 }
 
 
@@ -546,6 +492,26 @@ struct Enemy_Basic
                 }
             }
              */
+            using namespace glm;
+            const CGPoint mouse = [self midpoint:_translationPoints];
+            
+            const mat4 view = _game->viewMatrix();
+            const mat4 proj = _game->projMatrix();
+            const vec4 viewport = _game->viewport();
+            
+            vec3 touchPos0 = unProject( vec3( mouse.x, -mouse.y, 0 ), view, proj, viewport );
+            vec3 touchPos1 = unProject( vec3( mouse.x, -mouse.y, 1 ), view, proj, viewport );
+            
+            glm::vec3 createPos = touchPos0 /*+ normalize( touchPos1 - touchPos0 )*/; //position to create the explosion
+            glm::vec3 velocity = normalize( touchPos1 - touchPos0 ) * 100.0f;
+            
+            //glm::vec3 fwdDisplacement = glm::normalize(_game->_eyelook - _game->_eyepos) *1.0f;
+            //glm::vec3 oPos =_game->_eyepos + fwdDisplacement;
+            [self explosionImpact:createPos velocity:velocity radius:8.0f];
+            
+            //[self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f homeInOnPlayer:false damage:100];
+            
+            //bullet.body->setLinearVelocity( { vel.x, vel.y, vel.z } );
         }
         else {
             //If having lifted, but not having done a swipe cancel in the current 'swipe attempt'
@@ -592,12 +558,16 @@ struct Enemy_Basic
     currVerticalAngle = translation.y * rotationSpeed;
 }
 
-//Iterate thru translationPoints or pointArray, get the midpoint of them
+//Iterate thru translationPoints or any otherwise pointArray, get the midpoint of them
 -(CGPoint) midpoint: (NSMutableArray *)pointArray {
     CGPoint midPoint;
     for(int i=0; i<pointArray.count; i++) {
-        midPoint.x += [pointArray[i] x];
-        midPoint.y += [pointArray[i] y];
+        
+        //get each CGPoint
+        NSValue *locationValue = [pointArray objectAtIndex:i];
+        CGPoint location = locationValue.CGPointValue;
+        midPoint.x += location.x;
+        midPoint.y += location.y;
     }
     
     midPoint.x /= pointArray.count;
@@ -818,22 +788,33 @@ struct Enemy_Basic
 }
 
 -(void) explosionImpact:(glm::vec3) pos
+               velocity:(glm::vec3) vel
                  radius:(float)     radius
 {
     {
+        
+        GraphicalComponent explosion( "explosn1", GraphicalComponent::TRANSLUCENT );
+        explosion.program = &_game->_spriteProgram;
+        //for enemy projectiles
+        explosion.sprite = _projectileSprite2;
+        _game->addComponent(explosion);
+    }
+    {
         //Create explosion entity
         PhysicalComponent explosion("explosn1");
-        static btSphereShape SPHERE_SHAPE( 2.0 ); //radius of explosion
+        static btSphereShape explosionSphere( radius ); //radius of explosion //to _not_ be this radius.
         auto motionState = new btDefaultMotionState(btTransform( btQuaternion( 0,0,0,1 ), btVector3( pos.x, pos.y, pos.z ) ) );
-        explosion.body = new btRigidBody( 1, motionState, &SPHERE_SHAPE );
+        explosion.body = new btRigidBody( 1, motionState, &explosionSphere );
+        explosion.body->setLinearVelocity( btVector3(vel.x, vel.y, vel.z) ); //set velocity for explosion
         _game->addComponent(explosion);
     }
     {
         BehavioralComponent explosion("explosn1");
         explosion.endTimeInCycle = 3;
+        explosion.timeInCycle = 0;
         explosion.functor = [self](BehavioralComponent *bc, EntityCollection& entities, double time) {
-            if(bc->timeInCycle == 3) {
-                EntityId nttid = bc->entityId;
+            if(bc->timeInCycle == 3) { //end time of explosion
+                _game->markEntityForDestruction(bc->entityId);
                 //[[_toBeDeleted addObject:[[EntityId alloc] initWithFormat:@"%d", bc->entityId]];
                 //_game->destroyEntity(bc->entityId);
             }
@@ -841,7 +822,6 @@ struct Enemy_Basic
             
         };
         _game->addComponent(explosion);
-        
     }
     /*
     for ( auto& ntt : _game->_entities )
