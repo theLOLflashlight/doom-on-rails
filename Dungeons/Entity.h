@@ -50,6 +50,11 @@ inline bool operator ==( const EntityId& _l, const EntityId& _r )
     return _l.bitPattern == _r.bitPattern;
 }
 
+inline bool operator <( const EntityId& _l, const EntityId& _r )
+{
+    return _l.bitPattern < _r.bitPattern;
+}
+
 namespace std
 {
     template<>
