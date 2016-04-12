@@ -44,7 +44,6 @@
         
         dynamicsWorld->setGravity(btVector3(0,-9.81,0));
         
-        
         /*groundShape = new btStaticPlaneShape(btVector3(0,1,0),1);
         
         fallShape = new btSphereShape(1);

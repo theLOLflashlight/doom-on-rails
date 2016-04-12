@@ -269,14 +269,14 @@ void Game::update( double step )
     for ( auto& physable : _physics )
         physable.update( _entities );
     
-    std::vector<EntityId> badIds;
-    
     for ( auto pair : _entities )
         if ( pair.second.position.y < -5 )
-            badIds.push_back( pair.first );
+            markEntityForDestruction( pair.first );
     
-    for ( auto _id : badIds )
+    for ( auto _id : _badIds )
         destroyEntity( _id );
+    
+    _badIds.clear();
     
     // Sort our translucent sprites based on distance from camera.
     std::sort( _graphics.begin(), _graphics.end(),
@@ -468,6 +468,11 @@ void Game::addComponent( PhysicalComponent component )
 void Game::addComponent( BehavioralComponent component )
 {
     _behaviors.push_back( component );
+}
+
+void Game::markEntityForDestruction( EntityId _id )
+{
+    _badIds.insert( _id );
 }
 
 void Game::destroyEntity( EntityId _id )

@@ -12,6 +12,7 @@
 #include <memory>
 #include <vector>
 #include <chrono>
+#include <set>
 
 struct Rail
 {
@@ -127,6 +128,10 @@ public:
     ComponentCollection< GraphicalComponent >   _graphics;
     ComponentCollection< PhysicalComponent >    _physics;
     ComponentCollection< BehavioralComponent >  _behaviors;
+    
+    std::set< EntityId >    _badIds;
+    
+    void markEntityForDestruction( EntityId _id );
 
     Skybox                  _skybox;
     Water                   _water;

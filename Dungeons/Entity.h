@@ -50,6 +50,11 @@ inline bool operator ==( const EntityId& _l, const EntityId& _r )
     return _l.bitPattern == _r.bitPattern;
 }
 
+inline bool operator <( const EntityId& _l, const EntityId& _r )
+{
+    return _l.bitPattern < _r.bitPattern;
+}
+
 namespace std
 {
     template<>
@@ -69,14 +74,17 @@ struct Entity
 {
     glm::vec3   position;
     glm::vec3   rotation;
+    glm::vec3   scale;
     
     Entity
     (
         glm::vec3   position        = {},
-        glm::vec3   rotation        = {}
+        glm::vec3   rotation        = {},
+        glm::vec3   scale           = { 1, 1, 1 }
     )
         : position( position )
         , rotation( rotation )
+        , scale( scale )
     {
     }
     
@@ -89,6 +97,8 @@ struct Entity
         transform = rotate( transform, rotation.x, vec3( 1, 0, 0 ) );
         transform = rotate( transform, rotation.y, vec3( 0, 1, 0 ) );
         transform = rotate( transform, rotation.z, vec3( 0, 0, 1 ) );
+
+        transform = glm::scale( transform, scale );
         
         return transform;
     }
@@ -147,9 +157,7 @@ struct GraphicalComponent
             model->render( ntt.transform_matrix(), GL_TRIANGLES );
         
         if ( sprite )
-        {
             sprite->render( ntt.transform_matrix() );
-        }
         
         if ( visibility == TRANSLUCENT )
             glDisable( GL_BLEND );
