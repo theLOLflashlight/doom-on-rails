@@ -284,7 +284,7 @@
 }
 
 -(void) ThemeSound {
-    if(NSString *path = [[NSBundle mainBundle] pathForResource:@"DOOM" ofType: @"mp3"]) { //J: Not sure about this conversion from swift
+    if(NSString *path = [[NSBundle mainBundle] pathForResource:@"Doom3 Level 1" ofType: @"mp3"]) { //J: Not sure about this conversion from swift
         NSURL *soundURL = [NSURL fileURLWithPath:path]; //Can check this code later ...
         
         NSError *error;
