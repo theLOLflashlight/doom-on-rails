@@ -30,6 +30,8 @@
     int AmmoNumber;
     int Kills;
     AVAudioPlayer *ReloadSound;
+    AVAudioPlayer *KillsSound;
+    bool getkill;
     
     Game*       _game;
     int         _bulletId;
@@ -148,6 +150,7 @@
     AmmoNumber = 10;
     Kills = 0;
 
+    getkill = true;
     
     [super viewDidLoad];
     
@@ -284,7 +287,7 @@
 }
 
 -(void) ThemeSound {
-    if(NSString *path = [[NSBundle mainBundle] pathForResource:@"Doom3 Level 1" ofType: @"mp3"]) { //J: Not sure about this conversion from swift
+    if(NSString *path = [[NSBundle mainBundle] pathForResource:@"Doom3 Level 2" ofType: @"mp3"]) { //J: Not sure about this conversion from swift
         NSURL *soundURL = [NSURL fileURLWithPath:path]; //Can check this code later ...
         
         NSError *error;
@@ -461,6 +464,17 @@
         }
     }
     
+    if(Kills == 1 && getkill)
+    {
+        NSData *RlSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"First Blood" ofType:@"mp3"]];
+        KillsSound = [[AVAudioPlayer alloc]initWithData:RlSoundPath error:nil];
+        [KillsSound prepareToPlay];
+        [KillsSound play];
+        
+        getkill = false;
+    }
+    
+    
     self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", Kills];
     self.Health.text =[[NSString alloc] initWithFormat: @"%d", 100];
     self.Ammo.text =[[NSString alloc] initWithFormat: @"%d", AmmoNumber];
@@ -488,5 +502,12 @@
         _MusicOn = true;
         [themePlayer play];
     }
+}
+- (IBAction)Reload:(UIButton *)sender {
+   if(AmmoNumber<10)
+   {
+    ReLoad = true;
+    [ReloadSound play];
+   }
 }
 @end
