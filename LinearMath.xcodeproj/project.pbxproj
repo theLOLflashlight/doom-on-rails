@@ -18,42 +18,42 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		05C84232701D0ECE211E4080 /* btHashMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btHashMap.h; path = ../../src/LinearMath/btHashMap.h; sourceTree = "<group>"; };
-		066024996AB870923069678D /* btMatrixX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btMatrixX.h; path = ../../src/LinearMath/btMatrixX.h; sourceTree = "<group>"; };
-		0E0047AC0EC46EE50CB906FA /* btGeometryUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btGeometryUtil.h; path = ../../src/LinearMath/btGeometryUtil.h; sourceTree = "<group>"; };
-		0F181C05396929CB6192553A /* btConvexHull.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = btConvexHull.cpp; path = ../../src/LinearMath/btConvexHull.cpp; sourceTree = "<group>"; };
-		102303993484537A0EC2225B /* btMinMax.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btMinMax.h; path = ../../src/LinearMath/btMinMax.h; sourceTree = "<group>"; };
-		135F44655D4A35C0673A2B59 /* btTransformUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btTransformUtil.h; path = ../../src/LinearMath/btTransformUtil.h; sourceTree = "<group>"; };
-		14A72194085247405C6D2167 /* btTransform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btTransform.h; path = ../../src/LinearMath/btTransform.h; sourceTree = "<group>"; };
-		1517541E2A0167B74705423A /* btStackAlloc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btStackAlloc.h; path = ../../src/LinearMath/btStackAlloc.h; sourceTree = "<group>"; };
-		17B663856C6E54A672FD4221 /* btConvexHullComputer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btConvexHullComputer.h; path = ../../src/LinearMath/btConvexHullComputer.h; sourceTree = "<group>"; };
-		26066B2375E059E6428A03C9 /* btGrahamScan2dConvexHull.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btGrahamScan2dConvexHull.h; path = ../../src/LinearMath/btGrahamScan2dConvexHull.h; sourceTree = "<group>"; };
-		2A9B2D0068C6464371166994 /* btGeometryUtil.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = btGeometryUtil.cpp; path = ../../src/LinearMath/btGeometryUtil.cpp; sourceTree = "<group>"; };
-		2CC55200277F1514782F6EA7 /* btConvexHull.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btConvexHull.h; path = ../../src/LinearMath/btConvexHull.h; sourceTree = "<group>"; };
-		2ED663C077254A6832AC50C1 /* btIDebugDraw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btIDebugDraw.h; path = ../../src/LinearMath/btIDebugDraw.h; sourceTree = "<group>"; };
-		314422925816217608A2661F /* btDefaultMotionState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btDefaultMotionState.h; path = ../../src/LinearMath/btDefaultMotionState.h; sourceTree = "<group>"; };
-		381022964BF61B8B726B7B1F /* btVector3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btVector3.h; path = ../../src/LinearMath/btVector3.h; sourceTree = "<group>"; };
-		384C1B17112F62266D105AF9 /* btConvexHullComputer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = btConvexHullComputer.cpp; path = ../../src/LinearMath/btConvexHullComputer.cpp; sourceTree = "<group>"; };
-		3D8D06B17BF271931C2C392B /* btMotionState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btMotionState.h; path = ../../src/LinearMath/btMotionState.h; sourceTree = "<group>"; };
-		422D227C04537C994A6750BA /* btMatrix3x3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btMatrix3x3.h; path = ../../src/LinearMath/btMatrix3x3.h; sourceTree = "<group>"; };
-		42E6196E3A2840532F83469D /* btPoolAllocator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btPoolAllocator.h; path = ../../src/LinearMath/btPoolAllocator.h; sourceTree = "<group>"; };
-		4975420508531E50343F3443 /* btList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btList.h; path = ../../src/LinearMath/btList.h; sourceTree = "<group>"; };
-		49CE0D6C49604997790B4421 /* btPolarDecomposition.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = btPolarDecomposition.cpp; path = ../../src/LinearMath/btPolarDecomposition.cpp; sourceTree = "<group>"; };
-		4A82247939D70E3F64A91EBF /* btPolarDecomposition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btPolarDecomposition.h; path = ../../src/LinearMath/btPolarDecomposition.h; sourceTree = "<group>"; };
-		4AFA79594767466F372D048D /* btAlignedAllocator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = btAlignedAllocator.cpp; path = ../../src/LinearMath/btAlignedAllocator.cpp; sourceTree = "<group>"; };
-		50840F1009DA4964487A7278 /* btQuickprof.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btQuickprof.h; path = ../../src/LinearMath/btQuickprof.h; sourceTree = "<group>"; };
-		59EB0D48028056854E181684 /* btScalar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btScalar.h; path = ../../src/LinearMath/btScalar.h; sourceTree = "<group>"; };
-		5D30028B12BB6BA411D133D0 /* btRandom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btRandom.h; path = ../../src/LinearMath/btRandom.h; sourceTree = "<group>"; };
-		60302E2532C27BF128C13CD3 /* btAlignedAllocator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btAlignedAllocator.h; path = ../../src/LinearMath/btAlignedAllocator.h; sourceTree = "<group>"; };
-		613B719632A52BED64824859 /* btVector3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = btVector3.cpp; path = ../../src/LinearMath/btVector3.cpp; sourceTree = "<group>"; };
+		05C84232701D0ECE211E4080 /* btHashMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btHashMap.h; path = Bullet3D/LinearMath/btHashMap.h; sourceTree = "<group>"; };
+		066024996AB870923069678D /* btMatrixX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btMatrixX.h; path = Bullet3D/LinearMath/btMatrixX.h; sourceTree = "<group>"; };
+		0E0047AC0EC46EE50CB906FA /* btGeometryUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btGeometryUtil.h; path = Bullet3D/LinearMath/btGeometryUtil.h; sourceTree = "<group>"; };
+		0F181C05396929CB6192553A /* btConvexHull.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = btConvexHull.cpp; path = Bullet3D/LinearMath/btConvexHull.cpp; sourceTree = "<group>"; };
+		102303993484537A0EC2225B /* btMinMax.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btMinMax.h; path = Bullet3D/LinearMath/btMinMax.h; sourceTree = "<group>"; };
+		135F44655D4A35C0673A2B59 /* btTransformUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btTransformUtil.h; path = Bullet3D/LinearMath/btTransformUtil.h; sourceTree = "<group>"; };
+		14A72194085247405C6D2167 /* btTransform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btTransform.h; path = Bullet3D/LinearMath/btTransform.h; sourceTree = "<group>"; };
+		1517541E2A0167B74705423A /* btStackAlloc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btStackAlloc.h; path = Bullet3D/LinearMath/btStackAlloc.h; sourceTree = "<group>"; };
+		17B663856C6E54A672FD4221 /* btConvexHullComputer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btConvexHullComputer.h; path = Bullet3D/LinearMath/btConvexHullComputer.h; sourceTree = "<group>"; };
+		26066B2375E059E6428A03C9 /* btGrahamScan2dConvexHull.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btGrahamScan2dConvexHull.h; path = Bullet3D/LinearMath/btGrahamScan2dConvexHull.h; sourceTree = "<group>"; };
+		2A9B2D0068C6464371166994 /* btGeometryUtil.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = btGeometryUtil.cpp; path = Bullet3D/LinearMath/btGeometryUtil.cpp; sourceTree = "<group>"; };
+		2CC55200277F1514782F6EA7 /* btConvexHull.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btConvexHull.h; path = Bullet3D/LinearMath/btConvexHull.h; sourceTree = "<group>"; };
+		2ED663C077254A6832AC50C1 /* btIDebugDraw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btIDebugDraw.h; path = Bullet3D/LinearMath/btIDebugDraw.h; sourceTree = "<group>"; };
+		314422925816217608A2661F /* btDefaultMotionState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btDefaultMotionState.h; path = Bullet3D/LinearMath/btDefaultMotionState.h; sourceTree = "<group>"; };
+		381022964BF61B8B726B7B1F /* btVector3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btVector3.h; path = Bullet3D/LinearMath/btVector3.h; sourceTree = "<group>"; };
+		384C1B17112F62266D105AF9 /* btConvexHullComputer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = btConvexHullComputer.cpp; path = Bullet3D/LinearMath/btConvexHullComputer.cpp; sourceTree = "<group>"; };
+		3D8D06B17BF271931C2C392B /* btMotionState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btMotionState.h; path = Bullet3D/LinearMath/btMotionState.h; sourceTree = "<group>"; };
+		422D227C04537C994A6750BA /* btMatrix3x3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btMatrix3x3.h; path = Bullet3D/LinearMath/btMatrix3x3.h; sourceTree = "<group>"; };
+		42E6196E3A2840532F83469D /* btPoolAllocator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btPoolAllocator.h; path = Bullet3D/LinearMath/btPoolAllocator.h; sourceTree = "<group>"; };
+		4975420508531E50343F3443 /* btList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btList.h; path = Bullet3D/LinearMath/btList.h; sourceTree = "<group>"; };
+		49CE0D6C49604997790B4421 /* btPolarDecomposition.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = btPolarDecomposition.cpp; path = Bullet3D/LinearMath/btPolarDecomposition.cpp; sourceTree = "<group>"; };
+		4A82247939D70E3F64A91EBF /* btPolarDecomposition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btPolarDecomposition.h; path = Bullet3D/LinearMath/btPolarDecomposition.h; sourceTree = "<group>"; };
+		4AFA79594767466F372D048D /* btAlignedAllocator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = btAlignedAllocator.cpp; path = Bullet3D/LinearMath/btAlignedAllocator.cpp; sourceTree = "<group>"; };
+		50840F1009DA4964487A7278 /* btQuickprof.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btQuickprof.h; path = Bullet3D/LinearMath/btQuickprof.h; sourceTree = "<group>"; };
+		59EB0D48028056854E181684 /* btScalar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btScalar.h; path = Bullet3D/LinearMath/btScalar.h; sourceTree = "<group>"; };
+		5D30028B12BB6BA411D133D0 /* btRandom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btRandom.h; path = Bullet3D/LinearMath/btRandom.h; sourceTree = "<group>"; };
+		60302E2532C27BF128C13CD3 /* btAlignedAllocator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btAlignedAllocator.h; path = Bullet3D/LinearMath/btAlignedAllocator.h; sourceTree = "<group>"; };
+		613B719632A52BED64824859 /* btVector3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = btVector3.cpp; path = Bullet3D/LinearMath/btVector3.cpp; sourceTree = "<group>"; };
 		66C4782A307D15BD5BC427CF /* libLinearMath_xcode4.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLinearMath_xcode4.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		6703291761B613351F9F38AB /* btSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = btSerializer.cpp; path = ../../src/LinearMath/btSerializer.cpp; sourceTree = "<group>"; };
-		6B6A31616315021833551A67 /* btSerializer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btSerializer.h; path = ../../src/LinearMath/btSerializer.h; sourceTree = "<group>"; };
-		6E2A47E67172014E4AFD5662 /* btQuaternion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btQuaternion.h; path = ../../src/LinearMath/btQuaternion.h; sourceTree = "<group>"; };
-		71C57AD15B54726A348F5483 /* btQuadWord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btQuadWord.h; path = ../../src/LinearMath/btQuadWord.h; sourceTree = "<group>"; };
-		7BE5159428A1157573CA6018 /* btAabbUtil2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btAabbUtil2.h; path = ../../src/LinearMath/btAabbUtil2.h; sourceTree = "<group>"; };
-		7CF34C841A76439C3AC0495D /* btQuickprof.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = btQuickprof.cpp; path = ../../src/LinearMath/btQuickprof.cpp; sourceTree = "<group>"; };
-		7E0530CB182C7EFC676274B0 /* btAlignedObjectArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btAlignedObjectArray.h; path = ../../src/LinearMath/btAlignedObjectArray.h; sourceTree = "<group>"; };
+		6703291761B613351F9F38AB /* btSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = btSerializer.cpp; path = Bullet3D/LinearMath/btSerializer.cpp; sourceTree = "<group>"; };
+		6B6A31616315021833551A67 /* btSerializer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btSerializer.h; path = Bullet3D/LinearMath/btSerializer.h; sourceTree = "<group>"; };
+		6E2A47E67172014E4AFD5662 /* btQuaternion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btQuaternion.h; path = Bullet3D/LinearMath/btQuaternion.h; sourceTree = "<group>"; };
+		71C57AD15B54726A348F5483 /* btQuadWord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btQuadWord.h; path = Bullet3D/LinearMath/btQuadWord.h; sourceTree = "<group>"; };
+		7BE5159428A1157573CA6018 /* btAabbUtil2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btAabbUtil2.h; path = Bullet3D/LinearMath/btAabbUtil2.h; sourceTree = "<group>"; };
+		7CF34C841A76439C3AC0495D /* btQuickprof.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = btQuickprof.cpp; path = Bullet3D/LinearMath/btQuickprof.cpp; sourceTree = "<group>"; };
+		7E0530CB182C7EFC676274B0 /* btAlignedObjectArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = btAlignedObjectArray.h; path = Bullet3D/LinearMath/btAlignedObjectArray.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,7 +238,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../../src;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Bullet3D";
 				INFOPLIST_FILE = ../../Test/Info.plist;
 				OBJROOT = obj/x64/Debug/LinearMath;
 				ONLY_ACTIVE_ARCH = YES;
@@ -281,7 +281,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../../src;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Bullet3D";
 				INFOPLIST_FILE = ../../Test/Info.plist;
 				OBJROOT = obj/x32/Release/LinearMath;
 				ONLY_ACTIVE_ARCH = NO;
@@ -306,7 +306,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../../src;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Bullet3D";
 				INFOPLIST_FILE = ../../Test/Info.plist;
 				OBJROOT = obj/x64/Release/LinearMath;
 				ONLY_ACTIVE_ARCH = NO;
@@ -332,7 +332,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../../src;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Bullet3D";
 				INFOPLIST_FILE = ../../Test/Info.plist;
 				OBJROOT = obj/x32/Debug/LinearMath;
 				ONLY_ACTIVE_ARCH = YES;

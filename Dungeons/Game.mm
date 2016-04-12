@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "ios_path.h"
+#include <algorithm>
 
 using namespace glm;
 using std::shared_ptr;
@@ -7,10 +8,36 @@ using std::make_shared;
 using std::string;
 using std::vector;
 
-Game::Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::string redEnemies, std::string greenEnemies, std::string railName )
+#define VECTOR3( vec ) { vec[0], vec[1], vec[2] }
+#define VECTOR4( vec ) { vec[0], vec[1], vec[2], vec[3] }
+
+btVector3 btVector( glm::vec3 vec )
+{
+    return VECTOR3( vec );
+}
+
+btVector4 btVector( glm::vec4 vec )
+{
+    return VECTOR4( vec );
+}
+
+namespace glm
+{
+    glm::vec3 vec( btVector3 vec )
+    {
+        return VECTOR3( vec );
+    }
+    
+    glm::vec4 vec( btVector4 vec )
+    {
+        return VECTOR4( vec );
+    }
+}
+
+Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::string greenEnemies, std::string railName )
     // we need to bind the view drawable before our shaders load
     : _view( ([view bindDrawable], view) )
-    , _world( physics )
+    , _world( [[BulletPhysics alloc] init] )
 
     // why does this need to be doubled?
     , _width( _view.bounds.size.width * 2 )
@@ -22,6 +49,7 @@ Game::Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::s
 
     , _program( ios_path( "ModelShader.vs" ), ios_path( "ModelShader.fs" ), "aPosition", "aNormal", "aTexCoord" )
     , _spriteProgram( ios_path( "SpriteShader.vs" ), ios_path( "SpriteShader.fs" ), "aPosition", "aTexCoord" )
+    , _fireProgram( ios_path( "SpriteShader.vs" ), ios_path( "FireShader.fs" ), "aPosition", "aTexCoord" )
 
     , _level( ObjMesh( ios_path( levelName ) ), &_program )
     //, _enemies( ObjMesh( ios_path( "Level0EnemyPos.obj" ) ), &_program )
@@ -58,20 +86,23 @@ Game::Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::s
         glUseProgram( 0 );
     }
     
-    // Set up sprite shader
+    // Set up sprite shaders
     {
         vec4    ambientComponent( 0.5, 0.5, 0.5, 1.0 );
         
         _spriteProgram.bind();
-        glUniform4fv( _program.find_uniform( "uAmbientColor" ), 1, &ambientComponent[0] );
-        glUniform4fv( _program.find_uniform( "uDiffuseColor" ), 1, &_skybox.sunColor[0] );
+        glUniform4fv( _spriteProgram.find_uniform( "uAmbientColor" ), 1, &ambientComponent[0] );
+        glUniform4fv( _spriteProgram.find_uniform( "uDiffuseColor" ), 1, &_skybox.sunColor[0] );
+        
+        _fireProgram.bind();
+        glUniform1i( _fireProgram.find_uniform( "uMapDuDv" ), 3 ); // same as water DuDv
         glUseProgram( 0 );
     }
 
     
     // Set up level
     {
-        GraphicalComponent level( "level", GraphicalComponent::TRANSLUCENT );
+        GraphicalComponent level( "level" );
         level.model = &_level;
         level.program = &_program;
         
@@ -90,7 +121,7 @@ Game::Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::s
             vec3 v1 = _level._mesh[ i + 1 ].aPosition;
             vec3 v2 = _level._mesh[ i + 2 ].aPosition;
             
-            tMesh->addTriangle( { v0.x, v0.y, v0.z }, { v1.x, v1.y, v1.z }, { v2.x, v2.y, v2.z } );
+            tMesh->addTriangle( btVector( v0 ), btVector( v1 ), btVector( v2 ) );
         }
         
         btBvhTriangleMeshShape* levelShape = new btBvhTriangleMeshShape( tMesh, true );
@@ -106,18 +137,17 @@ Game::Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::s
         auto enemiesRail = ObjMesh( ios_path( redEnemies ) ).rail;
         
         Sprite* redSprite = new Sprite( ios_path( "Level0All/enemy2.png" ), &_spriteProgram );
-        redSprite->_height = 2;
-        redSprite->_width = 2;
-        
+        redSprite->height = 2;
+        redSprite->width = 2;
+        redSprite->spriteAxis = vec3( 0, 1, 0 );
         
         for ( int i = 0; i < enemiesRail.size(); i += 2 )
         {
-            const EntityId enemyId = 3000 + i;
+            const EntityId enemyId( "redemy", i );
             
             GraphicalComponent enemyG( enemyId, GraphicalComponent::TRANSLUCENT );
             enemyG.sprite = redSprite;
             enemyG.program = &_spriteProgram;
-            enemyG.spriteAxis = vec3( 0, 1, 0 );
             
             addComponent( enemyG );
             
@@ -141,17 +171,17 @@ Game::Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::s
         auto enemiesRail = ObjMesh( ios_path( greenEnemies ) ).rail;
         
         Sprite* greenSprite = new Sprite( ios_path( "Level0All/enemy0.png" ), &_spriteProgram );
-        greenSprite->_height = 2;
-        greenSprite->_width = 1;
+        greenSprite->height = 2;
+        greenSprite->width = 1.25;
+        greenSprite->spriteAxis = vec3( 0, 1, 0 );
         
         for ( int i = 0; i < enemiesRail.size(); i += 2 )
         {
-            const EntityId enemyId = 5000 + i;
+            const EntityId enemyId( "grnemy", i );
             
             GraphicalComponent enemyG( enemyId, GraphicalComponent::TRANSLUCENT );
             enemyG.sprite = greenSprite;
             enemyG.program = &_spriteProgram;
-            enemyG.spriteAxis = vec3( 0, 1, 0 );
             
             addComponent( enemyG );
             
@@ -164,6 +194,7 @@ Game::Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::s
             
             static btCylinderShape CYLINDER_SHAPE( { 0.5, 1, 0.5 } );
             enemyP.body = new btRigidBody( 1, motionState, &CYLINDER_SHAPE );
+            
             enemyP.body->setUserPointer( (void*) enemyId.bitPattern );
             
             addComponent( enemyP );
@@ -217,26 +248,20 @@ void Game::update( double step )
     _currTime += step;
     const double time = _currTime - _startTime;
     
+    [_world update: step];
+    
     if(!(_rail.isAtEnd()))
-        _eyepos = _rail[ time ];// - vec3( 0, 0.5, 0 );
+        _eyepos = _rail[ time ];
     
     if(!(_raillook.isAtEnd()))
-        _eyelook = _raillook[ time ];// - vec3( 0, 0.5, 0 );
-    
-    /*BehavioralComponent enemy( "enemy" );
-    enemy.functor = [&](BehavioralComponent* c, EntityCollection& entities, double time )
-    {
-        Entity& ntt = entities[ c->entityId ];
-        
-        ntt.position = _rail[ time ];
-    };*/
-    
-    
-    //_eyepos += vec3( 1, 1, 1 );
-    //_eyelook += vec3( 1, 1, 1 );
-    
+        _eyelook = _raillook[ time ];
     
     _water.update( time / 10, _eyepos );
+    
+    _fireProgram.bind();
+    glUniform1f( _fireProgram.find_uniform( "uDuDvFactor" ), time );
+    glUseProgram( 0 );
+    
     
     for ( auto& behavior : _behaviors )
         behavior.update( _entities, time );
@@ -252,6 +277,22 @@ void Game::update( double step )
     
     for ( auto _id : badIds )
         destroyEntity( _id );
+    
+    // Sort our translucent sprites based on distance from camera.
+    std::sort( _graphics.begin(), _graphics.end(),
+    [this](const GraphicalComponent& lhs, const GraphicalComponent& rhs)
+    {
+        if ( lhs.visibility == GraphicalComponent::TRANSLUCENT
+             && rhs.visibility == GraphicalComponent::TRANSLUCENT )
+        {
+            vec3 pos1 = _entities[ lhs.entityId ].position;
+            vec3 pos2 = _entities[ rhs.entityId ].position;
+            
+            return glm::distance( pos1, _eyepos ) > glm::distance( pos2, _eyepos );
+        }
+
+        return rhs.visibility == GraphicalComponent::TRANSLUCENT;
+    } );
 }
 
 
@@ -284,6 +325,8 @@ void Game::render() const
         glUniform4f( _program.find_uniform( "uWaterPlane" ), 0, 1, 0, 0 );
         _spriteProgram.bind();
         glUniform4f( _spriteProgram.find_uniform( "uWaterPlane" ), 0, 1, 0, 0 );
+        _fireProgram.bind();
+        glUniform4f( _fireProgram.find_uniform( "uWaterPlane" ), 0, 1, 0, 0 );
         glUseProgram( 0 );
 
         draw_scene( lookAt( eyepos, eyelook, vec3( 0, 1, 0 ) ), proj );
@@ -294,6 +337,9 @@ void Game::render() const
         glUniform4f( _program.find_uniform( "uWaterPlane" ), 0, -1, 0, 0 );
         _spriteProgram.bind();
         glUniform4f( _spriteProgram.find_uniform( "uWaterPlane" ), 0, -1, 0, 0 );
+        _fireProgram.bind();
+        glUniform4f( _fireProgram.find_uniform( "uWaterPlane" ), 0, -1, 0, 0 );
+
         glUseProgram( 0 );
         
         draw_scene( view, proj );
@@ -311,17 +357,20 @@ void Game::draw_scene( glm::mat4 view, glm::mat4 proj, bool drawWater ) const
 {
     _skybox.render( view, proj );
     
+    if ( drawWater )
+        _water.render( view, proj );
+    
     _program.bind();
     glUniformMatrix4fv( _program.find_uniform( "uViewMatrix" ), 1, GL_FALSE, &view[ 0 ][ 0 ] );
     glUniformMatrix4fv( _program.find_uniform( "uProjMatrix" ), 1, GL_FALSE, &proj[ 0 ][ 0 ] );
-    glUniform4f( _program.find_uniform( "uColor" ), 1, 1, 1, 0 );
     
     _spriteProgram.bind();
     glUniformMatrix4fv( _spriteProgram.find_uniform( "uViewMatrix" ), 1, GL_FALSE, &view[ 0 ][ 0 ] );
     glUniformMatrix4fv( _spriteProgram.find_uniform( "uProjMatrix" ), 1, GL_FALSE, &proj[ 0 ][ 0 ] );
-
-    if ( drawWater )
-        _water.render( view, proj );
+    
+    _fireProgram.bind();
+    glUniformMatrix4fv( _fireProgram.find_uniform( "uViewMatrix" ), 1, GL_FALSE, &view[ 0 ][ 0 ] );
+    glUniformMatrix4fv( _fireProgram.find_uniform( "uProjMatrix" ), 1, GL_FALSE, &proj[ 0 ][ 0 ] );
     
     for ( auto drawable : _graphics )
         drawable.update( _entities, view, proj );
@@ -419,6 +468,11 @@ void Game::addComponent( PhysicalComponent component )
 void Game::addComponent( BehavioralComponent component )
 {
     _behaviors.push_back( component );
+}
+
+void deleteEntity( EntityId _id )
+{
+    //_badIds.add;
 }
 
 void Game::destroyEntity( EntityId _id )

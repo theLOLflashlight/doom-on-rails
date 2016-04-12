@@ -26,6 +26,22 @@ struct EntityId
     EntityId( const char (&entityName)[ N ] )
     {
         std::strncpy( (char*) &bitPattern, entityName, sizeof( bitPattern ) );
+        bitPattern <<= (8 - (N - 1)) * 8;
+    }
+    
+    template< uint N, typename = typename std::enable_if< (N <= 7) >::type >
+    EntityId( const char (&tag)[ N ], uint16_t index )
+    {
+        std::strncpy( (char*) &bitPattern, tag, sizeof( bitPattern ) );
+        bitPattern <<= sizeof( index ) * 8;
+        bitPattern |= uint64_t( index );
+    }
+    
+    template< uint N, typename = typename std::enable_if< (N <= 7) >::type >
+    static bool matchesTag( const char (&tag)[ N ], EntityId _id )
+    {
+        return _id.bitPattern >= EntityId( tag, 0 ).bitPattern
+            && _id.bitPattern <= EntityId( tag, 65535 ).bitPattern;
     }
 };
 
@@ -42,9 +58,9 @@ namespace std
         typedef EntityId argument_type;
         typedef std::size_t result_type;
         
-        result_type operator()(argument_type const& s) const
+        result_type operator()( const argument_type& eid ) const
         {
-            return std::hash< uint64_t >{}( s.bitPattern );
+            return std::hash< uint64_t >{}( eid.bitPattern );
         }
     };
 }
@@ -81,87 +97,6 @@ struct Entity
 
 typedef std::unordered_map< EntityId, Entity > EntityCollection;
 
-
-inline glm::mat4 CreateBillboardMatrix( glm::vec3 right, glm::vec3 up, glm::vec3 look, glm::vec3 pos )
-{
-    return glm::mat4( glm::mat4x3( right, up, look, pos ) );
-    /*bbmat[0][0] = right.x;
-    bbmat[0][1] = right.y;
-    bbmat[0][2] = right.z;
-    bbmat[0][3] = 0;
-    bbmat[1][0] = up.x;
-    bbmat[1][1] = up.y;
-    bbmat[1][2] = up.z;
-    bbmat[1][3] = 0;
-    bbmat[2][0] = look.x;
-    bbmat[2][1] = look.y;
-    bbmat[2][2] = look.z;
-    bbmat[2][3] = 0;
-    // Add the translation in as well.
-    bbmat[3][0] = pos.x;
-    bbmat[3][1] = pos.y;
-    bbmat[3][2] = pos.z;
-    bbmat[3][3] = 1;*/
-}
-
-inline glm::mat4 BillboardPoint( glm::vec3 pos, glm::vec3 camPos, glm::vec3 camUp )
-{	// create the look vector: pos -> camPos
-    glm::vec3	look	= glm::normalize( camPos - pos );
-    
-    // right hand rule cross products
-    glm::vec3	right	= glm::cross( camUp, look );
-    glm::vec3	up		= glm::cross( look, right );
-    
-    glm::mat4	bbmat;
-    return CreateBillboardMatrix( right, up, look, pos );
-    
-    // apply the billboard
-    return bbmat;
-}
-
-inline glm::mat4 BillboardAxisY( glm::vec3 pos, glm::vec3 camPos )
-{	// create the look vector: pos -> camPos
-    glm::vec3	look	= camPos - pos;
-    look.y = 0;
-    look = glm::normalize( look );
-    
-    // right hand rule cross products
-    glm::vec3	up		= glm::vec3( 0, 1, 0 );
-    glm::vec3	right	= glm::cross( up, look );
-    
-    glm::mat4	bbmat;
-    return CreateBillboardMatrix( right, up, look, pos );
-    
-    // apply the billboard
-    return bbmat;
-}
-
-inline glm::mat4 BillboardAxis( glm::vec3 pos, glm::vec3 camPos, glm::vec3 axis )
-{	// create the look vector: pos -> camPos
-    glm::vec3	look	= glm::normalize( camPos - pos );
-    
-    // right hand rule cross products
-    glm::vec3	up		= axis;
-    glm::vec3	right	= glm::normalize( glm::cross( up, look ) );
-    look = glm::cross( right, up );
-    
-    glm::mat4	bbmat;
-    return CreateBillboardMatrix( right, up, look, pos );
-    
-    // apply the billboard
-    return bbmat;
-}
-
-inline glm::vec3 extract_eye_pos( glm::mat4 model, glm::mat4 view )
-{
-    using namespace glm;
-    mat4 model_view = view * model;
-    vec4 d          = vec4( vec3( model_view[3] ), 1 );
-    
-    return vec3( -d * model_view );
-    //return vec4( (model * view)[3] );
-}
-
 struct GraphicalComponent
 {
     enum Visibility
@@ -176,7 +111,6 @@ struct GraphicalComponent
     GLProgram*  program = 0;
     Model*      model   = 0;
     Sprite*     sprite  = 0;
-    glm::vec3   spriteAxis = { 0, 0, 0 };
     glm::vec4   color   = { 1, 1, 1, 0 };
     
     explicit GraphicalComponent( EntityId _id, Visibility _visibility = VISIBLE )
@@ -199,8 +133,7 @@ struct GraphicalComponent
         if ( visibility == INVISIBLE )
             return;
         
-        if ( program )
-        {
+        if ( program ) {
             program->bind();
             glUniform4fv( program->find_uniform( "uColor" ), 1, &color[ 0 ] );
         }
@@ -208,29 +141,14 @@ struct GraphicalComponent
         if ( visibility == TRANSLUCENT )
             glEnable( GL_BLEND );
         
+        Entity ntt = entities[ entityId ];
+        
         if ( model )
-            model->render( entities[ entityId ].transform_matrix(), GL_TRIANGLES );
+            model->render( ntt.transform_matrix(), GL_TRIANGLES );
         
         if ( sprite )
         {
-            Entity ntt = entities[ entityId ];
-
-            mat4 mod = ntt.transform_matrix();
-            
-            mod = scale( mod, vec3( sprite->_width, sprite->_height, sprite->_width ) );
-            
-            glUniformMatrix4fv( program->find_uniform( "uModelMatrix" ), 1, GL_FALSE, (float*)&mod );
-            glUniform3fv( program->find_uniform( "uSpriteAxis" ), 1, &spriteAxis[0] );
-            
-            //mod *= BillboardPoint( vec3( 0, 0, 0 ), vec3( row( view, 2 ) ), vec3( column( view, 1 ) ) );
-            
-            //mod = scale( mod, vec3( 1, 1, 0 ) );
-            
-            //mod *= BillboardAxisY( vec3( 0, 0, 0 ), vec3( row( view, 2 ) ) );
-            
-            //mod = lookAt( ntt.position, vec3( row( view, 2 ) ), vec3( column( view, 1 ) ) );
-            
-            sprite->render();
+            sprite->render( ntt.transform_matrix() );
         }
         
         if ( visibility == TRANSLUCENT )

@@ -156,7 +156,7 @@ void Water::bindRefraction( float width, float height ) const
 void Water::render( mat4 view, mat4 proj ) const
 {
     _program.bind();
-    //glDisable( GL_CULL_FACE );
+    
     glActiveTexture( GL_TEXTURE0 );
     glBindTexture( GL_TEXTURE_2D, _reflectTexture );
     

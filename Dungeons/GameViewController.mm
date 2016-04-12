@@ -7,11 +7,13 @@
 //
 
 #import "GameViewController.h"
+#import "EndViewController.h"
 #import <OpenGLES/ES3/glext.h>
 #import <AVFoundation/AVFoundation.h>
 #import "Game.h"
 #import "BulletPhysics.h"
 #import "GameCppVariables.hpp"
+#import "EndViewController.h"
 #include "ios_path.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
@@ -172,11 +174,24 @@ struct Enemy_Basic
 }
 
 @property (strong, nonatomic) EAGLContext* context;
-@property (strong, nonatomic) BulletPhysics* physics;
 
 @end
 
 @implementation GameViewController
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Make sure your segue name in storyboard is the same as this line
+    if ([[segue identifier] isEqualToString:@"GameToEnd"])
+    {
+        // Get reference to the destination view controller
+        EndViewController *vc = [segue destinationViewController];
+      
+        // Pass any objects to the view controller here, like...
+        vc.KillSum.text = [NSString stringWithFormat:@"%d", Kills];
+        //[vc setMyObjectHere:object];
+    }
+}
 
 //Tap handling - spawn projectile
 - (void) handleTapGesture:(UITapGestureRecognizer *)sender
@@ -266,7 +281,7 @@ struct Enemy_Basic
     
     [EAGLContext setCurrentContext:self.context];
     
-    _game = new Game( (GLKView*) self.view, _physics, "Level0Layout.obj", "Level0EnemyAPos.obj", "Level0EnemyBPos.obj", "DemoRail.obj" );
+    _game = new Game( (GLKView*) self.view, "Level0Layout.obj", "Level0EnemyAPos.obj", "Level0EnemyBPos.obj", "DemoRail.obj" );
     
     //_game->killCountPtr = *KI
     
@@ -715,7 +730,7 @@ struct Enemy_Basic
  }
  */
 -(void) ThemeSound {
-    if(NSString *path = [[NSBundle mainBundle] pathForResource:@"DOOM" ofType: @"mp3"]) { //J: Not sure about this conversion from swift
+    if(NSString *path = [[NSBundle mainBundle] pathForResource:@"Doom3 Level 1" ofType: @"mp3"]) { //J: Not sure about this conversion from swift
         NSURL *soundURL = [NSURL fileURLWithPath:path]; //Can check this code later ...
         
         NSError *error;
@@ -857,7 +872,7 @@ struct Enemy_Basic
 
 - (void) spawn_projectile:( glm::vec3 )pos velocity:( glm::vec3 ) vel homeInOnPlayer: (bool)targetPlayer damage: (int)damage
 {
-    const EntityId bulletId = _bulletId++;
+    const EntityId bulletId( "bullet", _bulletId++ );
     {
         GraphicalComponent bullet( bulletId, GraphicalComponent::TRANSLUCENT );
         bullet.program = &_game->_spriteProgram;
@@ -989,7 +1004,6 @@ struct Enemy_Basic
 
 - (void) update
 {
-    [_physics update: self.timeSinceLastUpdate];
     _game->update( self.timeSinceLastUpdate );
     [self cameraMovement];
     

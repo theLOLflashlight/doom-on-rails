@@ -12,6 +12,7 @@
 #include <memory>
 #include <vector>
 #include <chrono>
+#include <set>
 
 struct Rail
 {
@@ -79,7 +80,7 @@ class Game
 {
 public:
 
-    Game( GLKView* view, BulletPhysics* physics, std::string levelName, std::string redEnemies, std::string greenEnemies, std::string railName );
+    Game( GLKView* view, std::string levelName, std::string redEnemies, std::string greenEnemies, std::string railName );
 
     int* killCountPtr;
     
@@ -114,7 +115,7 @@ public:
     GLfloat                 _width, _height;
     double                  _startTime, _currTime;
     
-    mutable GLProgram       _program, _spriteProgram;
+    mutable GLProgram       _program, _spriteProgram, _fireProgram;
     
     Model                   _level;
     Rail                    _rail, _raillook;
@@ -127,6 +128,10 @@ public:
     ComponentCollection< GraphicalComponent >   _graphics;
     ComponentCollection< PhysicalComponent >    _physics;
     ComponentCollection< BehavioralComponent >  _behaviors;
+    
+    std::set< EntityId >    _badIds;
+    
+    void deleteEntity( EntityId _id );
 
     Skybox                  _skybox;
     Water                   _water;

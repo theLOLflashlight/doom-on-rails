@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "EndViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface EndViewController()
 {
-    
+    AVAudioPlayer *BGSound;
 }
 
 @end
@@ -21,8 +22,20 @@
 -(void)viewDidLoad
 {
     
-    self.KillSum.text =[[NSString alloc] initWithFormat: @"%d", 100];
+    //self.KillSum.text =[[NSString alloc] initWithFormat: @"%d", 11];
+    NSData *GBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"AND HIS NAME IS JOHN CENA" ofType:@"mp3"]];
+    BGSound = [[AVAudioPlayer alloc]initWithData:GBSoundPath error:nil];
+    
+    _KillSum.text = [NSString stringWithFormat: @"%d", _kills];
+    
+    [BGSound prepareToPlay];
+    [BGSound play];
 }
- 
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [BGSound stop];
+}
+
 @end
 
