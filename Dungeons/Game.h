@@ -131,7 +131,7 @@ public:
     
     std::set< EntityId >    _badIds;
     
-    void deleteEntity( EntityId _id );
+    void markEntityForDestruction( EntityId _id );
 
     Skybox                  _skybox;
     Water                   _water;
