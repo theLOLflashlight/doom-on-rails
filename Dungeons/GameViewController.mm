@@ -144,7 +144,7 @@ struct Enemy_Basic
         
         if(AmmoNumber>0)
         {
-            [self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f homeInOnPlayer:false damage:100];
+            [self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f];
             AmmoNumber --;
         }
         
@@ -157,6 +157,37 @@ struct Enemy_Basic
         }
     }
 }
+
+- (void) handleTap2Gesture:(UITapGestureRecognizer *)sender
+{
+    if (sender.state == UIGestureRecognizerStateRecognized)
+    {
+        using namespace glm;
+        const CGPoint mouse = [sender locationInView:self.view];
+        
+        const mat4 view = _game->viewMatrix();
+        const mat4 proj = _game->projMatrix();
+        const vec4 viewport = _game->viewport();
+        
+        vec3 touchPos0 = unProject( vec3( mouse.x, -mouse.y, 0 ), view, proj, viewport );
+        vec3 touchPos1 = unProject( vec3( mouse.x, -mouse.y, 1 ), view, proj, viewport );
+        
+        if(AmmoNumber>0)
+        {
+            [self spawn_bfg_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f];
+            AmmoNumber --;
+        }
+        
+        //[self explosionAt: _game->_eyepos];
+        
+        if(AmmoNumber == 0)
+        {
+            ReLoad = true;
+            [ReloadSound play];
+        }
+    }
+}
+
 
 - (void)viewDidLoad
 {
@@ -184,11 +215,10 @@ struct Enemy_Basic
     tapGesture.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:tapGesture];
     
-    //Swipe
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
-    [panGesture setMinimumNumberOfTouches:1];
-    [panGesture setMaximumNumberOfTouches:1];
-    [self.view addGestureRecognizer:panGesture];
+    UITapGestureRecognizer *tap2Gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap2Gesture:)];
+    tap2Gesture.numberOfTapsRequired = 1;
+    tap2Gesture.numberOfTouchesRequired = 2;
+    [self.view addGestureRecognizer:tap2Gesture];
     
     //play looping sound
     GLKView *view = (GLKView *)self.view;
@@ -316,197 +346,6 @@ struct Enemy_Basic
     }
 }
 
-- (void)handlePanGesture: (UIPanGestureRecognizer *)recognizer {
-    CGPoint translation = [recognizer translationInView:self.view];
-    CGPoint location = [recognizer locationInView:self.view];
-    
-    //Actually, just get furthest radius from the origin.
-    GLKVector2 radiusVec = GLKVector2Make(translation.x, translation.y);
-    CGFloat radLength = GLKVector2Length(radiusVec);
-    
-    if(recognizer.state == UIGestureRecognizerStateBegan) {
-        _maxRadius = 0;
-        _noSwipe = false;
-        [_translationPoints removeAllObjects];
-    }
-    
-    
-    if(radLength > _maxRadius) {
-        _maxRadius = radLength;
-    }
-    
-    //cancel gesture if moving backwards from the furthest radius from the origin (as opposed to total translation) by 6px.
-    //So yes, you can zigzag a lot if you wanted to.
-    if(radLength < _maxRadius - 6) {
-        if(!_noSwipe) {
-            using namespace glm;
-            const CGPoint mouse = [recognizer locationInView:self.view];
-            
-            const mat4 view = _game->viewMatrix();
-            const mat4 proj = _game->projMatrix();
-            const vec4 viewport = _game->viewport();
-            
-            vec3 touchPos0 = unProject( vec3( mouse.x, -mouse.y, 0 ), view, proj, viewport );
-            vec3 touchPos1 = unProject( vec3( mouse.x, -mouse.y, 1 ), view, proj, viewport );
-            
-            if(AmmoNumber>0)
-             {
-                 [self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f homeInOnPlayer:false damage:100];
-                 AmmoNumber --;
-             }
-        }
-        _noSwipe = true;
-        //[self explosionAt: _game->_eyepos];
-    }
-    
-    //On lift finger
-    if(recognizer.state == UIGestureRecognizerStateEnded) {
-        if(radLength >= 80) { //valid swipe
-            NSString *swipeSound;
-            NSString *swipeSoundExt = @"mp3";
-            if(_swipeHit) {
-                swipeSound = @"sword-clash1";
-            }
-            else {
-                swipeSound = @"swipe_whiff";
-            }
-            
-            if(NSString *path = [[NSBundle mainBundle] pathForResource:swipeSound ofType: swipeSoundExt]) { //J: Not sure about this conversion from swift
-                NSURL *soundURL = [NSURL fileURLWithPath:path]; //Can check this code later ...
-                
-                NSError *error;
-                try { //J: Not sure about this conversion from Swift
-                    soundPlayer2 = [[AVAudioPlayer alloc] initWithContentsOfURL:(NSURL *)soundURL error:nil];
-                    [soundPlayer2 prepareToPlay];
-                    [soundPlayer2 play];
-                }
-                catch(NSException *exception) {
-                }
-            }
-            _currBezierDuration = bezierDuration;
-            _currSwipeDrawn = true;
-            
-            using namespace glm;
-            const CGPoint mouse = [self midpointEnds:_translationPoints];
-            
-            const mat4 view = _game->viewMatrix();
-            const mat4 proj = _game->projMatrix();
-            const vec4 viewport = _game->viewport();
-            
-            vec3 touchPos0 = unProject( vec3( mouse.x, -mouse.y, 0 ), view, proj, viewport );
-            vec3 touchPos1 = unProject( vec3( mouse.x, -mouse.y, 1 ), view, proj, viewport );
-            
-            glm::vec3 createPos = touchPos0 /*+ normalize( touchPos1 - touchPos0 )*/; //position to create the explosion
-            glm::vec3 velocity = normalize( touchPos1 - touchPos0 ) * 100.0f;
-            
-        }
-        else {
-            //If having lifted, but not having done a swipe cancel in the current 'swipe attempt'
-            if (!_noSwipe) {
-                using namespace glm;
-                const CGPoint mouse = [recognizer locationInView:self.view];
-                
-                const mat4 view = _game->viewMatrix();
-                const mat4 proj = _game->projMatrix();
-                const vec4 viewport = _game->viewport();
-                
-                vec3 touchPos0 = unProject( vec3( mouse.x, -mouse.y, 0 ), view, proj, viewport );
-                vec3 touchPos1 = unProject( vec3( mouse.x, -mouse.y, 1 ), view, proj, viewport );
-                
-                if(AmmoNumber>0)
-                {
-                    [self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f homeInOnPlayer:false damage:100];
-                    AmmoNumber --;
-                }
-                
-                //[self explosionAt: _game->_eyepos];
-            }
-        }
-        _noSwipe = false;
-    }
-    
-    //draw line
-    //ie. create the _translationPoints
-    if(!_noSwipe) {
-        //From stackoverflow ...
-        [_translationPoints addObject:[NSValue valueWithCGPoint:CGPointMake(location.x, location.y)]];
-    }
-    //print("radLength: \(radLength); _maxRadius: \(_maxRadius)");
-    
-    
-    
-    //let point: CGPoint = recognizer.translationInView(self.view)
-    
-    
-    if(recognizer.state == UIGestureRecognizerStateBegan) {
-        //_prevHorizontalAngle
-        _baseHorizontalAngle += currHorizontalAngle; //had missed the + increment over the previous ...
-        _baseVerticalAngle += currVerticalAngle;
-        //currhorizontalAngle = 0;
-        //currverticalAngle = 0;
-    }
-    currHorizontalAngle = -translation.x * rotationSpeed;
-    currVerticalAngle = translation.y * rotationSpeed;
-}
-
-//Iterate thru translationPoints or any otherwise pointArray, get the midpoint of them
--(CGPoint) midpoint: (NSMutableArray *)pointArray {
-    CGPoint midPoint;
-    for(int i=0; i<pointArray.count; i++) {
-        
-        //get each CGPoint
-        NSValue *locationValue = [pointArray objectAtIndex:i];
-        CGPoint location = locationValue.CGPointValue;
-        midPoint.x += location.x;
-        midPoint.y += location.y;
-    }
-    
-    midPoint.x /= pointArray.count;
-    midPoint.y /= pointArray.count;
-    
-    return midPoint;
-}
--(CGPoint) midpointEnds: (NSMutableArray *)pointArray {
-    CGPoint midPoint;
-    int i = 0;
-    //add start and end points and average only those
-    NSValue *locationValue = [pointArray objectAtIndex:i];
-    CGPoint location = locationValue.CGPointValue;
-    midPoint.x += location.x;
-    midPoint.y += location.y;
-    
-    i = pointArray.count - 1;
-    
-    locationValue = [pointArray objectAtIndex:i];
-    location = locationValue.CGPointValue;
-    midPoint.x += location.x;
-    midPoint.y += location.y;
-    
-    
-    midPoint.x /= 2;
-    midPoint.y /= 2;
-    
-    return midPoint;
-}
-
-
-
-//Time since the last iteration of calling this method. Original intention is for running the code, and tracking time independently of frame rate.
-//Each place in code calling this is to use a different Int for 'closest-to-accurate' results (though it would not include the time after retrieving the time and updating the time, so the value would be less, or not include the time spent in retrieving the NSDate before retrieving timeDiff, ie. timeDiff would not include such time).
-- (double)timeSinceLastIter: (int)timePointIndex {
-    NSDate *newTime = [[NSDate alloc] init];
-    double timeDiff = 0; //this would be the first time; there would be no time before this one occurred.
-    int lastDateCount = (sizeof(_lastDate) / sizeof(_lastDate[0]));
-    if(timePointIndex < lastDateCount) {
-        if(_lastDate[timePointIndex] != nil) { //if an NSDate exists, then do the following
-            timeDiff = [newTime timeIntervalSinceDate:_lastDate[timePointIndex]]; //Had a "!" in the Swift version, but this is pretty much what Objective-C already does - ie. assume the existence of the object //provided misleading error info - where I declared timeDiff resolved an error of 'not matching array type' apparently
-        }
-    }
-    
-    _lastDate[timePointIndex] = newTime;
-    return timeDiff;
-}
-
 -(void) ThemeSound {
     NSString *path;
     switch ( _LevelIndex )
@@ -531,25 +370,6 @@ struct Enemy_Basic
             [themePlayer play];
   
     
-}
-
-
-//Jacob: Shake input handler
--(void) motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
-    if (motion == UIEventSubtypeMotionShake) { //just having earthquake for now
-        //shake method here
-        //Cast spell
-        
-        GCV.animationProgress = 0; //begins the animation of earthquake
-        
-        if(AmmoNumber != 10)
-        {
-            ReLoad= true;
-            [ReloadSound play];
-        }
-        
-        //Right now, it simply shakes the camera, but maybe shaking the world instead could be considered?
-    }
 }
 
 - (void)dealloc
@@ -606,7 +426,7 @@ struct Enemy_Basic
 }
 
 
-- (void) spawn_projectile:( glm::vec3 )pos velocity:( glm::vec3 ) vel homeInOnPlayer: (bool)targetPlayer damage: (int)damage
+- (void) spawn_projectile:( glm::vec3 )pos velocity:( glm::vec3 ) vel
 {
     const EntityId bulletId( "bullet", _bulletId++ );
     {
@@ -626,59 +446,8 @@ struct Enemy_Basic
         bullet.body = new btRigidBody( 1, motionState, &SPHERE_SHAPE );
         
         bullet.body->setLinearVelocity( { vel.x, vel.y, vel.z } );
-         
         
-        //[_physics addRigidBody: bullet.body];
         _game->addComponent( bullet );
-        //_game->findPhysicalComponent( bulletId )->active = false;
-        
-        BehavioralComponent bulletBc(bulletId);
-        
-        
-        //For projectiles targeting the player, have specific behaviour for the bullet
-        if(false) {
-            
-            bulletBc.functor = [targetPlayer, damage, bulletId, vel, self](BehavioralComponent *bc, EntityCollection& entities, double time) {
-                //operator() of the function
-                Entity *ntt = &(entities[ bc->entityId ]);
-                
-                //if distance between projectile and camera <= velocity + player velocity (ie. if it is at most the max amount that it could be from a player, perhaps, though considering player movement at the same time
-                //though, can just hardcode it as 2.5 * velocity, with the precondition that player velocity is at most 1.5x the projectile's velocity for this to work 100% of the time
-                //Actually, hardcoding projectile max distance entirely.
-                if(glm::length(ntt->position - _game->_eyepos) <= 1) {
-                    //do damage, eliminate projectile and damage player
-                    [self damagePlayer:damage];
-                }
-                
-                //after a positional physics update
-                glm::vec3 vecDir = _game->_eyepos - ntt->position; //target player
-                glm::normalize(vecDir);
-                glm::vec3 projVelocity = vecDir * glm::length(vel); //scale according to magnitude of vel
-                
-                
-                glm::vec3 oPos =_game->_eyepos + (_game->_eyelook - _game->_eyepos)/3.0f;
-                ntt->position = oPos;
-                NSLog(@"code is being run through, for bulletID: %d", bulletId);
-                
-                PhysicalComponent *pc = _game->findPhysicalComponent(bulletId);
-                pc->body->setLinearVelocity(btVector3(projVelocity.x, projVelocity.y, projVelocity.z));
-            };
-        }
-        else {
-            /*
-            //Default functor, used for debug purposes of understanding how this works
-            //Looks like this functor isn't working either.
-            bulletBc.functor =[self, bulletId](BehavioralComponent *bc, EntityCollection& entities, double time) {
-                //NSLog(@"BulletID %d posn: ", bulletId);
-                glm::vec3 oPos =_game->_eyepos + (_game->_eyelook - _game->_eyepos)/3.0f;
-                Entity *ntt = &(entities[bc->entityId]);
-                ntt->position = oPos;
-                NSLog(@"code is being run through, for bulletID: %d", bulletId);
-            };
-             */
-        }
-        //_game->addComponent(bulletBc);
-        
     }
     {
         BehavioralComponent bullet( bulletId );
@@ -773,50 +542,9 @@ struct Enemy_Basic
     
 }
 
-
-//No longer usable due to horizontalAngle and verticalAngle no longer existing in the _eyeLook variable
-- (void) cameraMovement
-{
-    float horizontalAngle = _baseHorizontalAngle + currHorizontalAngle;
-    float verticalAngle = _baseVerticalAngle + currVerticalAngle;
-    
-    //for animationProgress of shake
-    if(GCV.animationProgress > 1) {
-        GCV.animationProgress = 1;
-    }
-    if(GCV.animationProgress < 1) {
-        GCV.animationProgress += 1.0 / 45.0;
-        float shakeMag;
-        if(GCV.animationProgress < 0.70) {
-            shakeMag = 0.9 * 0.4;
-        }
-        else {
-            shakeMag = (0.9 - (GCV.animationProgress - 0.7) * 0.9 / 0.3) * 0.4; //after reaching 0.7 progress (when sound starts to dwindle), linearly decrease max magnitude to 0
-        }
-        //modelViewMatrix = GLKMatrix4Translate(modelViewMatrix, Float(arc4random())*shakeMag, Float(arc4random())*shakeMag, 0);
-        //GLKVector3Make(position.x + Float(arc4random())*shakeMag, position.y + Float(arc4random())*shakeMag, position.z + Float(arc4random())*shakeMag);
-        horizontalAngle += (arc4random() / UINT32_MAX) * shakeMag;
-        verticalAngle += (arc4random() / UINT32_MAX) * shakeMag;
-    }
-    
-    GCV.direction = {cosf(verticalAngle) * sinf(horizontalAngle),
-        sinf(verticalAngle),
-        cosf(verticalAngle) * cosf(horizontalAngle)};
-    //_eyelook = GCV.direction;
-    //GCV.horizontalMovement = GLKVector3Make(sinf(horizontalAngle - M_PI_2), 0, cosf(horizontalAngle - M_PI_2));
-    //print("horizontalAngle: \(horizontalAngle); verticalAngle: \(verticalAngle)");
-}
-
 - (void) update
 {
     _game->update( self.timeSinceLastUpdate );
-    [self cameraMovement];
-    
-    //update line
-    //Not yet implemented
-    //UIImage *image = [UIImage imageNamed:@"RedDamageOverlay.png"];//[drawSwipeLine size:imageSize]
-    //_imageView.image = image;
-    
     
     if(ReLoad)
     {
@@ -827,10 +555,6 @@ struct Enemy_Basic
         }
         
     }
-    /*
-     if(RedImageOverlay.alpha > 0) {
-     RedImageOverlay.alpha -= 0.7f / 60.0f;
-     }*/
     
     if(Kills == 1 && getkill)
     {
@@ -844,34 +568,6 @@ struct Enemy_Basic
     //update overlay and position each update
     
     glm::vec3 oPos =_game->_eyepos + (_game->_eyelook - _game->_eyepos)/3.0f;
-    
-    //Jacob's attempt at updating the position of an entity. Can ask Andrew about this later.
-    //Entity ntt = _game->_entities["overlay1"];
-    //ntt.position = oPos;/*_game->_eyelook;*///_game->_eyepos + (_game->_eyelook - _game->_eyepos); //put it very, very close in front such that anything in between the overlay and the camera would really not matter anyway
-    
-    //Jacob's attempt at updating the position of an entity. Can ask Andrew about this later.
-    //Entity *ntt2 = &(_game->_entities[_bulletId]); //bullet ID 1
-    //ntt2->position = oPos;
-    
-    //From looking up Bullet3D for that, just trying to use that - ie. to update position - using from http://gamedev.stackexchange.com/questions/58689/how-to-set-the-objects-world-position-in-bullet
-    /*
-    
-    //testing sprite to check if update were calling this at all; doesn't look like it works at all.
-    GraphicalComponent *gc2 = _game->findGraphicalComponent(_bulletId);
-    if(gc2) {
-        gc2->sprite = new Sprite(ios_path("RedDamageOverlay.png"), &_game->_program);
-    }
-    PhysicalComponent *pc2 = _game->findPhysicalComponent(_bulletId); //bullet ID 1
-    if(pc2) {
-        auto motionState = new btDefaultMotionState(
-                                                btTransform( btQuaternion( 0,0,0,1 ), btVector3( oPos.x, oPos.y, oPos.z ) ) );
-        static btSphereShape SPHERE_SHAPE( 0.5 );
-        pc2->body = new btRigidBody( 1, motionState, &SPHERE_SHAPE );
-    }*/
-    
-    //if()
-    //BehavioralComponent bc2(_bulletId);
-    //pc2 = oPos;
     
     self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", Kills];
     self.Health.text =[[NSString alloc] initWithFormat: @"%d", 100];
@@ -926,7 +622,7 @@ void Enemy_Basic::operator()(BehavioralComponent* c, EntityCollection& entities,
         glm::vec3 vecDir = gameptr->_eyepos - ntt.position; //target player
         glm::normalize(vecDir);
         glm::vec3 projVelocity = vecDir * velocity;
-        [gvc spawn_projectile:ntt.position velocity:projVelocity homeInOnPlayer:true damage:20];
+        //[gvc spawn_projectile:ntt.position velocity:projVelocity homeInOnPlayer:true damage:20];
     }
     //pc->body->setLinearVelocity(glm::)
     
