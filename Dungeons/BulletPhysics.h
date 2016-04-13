@@ -11,8 +11,6 @@
 
 @interface BulletPhysics: NSObject
 
-@property (nonatomic) btDiscreteDynamicsWorld* dynamicsWorld;
-
 -(void) update:(float) elapsedTime;
 
 -(void) addRigidBody:(btRigidBody*) body;
