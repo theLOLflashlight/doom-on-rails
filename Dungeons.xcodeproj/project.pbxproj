@@ -29,6 +29,7 @@
 		4453320E1CB5BD9C004DC43B /* SoundOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4453320A1CB5BD9C004DC43B /* SoundOn.png */; };
 		4453320F1CB5BD9C004DC43B /* Start.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4453320B1CB5BD9C004DC43B /* Start.gif */; };
 		445332111CB5C48E004DC43B /* Logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 445332101CB5C48E004DC43B /* Logout.png */; };
+		445B7EF71CBED8CE00521624 /* MainMenu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 445B7EF61CBED8CE00521624 /* MainMenu.jpg */; };
 		448A48001CBD79F500A3623D /* Doom3 Level 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 448A47FF1CBD79F500A3623D /* Doom3 Level 1.mp3 */; };
 		448A48031CBD7C8600A3623D /* Doom3 Level 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 448A48011CBD7C8600A3623D /* Doom3 Level 2.mp3 */; };
 		448A48041CBD7C8600A3623D /* Doom3 Level 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 448A48021CBD7C8600A3623D /* Doom3 Level 3.mp3 */; };
@@ -208,6 +209,7 @@
 		4453320A1CB5BD9C004DC43B /* SoundOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SoundOn.png; sourceTree = "<group>"; };
 		4453320B1CB5BD9C004DC43B /* Start.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Start.gif; sourceTree = "<group>"; };
 		445332101CB5C48E004DC43B /* Logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logout.png; sourceTree = "<group>"; };
+		445B7EF61CBED8CE00521624 /* MainMenu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MainMenu.jpg; sourceTree = "<group>"; };
 		448A47FF1CBD79F500A3623D /* Doom3 Level 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Doom3 Level 1.mp3"; sourceTree = "<group>"; };
 		448A48011CBD7C8600A3623D /* Doom3 Level 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Doom3 Level 2.mp3"; sourceTree = "<group>"; };
 		448A48021CBD7C8600A3623D /* Doom3 Level 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Doom3 Level 3.mp3"; sourceTree = "<group>"; };
@@ -830,6 +832,7 @@
 				53C2DC981CBEABFB004CF029 /* Level2Layout.obj in Resources */,
 				53C2DC761CBDF9DD004CF029 /* Level1EnemyPos.mtl in Resources */,
 				032AF1B01CBDE9B600823AF1 /* Level0EnemyPos.obj in Resources */,
+				445B7EF71CBED8CE00521624 /* MainMenu.jpg in Resources */,
 				532ECA8A1CADBDBD001BB153 /* Level0_Textures in Resources */,
 				53C2DCA21CBEAFD8004CF029 /* Level2Rail.obj in Resources */,
 				448A48031CBD7C8600A3623D /* Doom3 Level 2.mp3 in Resources */,
