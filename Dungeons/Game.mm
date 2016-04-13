@@ -150,8 +150,6 @@ Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::s
                 case 1: enemyP.body = new btRigidBody( 1, motionState, &CYLINDER_SHAPE ); break;
             }
             
-            enemyP.body->setUserPointer( (void*) enemyId.bitPattern );
-            
             addComponent( enemyP );
         }
 

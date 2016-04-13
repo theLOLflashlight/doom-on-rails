@@ -90,70 +90,6 @@ struct Enemy_Basic
     CGFloat _baseHorizontalAngle, _baseVerticalAngle;
     CGFloat currHorizontalAngle, currVerticalAngle;
     CGFloat rotationSpeed;
-    /* //original swift code
-     var modelViewProjectionMatrix:GLKMatrix4 = GLKMatrix4Identity
-     var normalMatrix: GLKMatrix3 = GLKMatrix3Identity
-     
-     var modelViewMatrix: GLKMatrix4 = GLKMatrix4Identity
-     
-     //Accessible static var - position
-     static var position: GLKVector3 = GLKVector3Make(0, 0.5, 5)
-     var direction: GLKVector3 = GLKVector3Make(0,0,0)
-     var up: GLKVector3 = GLKVector3Make(0, 1, 0)
-     
-     
-     var currProjectileCoord: UILabel!;
-     
-     var horizontalMovement: GLKVector3 = GLKVector3Make(0, 0, 0)
-     var _baseHorizontalAngle : Float = 0
-     var _baseVerticalAngle : Float = 0
-     var currhorizontalAngle: Float = 0
-     var currverticalAngle: Float = 0
-     
-     var rotationSpeed: Float = 0.005
-     
-     var vertexArray: GLuint = 0
-     var vertexBuffer: GLuint = 0
-     
-     var context: EAGLContext? = nil
-     var effect: GLKBaseEffect? = nil
-     
-     var _myBezier = UIBezierPath();
-     
-     let bezierDuration = Float(1); //duration of bezier on screen (in seconds)
-     
-     //to track swipe running or not
-     var _currBezierDuration = -0.00001; //hard-coded time below 0
-     var _currSwipeDrawn = false;
-     */
-    //End of for camera, swipe
-    
-    //For sound - Apr 9
-    //sound setup
-    
-    
-    //NSDate *_lastDate[64];
-    /* //Original swift code
-     // Grab the path, make sure to add it to your project!
-     let filePath = "footsteps_gravel";
-     var sound : NSURL = NSBundle.mainBundle().URLForResource("footsteps_gravel", withExtension: "wav")!;
-     //var audioPlayer = AVAudioPlayer()
-     var mySound: SystemSoundID = 0;
-     public var themePlayer : AVAudioPlayer!;
-     var soundPlayer : AVAudioPlayer!;
-     var soundPlayer2 : AVAudioPlayer!;
-     
-     //Make an arraylist keeping track of each audio played, and remove each AVPAudioPlayer from the arraylist as each of them has completed its track, is the plan - though, still have to figure out how to set delegate and such, as to-do.
-     //
-     var AVAudioPlayers : [AVAudioPlayer] = [];
-     
-     //For other iOS stuff.
-     typealias NSPoint = CGPoint;
-     typealias NSUInteger = UInt;
-     
-     var _lastDate = [NSDate?](count: 64, repeatedValue: nil);
-     */
-    //End of for sound - Apr 9
     
     AVAudioPlayer *soundPlayer, *soundPlayer2;
     AVAudioPlayer *themePlayer;
@@ -163,22 +99,12 @@ struct Enemy_Basic
     //
     AVAudioPlayer *AVAudioPlayers[5];
     
-    //For other iOS stuff.
-    //typedef CGPoint NSPoint;
-    //typedef UInt8 NSUInteger;
-    
-    //SystemSoundID *mySound = 0;
-    //UILabel *currProjectileCoord; //Swift: var currProjectileCoord: UILabel!;
     
     NSDate *_lastDate[64];
     GameCppVariables GCV;
     
     UIImage *_image;
     UIImage *_anImage;
-    //NSMutableArray *_toBeDeleted; //no longer used
-    
-    //For explosion
-    //btSphereShape _explosionSphere; //Can ask Andrew how to do this later.
 }
 
 @property (strong, nonatomic) EAGLContext* context;
@@ -253,23 +179,6 @@ struct Enemy_Basic
         NSLog(@"Failed to create ES context");
     }
     
-    //auto groundShape = new btStaticPlaneShape( btVector3( 0, 1, 0 ), 0 );
-    //auto groundMotionState = new btDefaultMotionState();
-    //btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI( 0, groundMotionState, groundShape, btVector3(0,0,0) );
-    //auto groundRigidBody = new btRigidBody(groundRigidBodyCI);
-    //[_physics addRigidBody: groundRigidBody];
-    //RedImageOverlay.alpha = 0;
-    //RedImageOverlay.hidden = YES;
-    CGRect newFrame = CGRectMake(2000, 2000, 200, 200);
-    //RedImageOverlay.frame = newFrame;
-    //RedImageOverlay.;
-    
-    //Using apple's tutorial, ie. https://developer.apple.com/library/ios/documentation/2DDrawing/Conceptual/DrawingPrintingiOS/HandlingImages/Images.html
-    /*NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"RedDamageOverlay" ofType:@"png"];
-    UIImage *myImageObj = [[UIImage alloc] initWithContentsOfFile:imagePath];
-    _anImage = myImageObj;
-    */
-    
     //tap
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     tapGesture.numberOfTapsRequired = 1;
@@ -288,17 +197,22 @@ struct Enemy_Basic
     
     [EAGLContext setCurrentContext:self.context];
     
+    double expireTime = 0;
+    
     switch ( _LevelIndex )
     {
         case 0:
             _game = new Game( (GLKView*) self.view, "Level0Layout.obj", "Level0EnemyAPos.obj", "Level0EnemyBPos.obj", "Level0Rail.obj", "mar", glm::vec3( 0.766, 0.259, 0.643 ), glm::vec4( 1, 1, 0, 0.5 ), 2 );
+            expireTime = 65;
             break;
         case 1:
             _game = new Game( (GLKView*) self.view, "Level1Layout.obj", "Level1EnemyAPos.obj", "Level1EnemyBPos.obj", "Level1Rail.obj", "cp", glm::vec3( 0.342, 0.866, -0.940 ), glm::vec4( 0, 0.5, 1, 0.5 ), 3 );
+            expireTime = 64;
             break;
             
         case 2:
             _game = new Game( (GLKView*) self.view, "Level2Layout.obj", "Level2EnemyAPos.obj", "Level2EnemyBPos.obj", "Level2Rail.obj", "mercury", glm::vec3( 0, 1, 0 ), glm::vec4( 1, 0.2, 0, 0.5 ), 4 );
+            expireTime = 64;
             break;
         case 3:
             //game over
@@ -306,9 +220,9 @@ struct Enemy_Basic
     }
     
     BehavioralComponent endGame( "endGame" );
-    endGame.functor = [self](BehavioralComponent*, EntityCollection&, double time)
+    endGame.functor = [self, expireTime](BehavioralComponent*, EntityCollection&, double time)
     {
-        if ( time > 64 )
+        if ( time > expireTime )
         {
             EndViewController* endController = [self.storyboard instantiateViewControllerWithIdentifier: @"EndViewController"];
             
@@ -402,23 +316,6 @@ struct Enemy_Basic
     }
 }
 
-- (void)viewDidLayoutSubviews
-{
-    
-    //        UIBlurEffect *blurEffect = [UIBlurEffect s];
-    //        UIVisualEffectView *blurEffectView = UIVisualEffectView( effect: blurEffect );
-    //        UIVisualEffectView *vibeEffectView = UIVisualEffectView( effect: UIVibrancyEffect( forBlurEffect: blurEffect ) );
-    //
-    //        blurEffectView.frame = Hud.bounds
-    //        vibeEffectView.frame = Hud.bounds
-    //
-    //        blurEffectView.addSubview( vibeEffectView )
-    //        Hud.insertSubview( blurEffectView, atIndex: 0 )
-    
-    //Update image for (originally lines, but then now) image
-    
-}
-
 - (void)handlePanGesture: (UIPanGestureRecognizer *)recognizer {
     CGPoint translation = [recognizer translationInView:self.view];
     CGPoint location = [recognizer locationInView:self.view];
@@ -452,7 +349,11 @@ struct Enemy_Basic
             vec3 touchPos0 = unProject( vec3( mouse.x, -mouse.y, 0 ), view, proj, viewport );
             vec3 touchPos1 = unProject( vec3( mouse.x, -mouse.y, 1 ), view, proj, viewport );
             
-            [self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f homeInOnPlayer:false damage:100];
+            if(AmmoNumber>0)
+             {
+                 [self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f homeInOnPlayer:false damage:100];
+                 AmmoNumber --;
+             }
         }
         _noSwipe = true;
         //[self explosionAt: _game->_eyepos];
@@ -485,19 +386,6 @@ struct Enemy_Basic
             _currBezierDuration = bezierDuration;
             _currSwipeDrawn = true;
             
-            /*
-            //
-            //   apply a force on all objects
-            //
-            for (int i = 0; i < m_phantom->getOverlappingCollidables().getSize(); i++ )
-            {
-                hkpCollidable* c = m_phantom->getOverlappingCollidables()[i];
-                if ( c->getType() == hkpWorldObject::BROAD_PHASE_ENTITY )
-                {
-                    // Apply linear impulse on rigid bodies
-                }
-            }
-             */
             using namespace glm;
             const CGPoint mouse = [self midpointEnds:_translationPoints];
             
@@ -511,13 +399,6 @@ struct Enemy_Basic
             glm::vec3 createPos = touchPos0 /*+ normalize( touchPos1 - touchPos0 )*/; //position to create the explosion
             glm::vec3 velocity = normalize( touchPos1 - touchPos0 ) * 100.0f;
             
-            //glm::vec3 fwdDisplacement = glm::normalize(_game->_eyelook - _game->_eyepos) *1.0f;
-            //glm::vec3 oPos =_game->_eyepos + fwdDisplacement;
-            //[self explosionImpact:createPos velocity:velocity radius:2.0f];
-            
-            //[self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f homeInOnPlayer:false damage:100];
-            
-            //bullet.body->setLinearVelocity( { vel.x, vel.y, vel.z } );
         }
         else {
             //If having lifted, but not having done a swipe cancel in the current 'swipe attempt'
@@ -532,7 +413,11 @@ struct Enemy_Basic
                 vec3 touchPos0 = unProject( vec3( mouse.x, -mouse.y, 0 ), view, proj, viewport );
                 vec3 touchPos1 = unProject( vec3( mouse.x, -mouse.y, 1 ), view, proj, viewport );
                 
-                [self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f homeInOnPlayer:false damage:100];
+                if(AmmoNumber>0)
+                {
+                    [self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f homeInOnPlayer:false damage:100];
+                    AmmoNumber --;
+                }
                 
                 //[self explosionAt: _game->_eyepos];
             }
@@ -604,14 +489,6 @@ struct Enemy_Basic
     return midPoint;
 }
 
-/*
- @IBAction func MoveCamera(sender: UIButton) {
- GameViewController.position = GLKVector3Subtract(GameViewController.position, direction)
- }
- */
-
-//J: Start of Swift code/functions to be converted as of Apr 9
-
 
 
 //Time since the last iteration of calling this method. Original intention is for running the code, and tracking time independently of frame rate.
@@ -625,122 +502,11 @@ struct Enemy_Basic
             timeDiff = [newTime timeIntervalSinceDate:_lastDate[timePointIndex]]; //Had a "!" in the Swift version, but this is pretty much what Objective-C already does - ie. assume the existence of the object //provided misleading error info - where I declared timeDiff resolved an error of 'not matching array type' apparently
         }
     }
-    //if let timeDiff = newTime.timeIntervalSinceDate(_lastDate[timePointIndex]);
     
-    /* //Not doing this in Objective-C. Simply make a precondition restricting to 64 elements instead.
-     //append array elements such that this array would be long enough to store the element at timePointIndex
-     if(!(timePointIndex < _lastDate.count)) {
-     _lastDate = _lastDate + [NSDate?](count: timePointIndex - (_lastDate.count - 1), repeatedValue: nil);
-     }
-     */
     _lastDate[timePointIndex] = newTime;
     return timeDiff;
 }
 
-//For drawing lines - from http://stackoverflow.com/questions/25229916/how-to-procedurally-draw-rectangle-lines-in-swift-using-cgcontext
-
-/*
- - (UIImage *) drawSwipeLine : (CGSize) size {
- // Setup our context
- let bounds = CGRect(origin: CGPoint.zero, size: size)
- let opaque = false
- let scale: CGFloat = 0
- UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
- let context = UIGraphicsGetCurrentContext()
- 
- // Setup complete, do drawing here
- CGContextSetStrokeColorWithColor(context, UIColor.blueColor().CGColor)
- CGContextSetLineWidth(context, 4.0)
- 
- CGContextStrokeRect(context, bounds)
- 
- CGContextBeginPath(context)
- 
- 
- let timesinceLast = timeSinceLastIter(0);
- if(!_noSwipe) { //condition to erase line if swipe ended
- //Draw bezier
- //Maybe a cubic bezier curve?
- _myBezier = UIBezierPath()
- let myMicroBezier = UIBezierPath();
- 
- //Set control points c0, c1, c2, and c3 for the path myBezierPath()
- var c0, c1, c2, c3 : CGPoint;
- let bezierInterval = 3; //have to make sure this is divisible by 3.
- //myBezier.moveToPoint(CGPoint(x: 0,y: 0));
- if(!(_translationPoints.count < 1)) {
- //initialization
- //c0 = _translationPoints[0]; //adding this because xcode is stupid
- c1 = _translationPoints[0];
- c2 = _translationPoints[0];
- c3 = _translationPoints[0]; //set origin point
- //var currCurvePos = 1;
- 
- //draw each line, as evident from _translationPoints
- for(var i=1; i < _translationPoints.count; i++) {
- //CGContextMoveToPoint(context, _translationPoints[i-1].x, _translationPoints[i-1].y);
- 
- //build bezier curve
- if(i%(bezierInterval/3) == 0) { //every point, add a new control point to bezier curve
- //shift all of the control points by one
- c0 = c1;
- c1 = c2;
- c2 = c3;
- c3 = _translationPoints[i];
- 
- //draw the c0,c1,c2,c3 bezier curve every 3 additional control points.
- if(i%(bezierInterval) == 0) { //becomes 0 ... making sometimes a straight line ... maybe the 'last line' being different in how Bezier might handle it? Oh, it's because of the closePath, and that apparently applying to addCurveToPoint ...
- _myBezier.moveToPoint(c0);
- _myBezier.addCurveToPoint(c3, controlPoint1: c1, controlPoint2: c2);
- }
- }
- 
- //get values greater than those truncated from dividing by bezierInterval, ie. values greater than the highest value quantized by bezierInterval, and draw normally according to that
- let highestQuantizedVal = (_translationPoints.count / bezierInterval) * bezierInterval;
- if(i > highestQuantizedVal) {
- myMicroBezier.moveToPoint(_translationPoints[i-1]);
- myMicroBezier.addLineToPoint(_translationPoints[i]);
- }
- //CGContextAddLineToPoint(context, _translationPoints[i].x, _translationPoints[i].y);
- }
- 
- //draw bezier curve from those control points
- _myBezier.lineWidth = 5;
- //Maybe error occurs when trying to access c0 when c0 would no longer exist, ie. be out of scope?
- //myBezier.addClip();
- //myBezier.closePath() //may be the cause
- UIColor.redColor().setStroke();
- 
- //myMicroBezier.lineWidth = 5;
- //UIColor.greenColor().setStroke();
- //myMicroBezier.stroke();
- }
- }
- //Fading swipe effect
- if(_currBezierDuration >= 0 && _currSwipeDrawn) {
- _currBezierDuration -= timesinceLast; //reserving 0 for this
- 
- //fade only halfway through the swipe
- let alpha = min(1, Float(_currBezierDuration)/Float(bezierDuration * 0.66));
- UIColor(red: 1,green: 0, blue: 0, alpha:CGFloat(alpha)).setStroke();
- _myBezier.stroke();
- 
- if(_currBezierDuration <= 0) {
- _translationPoints.removeAll();
- _currSwipeDrawn = false;
- }
- }
- //draw min to max - so, diagonally
- //        CGContextMoveToPoint(context, CGRectGetMaxX(bounds), CGRectGetMinY(bounds))
- //        CGContextAddLineToPoint(context, CGRectGetMinX(bounds), CGRectGetMaxY(bounds))
- //CGContextStrokePath(context)
- 
- // Drawing complete, retrieve the finished image and cleanup
- let image = UIGraphicsGetImageFromCurrentImageContext()
- UIGraphicsEndImageContext()
- return image
- }
- */
 -(void) ThemeSound {
     NSString *path;
     switch ( _LevelIndex )
