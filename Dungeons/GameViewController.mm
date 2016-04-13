@@ -370,6 +370,13 @@ struct Projectile {
     tapGesture.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:tapGesture];
     
+    //Swipe
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+    [panGesture setMinimumNumberOfTouches:1];
+    [panGesture setMaximumNumberOfTouches:1];
+    [self.view addGestureRecognizer:panGesture];
+    
+    
     UITapGestureRecognizer *tap2Gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap2Gesture:)];
     tap2Gesture.numberOfTapsRequired = 1;
     tap2Gesture.numberOfTouchesRequired = 2;
@@ -553,7 +560,7 @@ struct Projectile {
             
             if(AmmoNumber>0)
             {
-                [self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f homeInOnPlayer:false damage:100];
+                [self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f];
                 AmmoNumber --;
             }
         }
@@ -623,7 +630,7 @@ struct Projectile {
             
             //bullet.body->setLinearVelocity( { vel.x, vel.y, vel.z } );
             BFGAmmoNumber--;
-            [self spawn_bfg_projectile:touchPos0 velocity:normalize( touchPos1 - touchPos0 ) * 50.0f];
+            //[self spawn_bfg_projectile:touchPos0 velocity:normalize( touchPos1 - touchPos0 ) * 50.0f];
         }
         else {
             //If having lifted, but not having done a swipe cancel in the current 'swipe attempt'
@@ -640,7 +647,7 @@ struct Projectile {
                 
                 if(AmmoNumber>0)
                 {
-                    [self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f homeInOnPlayer:false damage:100];
+                    [self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f];
                     AmmoNumber --;
                 }
                 
@@ -946,11 +953,11 @@ struct Projectile {
         BehavioralComponent bulletBc(bulletId);
         
         //for player's projectiles
-        if(!targetPlayer) {
+        /*if(!targetPlayer) {
             bulletBc.functor = Projectile( _game, self);
-        }
+        }*/
         //For projectiles targeting the player, have specific behaviour for the bullet
-        if(false) {
+        /*if(false) {
             
             bulletBc.functor = [targetPlayer, damage, bulletId, vel, self](BehavioralComponent *bc, EntityCollection& entities, double time) {
                 //operator() of the function
@@ -978,7 +985,7 @@ struct Projectile {
                 pc->body->setLinearVelocity(btVector3(projVelocity.x, projVelocity.y, projVelocity.z));
             };
         }
-        else {
+        else {*/
             /*
              //Default functor, used for debug purposes of understanding how this works
              //Looks like this functor isn't working either.
@@ -990,7 +997,7 @@ struct Projectile {
              NSLog(@"code is being run through, for bulletID: %d", bulletId);
              };
              */
-        }
+        /*}*/
         _game->addComponent(bulletBc);
         
     }
