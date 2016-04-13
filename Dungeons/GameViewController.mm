@@ -43,7 +43,7 @@
     Game*       _game;
     uint16_t    _bulletId;
     uint16_t    _bfgId;
-    Sprite*     _projectileSprite, *_projectileSprite2;
+    Sprite*     _projectileSprite;
     Sprite*     _bfgProjectileSprite;
     
     //AVAudioPlayer *GunSoundEffects;
@@ -272,7 +272,9 @@
         
         endController.kills = Kills;
         endController.LevelIndex = _LevelIndex + 1;
-        [self presentViewController: endController animated: YES completion: nil];
+        [self presentViewController: endController animated: YES completion: ^() {
+            delete _game;
+        }];
     }
 }
 
@@ -334,7 +336,7 @@
         default:
         case 0:
             _game = new Game( (GLKView*) self.view, "Level0Layout.obj", "Level0EnemyPos.obj", "Level0Rail.obj", "mar", glm::vec3( 0.766, 0.259, 0.643 ), glm::vec4( 1, 1, 0, 0.5 ), 2 );
-            expireTime = 66;
+            expireTime = 67;
             break;
         case 1:
             _game = new Game( (GLKView*) self.view, "Level1Layout.obj", "Level1EnemyPos.obj", "Level1Rail.obj", "cp", glm::vec3( 0.342, 0.866, -0.940 ), glm::vec4( 0, 0.5, 1, 0.5 ), 3 );
@@ -343,7 +345,8 @@
             
         case 2:
             _game = new Game( (GLKView*) self.view, "Level2Layout.obj", "Level2EnemyPos.obj", "Level2Rail.obj", "mercury", glm::vec3( 0, 1, 0 ), glm::vec4( 0.8, 0.3, 0, 0.3 ), 4 );
-            expireTime = 95;
+            _game->useWater = false;
+            expireTime = 94.5;
             break;
     }
     
@@ -354,7 +357,9 @@
         {
             MainViewController* controller = [self.storyboard instantiateViewControllerWithIdentifier: @"MainViewController"];
             
-            [self presentViewController: controller animated: YES completion: nil];
+            [self presentViewController: controller animated: YES completion: ^() {
+                delete _game;
+            }];
         }
         else if ( time > expireTime )
         {
@@ -362,7 +367,9 @@
             
             endController.kills = Kills;
             endController.LevelIndex = _LevelIndex + 1;
-            [self presentViewController: endController animated: YES completion: nil];
+            [self presentViewController: endController animated: YES completion: ^() {
+                delete _game;
+            }];
         }
     };
     _game->addComponent( endGame );
@@ -749,6 +756,7 @@
         self.context = nil;
     }
     
+    delete _game;
     // Dispose of any resources that can be recreated.
 }
 
@@ -1071,7 +1079,9 @@
         GOViewController* goController = [self.storyboard instantiateViewControllerWithIdentifier: @"GOViewController"];
         
         goController.LevelIndex = _LevelIndex;
-        [self presentViewController: goController animated: YES completion: nil];
+        [self presentViewController: goController animated: YES completion: ^() {
+            delete _game;
+        }];
     }
     
     if(Kills == 1 && getkill)

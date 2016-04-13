@@ -1,24 +1,49 @@
-//
-//  BulletPhysics.h
-//  BulletTest
-//
-//  Created by Borna Noureddin on 2015-03-20.
-//  Copyright (c) 2015 BCIT. All rights reserved.
-//
+// Andrew
 
-#import <Foundation/Foundation.h>
 #include "btBulletDynamicsCommon.h"
 
-@interface BulletPhysics: NSObject
-
--(void) update:(float) elapsedTime;
-
--(void) addRigidBody:(btRigidBody*) body;
-
--(void) addCollisionObject:(btCollisionObject*) obj;
-
--(void) removeRigidBody:(btRigidBody*) body;
-
--(void) removeCollisionObject:(btCollisionObject*) obj;
-
-@end
+struct BulletPhysics
+{
+    btDbvtBroadphase                        _broadphase;
+    btDefaultCollisionConfiguration         _collisionConfiguration;
+    btCollisionDispatcher                   _dispatcher;
+    btSequentialImpulseConstraintSolver     _solver;
+    btDiscreteDynamicsWorld                 world;
+    
+    explicit BulletPhysics( float gravity = 0 )
+        : _broadphase()
+        , _collisionConfiguration()
+        , _dispatcher( &_collisionConfiguration )
+        , _solver()
+        , world( &_dispatcher, &_broadphase, &_solver, &_collisionConfiguration )
+    {
+        world.setGravity( btVector3( 0, gravity, 0 ) );
+    }
+    
+    
+    void update( float elapsedTime, int maxSubSteps = 10 )
+    {
+        world.stepSimulation( elapsedTime, maxSubSteps );
+    }
+    
+    void addRigidBody( btRigidBody* body )
+    {
+        world.addRigidBody( body );
+    }
+    
+    void addCollisionObject( btCollisionObject* obj )
+    {
+        world.addCollisionObject( obj );
+    }
+    
+    void removeRigidBody( btRigidBody* body )
+    {
+        world.removeRigidBody( body );
+    }
+    
+    void removeCollisionObject( btCollisionObject* obj )
+    {
+        world.removeCollisionObject( obj );
+    }
+    
+};

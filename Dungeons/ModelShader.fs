@@ -1,15 +1,14 @@
+// Andrew
 #version 300 es
 precision highp float;
 
 in          vec3        vEyePosition;
 in          vec3        vEyeNormal;
 in          vec2        vTexCoord;
-//in          vec4        vSpecColor;
 
 uniform     sampler2D   uTexture;
 uniform     vec4        uColor;
 uniform     vec3        uSunPosition;
-//uniform     vec3        uLightPosition;
 
 uniform     vec4        uAmbientColor;
 uniform     vec4        uDiffuseColor;

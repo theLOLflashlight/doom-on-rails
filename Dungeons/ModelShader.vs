@@ -1,3 +1,4 @@
+// Andrew
 #version 300 es
 #extension GL_APPLE_clip_distance : require
 
@@ -8,22 +9,19 @@ in          vec2        aTexCoord;
 out         vec3        vEyePosition;
 out         vec3        vEyeNormal;
 out         vec2        vTexCoord;
-//out         vec4        vSpecColor;
 
 uniform     mat4        uModelMatrix;
 uniform     mat4        uViewMatrix;
 uniform     mat4        uProjMatrix;
 
 uniform     vec3        uSunPosition;
-//uniform     vec3        uLightPosition;
 
 uniform     vec4        uAmbientColor;
 uniform     vec4        uDiffuseColor;
 uniform     vec4        uSpecularColor;
 uniform     float       uShininess;
 
-uniform     vec4        uWaterPlane;//    = vec4( 0, -1, 0, 0 );
-//uniform     vec4    refractPlane    = vec4( 0, 1, 0, 0 );
+uniform     vec4        uWaterPlane;
 
 vec4 extract_eye_pos( mat4 model, mat4 view )
 {

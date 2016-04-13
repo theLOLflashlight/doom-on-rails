@@ -1,8 +1,7 @@
+// Andrew
 #version 300 es
 
 in          vec3        aPosition;
-//in          vec3        aNormal;
-//in          vec2        aTexCoord;
 
 out         vec4        vClipSpace;
 out         vec3        vEyeNormal;
