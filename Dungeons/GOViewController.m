@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GOViewController.h"
+#import "GameViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
 @interface GOViewController ()
@@ -18,6 +19,19 @@
 @end
 
 @implementation GOViewController
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Make sure your segue name in storyboard is the same as this line
+    if ([[segue identifier] isEqualToString:@"ReplayToGame"])
+    {
+        // Get reference to the destination view controller
+        GameViewController *vc = [segue destinationViewController];
+        
+        vc.LevelIndex = _LevelIndex;
+        //[vc setMyObjectHere:object];
+    }
+}
 
 -(void) viewDidLoad
 {

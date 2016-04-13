@@ -12,6 +12,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "Game.h"
 #import "BulletPhysics.h"
+#import "GOViewController.h"
 #import "GameCppVariables.hpp"
 #import "EndViewController.h"
 #include "ios_path.h"
@@ -304,7 +305,7 @@
             break;
         case 1:
             _game = new Game( (GLKView*) self.view, "Level1Layout.obj", "Level1EnemyPos.obj", "Level1Rail.obj", "cp", glm::vec3( 0.342, 0.866, -0.940 ), glm::vec4( 0, 0.5, 1, 0.5 ), 2 );
-            expireTime = 64;
+            expireTime = 107;
             break;
             
         case 2:
@@ -1018,6 +1019,25 @@
         
     }
     
+    for ( auto pair : _game->_entities )
+    {
+        if ( EntityId::matchesTag( "enemy", pair.first ) )
+        {
+            if ( glm::distance( pair.second.position, _game->_eyepos ) < 2 )
+            {
+                [self damagePlayer: 0.5];
+            }
+        }
+    }
+    
+    if ( _healthInternal <= 0 )
+    {
+        GOViewController* goController = [self.storyboard instantiateViewControllerWithIdentifier: @"GOViewController"];
+        
+        goController.LevelIndex = _LevelIndex;
+        [self presentViewController: goController animated: YES completion: nil];
+    }
+    
     if(Kills == 1 && getkill)
     {
         NSData *RlSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"First Blood" ofType:@"mp3"]];
@@ -1036,7 +1056,7 @@
     self.Ammo.text =[[NSString alloc] initWithFormat: @"%d", AmmoNumber];
     self.BFGAmmo.text =[[NSString alloc] initWithFormat: @"%d", BFGAmmoNumber];
     
-    NSLog(@"count_Aggressive: %d", count_Aggressive);
+    //NSLog(@"count_Aggressive: %d", count_Aggressive);
     count_Aggressive = 0;
 }
 

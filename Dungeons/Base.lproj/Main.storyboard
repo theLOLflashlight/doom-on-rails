@@ -13,7 +13,7 @@
                         <viewControllerLayoutGuide type="bottom" id="sTi-vM-V0k"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5l8-c4-kS1">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Tq-bk-452">
@@ -37,7 +37,7 @@
                                 </connections>
                             </button>
                             <webView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o8y-Pk-AgF">
-                                <rect key="frame" x="0.0" y="630" width="600" height="90"/>
+                                <rect key="frame" x="0.0" y="630" width="1024" height="90"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -57,7 +57,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xga-Ij-T8a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="331" y="525"/>
+            <point key="canvasLocation" x="-71" y="597"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -152,7 +152,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="0si-ZP-tQY"/>
             </objects>
-            <point key="canvasLocation" x="1126" y="525"/>
+            <point key="canvasLocation" x="1702" y="-219"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="2pB-AD-otP">
@@ -181,7 +181,7 @@
                                 <rect key="frame" x="153" y="550" width="295" height="60"/>
                                 <state key="normal" image="replay.png"/>
                                 <connections>
-                                    <segue destination="BV1-FR-VrT" kind="show" id="elI-tx-AbD"/>
+                                    <segue destination="BV1-FR-VrT" kind="show" identifier="ReplayToGame" id="elI-tx-AbD"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -199,7 +199,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X3L-RC-yd2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1126" y="1291"/>
+            <point key="canvasLocation" x="233" y="1727"/>
         </scene>
         <!--End View Controller-->
         <scene sceneID="xfN-Xn-Fk6">
@@ -210,7 +210,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Jvn-9Q-0IB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="FQw-Qs-x9z">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Ending.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="EYl-xf-Vl7">
@@ -258,7 +258,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fIU-0i-aN5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1897" y="525"/>
+            <point key="canvasLocation" x="1937" y="1341"/>
         </scene>
     </scenes>
     <resources>
@@ -271,7 +271,7 @@
         <image name="replay.png" width="407" height="113"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="scL-5J-FdB"/>
+        <segue reference="elI-tx-AbD"/>
         <segue reference="4xJ-iI-ezb"/>
     </inferredMetricsTieBreakers>
 </document>

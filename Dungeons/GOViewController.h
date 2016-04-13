@@ -17,6 +17,7 @@
 }
 
 @property (weak, nonatomic) IBOutlet UIWebView *GameOver;
+@property (nonatomic) int LevelIndex;
 
 @end
 
