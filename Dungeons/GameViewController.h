@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *Health;
 @property (weak, nonatomic) IBOutlet UILabel *Ammo;
 @property (nonatomic) int LevelIndex;
+@property (weak, nonatomic) IBOutlet UILabel *BFGAmmo;
 
 - (IBAction)SoundButton:(UIButton *)sender;
 
