@@ -18,6 +18,13 @@
 		032AF18D1CBDD1C100823AF1 /* Level1Layout in Resources */ = {isa = PBXBuildFile; fileRef = 032AF18A1CBDD1C100823AF1 /* Level1Layout */; };
 		032AF18E1CBDD1C100823AF1 /* Level1Layout.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 032AF18B1CBDD1C100823AF1 /* Level1Layout.mtl */; };
 		032AF18F1CBDD1C100823AF1 /* Level1Layout.obj in Resources */ = {isa = PBXBuildFile; fileRef = 032AF18C1CBDD1C100823AF1 /* Level1Layout.obj */; };
+		032AF1AA1CBDE95400823AF1 /* Level0Layout in Resources */ = {isa = PBXBuildFile; fileRef = 032AF1A71CBDE95400823AF1 /* Level0Layout */; };
+		032AF1AB1CBDE95400823AF1 /* Level0Layout.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 032AF1A81CBDE95400823AF1 /* Level0Layout.mtl */; };
+		032AF1AC1CBDE95400823AF1 /* Level0Layout.obj in Resources */ = {isa = PBXBuildFile; fileRef = 032AF1A91CBDE95400823AF1 /* Level0Layout.obj */; };
+		032AF1AF1CBDE9B600823AF1 /* Level0EnemyPos.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 032AF1AD1CBDE9B600823AF1 /* Level0EnemyPos.mtl */; };
+		032AF1B01CBDE9B600823AF1 /* Level0EnemyPos.obj in Resources */ = {isa = PBXBuildFile; fileRef = 032AF1AE1CBDE9B600823AF1 /* Level0EnemyPos.obj */; };
+		032AF1B31CBDE9FE00823AF1 /* Level0Rail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 032AF1B11CBDE9FE00823AF1 /* Level0Rail.mtl */; };
+		032AF1B41CBDE9FE00823AF1 /* Level0Rail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 032AF1B21CBDE9FE00823AF1 /* Level0Rail.obj */; };
 		4442C95E1CBAF9900097FD98 /* Shooter_Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 4442C95D1CBAF9900097FD98 /* Shooter_Menu.png */; };
 		4442C9601CBB0A690097FD98 /* Gun.png in Resources */ = {isa = PBXBuildFile; fileRef = 4442C95F1CBB0A690097FD98 /* Gun.png */; };
 		4442C9741CBB21C90097FD98 /* reload.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4442C9731CBB21C90097FD98 /* reload.mp3 */; };
@@ -54,15 +61,8 @@
 		532ECA8E1CADBDBD001BB153 /* Level0All.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA7C1CADBDBD001BB153 /* Level0All.mtl */; };
 		532ECA8F1CADBDBD001BB153 /* Level0All.obj in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA7D1CADBDBD001BB153 /* Level0All.obj */; };
 		532ECA901CADBDBD001BB153 /* Level0EnemyPos in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA7E1CADBDBD001BB153 /* Level0EnemyPos */; };
-		532ECA911CADBDBD001BB153 /* Level0EnemyPos.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA7F1CADBDBD001BB153 /* Level0EnemyPos.mtl */; };
-		532ECA921CADBDBD001BB153 /* Level0EnemyPos.obj in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA801CADBDBD001BB153 /* Level0EnemyPos.obj */; };
 		532ECA931CADBDBD001BB153 /* Level0EnemyRail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA811CADBDBD001BB153 /* Level0EnemyRail.mtl */; };
 		532ECA941CADBDBD001BB153 /* Level0EnemyRail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA821CADBDBD001BB153 /* Level0EnemyRail.obj */; };
-		532ECA951CADBDBD001BB153 /* Level0Layout in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA831CADBDBD001BB153 /* Level0Layout */; };
-		532ECA961CADBDBD001BB153 /* Level0Layout.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA841CADBDBD001BB153 /* Level0Layout.mtl */; };
-		532ECA971CADBDBD001BB153 /* Level0Layout.obj in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA851CADBDBD001BB153 /* Level0Layout.obj */; };
-		532ECA981CADBDBD001BB153 /* Level0Rail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA861CADBDBD001BB153 /* Level0Rail.mtl */; };
-		532ECA991CADBDBD001BB153 /* Level0Rail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA871CADBDBD001BB153 /* Level0Rail.obj */; };
 		5385DE2F1CA3339200F1A323 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5385DE2E1CA3339200F1A323 /* GLKit.framework */; };
 		5385DE5B1CA3365100F1A323 /* crate in Resources */ = {isa = PBXBuildFile; fileRef = 5385DE301CA3365100F1A323 /* crate */; };
 		5385DE5C1CA3365100F1A323 /* crate.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 5385DE311CA3365100F1A323 /* crate.mtl */; };
@@ -189,6 +189,13 @@
 		032AF18A1CBDD1C100823AF1 /* Level1Layout */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Level1Layout; sourceTree = "<group>"; };
 		032AF18B1CBDD1C100823AF1 /* Level1Layout.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1Layout.mtl; sourceTree = "<group>"; };
 		032AF18C1CBDD1C100823AF1 /* Level1Layout.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1Layout.obj; sourceTree = "<group>"; };
+		032AF1A71CBDE95400823AF1 /* Level0Layout */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Level0Layout; sourceTree = "<group>"; };
+		032AF1A81CBDE95400823AF1 /* Level0Layout.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0Layout.mtl; sourceTree = "<group>"; };
+		032AF1A91CBDE95400823AF1 /* Level0Layout.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0Layout.obj; sourceTree = "<group>"; };
+		032AF1AD1CBDE9B600823AF1 /* Level0EnemyPos.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyPos.mtl; sourceTree = "<group>"; };
+		032AF1AE1CBDE9B600823AF1 /* Level0EnemyPos.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyPos.obj; sourceTree = "<group>"; };
+		032AF1B11CBDE9FE00823AF1 /* Level0Rail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0Rail.mtl; sourceTree = "<group>"; };
+		032AF1B21CBDE9FE00823AF1 /* Level0Rail.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0Rail.obj; sourceTree = "<group>"; };
 		4442C95D1CBAF9900097FD98 /* Shooter_Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shooter_Menu.png; sourceTree = "<group>"; };
 		4442C95F1CBB0A690097FD98 /* Gun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gun.png; sourceTree = "<group>"; };
 		4442C9731CBB21C90097FD98 /* reload.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = reload.mp3; sourceTree = "<group>"; };
@@ -228,15 +235,8 @@
 		532ECA7C1CADBDBD001BB153 /* Level0All.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0All.mtl; sourceTree = "<group>"; };
 		532ECA7D1CADBDBD001BB153 /* Level0All.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0All.obj; sourceTree = "<group>"; };
 		532ECA7E1CADBDBD001BB153 /* Level0EnemyPos */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Level0EnemyPos; sourceTree = "<group>"; };
-		532ECA7F1CADBDBD001BB153 /* Level0EnemyPos.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyPos.mtl; sourceTree = "<group>"; };
-		532ECA801CADBDBD001BB153 /* Level0EnemyPos.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyPos.obj; sourceTree = "<group>"; };
 		532ECA811CADBDBD001BB153 /* Level0EnemyRail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyRail.mtl; sourceTree = "<group>"; };
 		532ECA821CADBDBD001BB153 /* Level0EnemyRail.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0EnemyRail.obj; sourceTree = "<group>"; };
-		532ECA831CADBDBD001BB153 /* Level0Layout */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Level0Layout; sourceTree = "<group>"; };
-		532ECA841CADBDBD001BB153 /* Level0Layout.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0Layout.mtl; sourceTree = "<group>"; };
-		532ECA851CADBDBD001BB153 /* Level0Layout.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0Layout.obj; sourceTree = "<group>"; };
-		532ECA861CADBDBD001BB153 /* Level0Rail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0Rail.mtl; sourceTree = "<group>"; };
-		532ECA871CADBDBD001BB153 /* Level0Rail.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level0Rail.obj; sourceTree = "<group>"; };
 		5385DE2E1CA3339200F1A323 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		5385DE301CA3365100F1A323 /* crate */ = {isa = PBXFileReference; lastKnownFileType = folder; path = crate; sourceTree = "<group>"; };
 		5385DE311CA3365100F1A323 /* crate.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = crate.mtl; sourceTree = "<group>"; };
@@ -376,6 +376,13 @@
 		032AF1921CBDD31200823AF1 /* Level0 */ = {
 			isa = PBXGroup;
 			children = (
+				032AF1A71CBDE95400823AF1 /* Level0Layout */,
+				032AF1A81CBDE95400823AF1 /* Level0Layout.mtl */,
+				032AF1A91CBDE95400823AF1 /* Level0Layout.obj */,
+				032AF1B11CBDE9FE00823AF1 /* Level0Rail.mtl */,
+				032AF1B21CBDE9FE00823AF1 /* Level0Rail.obj */,
+				032AF1AD1CBDE9B600823AF1 /* Level0EnemyPos.mtl */,
+				032AF1AE1CBDE9B600823AF1 /* Level0EnemyPos.obj */,
 			);
 			name = Level0;
 			sourceTree = "<group>";
@@ -483,15 +490,8 @@
 				532ECA7C1CADBDBD001BB153 /* Level0All.mtl */,
 				532ECA7D1CADBDBD001BB153 /* Level0All.obj */,
 				532ECA7E1CADBDBD001BB153 /* Level0EnemyPos */,
-				532ECA7F1CADBDBD001BB153 /* Level0EnemyPos.mtl */,
-				532ECA801CADBDBD001BB153 /* Level0EnemyPos.obj */,
 				532ECA811CADBDBD001BB153 /* Level0EnemyRail.mtl */,
 				532ECA821CADBDBD001BB153 /* Level0EnemyRail.obj */,
-				532ECA831CADBDBD001BB153 /* Level0Layout */,
-				532ECA841CADBDBD001BB153 /* Level0Layout.mtl */,
-				532ECA851CADBDBD001BB153 /* Level0Layout.obj */,
-				532ECA861CADBDBD001BB153 /* Level0Rail.mtl */,
-				532ECA871CADBDBD001BB153 /* Level0Rail.obj */,
 			);
 			name = Levels;
 			sourceTree = "<group>";
@@ -755,37 +755,36 @@
 				532ECA881CADBDBD001BB153 /* DemoRail.mtl in Resources */,
 				53C6792F1CA22E62007C7945 /* Main.storyboard in Resources */,
 				53F05FB01CB9FA0C007F3023 /* footsteps_gravel.wav in Resources */,
+				032AF1AB1CBDE95400823AF1 /* Level0Layout.mtl in Resources */,
 				4442C9741CBB21C90097FD98 /* reload.mp3 in Resources */,
 				532ECA901CADBDBD001BB153 /* Level0EnemyPos in Resources */,
-				532ECA981CADBDBD001BB153 /* Level0Rail.mtl in Resources */,
 				53C679291CA22E62007C7945 /* Shader.vs in Resources */,
 				532ECA931CADBDBD001BB153 /* Level0EnemyRail.mtl in Resources */,
 				53F05FC41CBB4497007F3023 /* Level0EnemyPosRail.mtl in Resources */,
 				539644B81CBC66D800F71E6E /* FireShader.fs in Resources */,
-				532ECA971CADBDBD001BB153 /* Level0Layout.obj in Resources */,
 				4453320F1CB5BD9C004DC43B /* Start.gif in Resources */,
 				53F05FB41CB9FA0C007F3023 /* sword-clash1.mp3 in Resources */,
 				4453320D1CB5BD9C004DC43B /* SoundOff.png in Resources */,
 				032AF1881CBDD14C00823AF1 /* Level1Rail.mtl in Resources */,
 				44F67C391CBD80DD00043DA1 /* First Blood.mp3 in Resources */,
+				032AF1B41CBDE9FE00823AF1 /* Level0Rail.obj in Resources */,
 				53F05FB21CB9FA0C007F3023 /* shooting_star.wav in Resources */,
 				032AF1841CBDD12500823AF1 /* Level1EnemyCPos.mtl in Resources */,
 				53F05FB11CB9FA0C007F3023 /* magic-quake2.mp3 in Resources */,
 				532ECA8F1CADBDBD001BB153 /* Level0All.obj in Resources */,
-				532ECA911CADBDBD001BB153 /* Level0EnemyPos.mtl in Resources */,
 				53C679311CA22E62007C7945 /* Assets.xcassets in Resources */,
 				445332111CB5C48E004DC43B /* Logout.png in Resources */,
 				5385DE5C1CA3365100F1A323 /* crate.mtl in Resources */,
 				53F05FC51CBB4497007F3023 /* Level0EnemyPosRail.obj in Resources */,
 				53F05FCF1CBB5B3D007F3023 /* Level0EnemyBPos.mtl in Resources */,
 				53F05FB31CB9FA0C007F3023 /* swipe_whiff.mp3 in Resources */,
+				032AF1AA1CBDE95400823AF1 /* Level0Layout in Resources */,
 				445332071CB5BD81004DC43B /* DOOM.mp3 in Resources */,
 				53C679581CA22F35007C7945 /* glm in Resources */,
 				4442C95E1CBAF9900097FD98 /* Shooter_Menu.png in Resources */,
 				53C679341CA22E62007C7945 /* LaunchScreen.storyboard in Resources */,
 				4453320E1CB5BD9C004DC43B /* SoundOn.png in Resources */,
 				448A48041CBD7C8600A3623D /* Doom3 Level 3.mp3 in Resources */,
-				532ECA961CADBDBD001BB153 /* Level0Layout.mtl in Resources */,
 				5385DE6E1CA3365100F1A323 /* skybox in Resources */,
 				5385DE721CA3365100F1A323 /* water in Resources */,
 				5385DE701CA3365100F1A323 /* Skybox.vs in Resources */,
@@ -793,20 +792,21 @@
 				032AF1801CBDD12500823AF1 /* Level1EnemyAPos.mtl in Resources */,
 				4442C9851CBB59590097FD98 /* Ending.jpg in Resources */,
 				44F67C461CBDCBA900043DA1 /* Logout2.png in Resources */,
-				532ECA951CADBDBD001BB153 /* Level0Layout in Resources */,
 				44F1AC4B1CB74AF3002557C5 /* GunSoundEffect_1.wav in Resources */,
 				5385DE671CA3365100F1A323 /* ModelShader.vs in Resources */,
+				032AF1B31CBDE9FE00823AF1 /* Level0Rail.mtl in Resources */,
 				44F67C521CBDE2FB00043DA1 /* BigGun.mp3 in Resources */,
 				53F05FCD1CBB5B3D007F3023 /* Level0EnemyAPos.mtl in Resources */,
 				53ADE8951CB88DDF00DD3588 /* fireball.mtl in Resources */,
+				032AF1B01CBDE9B600823AF1 /* Level0EnemyPos.obj in Resources */,
 				532ECA8A1CADBDBD001BB153 /* Level0_Textures in Resources */,
 				448A48031CBD7C8600A3623D /* Doom3 Level 2.mp3 in Resources */,
 				5385DE961CA370F200F1A323 /* crate.obj in Resources */,
 				5385DE891CA3429000F1A323 /* original in Resources */,
 				532ECA8D1CADBDBD001BB153 /* Level0All in Resources */,
 				53C679271CA22E62007C7945 /* Shader.fs in Resources */,
+				032AF1AC1CBDE95400823AF1 /* Level0Layout.obj in Resources */,
 				032AF1811CBDD12500823AF1 /* Level1EnemyAPos.obj in Resources */,
-				532ECA921CADBDBD001BB153 /* Level0EnemyPos.obj in Resources */,
 				032AF18F1CBDD1C100823AF1 /* Level1Layout.obj in Resources */,
 				53F05FAE1CB9FA0C007F3023 /* 'flyby'.wav in Resources */,
 				5385DE731CA3365100F1A323 /* WaterShader.fs in Resources */,
@@ -833,8 +833,8 @@
 				532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */,
 				5385DE741CA3365100F1A323 /* WaterShader.vs in Resources */,
 				532ECA8E1CADBDBD001BB153 /* Level0All.mtl in Resources */,
+				032AF1AF1CBDE9B600823AF1 /* Level0EnemyPos.mtl in Resources */,
 				44F67C4A1CBDCF6500043DA1 /* replay.png in Resources */,
-				532ECA991CADBDBD001BB153 /* Level0Rail.obj in Resources */,
 				44F67C441CBDC7F900043DA1 /* GameOver.gif in Resources */,
 				53F05FCE1CBB5B3D007F3023 /* Level0EnemyAPos.obj in Resources */,
 			);
