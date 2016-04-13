@@ -288,10 +288,22 @@ struct Enemy_Basic
     
     [EAGLContext setCurrentContext:self.context];
     
-    _game = new Game( (GLKView*) self.view, "Level0Layout.obj", "Level0EnemyAPos.obj", "Level0EnemyBPos.obj", "DemoRail.obj", "mar", glm::vec3( 0.766, 0.259, 0.643 ), glm::vec4( 1, 1, 0, 0.5 ), 2 );
-    //_game = new Game( (GLKView*) self.view, "Level1Layout.obj", "Level1EnemyAPos.obj", "Level1EnemyBPos.obj", "Level1Rail.obj", "cp", glm::vec3( 0.342, 0.866, -0.940 ), glm::vec4( 0, 0.5, 1, 0.5 ), 3 );
-    //_game = new Game( (GLKView*) self.view, "Level2Layout.obj", "Level2EnemyAPos.obj", "Level2EnemyBPos.obj", "Level2Rail.obj", "mercury", glm::vec3( 0, 1, 0 ), glm::vec4( 1, 0.2, 0, 0.5 ), 4 );
-    
+    switch ( _LevelIndex )
+    {
+        case 0:
+            _game = new Game( (GLKView*) self.view, "Level0Layout.obj", "Level0EnemyAPos.obj", "Level0EnemyBPos.obj", "DemoRail.obj", "mar", glm::vec3( 0.766, 0.259, 0.643 ), glm::vec4( 1, 1, 0, 0.5 ), 2 );
+            break;
+        case 1:
+            _game = new Game( (GLKView*) self.view, "Level1Layout.obj", "Level1EnemyAPos.obj", "Level1EnemyBPos.obj", "Level1Rail.obj", "cp", glm::vec3( 0.342, 0.866, -0.940 ), glm::vec4( 0, 0.5, 1, 0.5 ), 3 );
+            break;
+            
+        case 2:
+            _game = new Game( (GLKView*) self.view, "Level2Layout.obj", "Level2EnemyAPos.obj", "Level2EnemyBPos.obj", "Level2Rail.obj", "mercury", glm::vec3( 0, 1, 0 ), glm::vec4( 1, 0.2, 0, 0.5 ), 4 );
+            break;
+        case 3:
+            //game over
+            break;
+    }
     
     BehavioralComponent endGame( "endGame" );
     endGame.functor = [self](BehavioralComponent*, EntityCollection&, double time)
@@ -301,6 +313,7 @@ struct Enemy_Basic
             EndViewController* endController = [self.storyboard instantiateViewControllerWithIdentifier: @"EndViewController"];
             
             endController.kills = Kills;
+            endController.LevelIndex = _LevelIndex + 1;
             [self presentViewController: endController animated: YES completion: nil];
         }
     };

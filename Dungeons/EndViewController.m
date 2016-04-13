@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "EndViewController.h"
+#import "GameViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
 @interface EndViewController()
@@ -18,6 +19,19 @@
 @end
 
 @implementation EndViewController
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Make sure your segue name in storyboard is the same as this line
+    if ([[segue identifier] isEqualToString:@"GameToEnd"])
+    {
+        // Get reference to the destination view controller
+        GameViewController *vc = [segue destinationViewController];
+        
+        vc.LevelIndex = _LevelIndex;
+        //[vc setMyObjectHere:object];
+    }
+}
 
 -(void)viewDidLoad
 {

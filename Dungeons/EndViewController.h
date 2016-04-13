@@ -18,6 +18,7 @@
 
 @property (nonatomic) int kills;
 @property (weak, nonatomic) IBOutlet UILabel *KillSum;
+@property (nonatomic) int LevelIndex;
 
 @end
 #endif /* EndViewController_h */
