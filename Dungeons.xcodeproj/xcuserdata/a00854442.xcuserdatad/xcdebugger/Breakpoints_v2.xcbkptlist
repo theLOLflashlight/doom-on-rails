@@ -6,22 +6,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Dungeons/GameViewController.mm"
-            timestampString = "482211903.987671"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "@interface GameViewController()"
-            landmarkType = "2">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -218,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Dungeons/GameViewController.mm"
-            timestampString = "482211903.987671"
+            timestampString = "482213360.399816"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "@interface GameViewController()"
             landmarkType = "2">
          </BreakpointContent>
@@ -328,12 +312,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Dungeons/GameViewController.mm"
-            timestampString = "482211903.987671"
+            timestampString = "482213360.399816"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "-incCountAggressive"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -25,72 +25,6 @@
 #define BULLET_MIN 1000
 #define BULLET_MAX 3000
 
-struct Enemy_Basic
-{
-    Game* gameptr;
-    GameViewController *gvc;
-    float velocity; //because glm uses floats apparently
-    
-    explicit Enemy_Basic( Game* game, GameViewController* gvc )
-    : gameptr( game )
-    , gvc( gvc )
-    {
-    }
-    
-    void operator()(BehavioralComponent* c, EntityCollection& entities, double time);
-    
-};
-struct Enemy_Stationary
-{
-    Game* gameptr;
-    GameViewController *gvc;
-    float velocity; //because glm uses floats apparently
-    int timeInCycle = 0;
-    bool attacked = false;
-    
-    explicit Enemy_Stationary( Game* game, GameViewController* gvc )
-    : gameptr( game )
-    , gvc( gvc )
-    {
-    }
-    
-    void operator()(BehavioralComponent* c, EntityCollection& entities, double time);
-    
-};
-struct Enemy_Aggressive
-{
-    Game* gameptr;
-    GameViewController *gvc;
-    float velocity; //because glm uses floats apparently
-    int timeInCycle = 0;
-    bool attacked = false;
-    //bool potentiallyHitByProjectile = false; //make true when potentially, a collision handled by bullet3D could occur and so, cancel the velocity so it wouldn't interfere with that collision
-    
-    explicit Enemy_Aggressive( Game* game, GameViewController* gvc )
-    : gameptr( game )
-    , gvc( gvc )
-    {
-    }
-    
-    void operator()(BehavioralComponent* c, EntityCollection& entities, double time);
-    
-};
-struct Projectile {
-    Game* gameptr;
-    GameViewController *gvc;
-    
-    explicit Projectile( Game* game, GameViewController* gvc )
-    : gameptr( game )
-    , gvc( gvc )
-    {
-    }
-    
-    void operator()(BehavioralComponent* c, EntityCollection& entities, double time);
-};
-
-
-//http://www.informit.com/articles/article.aspx?p=2160898&seqNum=4
-
 @interface GameViewController ()
 {
     //__weak IBOutlet UIImageView *RedImageOverlay;
@@ -311,18 +245,10 @@ struct Projectile {
         vec3 touchPos0 = unProject( vec3( mouse.x, -mouse.y, 0 ), view, proj, viewport );
         vec3 touchPos1 = unProject( vec3( mouse.x, -mouse.y, 1 ), view, proj, viewport );
         
-        if(AmmoNumber>0)
+        if(BFGAmmoNumber>0)
         {
             [self spawn_bfg_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f];
-            AmmoNumber --;
-        }
-        
-        //[self explosionAt: _game->_eyepos];
-        
-        if(AmmoNumber == 0)
-        {
-            ReLoad = true;
-            [ReloadSound play];
+            BFGAmmoNumber --;
         }
     }
 }
@@ -350,34 +276,11 @@ struct Projectile {
         NSLog(@"Failed to create ES context");
     }
     
-    //auto groundShape = new btStaticPlaneShape( btVector3( 0, 1, 0 ), 0 );
-    //auto groundMotionState = new btDefaultMotionState();
-    //btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI( 0, groundMotionState, groundShape, btVector3(0,0,0) );
-    //auto groundRigidBody = new btRigidBody(groundRigidBodyCI);
-    //[_physics addRigidBody: groundRigidBody];
-    //RedImageOverlay.alpha = 0;
-    //RedImageOverlay.hidden = YES;
-    CGRect newFrame = CGRectMake(2000, 2000, 200, 200);
-    //RedImageOverlay.frame = newFrame;
-    //RedImageOverlay.;
-    
-    //Using apple's tutorial, ie. https://developer.apple.com/library/ios/documentation/2DDrawing/Conceptual/DrawingPrintingiOS/HandlingImages/Images.html
-    /*NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"RedDamageOverlay" ofType:@"png"];
-     UIImage *myImageObj = [[UIImage alloc] initWithContentsOfFile:imagePath];
-     _anImage = myImageObj;
-     */
     
     //tap
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     tapGesture.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:tapGesture];
-    
-    //Swipe
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
-    [panGesture setMinimumNumberOfTouches:1];
-    [panGesture setMaximumNumberOfTouches:1];
-    [self.view addGestureRecognizer:panGesture];
-    
     
     UITapGestureRecognizer *tap2Gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap2Gesture:)];
     tap2Gesture.numberOfTapsRequired = 1;
@@ -1114,20 +1017,6 @@ struct Projectile {
         }
         
     }
-    for ( auto pair : _game->_entities )
-        if ( EntityId::matchesTag("redemy", pair.first ) || EntityId::matchesTag("grnemy", pair.first )) {
-            BehavioralComponent enemy(pair.first);
-            BehavioralComponent *enemyBc = (_game->findBehavioralComponent(pair.first));
-            if(enemyBc == NULL) {
-                enemy.functor = Enemy_Aggressive( _game, self);
-                _game->addComponent(enemy);
-                
-            }
-        }
-    /*
-     if(RedImageOverlay.alpha > 0) {
-     RedImageOverlay.alpha -= 0.7f / 60.0f;
-     }*/
     
     if(Kills == 1 && getkill)
     {
@@ -1141,34 +1030,6 @@ struct Projectile {
     //update overlay and position each update
     
     glm::vec3 oPos =_game->_eyepos + (_game->_eyelook - _game->_eyepos)/3.0f;
-    
-    //Jacob's attempt at updating the position of an entity. Can ask Andrew about this later.
-    //Entity ntt = _game->_entities["overlay1"];
-    //ntt.position = oPos;/*_game->_eyelook;*///_game->_eyepos + (_game->_eyelook - _game->_eyepos); //put it very, very close in front such that anything in between the overlay and the camera would really not matter anyway
-    
-    //Jacob's attempt at updating the position of an entity. Can ask Andrew about this later.
-    //Entity *ntt2 = &(_game->_entities[_bulletId]); //bullet ID 1
-    //ntt2->position = oPos;
-    
-    //From looking up Bullet3D for that, just trying to use that - ie. to update position - using from http://gamedev.stackexchange.com/questions/58689/how-to-set-the-objects-world-position-in-bullet
-    /*
-     
-     //testing sprite to check if update were calling this at all; doesn't look like it works at all.
-     GraphicalComponent *gc2 = _game->findGraphicalComponent(_bulletId);
-     if(gc2) {
-     gc2->sprite = new Sprite(ios_path("RedDamageOverlay.png"), &_game->_program);
-     }
-     PhysicalComponent *pc2 = _game->findPhysicalComponent(_bulletId); //bullet ID 1
-     if(pc2) {
-     auto motionState = new btDefaultMotionState(
-     btTransform( btQuaternion( 0,0,0,1 ), btVector3( oPos.x, oPos.y, oPos.z ) ) );
-     static btSphereShape SPHERE_SHAPE( 0.5 );
-     pc2->body = new btRigidBody( 1, motionState, &SPHERE_SHAPE );
-     }*/
-    
-    //if()
-    //BehavioralComponent bc2(_bulletId);
-    //pc2 = oPos;
     
     self.KillNumber.text =[[NSString alloc] initWithFormat: @"%d", Kills];
     //self.Health.text =[[NSString alloc] initWithFormat: @"%d", 100];
@@ -1214,96 +1075,3 @@ struct Projectile {
     NSLog(@"x: %f, y: %f, z: %f", vec.x, vec.y, vec.z);
 }
 @end
-
-void Enemy_Basic::operator()(BehavioralComponent* c, EntityCollection& entities, double)
-{
-    if(c->timeInCycle >= c->endTimeInCycle) {
-        c->timeInCycle = 0;
-    }
-    c->timeInCycle++; //how to get specific enemy's ...
-    PhysicalComponent* pc = gameptr->findPhysicalComponent(c->entityId);
-    
-    
-    Entity ntt = entities[ c->entityId ];
-    //on the 2nd 'second' worth of update calls, shoot projectile
-    if(c->timeInCycle == 60) {
-        //set up projectile
-        glm::vec3 vecDir = gameptr->_eyepos - ntt.position; //target player
-        glm::normalize(vecDir);
-        glm::vec3 projVelocity = vecDir * velocity;
-        //[gvc spawn_projectile:ntt.position velocity:projVelocity homeInOnPlayer:true damage:20];
-    }
-    //pc->body->setLinearVelocity(glm::)
-    
-    
-    //ntt.position;
-    //_game->_eyepos;
-    
-    //PhysicalComponent* phy = gameptr->findPhysicalComponent( c->entityId );
-    //phy->body->getLinearVelocity();
-}
-void Enemy_Stationary::operator()(BehavioralComponent* c, EntityCollection& entities, double)
-{
-    Entity* ntt = &(entities[c->entityId]);
-    float dist = glm::length(gameptr->_eyepos - ntt->position);
-    if(dist < 6 && timeInCycle <= 0) {
-        [gvc damagePlayer:1];
-        attacked = true;
-        //begin cooldown
-        timeInCycle = 30;
-    }
-    timeInCycle--;
-}
-
-void Projectile::operator()(BehavioralComponent* c, EntityCollection& entities, double)
-{
-    //iterate thru enemies, flag them to stop following if close enough
-    for ( auto pair :entities )
-        if ( EntityId::matchesTag("redemy", pair.first ) || EntityId::matchesTag("grnemy", pair.first )) {
-            Entity* ntt = &(entities[c->entityId]);
-            Entity* nttEnemy = &(pair.second);
-            BehavioralComponent *bcEnemy = gameptr->findBehavioralComponent(pair.first);
-            if(bcEnemy != nullptr) { //update the bool if not null
-                
-                float dist = glm::length(ntt->position - nttEnemy->position); //distance between projectile and enemy
-                if(dist < 5 && !bcEnemy->potentiallyhitByProjectile) {
-                    bcEnemy->potentiallyhitByProjectile = true;
-                }
-            }
-        }
-}
-
-void Enemy_Aggressive::operator()(BehavioralComponent* c, EntityCollection& entities, double)
-{
-    Entity* ntt = &(entities[c->entityId]);
-    float dist = glm::length(gameptr->_eyepos - ntt->position);
-    
-    if(dist < 25 && !(c->potentiallyhitByProjectile)) { //disallow if enemy were potentially hit by a projectile, in order to avoid bounding
-        //follow player via setting velocity
-        glm::vec3 vecDir = gameptr->_eyepos - ntt->position; //target player
-        vecDir.y = 0; //remove y component of velocity; enemies will not float, but follow along the ground.
-        glm::normalize(vecDir);
-        glm::vec3 enemyVelocity = vecDir * 1.0f; //scale according to magnitude of vel
-        //glm::vec3 position0 = ntt->position;
-        //ntt->position += enemyVelocity * 0.3f;
-        //glm::vec3 position1 = ntt->position;
-        //[gvc print_Vector:(position1 - position0)]; //check for differences from update
-        PhysicalComponent *pc = gameptr->findPhysicalComponent(c->entityId);
-        //  pc->body->applyCentralImpulse({enemyVelocity.x, enemyVelocity.y, enemyVelocity.z});
-        //gameptr->markEntityForDestruction(c->entityId);
-        pc->body->setLinearVelocity({enemyVelocity.x, enemyVelocity.y, enemyVelocity.z});
-        
-        [gvc incCountAggressive];
-        
-    }
-    if(dist < 6 && timeInCycle <= 0) {
-        [gvc damagePlayer:1];
-        attacked = true;
-        //begin cooldown
-        timeInCycle = 30;
-    }
-    timeInCycle--;
-}
-
-/*
- */

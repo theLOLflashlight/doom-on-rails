@@ -213,7 +213,6 @@ struct BehavioralComponent
     EntityId    entityId;
     int         timeInCycle = 0;
     int         endTimeInCycle = 180;
-    bool        potentiallyhitByProjectile = false;
     bool        enabled;
     Delegate    functor;
     

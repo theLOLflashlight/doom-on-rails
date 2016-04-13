@@ -93,8 +93,8 @@
 		53C2DC781CBDF9DD004CF029 /* Level1Layout in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC711CBDF9DD004CF029 /* Level1Layout */; };
 		53C2DC791CBDF9DD004CF029 /* Level1Layout.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC721CBDF9DD004CF029 /* Level1Layout.mtl */; };
 		53C2DC7A1CBDF9DD004CF029 /* Level1Layout.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC731CBDF9DD004CF029 /* Level1Layout.obj */; };
-		53C2DC7B1CBDF9DD004CF029 /* Level1Rail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC741CBDF9DD004CF029 /* Level1Rail.mtl */; };
-		53C2DC7C1CBDF9DD004CF029 /* Level1Rail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC751CBDF9DD004CF029 /* Level1Rail.obj */; };
+		53C2DC821CBDFEEC004CF029 /* Level1Rail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC801CBDFEEC004CF029 /* Level1Rail.mtl */; };
+		53C2DC831CBDFEEC004CF029 /* Level1Rail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC811CBDFEEC004CF029 /* Level1Rail.obj */; };
 		53C679221CA22E62007C7945 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C679211CA22E62007C7945 /* main.m */; };
 		53C679251CA22E62007C7945 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C679241CA22E62007C7945 /* AppDelegate.m */; };
 		53C679271CA22E62007C7945 /* Shader.fs in Resources */ = {isa = PBXBuildFile; fileRef = 53C679261CA22E62007C7945 /* Shader.fs */; };
@@ -288,8 +288,8 @@
 		53C2DC711CBDF9DD004CF029 /* Level1Layout */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Level1Layout; sourceTree = "<group>"; };
 		53C2DC721CBDF9DD004CF029 /* Level1Layout.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1Layout.mtl; sourceTree = "<group>"; };
 		53C2DC731CBDF9DD004CF029 /* Level1Layout.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1Layout.obj; sourceTree = "<group>"; };
-		53C2DC741CBDF9DD004CF029 /* Level1Rail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1Rail.mtl; sourceTree = "<group>"; };
-		53C2DC751CBDF9DD004CF029 /* Level1Rail.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1Rail.obj; sourceTree = "<group>"; };
+		53C2DC801CBDFEEC004CF029 /* Level1Rail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1Rail.mtl; sourceTree = "<group>"; };
+		53C2DC811CBDFEEC004CF029 /* Level1Rail.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1Rail.obj; sourceTree = "<group>"; };
 		53C6791D1CA22E62007C7945 /* Dungeons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dungeons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53C679211CA22E62007C7945 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		53C679231CA22E62007C7945 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -350,11 +350,11 @@
 		032AF1901CBDD2E900823AF1 /* Level1 */ = {
 			isa = PBXGroup;
 			children = (
+				53C2DC801CBDFEEC004CF029 /* Level1Rail.mtl */,
+				53C2DC811CBDFEEC004CF029 /* Level1Rail.obj */,
 				53C2DC711CBDF9DD004CF029 /* Level1Layout */,
 				53C2DC721CBDF9DD004CF029 /* Level1Layout.mtl */,
 				53C2DC731CBDF9DD004CF029 /* Level1Layout.obj */,
-				53C2DC741CBDF9DD004CF029 /* Level1Rail.mtl */,
-				53C2DC751CBDF9DD004CF029 /* Level1Rail.obj */,
 				53C2DC6F1CBDF9DD004CF029 /* Level1EnemyPos.mtl */,
 				53C2DC701CBDF9DD004CF029 /* Level1EnemyPos.obj */,
 			);
@@ -669,7 +669,7 @@
 				TargetAttributes = {
 					53C6791C1CA22E62007C7945 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = RX327XMQJX;
+						DevelopmentTeam = QBSFJ43NUJ;
 					};
 				};
 			};
@@ -754,7 +754,7 @@
 				4453320D1CB5BD9C004DC43B /* SoundOff.png in Resources */,
 				44F67C391CBD80DD00043DA1 /* First Blood.mp3 in Resources */,
 				032AF1B41CBDE9FE00823AF1 /* Level0Rail.obj in Resources */,
-				53C2DC7B1CBDF9DD004CF029 /* Level1Rail.mtl in Resources */,
+				53C2DC821CBDFEEC004CF029 /* Level1Rail.mtl in Resources */,
 				53F05FB21CB9FA0C007F3023 /* shooting_star.wav in Resources */,
 				53F05FB11CB9FA0C007F3023 /* magic-quake2.mp3 in Resources */,
 				532ECA8F1CADBDBD001BB153 /* Level0All.obj in Resources */,
@@ -813,7 +813,7 @@
 				4442C9601CBB0A690097FD98 /* Gun.png in Resources */,
 				44F67C481CBDCD9E00043DA1 /* Game Over sound effect.mp3 in Resources */,
 				532ECA941CADBDBD001BB153 /* Level0EnemyRail.obj in Resources */,
-				53C2DC7C1CBDF9DD004CF029 /* Level1Rail.obj in Resources */,
+				53C2DC831CBDFEEC004CF029 /* Level1Rail.obj in Resources */,
 				532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */,
 				5385DE741CA3365100F1A323 /* WaterShader.vs in Resources */,
 				532ECA8E1CADBDBD001BB153 /* Level0All.mtl in Resources */,
@@ -1004,7 +1004,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Jacob;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Andrew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dungeons/Dungeons-Bridging-Header.h";
@@ -1035,7 +1035,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Jacob;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.btech.Dungeons.Andrew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dungeons/Dungeons-Bridging-Header.h";
