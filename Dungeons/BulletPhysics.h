@@ -11,10 +11,16 @@
 
 @interface BulletPhysics: NSObject
 
+@property (nonatomic) btDiscreteDynamicsWorld* dynamicsWorld;
+
 -(void) update:(float) elapsedTime;
 
 -(void) addRigidBody:(btRigidBody*) body;
 
 -(void) addCollisionObject:(btCollisionObject*) obj;
+
+-(void) removeRigidBody:(btRigidBody*) body;
+
+-(void) removeCollisionObject:(btCollisionObject*) obj;
 
 @end

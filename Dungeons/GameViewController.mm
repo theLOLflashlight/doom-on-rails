@@ -443,39 +443,37 @@
         _game->addComponent( bfg );
     }
     {
-        PhysicalComponent bfg( bfgId );
-        
-        auto motionState = new btDefaultMotionState(
-            btTransform( btQuaternion( 0,0,0,1 ), btVector3( pos.x, pos.y, pos.z ) ) );
-        
-        static btSphereShape SPHERE_SHAPE( 2 );
-        bfg.body = new btRigidBody( 1, motionState, &SPHERE_SHAPE );
-        bfg.body->setLinearVelocity( { vel.x, vel.y, vel.z } );
-        
-        _game->addComponent( bfg );
-    }
-    {
         BehavioralComponent bfg( bfgId );
         
+        _game->_entities[ bfgId ].position = pos;
+        
         double startTime = -1;
-        bfg.functor = [self, startTime](BehavioralComponent* bc, EntityCollection& entities, double time)
+        bfg.functor = [self, startTime, vel](BehavioralComponent* bc, EntityCollection& entities, double time)
         mutable {
-            const double MAX_LIFETIME = 3;
-            const EntityId entityId = bc->entityId;
-            
+            const double MAX_LIFETIME = 4;
             if ( startTime < 0 )
                 startTime = time;
             
             const double lifetime = time - startTime;
+            Entity& ntt = entities[ bc->entityId ];
             
             if ( lifetime > MAX_LIFETIME - 1 )
             {
                 float size = MAX_LIFETIME - lifetime;
-                entities[ entityId ].scale = glm::vec3( size, size, size );
+                ntt.scale = glm::vec3( size, size, size );
             }
             
+            ntt.position += vel * 0.01f;
+            
+            for ( auto pair : entities )
+                if ( EntityId::matchesTag( "redemy", pair.first ) || EntityId::matchesTag( "grnemy", pair.first ) )
+                    if ( glm::distance( ntt.position, pair.second.position ) < 2 * (ntt.scale.x) )
+                        _game->markEntityForDestruction( pair.first );
+            
             if ( lifetime > MAX_LIFETIME )
-                _game->markEntityForDestruction( entityId );
+            {
+                _game->markEntityForDestruction( bc->entityId );
+            }
         };
         _game->addComponent( bfg );
     }

@@ -158,7 +158,10 @@ struct PhysicalComponent
 {
     EntityId        entityId;
     bool            active;
+    union {
     btRigidBody*    body;
+    btCollisionObject*    object;
+    };
     
     explicit PhysicalComponent( EntityId _id, bool _active = true )
         : entityId( _id )
@@ -171,8 +174,7 @@ struct PhysicalComponent
         if ( !active )
             return;
         
-        btTransform trans;
-        body->getMotionState()->getWorldTransform( trans );
+        btTransform trans = object->getWorldTransform();
         
         btVector3 pos = trans.getOrigin();
         

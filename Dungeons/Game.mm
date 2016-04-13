@@ -8,31 +8,6 @@ using std::make_shared;
 using std::string;
 using std::vector;
 
-#define VECTOR3( vec ) { vec[0], vec[1], vec[2] }
-#define VECTOR4( vec ) { vec[0], vec[1], vec[2], vec[3] }
-
-btVector3 btVector( glm::vec3 vec )
-{
-    return VECTOR3( vec );
-}
-
-btVector4 btVector( glm::vec4 vec )
-{
-    return VECTOR4( vec );
-}
-
-namespace glm
-{
-    glm::vec3 vec( btVector3 vec )
-    {
-        return VECTOR3( vec );
-    }
-    
-    glm::vec4 vec( btVector4 vec )
-    {
-        return VECTOR4( vec );
-    }
-}
 
 Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::string greenEnemies, std::string railName )
     // we need to bind the view drawable before our shaders load
@@ -329,13 +304,13 @@ void Game::render() const
         
         // Render refRAction
         _water.bindRefraction( _width, _height );
+        
         _program.bind();
         glUniform4f( _program.find_uniform( "uWaterPlane" ), 0, -1, 0, 0 );
         _spriteProgram.bind();
         glUniform4f( _spriteProgram.find_uniform( "uWaterPlane" ), 0, -1, 0, 0 );
         _fireProgram.bind();
         glUniform4f( _fireProgram.find_uniform( "uWaterPlane" ), 0, -1, 0, 0 );
-
         glUseProgram( 0 );
         
         draw_scene( view, proj );
@@ -482,7 +457,11 @@ void Game::destroyEntity( EntityId _id )
     
     for ( int i = 0; i < _physics.size(); i++ )
         if ( _physics[ i ].entityId == _id )
+        {
+            [_world removeRigidBody: _physics[ i ].body];
             _physics.erase( _physics.begin() + i-- );
+        }
+    
     
     for ( int i = 0; i < _behaviors.size(); i++ )
         if ( _behaviors[ i ].entityId == _id )
