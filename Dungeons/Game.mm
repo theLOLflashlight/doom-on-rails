@@ -120,15 +120,15 @@ Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::s
         greenSprite->width = 1.25;
         greenSprite->spriteAxis = vec3( 0, 1, 0 );
         
-        Sprite* yellowSprite = new Sprite( ios_path( "Level0All/enemy1.png" ), &_spriteProgram );
-        yellowSprite->height = 1.5;
-        yellowSprite->width = 1;
-        yellowSprite->spriteAxis = vec3( 0, 1, 0 );
-        
         Sprite* blueSprite = new Sprite( ios_path( "Level0All/enemy3.png" ), &_spriteProgram );
         blueSprite->height = 2;
         blueSprite->width = 1.2;
         blueSprite->spriteAxis = vec3( 0, 1, 0 );
+        
+        Sprite* yellowSprite = new Sprite( ios_path( "Level0All/enemy1.png" ), &_spriteProgram );
+        yellowSprite->height = 2.5;
+        yellowSprite->width = 1.5;
+        yellowSprite->spriteAxis = vec3( 0, 1, 0 );
         
         Sprite* enemySprites[] = { redSprite, greenSprite, blueSprite, yellowSprite };
         
@@ -151,13 +151,22 @@ Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::s
             
             static btSphereShape SPHERE_SHAPE( 1 );
             static btCylinderShape CYLINDER_SHAPE( { 0.5, 1, 0.5 } );
+            static btCylinderShape CYLINDER_SHAPE2( { 0.6, 1.25, 0.6 } );
             
             switch ( enemyType )
             {
-                case 0: enemyP.body = new btRigidBody( 1, motionState, &SPHERE_SHAPE ); break;
-                case 1: enemyP.body = new btRigidBody( 1, motionState, &CYLINDER_SHAPE ); break;
-                case 2: enemyP.body = new btRigidBody( 1, motionState, &SPHERE_SHAPE ); break;
-                case 3: enemyP.body = new btRigidBody( 1, motionState, &SPHERE_SHAPE ); break;
+                case 0:
+                    enemyP.body = new btRigidBody( 1.5, motionState, &SPHERE_SHAPE );
+                    break;
+                case 1:
+                    enemyP.body = new btRigidBody( 1, motionState, &CYLINDER_SHAPE );
+                    break;
+                case 2:
+                    enemyP.body = new btRigidBody( 1.2, motionState, &CYLINDER_SHAPE );
+                    break;
+                case 3:
+                    enemyP.body = new btRigidBody( 10, motionState, &CYLINDER_SHAPE2 );
+                    break;
             }
             
             addComponent( enemyP );

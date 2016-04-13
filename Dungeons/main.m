@@ -13,7 +13,7 @@
 #include <time.h>
 
 int main(int argc, char * argv[]) {
-    srand (time(NULL));
+    srand( time(0) );
     @autoreleasepool {
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }

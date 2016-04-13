@@ -343,7 +343,7 @@
             
         case 2:
             _game = new Game( (GLKView*) self.view, "Level2Layout.obj", "Level2EnemyPos.obj", "Level2Rail.obj", "mercury", glm::vec3( 0, 1, 0 ), glm::vec4( 0.8, 0.3, 0, 0.3 ), 4 );
-            expireTime = 96;
+            expireTime = 95;
             break;
     }
     
@@ -371,8 +371,8 @@
     
     _projectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_fireProgram );
     _bfgProjectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_fireProgram );
-    _bfgProjectileSprite->width = 4;
-    _bfgProjectileSprite->height = 4;
+    _bfgProjectileSprite->width = 8;
+    _bfgProjectileSprite->height = 8;
     
     _translationPoints = [[NSMutableArray alloc] init];
     
@@ -1019,7 +1019,7 @@
             
             for ( auto pair : entities )
                 if ( EntityId::matchesTag( "enemy", pair.first ) )
-                    if ( glm::distance( ntt.position, pair.second.position ) < 2.5 * (ntt.scale.x) )
+                    if ( glm::distance( ntt.position, pair.second.position ) < 4 * (ntt.scale.x) )
                         _game->markEntityForDestruction( pair.first );
             
             if ( lifetime > MAX_LIFETIME )
