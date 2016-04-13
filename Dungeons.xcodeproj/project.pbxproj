@@ -93,9 +93,9 @@
 		53C2DC781CBDF9DD004CF029 /* Level1Layout in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC711CBDF9DD004CF029 /* Level1Layout */; };
 		53C2DC791CBDF9DD004CF029 /* Level1Layout.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC721CBDF9DD004CF029 /* Level1Layout.mtl */; };
 		53C2DC7A1CBDF9DD004CF029 /* Level1Layout.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC731CBDF9DD004CF029 /* Level1Layout.obj */; };
-		53C2DC851CBE0097004CF029 /* Group.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC841CBE0097004CF029 /* Group.jpg */; };
 		53C2DC881CBE012F004CF029 /* Level1Rail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC861CBE012F004CF029 /* Level1Rail.mtl */; };
 		53C2DC891CBE012F004CF029 /* Level1Rail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC871CBE012F004CF029 /* Level1Rail.obj */; };
+		53C2DC8B1CBE0B23004CF029 /* Group1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC8A1CBE0B23004CF029 /* Group1.jpg */; };
 		53C679221CA22E62007C7945 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C679211CA22E62007C7945 /* main.m */; };
 		53C679251CA22E62007C7945 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C679241CA22E62007C7945 /* AppDelegate.m */; };
 		53C679271CA22E62007C7945 /* Shader.fs in Resources */ = {isa = PBXBuildFile; fileRef = 53C679261CA22E62007C7945 /* Shader.fs */; };
@@ -289,9 +289,9 @@
 		53C2DC711CBDF9DD004CF029 /* Level1Layout */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Level1Layout; sourceTree = "<group>"; };
 		53C2DC721CBDF9DD004CF029 /* Level1Layout.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1Layout.mtl; sourceTree = "<group>"; };
 		53C2DC731CBDF9DD004CF029 /* Level1Layout.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1Layout.obj; sourceTree = "<group>"; };
-		53C2DC841CBE0097004CF029 /* Group.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Group.jpg; sourceTree = "<group>"; };
 		53C2DC861CBE012F004CF029 /* Level1Rail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1Rail.mtl; sourceTree = "<group>"; };
 		53C2DC871CBE012F004CF029 /* Level1Rail.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1Rail.obj; sourceTree = "<group>"; };
+		53C2DC8A1CBE0B23004CF029 /* Group1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Group1.jpg; sourceTree = "<group>"; };
 		53C6791D1CA22E62007C7945 /* Dungeons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dungeons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53C679211CA22E62007C7945 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		53C679231CA22E62007C7945 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -405,7 +405,7 @@
 		445332031CB5BD68004DC43B /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
-				53C2DC841CBE0097004CF029 /* Group.jpg */,
+				53C2DC8A1CBE0B23004CF029 /* Group1.jpg */,
 				44F67C491CBDCF6500043DA1 /* replay.png */,
 				44F67C451CBDCBA900043DA1 /* Logout2.png */,
 				44F67C431CBDC7F900043DA1 /* GameOver.gif */,
@@ -798,7 +798,7 @@
 				032AF1AC1CBDE95400823AF1 /* Level0Layout.obj in Resources */,
 				53F05FAE1CB9FA0C007F3023 /* 'flyby'.wav in Resources */,
 				5385DE731CA3365100F1A323 /* WaterShader.fs in Resources */,
-				53C2DC851CBE0097004CF029 /* Group.jpg in Resources */,
+				53C2DC8B1CBE0B23004CF029 /* Group1.jpg in Resources */,
 				4442C9921CBB76450097FD98 /* AND HIS NAME IS JOHN CENA.mp3 in Resources */,
 				53ADE8961CB88DDF00DD3588 /* fireball.obj in Resources */,
 				53C2DC771CBDF9DD004CF029 /* Level1EnemyPos.obj in Resources */,

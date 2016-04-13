@@ -297,7 +297,7 @@
     
     double expireTime = 0;
     
-    switch ( _LevelIndex + 1 )
+    switch ( _LevelIndex + 0 )
     {
         case 0:
             _game = new Game( (GLKView*) self.view, "Level0Layout.obj", "Level0EnemyPos.obj", "Level0Rail.obj", "mar", glm::vec3( 0.766, 0.259, 0.643 ), glm::vec4( 1, 1, 0, 0.5 ), 2 );
