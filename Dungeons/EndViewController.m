@@ -28,7 +28,7 @@
         // Get reference to the destination view controller
         GameViewController *vc = [segue destinationViewController];
         
-        vc.LevelIndex = _LevelIndex;
+        vc.LevelIndex = _LevelIndex % 3;
         //[vc setMyObjectHere:object];
     }
 }

@@ -334,6 +334,7 @@
     switch ( _LevelIndex )
     {
         default:
+            [self dismissViewControllerAnimated: YES completion: nil];
         case 0:
             _game = new Game( (GLKView*) self.view, "Level0Layout.obj", "Level0EnemyPos.obj", "Level0Rail.obj", "mar", glm::vec3( 0.766, 0.259, 0.643 ), glm::vec4( 1, 1, 0, 0.5 ), 2 );
             expireTime = 67;
@@ -353,15 +354,7 @@
     BehavioralComponent endGame( "endGame" );
     endGame.functor = [self, expireTime](BehavioralComponent*, EntityCollection&, double time)
     {
-        if ( _LevelIndex > 2 )
-        {
-            MainViewController* controller = [self.storyboard instantiateViewControllerWithIdentifier: @"MainViewController"];
-            
-            [self presentViewController: controller animated: YES completion: ^() {
-                delete _game;
-            }];
-        }
-        else if ( time > expireTime )
+        if ( time > expireTime )
         {
             EndViewController* endController = [self.storyboard instantiateViewControllerWithIdentifier: @"EndViewController"];
             
