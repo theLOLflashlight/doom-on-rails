@@ -7,8 +7,8 @@ mtllib Level1Rail.mtl
 g Mesh1 Group1 Model
 
 v 150 31.25 -7.5
-v 143.43 31.25 -7.5
-v 1 2
+v 144 31.25 -7.5
+l 1 2
 
 v 77.25 31.25 -7.5
 l 2 3
