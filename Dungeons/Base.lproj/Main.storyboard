@@ -68,7 +68,7 @@
                         <viewControllerLayoutGuide type="bottom" id="qHh-Mt-9TT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3se-qz-xqx" customClass="GLKView">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcd-0s-JYa">
@@ -82,7 +82,7 @@
                                 <rect key="frame" x="520" y="510" width="347" height="155"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Shooter_Menu.png" translatesAutoresizingMaskIntoConstraints="NO" id="Sdy-iq-C7p">
-                                <rect key="frame" x="0.0" y="650" width="600" height="90"/>
+                                <rect key="frame" x="0.0" y="650" width="1024" height="90"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oD2-g1-YCx">
                                 <rect key="frame" x="20" y="660" width="110" height="60"/>
@@ -132,6 +132,8 @@
                             <constraint firstItem="Sdy-iq-C7p" firstAttribute="width" secondItem="3se-qz-xqx" secondAttribute="width" id="hzd-tu-bkM"/>
                         </constraints>
                     </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <outlet property="Ammo" destination="nWN-Qi-tah" id="9bM-PR-Bbx"/>
                         <outlet property="Health" destination="cnS-ez-hyX" id="DnK-Ou-Gkh"/>
