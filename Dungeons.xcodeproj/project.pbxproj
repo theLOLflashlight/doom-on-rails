@@ -43,6 +43,7 @@
 		44F67C461CBDCBA900043DA1 /* Logout2.png in Resources */ = {isa = PBXBuildFile; fileRef = 44F67C451CBDCBA900043DA1 /* Logout2.png */; };
 		44F67C481CBDCD9E00043DA1 /* Game Over sound effect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44F67C471CBDCD9E00043DA1 /* Game Over sound effect.mp3 */; };
 		44F67C4A1CBDCF6500043DA1 /* replay.png in Resources */ = {isa = PBXBuildFile; fileRef = 44F67C491CBDCF6500043DA1 /* replay.png */; };
+		44F67C521CBDE2FB00043DA1 /* BigGun.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44F67C511CBDE2FB00043DA1 /* BigGun.mp3 */; };
 		532ECA701CADA9F8001BB153 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532ECA6F1CADA9F8001BB153 /* OpenGLES.framework */; };
 		532ECA881CADBDBD001BB153 /* DemoRail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA761CADBDBD001BB153 /* DemoRail.mtl */; };
 		532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA771CADBDBD001BB153 /* DemoRail.obj */; };
@@ -216,6 +217,7 @@
 		44F67C451CBDCBA900043DA1 /* Logout2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logout2.png; sourceTree = "<group>"; };
 		44F67C471CBDCD9E00043DA1 /* Game Over sound effect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Game Over sound effect.mp3"; sourceTree = "<group>"; };
 		44F67C491CBDCF6500043DA1 /* replay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = replay.png; sourceTree = "<group>"; };
+		44F67C511CBDE2FB00043DA1 /* BigGun.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BigGun.mp3; sourceTree = "<group>"; };
 		532ECA6F1CADA9F8001BB153 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		532ECA761CADBDBD001BB153 /* DemoRail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DemoRail.mtl; sourceTree = "<group>"; };
 		532ECA771CADBDBD001BB153 /* DemoRail.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DemoRail.obj; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@
 		445332021CB5BD5E004DC43B /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				44F67C511CBDE2FB00043DA1 /* BigGun.mp3 */,
 				44F67C471CBDCD9E00043DA1 /* Game Over sound effect.mp3 */,
 				44F67C381CBD80DD00043DA1 /* First Blood.mp3 */,
 				448A48011CBD7C8600A3623D /* Doom3 Level 2.mp3 */,
@@ -793,6 +796,7 @@
 				532ECA951CADBDBD001BB153 /* Level0Layout in Resources */,
 				44F1AC4B1CB74AF3002557C5 /* GunSoundEffect_1.wav in Resources */,
 				5385DE671CA3365100F1A323 /* ModelShader.vs in Resources */,
+				44F67C521CBDE2FB00043DA1 /* BigGun.mp3 in Resources */,
 				53F05FCD1CBB5B3D007F3023 /* Level0EnemyAPos.mtl in Resources */,
 				53ADE8951CB88DDF00DD3588 /* fireball.mtl in Resources */,
 				532ECA8A1CADBDBD001BB153 /* Level0_Textures in Resources */,
