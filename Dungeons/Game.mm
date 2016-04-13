@@ -9,7 +9,7 @@ using std::string;
 using std::vector;
 
 
-Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::string greenEnemies, std::string railName )
+Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::string greenEnemies, std::string railName, std::string name, glm::vec3 sunPosition, glm::vec4 sunColor, int enemyTypes )
     // we need to bind the view drawable before our shaders load
     : _view( ([view bindDrawable], view) )
     , _world( [[BulletPhysics alloc] init] )
@@ -27,13 +27,13 @@ Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::s
     , _fireProgram( ios_path( "SpriteShader.vs" ), ios_path( "FireShader.fs" ), "aPosition", "aTexCoord" )
 
     , _level( ObjMesh( ios_path( levelName ) ), &_program )
-    //, _enemies( ObjMesh( ios_path( "Level0EnemyPos.obj" ) ), &_program )
 
     , _rail( ObjMesh( ios_path( railName ) ).rail )
     , _raillook( _rail.data, 1 )
 
+    , _skybox( name, sunPosition, sunColor )
     //, _skybox( "goldrush", vec3( 0.342, 0.866, -0.940 ), vec4( 1, 1, 0.8, 0.5 ) )
-    , _skybox( "mar", vec3( 0.766, 0.259, 0.643 ), vec4( 1, 1, 0, 0.5 ) )
+    //, _skybox( "mar", vec3( 0.766, 0.259, 0.643 ), vec4( 1, 1, 0, 0.5 ) )
     //, _skybox( "cp", vec3( 0.342, 0.866, -0.940 ), vec4( 0, 0.5, 1, 0.5 ) )
     //, _skybox( "mercury", vec3( 0, 1, 0 ), vec4( 1, 0.2, 0, 0.5 ) )
 
@@ -109,18 +109,28 @@ Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::s
 
     {
         auto enemiesRail = ObjMesh( ios_path( redEnemies ) ).rail;
+        for ( auto emy : ObjMesh( ios_path( greenEnemies ) ).rail )
+            enemiesRail.push_back( emy );
         
         Sprite* redSprite = new Sprite( ios_path( "Level0All/enemy2.png" ), &_spriteProgram );
         redSprite->height = 2;
         redSprite->width = 2;
         redSprite->spriteAxis = vec3( 0, 1, 0 );
         
+        Sprite* greenSprite = new Sprite( ios_path( "Level0All/enemy0.png" ), &_spriteProgram );
+        greenSprite->height = 2;
+        greenSprite->width = 1.25;
+        greenSprite->spriteAxis = vec3( 0, 1, 0 );
+        
+        Sprite* enemySprites[] = { redSprite, greenSprite };
+        
         for ( int i = 0; i < enemiesRail.size(); i += 2 )
         {
-            const EntityId enemyId( "redemy", i );
+            const EntityId enemyId( "enemy", i );
+            const int enemyType = std::rand() % enemyTypes;
             
             GraphicalComponent enemyG( enemyId, GraphicalComponent::TRANSLUCENT );
-            enemyG.asset = redSprite;
+            enemyG.asset = enemySprites[ enemyType ];
             
             addComponent( enemyG );
             
@@ -132,7 +142,14 @@ Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::s
                 btTransform( btQuaternion( 0,0,0,1 ), btVector3( pos.x, pos.y + 1, pos.z ) ) );
             
             static btSphereShape SPHERE_SHAPE( 1 );
-            enemyP.body = new btRigidBody( 1, motionState, &SPHERE_SHAPE );
+            static btCylinderShape CYLINDER_SHAPE( { 0.5, 1, 0.5 } );
+            
+            switch ( enemyType )
+            {
+                case 0: enemyP.body = new btRigidBody( 1, motionState, &SPHERE_SHAPE ); break;
+                case 1: enemyP.body = new btRigidBody( 1, motionState, &CYLINDER_SHAPE ); break;
+            }
+            
             enemyP.body->setUserPointer( (void*) enemyId.bitPattern );
             
             addComponent( enemyP );
@@ -140,7 +157,7 @@ Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::s
 
     }
     
-    {
+    /*{
         auto enemiesRail = ObjMesh( ios_path( greenEnemies ) ).rail;
         
         Sprite* greenSprite = new Sprite( ios_path( "Level0All/enemy0.png" ), &_spriteProgram );
@@ -172,7 +189,7 @@ Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::s
             addComponent( enemyP );
         }
 
-    }
+    }*/
 }
 
 
@@ -448,7 +465,7 @@ void Game::markEntityForDestruction( EntityId _id )
 
 void Game::destroyEntity( EntityId _id )
 {
-    if ( EntityId::matchesTag( "redemy", _id ) || EntityId::matchesTag( "grnemy", _id ) )
+    if ( EntityId::matchesTag( "enemy", _id ) )
         ++*killCountPtr;
     
     for ( int i = 0; i < _graphics.size(); i++ )

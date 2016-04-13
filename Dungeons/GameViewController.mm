@@ -288,8 +288,10 @@ struct Enemy_Basic
     
     [EAGLContext setCurrentContext:self.context];
     
+    _game = new Game( (GLKView*) self.view, "Level0Layout.obj", "Level0EnemyAPos.obj", "Level0EnemyBPos.obj", "DemoRail.obj", "mar", glm::vec3( 0.766, 0.259, 0.643 ), glm::vec4( 1, 1, 0, 0.5 ), 2 );
+    //_game = new Game( (GLKView*) self.view, "Level1Layout.obj", "Level1EnemyAPos.obj", "Level1EnemyBPos.obj", "Level1Rail.obj", "cp", glm::vec3( 0.342, 0.866, -0.940 ), glm::vec4( 0, 0.5, 1, 0.5 ), 3 );
+    //_game = new Game( (GLKView*) self.view, "Level2Layout.obj", "Level2EnemyAPos.obj", "Level2EnemyBPos.obj", "Level2Rail.obj", "mercury", glm::vec3( 0, 1, 0 ), glm::vec4( 1, 0.2, 0, 0.5 ), 4 );
     
-    _game = new Game( (GLKView*) self.view, "Level0Layout.obj", "Level0EnemyAPos.obj", "Level0EnemyBPos.obj", "DemoRail.obj" );
     
     BehavioralComponent endGame( "endGame" );
     endGame.functor = [self](BehavioralComponent*, EntityCollection&, double time)
@@ -304,9 +306,6 @@ struct Enemy_Basic
     };
     _game->addComponent( endGame );
     
-    _projectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_spriteProgram );
-    _projectileSprite2 = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_spriteProgram );
-    //_slashSprite = new Sprite( ios_path( "slashesD4.jpg" ), &_game->_spriteProgram );
     _game->killCountPtr = &Kills;
     
     _projectileSprite = new Sprite( ios_path( "fireball/fireball.png" ), &_game->_fireProgram );
@@ -501,7 +500,7 @@ struct Enemy_Basic
             
             //glm::vec3 fwdDisplacement = glm::normalize(_game->_eyelook - _game->_eyepos) *1.0f;
             //glm::vec3 oPos =_game->_eyepos + fwdDisplacement;
-            [self explosionImpact:createPos velocity:velocity radius:2.0f];
+            //[self explosionImpact:createPos velocity:velocity radius:2.0f];
             
             //[self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f homeInOnPlayer:false damage:100];
             
@@ -803,99 +802,6 @@ struct Enemy_Basic
     [EAGLContext setCurrentContext:self.context];
 }
 
--(void) explosionImpact:(glm::vec3) pos
-               velocity:(glm::vec3) vel
-                 radius:(float)     radius
-{
-    //explosion graphic:
-    //position the explosn2 entity
-    glm::vec3 fwdDisplacement = glm::normalize(_game->_eyelook - _game->_eyepos) *1.0f;
-    glm::vec3 oPos =_game->_eyepos + fwdDisplacement;
-    Entity* ntt = &(_game->_entities["explosn2"]);
-    ntt->position = oPos;
-    {
-        
-        GraphicalComponent explosion( "explosn2", GraphicalComponent::TRANSLUCENT );
-        explosion.program = &_game->_spriteProgram;
-        //for enemy projectiles
-        explosion.sprite = _slashSprite;
-        _game->addComponent(explosion);
-    }
-    {
-        BehavioralComponent explosion("explosn2");
-        //explosion.endTimeInCycle = 20;
-        explosion.timeInCycle = 0;
-        int timeInCycle = 0, endTimeInCycle = 20; //check with Andrew about how he stored the time
-        explosion.functor = [self](BehavioralComponent *bc, EntityCollection& entities, double time) {
-            if(bc->timeInCycle == 20) { //end time of explosion
-                _game->markEntityForDestruction(bc->entityId);
-            }
-            
-            //update position of explosion graphic
-            glm::vec3 fwdDisplacement = glm::normalize(_game->_eyelook - _game->_eyepos) *1.0f;
-            glm::vec3 oPos =_game->_eyepos + fwdDisplacement;
-            Entity* ntt = &(_game->_entities[bc->entityId]);
-            ntt->position = oPos;
-            //add fade effect proportional to time in cycle to point of destruction
-            
-            bc->timeInCycle++;
-        };
-    }
-    
-    //explosion physics object:
-    {
-        //Create explosion entity
-        PhysicalComponent explosion("explosn1");
-        static btSphereShape explosionSphere( radius ); //radius of explosion //to _not_ be this radius.
-        auto motionState = new btDefaultMotionState(btTransform( btQuaternion( 0,0,0,1 ), btVector3( pos.x, pos.y, pos.z ) ) );
-        explosion.body = new btRigidBody( 1, motionState, &explosionSphere );
-        explosion.body->setLinearVelocity( btVector3(vel.x, vel.y, vel.z) ); //set velocity for explosion
-        _game->addComponent(explosion);
-    }
-    {
-        BehavioralComponent explosion("explosn1");
-        explosion.endTimeInCycle = 3;
-        explosion.timeInCycle = 0;
-        explosion.functor = [self](BehavioralComponent *bc, EntityCollection& entities, double time) {
-            if(bc->timeInCycle == 3) { //end time of explosion
-                _game->markEntityForDestruction(bc->entityId);
-                //[[_toBeDeleted addObject:[[EntityId alloc] initWithFormat:@"%d", bc->entityId]];
-                //_game->destroyEntity(bc->entityId);
-                
-            }
-            bc->timeInCycle++;
-            //fade - reduce alpha
-            
-        };
-        _game->addComponent(explosion);
-    }
-    /*
-    for ( auto& ntt : _game->_entities )
-    {
-        if ( glm::distance( ntt.second.position, pos ) < radius )
-        {
-            GraphicalComponent* gfx = _game->findGraphicalComponent( ntt.first );
-            if ( gfx )
-                gfx->color = glm::vec4( 1, 0, 0, 1 );
-            
-        }
-    }*/
-}
-
--(void) explosionAt:(glm::vec3) pos
-             radius:(float)     radius
-{
-    for ( auto& ntt : _game->_entities )
-    {
-        if ( glm::distance( ntt.second.position, pos ) < radius )
-        {
-            GraphicalComponent* gfx = _game->findGraphicalComponent( ntt.first );
-            if ( gfx )
-                gfx->color = glm::vec4( 1, 0, 0, 1 );
-        }
-    }
-}
-
 - (void) damagePlayer: (int)damage {
     int healthInt = [self.Health.text intValue]; //string to int
     //_anImage = 0.7;
@@ -1055,7 +961,7 @@ struct Enemy_Basic
             ntt.position += vel * 0.01f;
             
             for ( auto pair : entities )
-                if ( EntityId::matchesTag( "redemy", pair.first ) || EntityId::matchesTag( "grnemy", pair.first ) )
+                if ( EntityId::matchesTag( "enemy", pair.first ) )
                     if ( glm::distance( ntt.position, pair.second.position ) < 2 * (ntt.scale.x) )
                         _game->markEntityForDestruction( pair.first );
             
