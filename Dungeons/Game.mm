@@ -9,7 +9,7 @@ using std::string;
 using std::vector;
 
 
-Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::string greenEnemies, std::string railName, std::string name, glm::vec3 sunPosition, glm::vec4 sunColor, int enemyTypes )
+Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::string railName, std::string name, glm::vec3 sunPosition, glm::vec4 sunColor, int enemyTypes )
     // we need to bind the view drawable before our shaders load
     : _view( ([view bindDrawable], view) )
     , _world( [[BulletPhysics alloc] init] )
@@ -109,9 +109,7 @@ Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::s
 
     {
         auto enemiesRail = ObjMesh( ios_path( redEnemies ) ).rail;
-        for ( auto emy : ObjMesh( ios_path( greenEnemies ) ).rail )
-            enemiesRail.push_back( emy );
-        
+               
         Sprite* redSprite = new Sprite( ios_path( "Level0All/enemy2.png" ), &_spriteProgram );
         redSprite->height = 2;
         redSprite->width = 2;

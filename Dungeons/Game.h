@@ -106,7 +106,7 @@ class Game
 {
 public:
 
-    Game( GLKView* view, std::string levelName, std::string redEnemies, std::string greenEnemies, std::string railName, std::string name, glm::vec3 sunPosition, glm::vec4 sunColor, int enemyTypes );
+    Game( GLKView* view, std::string levelName, std::string redEnemies, std::string railName, std::string name, glm::vec3 sunPosition, glm::vec4 sunColor, int enemyTypes );
 
     int* killCountPtr;
     
