@@ -281,7 +281,7 @@ struct Projectile {
         
         if(AmmoNumber>0)
         {
-            [self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f homeInOnPlayer:false damage:100];
+            [self spawn_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f];
             AmmoNumber --;
         }
         
@@ -294,6 +294,37 @@ struct Projectile {
         }
     }
 }
+
+- (void) handleTap2Gesture:(UITapGestureRecognizer *)sender
+{
+    if (sender.state == UIGestureRecognizerStateRecognized)
+    {
+        using namespace glm;
+        const CGPoint mouse = [sender locationInView:self.view];
+        
+        const mat4 view = _game->viewMatrix();
+        const mat4 proj = _game->projMatrix();
+        const vec4 viewport = _game->viewport();
+        
+        vec3 touchPos0 = unProject( vec3( mouse.x, -mouse.y, 0 ), view, proj, viewport );
+        vec3 touchPos1 = unProject( vec3( mouse.x, -mouse.y, 1 ), view, proj, viewport );
+        
+        if(AmmoNumber>0)
+        {
+            [self spawn_bfg_projectile: touchPos0 velocity: normalize( touchPos1 - touchPos0 ) * 50.0f];
+            AmmoNumber --;
+        }
+        
+        //[self explosionAt: _game->_eyepos];
+        
+        if(AmmoNumber == 0)
+        {
+            ReLoad = true;
+            [ReloadSound play];
+        }
+    }
+}
+
 
 - (void)viewDidLoad
 {
@@ -339,11 +370,10 @@ struct Projectile {
     tapGesture.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:tapGesture];
     
-    //Swipe
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
-    [panGesture setMinimumNumberOfTouches:1];
-    [panGesture setMaximumNumberOfTouches:1];
-    [self.view addGestureRecognizer:panGesture];
+    UITapGestureRecognizer *tap2Gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap2Gesture:)];
+    tap2Gesture.numberOfTapsRequired = 1;
+    tap2Gesture.numberOfTouchesRequired = 2;
+    [self.view addGestureRecognizer:tap2Gesture];
     
     //play looping sound
     GLKView *view = (GLKView *)self.view;
@@ -738,25 +768,6 @@ struct Projectile {
     
 }
 
-
-//Jacob: Shake input handler
--(void) motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
-    if (motion == UIEventSubtypeMotionShake) { //just having earthquake for now
-        //shake method here
-        //Cast spell
-        
-        GCV.animationProgress = 0; //begins the animation of earthquake
-        
-        if(AmmoNumber != 10)
-        {
-            ReLoad= true;
-            [ReloadSound play];
-        }
-        
-        //Right now, it simply shakes the camera, but maybe shaking the world instead could be considered?
-    }
-}
-
 - (void)dealloc
 {
     [self tearDownGL];
@@ -907,7 +918,7 @@ struct Projectile {
 }
 
 
-- (void) spawn_projectile:( glm::vec3 )pos velocity:( glm::vec3 ) vel homeInOnPlayer: (bool)targetPlayer damage: (int)damage
+- (void) spawn_projectile:( glm::vec3 )pos velocity:( glm::vec3 ) vel
 {
     const EntityId bulletId( "bullet", _bulletId++ );
     {
@@ -929,7 +940,6 @@ struct Projectile {
         bullet.body->setLinearVelocity( { vel.x, vel.y, vel.z } );
         
         
-        //[_physics addRigidBody: bullet.body];
         _game->addComponent( bullet );
         //_game->findPhysicalComponent( bulletId )->active = false;
         
@@ -1077,50 +1087,9 @@ struct Projectile {
      */
 }
 
-
-//No longer usable due to horizontalAngle and verticalAngle no longer existing in the _eyeLook variable
-- (void) cameraMovement
-{
-    float horizontalAngle = _baseHorizontalAngle + currHorizontalAngle;
-    float verticalAngle = _baseVerticalAngle + currVerticalAngle;
-    
-    //for animationProgress of shake
-    if(GCV.animationProgress > 1) {
-        GCV.animationProgress = 1;
-    }
-    if(GCV.animationProgress < 1) {
-        GCV.animationProgress += 1.0 / 45.0;
-        float shakeMag;
-        if(GCV.animationProgress < 0.70) {
-            shakeMag = 0.9 * 0.4;
-        }
-        else {
-            shakeMag = (0.9 - (GCV.animationProgress - 0.7) * 0.9 / 0.3) * 0.4; //after reaching 0.7 progress (when sound starts to dwindle), linearly decrease max magnitude to 0
-        }
-        //modelViewMatrix = GLKMatrix4Translate(modelViewMatrix, Float(arc4random())*shakeMag, Float(arc4random())*shakeMag, 0);
-        //GLKVector3Make(position.x + Float(arc4random())*shakeMag, position.y + Float(arc4random())*shakeMag, position.z + Float(arc4random())*shakeMag);
-        horizontalAngle += (arc4random() / UINT32_MAX) * shakeMag;
-        verticalAngle += (arc4random() / UINT32_MAX) * shakeMag;
-    }
-    
-    GCV.direction = {cosf(verticalAngle) * sinf(horizontalAngle),
-        sinf(verticalAngle),
-        cosf(verticalAngle) * cosf(horizontalAngle)};
-    //_eyelook = GCV.direction;
-    //GCV.horizontalMovement = GLKVector3Make(sinf(horizontalAngle - M_PI_2), 0, cosf(horizontalAngle - M_PI_2));
-    //print("horizontalAngle: \(horizontalAngle); verticalAngle: \(verticalAngle)");
-}
-
 - (void) update
 {
     _game->update( self.timeSinceLastUpdate );
-    [self cameraMovement];
-    
-    //update line
-    //Not yet implemented
-    //UIImage *image = [UIImage imageNamed:@"RedDamageOverlay.png"];//[drawSwipeLine size:imageSize]
-    //_imageView.image = image;
-    
     
     if(ReLoad)
     {
@@ -1248,7 +1217,7 @@ void Enemy_Basic::operator()(BehavioralComponent* c, EntityCollection& entities,
         glm::vec3 vecDir = gameptr->_eyepos - ntt.position; //target player
         glm::normalize(vecDir);
         glm::vec3 projVelocity = vecDir * velocity;
-        [gvc spawn_projectile:ntt.position velocity:projVelocity homeInOnPlayer:true damage:20];
+        //[gvc spawn_projectile:ntt.position velocity:projVelocity homeInOnPlayer:true damage:20];
     }
     //pc->body->setLinearVelocity(glm::)
     
