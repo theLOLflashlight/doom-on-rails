@@ -25,5 +25,6 @@
 - (IBAction)SoundButton:(UIButton *)sender;
 
 @property (weak, nonatomic) IBOutlet UIButton *SoundButtonEffects;
+- (IBAction)Reload:(UIButton *)sender;
 
 @end
