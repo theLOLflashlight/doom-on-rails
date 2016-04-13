@@ -14,6 +14,32 @@
 #include <chrono>
 #include <set>
 
+#define VECTOR3( vec ) { vec[0], vec[1], vec[2] }
+#define VECTOR4( vec ) { vec[0], vec[1], vec[2], vec[3] }
+
+inline btVector3 btVector( glm::vec3 vec )
+{
+    return VECTOR3( vec );
+}
+
+inline btVector4 btVector( glm::vec4 vec )
+{
+    return VECTOR4( vec );
+}
+
+namespace glm
+{
+    inline glm::vec3 vec( btVector3 vec )
+    {
+        return VECTOR3( vec );
+    }
+    
+    inline glm::vec4 vec( btVector4 vec )
+    {
+        return VECTOR4( vec );
+    }
+}
+
 struct Rail
 {
     std::vector< glm::vec3 > data;

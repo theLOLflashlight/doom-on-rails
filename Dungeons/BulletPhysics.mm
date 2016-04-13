@@ -15,7 +15,6 @@
     btDefaultCollisionConfiguration*        collisionConfiguration;
     btCollisionDispatcher*                  dispatcher;
     btSequentialImpulseConstraintSolver*    solver;
-    btDiscreteDynamicsWorld*                dynamicsWorld;
 
     /*btCollisionShape *groundShape;
     btCollisionShape *fallShape;
@@ -40,9 +39,9 @@
         
         solver = new btSequentialImpulseConstraintSolver;
         
-        dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
+        _dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
         
-        dynamicsWorld->setGravity(btVector3(0,-9.81,0));
+        _dynamicsWorld->setGravity(btVector3(0,-9.81,0));
         
         /*groundShape = new btStaticPlaneShape(btVector3(0,1,0),1);
         
@@ -71,7 +70,7 @@
 
 - (void) dealloc
 {
-    delete dynamicsWorld;
+    delete _dynamicsWorld;
     delete solver;
     delete collisionConfiguration;
     delete dispatcher;
@@ -81,17 +80,27 @@
 
 -(void) addRigidBody:(btRigidBody*) body
 {
-    dynamicsWorld->addRigidBody( body );
+    _dynamicsWorld->addRigidBody( body );
 }
 
 -(void) addCollisionObject:(btCollisionObject*) obj
 {
-    dynamicsWorld->addCollisionObject( obj );
+    _dynamicsWorld->addCollisionObject( obj );
+}
+
+-(void) removeRigidBody:(btRigidBody*) body
+{
+    _dynamicsWorld->removeRigidBody( body );
+}
+
+-(void) removeCollisionObject:(btCollisionObject*) obj
+{
+    _dynamicsWorld->removeCollisionObject( obj );
 }
 
 -(void) update:(float) elapsedTime
 {
-    dynamicsWorld->stepSimulation( elapsedTime, 10 );
+    _dynamicsWorld->stepSimulation( elapsedTime, 10 );
 }
 
 
