@@ -62,7 +62,9 @@ struct Enemy_Basic
     
     //AVAudioPlayer *GunSoundEffects;
     AVAudioPlayer *GunSoundEffects[MAX_CHANNELS];
+    AVAudioPlayer *BGunSoundEffects[MAX_CHANNELS];
     int _CurrentChannel;
+    int _BCurrentChannel;
     
     //For swipe action.
     CGFloat _maxRadius;
@@ -277,12 +279,17 @@ struct Enemy_Basic
     
     NSData *GBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"GunSoundEffect_1" ofType:@"wav"]];
     
+     NSData *BGBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"BigGun" ofType:@"mp3"]];
+    
     for(int i = 0; i < MAX_CHANNELS; i++) {
         
         GunSoundEffects[i] = [[AVAudioPlayer alloc]initWithData:GBSoundPath error:nil];
         
         [GunSoundEffects[i] prepareToPlay];
         
+        BGunSoundEffects[i] = [[AVAudioPlayer alloc]initWithData:BGBSoundPath error:nil];
+        
+        [BGunSoundEffects[i] prepareToPlay];
         
     }
     if (_MusicOn)
@@ -531,13 +538,13 @@ struct Enemy_Basic
         _game->addComponent( bfg );
     }
     
-    [GunSoundEffects[_CurrentChannel] play];
+    [BGunSoundEffects[_BCurrentChannel] play];
     
-    _CurrentChannel ++;
+    _BCurrentChannel ++;
     
-    if(_CurrentChannel == MAX_CHANNELS)
+    if(_BCurrentChannel == MAX_CHANNELS)
     {
-        _CurrentChannel = 0;
+        _BCurrentChannel = 0;
     }
     
 }
