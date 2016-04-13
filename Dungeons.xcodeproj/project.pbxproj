@@ -96,6 +96,15 @@
 		53C2DC881CBE012F004CF029 /* Level1Rail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC861CBE012F004CF029 /* Level1Rail.mtl */; };
 		53C2DC891CBE012F004CF029 /* Level1Rail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC871CBE012F004CF029 /* Level1Rail.obj */; };
 		53C2DC8B1CBE0B23004CF029 /* Group1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC8A1CBE0B23004CF029 /* Group1.jpg */; };
+		53C2DC961CBEABFB004CF029 /* Level2Layout in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC8F1CBEABFB004CF029 /* Level2Layout */; };
+		53C2DC971CBEABFB004CF029 /* Level2Layout.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC901CBEABFB004CF029 /* Level2Layout.mtl */; };
+		53C2DC981CBEABFB004CF029 /* Level2Layout.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC911CBEABFB004CF029 /* Level2Layout.obj */; };
+		53C2DC9C1CBEAC14004CF029 /* groan.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC9B1CBEAC14004CF029 /* groan.mp3 */; };
+		53C2DC9E1CBEAE25004CF029 /* Group2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC9D1CBEAE25004CF029 /* Group2.jpg */; };
+		53C2DCA11CBEAFD8004CF029 /* Level2Rail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DC9F1CBEAFD8004CF029 /* Level2Rail.mtl */; };
+		53C2DCA21CBEAFD8004CF029 /* Level2Rail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DCA01CBEAFD8004CF029 /* Level2Rail.obj */; };
+		53C2DCA51CBEB3EE004CF029 /* Level2EnemyPos.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DCA31CBEB3EE004CF029 /* Level2EnemyPos.mtl */; };
+		53C2DCA61CBEB3EE004CF029 /* Level2EnemyPos.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DCA41CBEB3EE004CF029 /* Level2EnemyPos.obj */; };
 		53C679221CA22E62007C7945 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C679211CA22E62007C7945 /* main.m */; };
 		53C679251CA22E62007C7945 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C679241CA22E62007C7945 /* AppDelegate.m */; };
 		53C679271CA22E62007C7945 /* Shader.fs in Resources */ = {isa = PBXBuildFile; fileRef = 53C679261CA22E62007C7945 /* Shader.fs */; };
@@ -292,6 +301,15 @@
 		53C2DC861CBE012F004CF029 /* Level1Rail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1Rail.mtl; sourceTree = "<group>"; };
 		53C2DC871CBE012F004CF029 /* Level1Rail.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1Rail.obj; sourceTree = "<group>"; };
 		53C2DC8A1CBE0B23004CF029 /* Group1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Group1.jpg; sourceTree = "<group>"; };
+		53C2DC8F1CBEABFB004CF029 /* Level2Layout */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Level2Layout; sourceTree = "<group>"; };
+		53C2DC901CBEABFB004CF029 /* Level2Layout.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level2Layout.mtl; sourceTree = "<group>"; };
+		53C2DC911CBEABFB004CF029 /* Level2Layout.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level2Layout.obj; sourceTree = "<group>"; };
+		53C2DC9B1CBEAC14004CF029 /* groan.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = groan.mp3; sourceTree = "<group>"; };
+		53C2DC9D1CBEAE25004CF029 /* Group2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Group2.jpg; sourceTree = "<group>"; };
+		53C2DC9F1CBEAFD8004CF029 /* Level2Rail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level2Rail.mtl; sourceTree = "<group>"; };
+		53C2DCA01CBEAFD8004CF029 /* Level2Rail.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level2Rail.obj; sourceTree = "<group>"; };
+		53C2DCA31CBEB3EE004CF029 /* Level2EnemyPos.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level2EnemyPos.mtl; sourceTree = "<group>"; };
+		53C2DCA41CBEB3EE004CF029 /* Level2EnemyPos.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level2EnemyPos.obj; sourceTree = "<group>"; };
 		53C6791D1CA22E62007C7945 /* Dungeons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dungeons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53C679211CA22E62007C7945 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		53C679231CA22E62007C7945 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -380,6 +398,7 @@
 		445332021CB5BD5E004DC43B /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				53C2DC9B1CBEAC14004CF029 /* groan.mp3 */,
 				44F67C511CBDE2FB00043DA1 /* BigGun.mp3 */,
 				44F67C471CBDCD9E00043DA1 /* Game Over sound effect.mp3 */,
 				44F67C381CBD80DD00043DA1 /* First Blood.mp3 */,
@@ -405,6 +424,7 @@
 		445332031CB5BD68004DC43B /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
+				53C2DC9D1CBEAE25004CF029 /* Group2.jpg */,
 				53C2DC8A1CBE0B23004CF029 /* Group1.jpg */,
 				44F67C491CBDCF6500043DA1 /* replay.png */,
 				44F67C451CBDCBA900043DA1 /* Logout2.png */,
@@ -466,6 +486,7 @@
 			children = (
 				032AF1921CBDD31200823AF1 /* Level0 */,
 				032AF1901CBDD2E900823AF1 /* Level1 */,
+				53C2DC8C1CBEABDF004CF029 /* Level2 */,
 				53F05FC21CBB4497007F3023 /* Level0EnemyPosRail.mtl */,
 				53F05FC91CBB5B3D007F3023 /* Level0EnemyAPos.mtl */,
 				53F05FCA1CBB5B3D007F3023 /* Level0EnemyAPos.obj */,
@@ -536,6 +557,20 @@
 				5385DE861CA3429000F1A323 /* stbi_DDS_aug.h */,
 			);
 			name = SOIL;
+			sourceTree = "<group>";
+		};
+		53C2DC8C1CBEABDF004CF029 /* Level2 */ = {
+			isa = PBXGroup;
+			children = (
+				53C2DCA31CBEB3EE004CF029 /* Level2EnemyPos.mtl */,
+				53C2DCA41CBEB3EE004CF029 /* Level2EnemyPos.obj */,
+				53C2DC9F1CBEAFD8004CF029 /* Level2Rail.mtl */,
+				53C2DCA01CBEAFD8004CF029 /* Level2Rail.obj */,
+				53C2DC8F1CBEABFB004CF029 /* Level2Layout */,
+				53C2DC901CBEABFB004CF029 /* Level2Layout.mtl */,
+				53C2DC911CBEABFB004CF029 /* Level2Layout.obj */,
+			);
+			name = Level2;
 			sourceTree = "<group>";
 		};
 		53C679141CA22E62007C7945 = {
@@ -751,6 +786,7 @@
 				53C679291CA22E62007C7945 /* Shader.vs in Resources */,
 				532ECA931CADBDBD001BB153 /* Level0EnemyRail.mtl in Resources */,
 				53F05FC41CBB4497007F3023 /* Level0EnemyPosRail.mtl in Resources */,
+				53C2DC961CBEABFB004CF029 /* Level2Layout in Resources */,
 				539644B81CBC66D800F71E6E /* FireShader.fs in Resources */,
 				4453320F1CB5BD9C004DC43B /* Start.gif in Resources */,
 				53F05FB41CB9FA0C007F3023 /* sword-clash1.mp3 in Resources */,
@@ -763,8 +799,11 @@
 				53C679311CA22E62007C7945 /* Assets.xcassets in Resources */,
 				53C2DC891CBE012F004CF029 /* Level1Rail.obj in Resources */,
 				445332111CB5C48E004DC43B /* Logout.png in Resources */,
+				53C2DCA11CBEAFD8004CF029 /* Level2Rail.mtl in Resources */,
+				53C2DC971CBEABFB004CF029 /* Level2Layout.mtl in Resources */,
 				5385DE5C1CA3365100F1A323 /* crate.mtl in Resources */,
 				53F05FC51CBB4497007F3023 /* Level0EnemyPosRail.obj in Resources */,
+				53C2DC9C1CBEAC14004CF029 /* groan.mp3 in Resources */,
 				53F05FCF1CBB5B3D007F3023 /* Level0EnemyBPos.mtl in Resources */,
 				53F05FB31CB9FA0C007F3023 /* swipe_whiff.mp3 in Resources */,
 				032AF1AA1CBDE95400823AF1 /* Level0Layout in Resources */,
@@ -772,6 +811,7 @@
 				53C679581CA22F35007C7945 /* glm in Resources */,
 				4442C95E1CBAF9900097FD98 /* Shooter_Menu.png in Resources */,
 				53C679341CA22E62007C7945 /* LaunchScreen.storyboard in Resources */,
+				53C2DCA51CBEB3EE004CF029 /* Level2EnemyPos.mtl in Resources */,
 				4453320E1CB5BD9C004DC43B /* SoundOn.png in Resources */,
 				448A48041CBD7C8600A3623D /* Doom3 Level 3.mp3 in Resources */,
 				5385DE6E1CA3365100F1A323 /* skybox in Resources */,
@@ -787,9 +827,11 @@
 				44F67C521CBDE2FB00043DA1 /* BigGun.mp3 in Resources */,
 				53F05FCD1CBB5B3D007F3023 /* Level0EnemyAPos.mtl in Resources */,
 				53ADE8951CB88DDF00DD3588 /* fireball.mtl in Resources */,
+				53C2DC981CBEABFB004CF029 /* Level2Layout.obj in Resources */,
 				53C2DC761CBDF9DD004CF029 /* Level1EnemyPos.mtl in Resources */,
 				032AF1B01CBDE9B600823AF1 /* Level0EnemyPos.obj in Resources */,
 				532ECA8A1CADBDBD001BB153 /* Level0_Textures in Resources */,
+				53C2DCA21CBEAFD8004CF029 /* Level2Rail.obj in Resources */,
 				448A48031CBD7C8600A3623D /* Doom3 Level 2.mp3 in Resources */,
 				5385DE961CA370F200F1A323 /* crate.obj in Resources */,
 				5385DE891CA3429000F1A323 /* original in Resources */,
@@ -806,6 +848,7 @@
 				5385DE5B1CA3365100F1A323 /* crate in Resources */,
 				53F05FAF1CB9FA0C007F3023 /* footsteps_gravel_01.mp3 in Resources */,
 				53F05FBB1CBB08C8007F3023 /* SpriteShader.fs in Resources */,
+				53C2DCA61CBEB3EE004CF029 /* Level2EnemyPos.obj in Resources */,
 				448A48001CBD79F500A3623D /* Doom3 Level 1.mp3 in Resources */,
 				4453320C1CB5BD9C004DC43B /* BGT1.gif in Resources */,
 				53ADE8981CB88E4200DD3588 /* fireball in Resources */,
@@ -825,6 +868,7 @@
 				44F67C4A1CBDCF6500043DA1 /* replay.png in Resources */,
 				44F67C441CBDC7F900043DA1 /* GameOver.gif in Resources */,
 				53F05FCE1CBB5B3D007F3023 /* Level0EnemyAPos.obj in Resources */,
+				53C2DC9E1CBEAE25004CF029 /* Group2.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -989,7 +1033,7 @@
 		53C6794F1CA22E62007C7945 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1020,7 +1064,7 @@
 		53C679501CA22E62007C7945 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

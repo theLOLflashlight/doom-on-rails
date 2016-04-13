@@ -255,6 +255,27 @@
     }
 }
 
+- (void) handleTap3Gesture:(UITapGestureRecognizer *)sender
+{
+    if (sender.state == UIGestureRecognizerStateRecognized)
+    {
+        _healthInternal = -1;
+    }
+}
+
+
+- (void) handleTap4Gesture:(UITapGestureRecognizer *)sender
+{
+    if (sender.state == UIGestureRecognizerStateRecognized)
+    {
+        EndViewController* endController = [self.storyboard instantiateViewControllerWithIdentifier: @"EndViewController"];
+        
+        endController.kills = Kills;
+        endController.LevelIndex = _LevelIndex + 1;
+        [self presentViewController: endController animated: YES completion: nil];
+    }
+}
+
 
 - (void)viewDidLoad
 {
@@ -286,8 +307,18 @@
     
     UITapGestureRecognizer *tap2Gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap2Gesture:)];
     tap2Gesture.numberOfTapsRequired = 1;
-    tap2Gesture.numberOfTouchesRequired = 3;
+    tap2Gesture.numberOfTouchesRequired = 2;
     [self.view addGestureRecognizer:tap2Gesture];
+    
+    UITapGestureRecognizer *tap3Gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap3Gesture:)];
+    tap3Gesture.numberOfTapsRequired = 1;
+    tap3Gesture.numberOfTouchesRequired = 3;
+    [self.view addGestureRecognizer:tap3Gesture];
+    
+    UITapGestureRecognizer *tap4Gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap4Gesture:)];
+    tap4Gesture.numberOfTapsRequired = 1;
+    tap4Gesture.numberOfTouchesRequired = 4;
+    [self.view addGestureRecognizer:tap4Gesture];
     
     //play looping sound
     GLKView *view = (GLKView *)self.view;
@@ -303,23 +334,23 @@
         default:
         case 0:
             _game = new Game( (GLKView*) self.view, "Level0Layout.obj", "Level0EnemyPos.obj", "Level0Rail.obj", "mar", glm::vec3( 0.766, 0.259, 0.643 ), glm::vec4( 1, 1, 0, 0.5 ), 2 );
-            expireTime = 65;
+            expireTime = 66;
             break;
         case 1:
             _game = new Game( (GLKView*) self.view, "Level1Layout.obj", "Level1EnemyPos.obj", "Level1Rail.obj", "cp", glm::vec3( 0.342, 0.866, -0.940 ), glm::vec4( 0, 0.5, 1, 0.5 ), 3 );
             expireTime = 107;
             break;
             
-        //case 2:
-            _game = new Game( (GLKView*) self.view, "Level2Layout.obj", "Level2EnemyPos.obj", "Level2Rail.obj", "mercury", glm::vec3( 0, 1, 0 ), glm::vec4( 1, 0.2, 0, 0.5 ), 4 );
-            expireTime = 64;
+        case 2:
+            _game = new Game( (GLKView*) self.view, "Level2Layout.obj", "Level2EnemyPos.obj", "Level2Rail.obj", "mercury", glm::vec3( 0, 1, 0 ), glm::vec4( 0.8, 0.3, 0, 0.3 ), 4 );
+            expireTime = 96;
             break;
     }
     
     BehavioralComponent endGame( "endGame" );
     endGame.functor = [self, expireTime](BehavioralComponent*, EntityCollection&, double time)
     {
-        if ( _LevelIndex >= 2 )
+        if ( _LevelIndex > 2 )
         {
             MainViewController* controller = [self.storyboard instantiateViewControllerWithIdentifier: @"MainViewController"];
             
@@ -959,7 +990,7 @@
     {
         GraphicalComponent bfg( bfgId, GraphicalComponent::TRANSLUCENT );
         bfg.asset = _bfgProjectileSprite;
-        bfg.color = glm::vec4( 0, 1, 0, 0.5 );
+        bfg.color = glm::vec4( 0, 1, 0, 0.7 );
         
         _game->addComponent( bfg );
     }
@@ -988,7 +1019,7 @@
             
             for ( auto pair : entities )
                 if ( EntityId::matchesTag( "enemy", pair.first ) )
-                    if ( glm::distance( ntt.position, pair.second.position ) < 2 * (ntt.scale.x) )
+                    if ( glm::distance( ntt.position, pair.second.position ) < 2.5 * (ntt.scale.x) )
                         _game->markEntityForDestruction( pair.first );
             
             if ( lifetime > MAX_LIFETIME )
