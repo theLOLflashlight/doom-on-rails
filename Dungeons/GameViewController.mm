@@ -13,6 +13,7 @@
 #import "Game.h"
 #import "BulletPhysics.h"
 #import "GOViewController.h"
+#import "MainViewController.h"
 #import "GameCppVariables.hpp"
 #import "EndViewController.h"
 #include "ios_path.h"
@@ -285,7 +286,7 @@
     
     UITapGestureRecognizer *tap2Gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap2Gesture:)];
     tap2Gesture.numberOfTapsRequired = 1;
-    tap2Gesture.numberOfTouchesRequired = 2;
+    tap2Gesture.numberOfTouchesRequired = 3;
     [self.view addGestureRecognizer:tap2Gesture];
     
     //play looping sound
@@ -297,30 +298,34 @@
     
     double expireTime = 0;
     
-    switch ( _LevelIndex + 0 )
+    switch ( _LevelIndex )
     {
+        default:
         case 0:
             _game = new Game( (GLKView*) self.view, "Level0Layout.obj", "Level0EnemyPos.obj", "Level0Rail.obj", "mar", glm::vec3( 0.766, 0.259, 0.643 ), glm::vec4( 1, 1, 0, 0.5 ), 2 );
             expireTime = 65;
             break;
         case 1:
-            _game = new Game( (GLKView*) self.view, "Level1Layout.obj", "Level1EnemyPos.obj", "Level1Rail.obj", "cp", glm::vec3( 0.342, 0.866, -0.940 ), glm::vec4( 0, 0.5, 1, 0.5 ), 2 );
+            _game = new Game( (GLKView*) self.view, "Level1Layout.obj", "Level1EnemyPos.obj", "Level1Rail.obj", "cp", glm::vec3( 0.342, 0.866, -0.940 ), glm::vec4( 0, 0.5, 1, 0.5 ), 3 );
             expireTime = 107;
             break;
             
-        case 2:
-            _game = new Game( (GLKView*) self.view, "Level2Layout.obj", "Level2EnemyPos.obj", "Level2Rail.obj", "mercury", glm::vec3( 0, 1, 0 ), glm::vec4( 1, 0.2, 0, 0.5 ), 2 );
+        //case 2:
+            _game = new Game( (GLKView*) self.view, "Level2Layout.obj", "Level2EnemyPos.obj", "Level2Rail.obj", "mercury", glm::vec3( 0, 1, 0 ), glm::vec4( 1, 0.2, 0, 0.5 ), 4 );
             expireTime = 64;
-            break;
-        case 3:
-            //game over
             break;
     }
     
     BehavioralComponent endGame( "endGame" );
     endGame.functor = [self, expireTime](BehavioralComponent*, EntityCollection&, double time)
     {
-        if ( time > expireTime )
+        if ( _LevelIndex >= 2 )
+        {
+            MainViewController* controller = [self.storyboard instantiateViewControllerWithIdentifier: @"MainViewController"];
+            
+            [self presentViewController: controller animated: YES completion: nil];
+        }
+        else if ( time > expireTime )
         {
             EndViewController* endController = [self.storyboard instantiateViewControllerWithIdentifier: @"EndViewController"];
             

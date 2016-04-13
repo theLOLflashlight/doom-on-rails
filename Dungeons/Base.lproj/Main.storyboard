@@ -7,7 +7,7 @@
         <!--Main View Controller-->
         <scene sceneID="ysK-lj-nbf">
             <objects>
-                <viewController id="rZz-8N-SCI" customClass="MainViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="rZz-8N-SCI" customClass="MainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="l3Y-cb-RCH"/>
                         <viewControllerLayoutGuide type="bottom" id="sTi-vM-V0k"/>
@@ -271,7 +271,7 @@
         <image name="replay.png" width="407" height="113"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="elI-tx-AbD"/>
+        <segue reference="JEP-ZT-spM"/>
         <segue reference="4xJ-iI-ezb"/>
     </inferredMetricsTieBreakers>
 </document>
