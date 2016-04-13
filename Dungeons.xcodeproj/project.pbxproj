@@ -27,6 +27,11 @@
 		448A48041CBD7C8600A3623D /* Doom3 Level 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 448A48021CBD7C8600A3623D /* Doom3 Level 3.mp3 */; };
 		44F1AC4B1CB74AF3002557C5 /* GunSoundEffect_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44F1AC4A1CB74AF3002557C5 /* GunSoundEffect_1.wav */; };
 		44F67C391CBD80DD00043DA1 /* First Blood.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44F67C381CBD80DD00043DA1 /* First Blood.mp3 */; };
+		44F67C411CBDC59700043DA1 /* GOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F67C401CBDC59700043DA1 /* GOViewController.m */; };
+		44F67C441CBDC7F900043DA1 /* GameOver.gif in Resources */ = {isa = PBXBuildFile; fileRef = 44F67C431CBDC7F900043DA1 /* GameOver.gif */; };
+		44F67C461CBDCBA900043DA1 /* Logout2.png in Resources */ = {isa = PBXBuildFile; fileRef = 44F67C451CBDCBA900043DA1 /* Logout2.png */; };
+		44F67C481CBDCD9E00043DA1 /* Game Over sound effect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44F67C471CBDCD9E00043DA1 /* Game Over sound effect.mp3 */; };
+		44F67C4A1CBDCF6500043DA1 /* replay.png in Resources */ = {isa = PBXBuildFile; fileRef = 44F67C491CBDCF6500043DA1 /* replay.png */; };
 		532ECA701CADA9F8001BB153 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532ECA6F1CADA9F8001BB153 /* OpenGLES.framework */; };
 		532ECA881CADBDBD001BB153 /* DemoRail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA761CADBDBD001BB153 /* DemoRail.mtl */; };
 		532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 532ECA771CADBDBD001BB153 /* DemoRail.obj */; };
@@ -183,6 +188,12 @@
 		448A48021CBD7C8600A3623D /* Doom3 Level 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Doom3 Level 3.mp3"; sourceTree = "<group>"; };
 		44F1AC4A1CB74AF3002557C5 /* GunSoundEffect_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GunSoundEffect_1.wav; sourceTree = "<group>"; };
 		44F67C381CBD80DD00043DA1 /* First Blood.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "First Blood.mp3"; sourceTree = "<group>"; };
+		44F67C401CBDC59700043DA1 /* GOViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GOViewController.m; sourceTree = "<group>"; };
+		44F67C421CBDC5A000043DA1 /* GOViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GOViewController.h; sourceTree = "<group>"; };
+		44F67C431CBDC7F900043DA1 /* GameOver.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = GameOver.gif; sourceTree = "<group>"; };
+		44F67C451CBDCBA900043DA1 /* Logout2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logout2.png; sourceTree = "<group>"; };
+		44F67C471CBDCD9E00043DA1 /* Game Over sound effect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Game Over sound effect.mp3"; sourceTree = "<group>"; };
+		44F67C491CBDCF6500043DA1 /* replay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = replay.png; sourceTree = "<group>"; };
 		532ECA6F1CADA9F8001BB153 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		532ECA761CADBDBD001BB153 /* DemoRail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DemoRail.mtl; sourceTree = "<group>"; };
 		532ECA771CADBDBD001BB153 /* DemoRail.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DemoRail.obj; sourceTree = "<group>"; };
@@ -323,6 +334,7 @@
 		445332021CB5BD5E004DC43B /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				44F67C471CBDCD9E00043DA1 /* Game Over sound effect.mp3 */,
 				44F67C381CBD80DD00043DA1 /* First Blood.mp3 */,
 				448A48011CBD7C8600A3623D /* Doom3 Level 2.mp3 */,
 				448A48021CBD7C8600A3623D /* Doom3 Level 3.mp3 */,
@@ -346,6 +358,9 @@
 		445332031CB5BD68004DC43B /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
+				44F67C491CBDCF6500043DA1 /* replay.png */,
+				44F67C451CBDCBA900043DA1 /* Logout2.png */,
+				44F67C431CBDC7F900043DA1 /* GameOver.gif */,
 				4442C9891CBB61790097FD98 /* Continue.png */,
 				4442C9841CBB59590097FD98 /* Ending.jpg */,
 				4442C95F1CBB0A690097FD98 /* Gun.png */,
@@ -514,6 +529,8 @@
 				53C6792B1CA22E62007C7945 /* GameViewController.mm */,
 				4442C9831CBB50890097FD98 /* EndViewController.h */,
 				4442C9811CBB506F0097FD98 /* EndViewController.m */,
+				44F67C421CBDC5A000043DA1 /* GOViewController.h */,
+				44F67C401CBDC59700043DA1 /* GOViewController.m */,
 				5385DE351CA3365100F1A323 /* Game.h */,
 				5385DE341CA3365100F1A323 /* Game.mm */,
 				53F05F8B1CB9B73E007F3023 /* BulletPhysics.h */,
@@ -718,6 +735,7 @@
 				5385DE721CA3365100F1A323 /* water in Resources */,
 				5385DE701CA3365100F1A323 /* Skybox.vs in Resources */,
 				4442C9851CBB59590097FD98 /* Ending.jpg in Resources */,
+				44F67C461CBDCBA900043DA1 /* Logout2.png in Resources */,
 				532ECA951CADBDBD001BB153 /* Level0Layout in Resources */,
 				44F1AC4B1CB74AF3002557C5 /* GunSoundEffect_1.wav in Resources */,
 				5385DE671CA3365100F1A323 /* ModelShader.vs in Resources */,
@@ -746,11 +764,14 @@
 				4442C98A1CBB61790097FD98 /* Continue.png in Resources */,
 				445332061CB5BD81004DC43B /* ButtonPress.wav in Resources */,
 				4442C9601CBB0A690097FD98 /* Gun.png in Resources */,
+				44F67C481CBDCD9E00043DA1 /* Game Over sound effect.mp3 in Resources */,
 				532ECA941CADBDBD001BB153 /* Level0EnemyRail.obj in Resources */,
 				532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */,
 				5385DE741CA3365100F1A323 /* WaterShader.vs in Resources */,
 				532ECA8E1CADBDBD001BB153 /* Level0All.mtl in Resources */,
+				44F67C4A1CBDCF6500043DA1 /* replay.png in Resources */,
 				532ECA991CADBDBD001BB153 /* Level0Rail.obj in Resources */,
+				44F67C441CBDC7F900043DA1 /* GameOver.gif in Resources */,
 				53F05FCE1CBB5B3D007F3023 /* Level0EnemyAPos.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -772,6 +793,7 @@
 				4442C9821CBB506F0097FD98 /* EndViewController.m in Sources */,
 				5385DE941CA359B700F1A323 /* ios_path.mm in Sources */,
 				5385DE621CA3365100F1A323 /* GLTexture.cpp in Sources */,
+				44F67C411CBDC59700043DA1 /* GOViewController.m in Sources */,
 				5385DE711CA3365100F1A323 /* Vertex.cpp in Sources */,
 				5385DE601CA3365100F1A323 /* GLProgram.cpp in Sources */,
 				5385DE641CA3365100F1A323 /* Model.cpp in Sources */,
