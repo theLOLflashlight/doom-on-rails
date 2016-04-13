@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		032AF1801CBDD12500823AF1 /* Level1EnemyAPos.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 032AF17A1CBDD12500823AF1 /* Level1EnemyAPos.mtl */; };
+		032AF1811CBDD12500823AF1 /* Level1EnemyAPos.obj in Resources */ = {isa = PBXBuildFile; fileRef = 032AF17B1CBDD12500823AF1 /* Level1EnemyAPos.obj */; };
+		032AF1821CBDD12500823AF1 /* Level1EnemyBPos.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 032AF17C1CBDD12500823AF1 /* Level1EnemyBPos.mtl */; };
+		032AF1831CBDD12500823AF1 /* Level1EnemyBPos.obj in Resources */ = {isa = PBXBuildFile; fileRef = 032AF17D1CBDD12500823AF1 /* Level1EnemyBPos.obj */; };
+		032AF1841CBDD12500823AF1 /* Level1EnemyCPos.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 032AF17E1CBDD12500823AF1 /* Level1EnemyCPos.mtl */; };
+		032AF1851CBDD12500823AF1 /* Level1EnemyCPos.obj in Resources */ = {isa = PBXBuildFile; fileRef = 032AF17F1CBDD12500823AF1 /* Level1EnemyCPos.obj */; };
+		032AF1881CBDD14C00823AF1 /* Level1Rail.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 032AF1861CBDD14C00823AF1 /* Level1Rail.mtl */; };
+		032AF1891CBDD14C00823AF1 /* Level1Rail.obj in Resources */ = {isa = PBXBuildFile; fileRef = 032AF1871CBDD14C00823AF1 /* Level1Rail.obj */; };
+		032AF18D1CBDD1C100823AF1 /* Level1Layout in Resources */ = {isa = PBXBuildFile; fileRef = 032AF18A1CBDD1C100823AF1 /* Level1Layout */; };
+		032AF18E1CBDD1C100823AF1 /* Level1Layout.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 032AF18B1CBDD1C100823AF1 /* Level1Layout.mtl */; };
+		032AF18F1CBDD1C100823AF1 /* Level1Layout.obj in Resources */ = {isa = PBXBuildFile; fileRef = 032AF18C1CBDD1C100823AF1 /* Level1Layout.obj */; };
 		4442C95E1CBAF9900097FD98 /* Shooter_Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 4442C95D1CBAF9900097FD98 /* Shooter_Menu.png */; };
 		4442C9601CBB0A690097FD98 /* Gun.png in Resources */ = {isa = PBXBuildFile; fileRef = 4442C95F1CBB0A690097FD98 /* Gun.png */; };
 		4442C9741CBB21C90097FD98 /* reload.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4442C9731CBB21C90097FD98 /* reload.mp3 */; };
@@ -166,6 +177,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		032AF17A1CBDD12500823AF1 /* Level1EnemyAPos.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1EnemyAPos.mtl; sourceTree = "<group>"; };
+		032AF17B1CBDD12500823AF1 /* Level1EnemyAPos.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1EnemyAPos.obj; sourceTree = "<group>"; };
+		032AF17C1CBDD12500823AF1 /* Level1EnemyBPos.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1EnemyBPos.mtl; sourceTree = "<group>"; };
+		032AF17D1CBDD12500823AF1 /* Level1EnemyBPos.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1EnemyBPos.obj; sourceTree = "<group>"; };
+		032AF17E1CBDD12500823AF1 /* Level1EnemyCPos.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1EnemyCPos.mtl; sourceTree = "<group>"; };
+		032AF17F1CBDD12500823AF1 /* Level1EnemyCPos.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1EnemyCPos.obj; sourceTree = "<group>"; };
+		032AF1861CBDD14C00823AF1 /* Level1Rail.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1Rail.mtl; sourceTree = "<group>"; };
+		032AF1871CBDD14C00823AF1 /* Level1Rail.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1Rail.obj; sourceTree = "<group>"; };
+		032AF18A1CBDD1C100823AF1 /* Level1Layout */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Level1Layout; sourceTree = "<group>"; };
+		032AF18B1CBDD1C100823AF1 /* Level1Layout.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1Layout.mtl; sourceTree = "<group>"; };
+		032AF18C1CBDD1C100823AF1 /* Level1Layout.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level1Layout.obj; sourceTree = "<group>"; };
 		4442C95D1CBAF9900097FD98 /* Shooter_Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shooter_Menu.png; sourceTree = "<group>"; };
 		4442C95F1CBB0A690097FD98 /* Gun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gun.png; sourceTree = "<group>"; };
 		4442C9731CBB21C90097FD98 /* reload.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = reload.mp3; sourceTree = "<group>"; };
@@ -331,6 +353,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		032AF1901CBDD2E900823AF1 /* Level1 */ = {
+			isa = PBXGroup;
+			children = (
+				032AF18A1CBDD1C100823AF1 /* Level1Layout */,
+				032AF18B1CBDD1C100823AF1 /* Level1Layout.mtl */,
+				032AF18C1CBDD1C100823AF1 /* Level1Layout.obj */,
+				032AF1861CBDD14C00823AF1 /* Level1Rail.mtl */,
+				032AF1871CBDD14C00823AF1 /* Level1Rail.obj */,
+				032AF17A1CBDD12500823AF1 /* Level1EnemyAPos.mtl */,
+				032AF17B1CBDD12500823AF1 /* Level1EnemyAPos.obj */,
+				032AF17C1CBDD12500823AF1 /* Level1EnemyBPos.mtl */,
+				032AF17D1CBDD12500823AF1 /* Level1EnemyBPos.obj */,
+				032AF17E1CBDD12500823AF1 /* Level1EnemyCPos.mtl */,
+				032AF17F1CBDD12500823AF1 /* Level1EnemyCPos.obj */,
+			);
+			name = Level1;
+			sourceTree = "<group>";
+		};
+		032AF1921CBDD31200823AF1 /* Level0 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Level0;
+			sourceTree = "<group>";
+		};
 		445332021CB5BD5E004DC43B /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -416,6 +463,8 @@
 		532ECA9A1CADBDC5001BB153 /* Levels */ = {
 			isa = PBXGroup;
 			children = (
+				032AF1921CBDD31200823AF1 /* Level0 */,
+				032AF1901CBDD2E900823AF1 /* Level1 */,
 				53F05FC21CBB4497007F3023 /* Level0EnemyPosRail.mtl */,
 				53F05FC91CBB5B3D007F3023 /* Level0EnemyAPos.mtl */,
 				53F05FCA1CBB5B3D007F3023 /* Level0EnemyAPos.obj */,
@@ -695,6 +744,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5385DE6F1CA3365100F1A323 /* Skybox.fs in Resources */,
+				032AF1821CBDD12500823AF1 /* Level1EnemyBPos.mtl in Resources */,
 				532ECA8B1CADBDBD001BB153 /* Level0.mtl in Resources */,
 				5385DE661CA3365100F1A323 /* ModelShader.fs in Resources */,
 				532ECA8C1CADBDBD001BB153 /* Level0.obj in Resources */,
@@ -713,8 +763,10 @@
 				4453320F1CB5BD9C004DC43B /* Start.gif in Resources */,
 				53F05FB41CB9FA0C007F3023 /* sword-clash1.mp3 in Resources */,
 				4453320D1CB5BD9C004DC43B /* SoundOff.png in Resources */,
+				032AF1881CBDD14C00823AF1 /* Level1Rail.mtl in Resources */,
 				44F67C391CBD80DD00043DA1 /* First Blood.mp3 in Resources */,
 				53F05FB21CB9FA0C007F3023 /* shooting_star.wav in Resources */,
+				032AF1841CBDD12500823AF1 /* Level1EnemyCPos.mtl in Resources */,
 				53F05FB11CB9FA0C007F3023 /* magic-quake2.mp3 in Resources */,
 				532ECA8F1CADBDBD001BB153 /* Level0All.obj in Resources */,
 				532ECA911CADBDBD001BB153 /* Level0EnemyPos.mtl in Resources */,
@@ -734,6 +786,8 @@
 				5385DE6E1CA3365100F1A323 /* skybox in Resources */,
 				5385DE721CA3365100F1A323 /* water in Resources */,
 				5385DE701CA3365100F1A323 /* Skybox.vs in Resources */,
+				032AF18D1CBDD1C100823AF1 /* Level1Layout in Resources */,
+				032AF1801CBDD12500823AF1 /* Level1EnemyAPos.mtl in Resources */,
 				4442C9851CBB59590097FD98 /* Ending.jpg in Resources */,
 				44F67C461CBDCBA900043DA1 /* Logout2.png in Resources */,
 				532ECA951CADBDBD001BB153 /* Level0Layout in Resources */,
@@ -747,9 +801,12 @@
 				5385DE891CA3429000F1A323 /* original in Resources */,
 				532ECA8D1CADBDBD001BB153 /* Level0All in Resources */,
 				53C679271CA22E62007C7945 /* Shader.fs in Resources */,
+				032AF1811CBDD12500823AF1 /* Level1EnemyAPos.obj in Resources */,
 				532ECA921CADBDBD001BB153 /* Level0EnemyPos.obj in Resources */,
+				032AF18F1CBDD1C100823AF1 /* Level1Layout.obj in Resources */,
 				53F05FAE1CB9FA0C007F3023 /* 'flyby'.wav in Resources */,
 				5385DE731CA3365100F1A323 /* WaterShader.fs in Resources */,
+				032AF1851CBDD12500823AF1 /* Level1EnemyCPos.obj in Resources */,
 				4442C9921CBB76450097FD98 /* AND HIS NAME IS JOHN CENA.mp3 in Resources */,
 				53ADE8961CB88DDF00DD3588 /* fireball.obj in Resources */,
 				53ADE88F1CB8887800DD3588 /* Fireball.png in Resources */,
@@ -759,6 +816,8 @@
 				448A48001CBD79F500A3623D /* Doom3 Level 1.mp3 in Resources */,
 				4453320C1CB5BD9C004DC43B /* BGT1.gif in Resources */,
 				53ADE8981CB88E4200DD3588 /* fireball in Resources */,
+				032AF1831CBDD12500823AF1 /* Level1EnemyBPos.obj in Resources */,
+				032AF18E1CBDD1C100823AF1 /* Level1Layout.mtl in Resources */,
 				53F05FB91CBB08BA007F3023 /* SpriteShader.vs in Resources */,
 				53F05FD01CBB5B3D007F3023 /* Level0EnemyBPos.obj in Resources */,
 				4442C98A1CBB61790097FD98 /* Continue.png in Resources */,
@@ -766,6 +825,7 @@
 				4442C9601CBB0A690097FD98 /* Gun.png in Resources */,
 				44F67C481CBDCD9E00043DA1 /* Game Over sound effect.mp3 in Resources */,
 				532ECA941CADBDBD001BB153 /* Level0EnemyRail.obj in Resources */,
+				032AF1891CBDD14C00823AF1 /* Level1Rail.obj in Resources */,
 				532ECA891CADBDBD001BB153 /* DemoRail.obj in Resources */,
 				5385DE741CA3365100F1A323 /* WaterShader.vs in Resources */,
 				532ECA8E1CADBDBD001BB153 /* Level0All.mtl in Resources */,
