@@ -742,19 +742,29 @@ struct Enemy_Basic
  }
  */
 -(void) ThemeSound {
-    if(NSString *path = [[NSBundle mainBundle] pathForResource:@"Doom3 Level 1" ofType: @"mp3"]) { //J: Not sure about this conversion from swift
+    NSString *path;
+    switch ( _LevelIndex )
+    {
+        case 0:
+            path = [[NSBundle mainBundle] pathForResource:@"Doom3 Level 1" ofType: @"mp3"];;
+            break;
+        case 1:
+            path = [[NSBundle mainBundle] pathForResource:@"Doom3 Level 2" ofType: @"mp3"];;
+            break;
+        case 2:
+            path = [[NSBundle mainBundle] pathForResource:@"Doom3 Level 3" ofType: @"mp3"];;
+            break;
+    }
+    
         NSURL *soundURL = [NSURL fileURLWithPath:path]; //Can check this code later ...
         
-        NSError *error;
-        try { //J: Not sure about this conversion from Swift
+  
             themePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:(NSURL *)soundURL error:nil];
             [themePlayer prepareToPlay];
             themePlayer.numberOfLoops = -1;
             [themePlayer play];
-        }
-        catch(NSException *exception) {
-        }
-    }
+  
+    
 }
 
 
