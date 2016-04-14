@@ -314,6 +314,7 @@
 		53C2DCC11CBEFADA004CF029 /* Level2Layout.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level2Layout.obj; sourceTree = "<group>"; };
 		53C2DCC51CBF02B4004CF029 /* enemytextures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = enemytextures; sourceTree = "<group>"; };
 		53C2DCC71CBF0ED0004CF029 /* Renderer.readme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Renderer.readme; sourceTree = "<group>"; };
+		53C2DCD21CBF40D7004CF029 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		53C6791D1CA22E62007C7945 /* Dungeons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dungeons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53C679211CA22E62007C7945 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		53C679231CA22E62007C7945 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -582,6 +583,7 @@
 		53C679141CA22E62007C7945 = {
 			isa = PBXGroup;
 			children = (
+				53C2DCD21CBF40D7004CF029 /* CoreData.framework */,
 				53F05F6A1CB9AEC5007F3023 /* BulletCollision.xcodeproj */,
 				53F05F6D1CB9AEC5007F3023 /* BulletDynamics.xcodeproj */,
 				53F05F701CB9AEC5007F3023 /* LinearMath.xcodeproj */,
