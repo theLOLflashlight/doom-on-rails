@@ -289,7 +289,6 @@
         [self presentViewController: endController animated: YES completion: ^() {
             delete _game;
         }];
-        int a = 0;
     }
 }
 
