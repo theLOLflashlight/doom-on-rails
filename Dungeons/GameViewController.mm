@@ -263,7 +263,7 @@
     }
 }
 
-
+//Debug end
 - (void) handleTap4Gesture:(UITapGestureRecognizer *)sender
 {
     if (sender.state == UIGestureRecognizerStateRecognized)
