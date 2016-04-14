@@ -18,6 +18,8 @@
 
 @property (weak, nonatomic) IBOutlet UIWebView *UIWebView;
 @property (weak, nonatomic) IBOutlet UIWebView *Login;
+@property (weak, nonatomic) IBOutlet UIButton *startButton;
+
 
 - (IBAction)Login:(UIButton *)sender;
 - (IBAction)SoundButton:(UIButton *)sender;

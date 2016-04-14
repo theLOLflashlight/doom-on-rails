@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rZz-8N-SCI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rZz-8N-SCI">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="DooM.ttf">
+            <string>DooM</string>
+            <string>DooM</string>
+            <string>DooM</string>
+            <string>DooM</string>
+            <string>DooM</string>
+            <string>DooM</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Main View Controller-->
         <scene sceneID="ysK-lj-nbf">
@@ -29,10 +39,16 @@
                                     <action selector="SoundButton:" destination="rZz-8N-SCI" eventType="touchUpInside" id="l30-y5-9Lf"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OC2-Dp-ZLW">
-                                <rect key="frame" x="212" y="563" width="600" height="118"/>
-                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="60"/>
-                                <state key="normal" title="Tap Start">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="D-DOOM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYv-eF-ARO">
+                                <rect key="frame" x="101" y="108" width="823" height="290"/>
+                                <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="90"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OC2-Dp-ZLW" userLabel="UIstart">
+                                <rect key="frame" x="254" y="540" width="515" height="97"/>
+                                <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="50"/>
+                                <state key="normal" title="tap to start">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -40,14 +56,8 @@
                                     <segue destination="BV1-FR-VrT" kind="showDetail" identifier="MainToGame" action="showViewController:sender:" id="JEP-ZT-spM"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="D - DOOM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYv-eF-ARO">
-                                <rect key="frame" x="212" y="96" width="600" height="290"/>
-                                <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="100"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Vra-X4-moM" firstAttribute="centerX" secondItem="5l8-c4-kS1" secondAttribute="centerX" id="Bq1-2p-q4y"/>
                             <constraint firstItem="Vra-X4-moM" firstAttribute="width" secondItem="5l8-c4-kS1" secondAttribute="width" id="GZC-Vo-iTv"/>
@@ -167,7 +177,7 @@
                         <viewControllerLayoutGuide type="bottom" id="sSJ-LB-PJg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="y9v-kt-4am">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uV3-zA-oEz">
@@ -197,6 +207,8 @@
                             <constraint firstItem="uV3-zA-oEz" firstAttribute="centerX" secondItem="y9v-kt-4am" secondAttribute="centerX" id="xiS-5d-ozX"/>
                         </constraints>
                     </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <outlet property="GameOver" destination="uV3-zA-oEz" id="eyq-06-4a6"/>
                     </connections>
@@ -217,7 +229,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Ending.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="EYl-xf-Vl7">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="endoflevel.png" translatesAutoresizingMaskIntoConstraints="NO" id="EYl-xf-Vl7">
                                 <rect key="frame" x="180" y="236" width="240" height="128"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZL-ys-Efo">
@@ -227,22 +239,31 @@
                                     <segue destination="rZz-8N-SCI" kind="show" id="vpU-i5-Raj"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eoX-ze-X2I">
-                                <rect key="frame" x="153" y="630" width="295" height="60"/>
-                                <state key="normal" image="Continue.png"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eoX-ze-X2I">
+                                <rect key="frame" x="364" y="630" width="295" height="60"/>
+                                <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="35"/>
+                                <state key="normal" title="next level">
+                                    <color key="titleColor" red="1" green="0.27120052358486457" blue="0.1658197415095396" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <segue destination="BV1-FR-VrT" kind="show" identifier="GameToEnd" id="scL-5J-FdB"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kills :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9Q-ZR-YJB">
-                                <rect key="frame" x="300" y="175" width="190" height="95"/>
-                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="80"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="kills :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9Q-ZR-YJB">
+                                <rect key="frame" x="297" y="395" width="259" height="95"/>
+                                <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="55"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dis-cH-jyH">
-                                <rect key="frame" x="500" y="175" width="190" height="95"/>
-                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="80"/>
+                                <rect key="frame" x="536" y="395" width="190" height="95"/>
+                                <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="55"/>
+                                <color key="textColor" red="0.98431372549019602" green="0.16862745098039217" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" red="1" green="0.27894175075253791" blue="0.17181309091593067" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LEVEL COMPLETE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="70f-0y-tka">
+                                <rect key="frame" x="79" y="176" width="864" height="141"/>
+                                <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="55"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -256,6 +277,8 @@
                             <constraint firstItem="EYl-xf-Vl7" firstAttribute="width" secondItem="FQw-Qs-x9z" secondAttribute="width" id="pXg-F5-d2P"/>
                         </constraints>
                     </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <outlet property="KillSum" destination="dis-cH-jyH" id="qgI-yj-Sal"/>
                     </connections>
@@ -266,17 +289,16 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Continue.png" width="240" height="60"/>
-        <image name="Ending.jpg" width="1920" height="1080"/>
         <image name="Gun.png" width="940" height="525"/>
         <image name="Logout.png" width="64" height="64"/>
         <image name="Logout2.png" width="64" height="64"/>
         <image name="MainMenu.jpg" width="1280" height="720"/>
         <image name="Shooter_Menu.png" width="1600" height="120"/>
+        <image name="endoflevel.png" width="787" height="446"/>
         <image name="replay.png" width="407" height="113"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="JEP-ZT-spM"/>
-        <segue reference="4xJ-iI-ezb"/>
+        <segue reference="neD-dp-SyB"/>
     </inferredMetricsTieBreakers>
 </document>
