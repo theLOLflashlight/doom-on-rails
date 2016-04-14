@@ -1,3 +1,4 @@
+// Andrew
 #version 300 es
 #extension GL_APPLE_clip_distance : require
 
@@ -19,6 +20,7 @@ uniform     vec3        uSpriteAxis;
 uniform     vec4        uWaterPlane;
 
 
+// these functions were adapted from a tutorial found at http://nehe.gamedev.net/article/billboarding_how_to/18011/
 mat4 billboard( vec3 right, vec3 up, vec3 look, vec3 pos )
 {
     return mat4( mat4x3( right, up, look, pos ) );

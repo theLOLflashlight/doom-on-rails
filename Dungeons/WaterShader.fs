@@ -1,3 +1,4 @@
+// Andrew
 #version 300 es
 precision highp float;
 
@@ -27,6 +28,7 @@ const       float       NEAR                = 0.1;
 const       float       FAR                 = 1000.0;
 
 
+// adapted from tutorial found at https://www.youtube.com/watch?v=HusvGeEDU_U
 void main()
 {
     vec2 ndc = (vClipSpace.xy / vClipSpace.w) / 2.0 + 0.5;

@@ -1,3 +1,4 @@
+// Andrew
 #pragma once
 #include "glhelp.h"
 
@@ -108,10 +109,14 @@ public:
 
     Game( GLKView* view, std::string levelName, std::string redEnemies, std::string railName, std::string name, glm::vec3 sunPosition, glm::vec4 sunColor, int enemyTypes );
 
+    ~Game()
+    {
+        NSLog( @"freeing game" );
+    }
+    
     int* killCountPtr;
     
     void render() const;
-    void offsetEyelook ();
     void update( double );
     
     glm::mat4 viewMatrix() const;
@@ -137,7 +142,7 @@ public:
 
     
     GLKView*                _view;
-    BulletPhysics*          _world;
+    BulletPhysics           _bullet3d;
     GLfloat                 _width, _height;
     double                  _startTime, _currTime;
     
@@ -165,6 +170,10 @@ public:
     glm::vec3               _eyepos, _eyelook;
     double                  _animationProgress;
     
+    btTriangleMesh          _levelMesh;
+    
     bool                    _endOfLevel;
+    
+    bool                    useWater = true;
 };
 

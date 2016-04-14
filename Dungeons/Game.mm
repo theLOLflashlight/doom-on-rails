@@ -1,3 +1,4 @@
+// Andrew
 #include "Game.h"
 #include "ios_path.h"
 #include <algorithm>
@@ -12,7 +13,7 @@ using std::vector;
 Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::string railName, std::string name, glm::vec3 sunPosition, glm::vec4 sunColor, int enemyTypes )
     // we need to bind the view drawable before our shaders load
     : _view( ([view bindDrawable], view) )
-    , _world( [[BulletPhysics alloc] init] )
+    , _bullet3d( -9.81 )
 
     // why does this need to be doubled?
     , _width( _view.bounds.size.width * 2 )
@@ -38,6 +39,7 @@ Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::s
     //, _skybox( "mercury", vec3( 0, 1, 0 ), vec4( 1, 0.2, 0, 0.5 ) )
 
     , _water( vec4( 0, 0.3, 0.5, 1 ), _width, _height )
+    , _levelMesh()
 {
     _water.setSun( _skybox.sunPosition, _skybox.sunColor );
     
@@ -84,27 +86,22 @@ Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::s
         _entities[ "level" ].position = vec3( 0, -0.1, 0 );
     }
     {
-        //PhysicalComponent level( "level" );
-        //_physics.push_back( level );
-        
-        btTriangleMesh* tMesh = new btTriangleMesh();
-        
         for ( int i = 0; i < _level._mesh.size(); i += 3 )
         {
             vec3 v0 = _level._mesh[ i + 0 ].aPosition;
             vec3 v1 = _level._mesh[ i + 1 ].aPosition;
             vec3 v2 = _level._mesh[ i + 2 ].aPosition;
             
-            tMesh->addTriangle( btVector( v0 ), btVector( v1 ), btVector( v2 ) );
+            _levelMesh.addTriangle( btVector( v0 ), btVector( v1 ), btVector( v2 ) );
         }
         
-        btBvhTriangleMeshShape* levelShape = new btBvhTriangleMeshShape( tMesh, true );
+        btBvhTriangleMeshShape* levelShape = new btBvhTriangleMeshShape( &_levelMesh, true );
         
         auto levelObj = new btCollisionObject();
         levelObj->setCollisionShape( levelShape );
         levelObj->setWorldTransform( btTransform( btQuaternion( 0,0,0,1 ), btVector3( 0, -0.1, 0 ) ) );
         
-        [_world addCollisionObject: levelObj];
+        _bullet3d.addCollisionObject( levelObj );
     }
 
     {
@@ -159,102 +156,48 @@ Game::Game( GLKView* view, std::string levelName, std::string redEnemies, std::s
                     enemyP.body = new btRigidBody( 1.5, motionState, &SPHERE_SHAPE );
                     break;
                 case 1:
-                    enemyP.body = new btRigidBody( 1, motionState, &CYLINDER_SHAPE );
+                    enemyP.body = new btRigidBody( 2, motionState, &CYLINDER_SHAPE );
                     break;
                 case 2:
-                    enemyP.body = new btRigidBody( 1.2, motionState, &CYLINDER_SHAPE );
+                    enemyP.body = new btRigidBody( 4, motionState, &CYLINDER_SHAPE );
                     break;
                 case 3:
-                    enemyP.body = new btRigidBody( 10, motionState, &CYLINDER_SHAPE2 );
+                    enemyP.body = new btRigidBody( 9, motionState, &CYLINDER_SHAPE2 );
                     break;
             }
             
             addComponent( enemyP );
+            
+            BehavioralComponent enemyB( enemyId );
+            enemyB.functor = [this](BehavioralComponent* bc, EntityCollection& entities, double time)
+            {
+                PhysicalComponent* pc = findPhysicalComponent( bc->entityId );
+                GraphicalComponent* gc = findGraphicalComponent( bc->entityId );
+                
+                vec3 vel = glm::vec( pc->body->getLinearVelocity() );
+                
+                if ( glm::length( vel ) > 0.1 )
+                {
+                    gc->color = vec4( 1, 0, 0, 0.3 );
+                }
+                else
+                {
+                    gc->color = vec4( 1, 0, 0, 0 );
+                }
+            };
+            
+            addComponent( enemyB );
         }
 
     }
-    
-    /*{
-        auto enemiesRail = ObjMesh( ios_path( greenEnemies ) ).rail;
-        
-        Sprite* greenSprite = new Sprite( ios_path( "Level0All/enemy0.png" ), &_spriteProgram );
-        greenSprite->height = 2;
-        greenSprite->width = 1.25;
-        greenSprite->spriteAxis = vec3( 0, 1, 0 );
-        
-        for ( int i = 0; i < enemiesRail.size(); i += 2 )
-        {
-            const EntityId enemyId( "grnemy", i );
-            
-            GraphicalComponent enemyG( enemyId, GraphicalComponent::TRANSLUCENT );
-            enemyG.asset = greenSprite;
-            
-            addComponent( enemyG );
-            
-            PhysicalComponent enemyP( enemyId );
-            
-            vec3 pos = enemiesRail[ i ];
-            
-            auto motionState = new btDefaultMotionState(
-                btTransform( btQuaternion( 0,0,0,1 ), btVector3( pos.x, pos.y + 1, pos.z ) ) );
-            
-            static btCylinderShape CYLINDER_SHAPE( { 0.5, 1, 0.5 } );
-            enemyP.body = new btRigidBody( 1, motionState, &CYLINDER_SHAPE );
-            
-            enemyP.body->setUserPointer( (void*) enemyId.bitPattern );
-            
-            addComponent( enemyP );
-        }
-
-    }*/
 }
-
-
-void Game::offsetEyelook() {
-    using namespace glm;
-    /*
-    //for animationProgress of shake
-    if(_animationProgress > 1) {
-        _animationProgress = 1;
-    }
-    if(_animationProgress < 1) {
-        _animationProgress += 1.0 / 45.0;
-        float shakeMag;
-        if(_animationProgress < 0.70) {
-            shakeMag = 0.9 * 0.4;
-        }
-        else {
-            shakeMag = (0.9 - (_animationProgress - 0.7) * 0.9 / 0.3) * 0.4; //after reaching 0.7 progress (when sound starts to dwindle), linearly decrease max magnitude to 0
-        }
-        //modelViewMatrix = GLKMatrix4Translate(modelViewMatrix, Float(arc4random())*shakeMag, Float(arc4random())*shakeMag, 0);
-        //GLKVector3Make(position.x + Float(arc4random())*shakeMag, position.y + Float(arc4random())*shakeMag, position.z + Float(arc4random())*shakeMag);
-        //horizontalAngle += (arc4random() / UINT32_MAX) * shakeMag;
-        //verticalAngle += (arc4random() / UINT32_MAX) * shakeMag;
-        
-        mat4 rotMatrix;
-        
-        rotMatrix = rotate( rotMatrix, arc4random() * shakeMag, vec3 {0, 1, 0} );
-        
-        //auto v =
-    }
-     */
-    if(_animationProgress > 1) {
-        _animationProgress = 1;
-    }
-    if(_animationProgress < 1) {
-        _animationProgress += 1.0 / 45.0;
-        //if(_animationProgress <= )
-    }
-    //ambientComponent =
-}
-
 
 void Game::update( double step )
 {
     _currTime += step;
     const double time = _currTime - _startTime;
     
-    [_world update: step];
+    _bullet3d.update( step );
     
     if(!(_rail.isAtEnd()))
         _eyepos = _rail[ time ];
@@ -275,7 +218,7 @@ void Game::update( double step )
         behavior.update( _entities, time );
     
     for ( auto pair : _entities )
-        if ( pair.second.position.y < -5 )
+        if ( pair.second.position.y < (useWater ? -5 : -20) )
             markEntityForDestruction( pair.first );
     
     for ( auto _id : _badIds )
@@ -317,7 +260,7 @@ void Game::render() const
     const mat4 proj = projMatrix();
     
     // Draw to water buffers.
-    {
+    if ( useWater ) {
         glEnable( GL_CLIP_DISTANCE(0) );
         
         // Render refLEction.
@@ -351,10 +294,16 @@ void Game::render() const
         
         glDisable( GL_CLIP_DISTANCE(0) );
     }
+    else
+    {
+        _water._program.bind();
+        glActiveTexture( GL_TEXTURE3 );
+        glBindTexture( GL_TEXTURE_2D, _water._waterDudv.glHandle );
+    }
 
     // Draw our scene.
     [_view bindDrawable];
-    draw_scene( view, proj, true );
+    draw_scene( view, proj, useWater );
 }
 
 
@@ -467,7 +416,7 @@ void Game::addComponent( GraphicalComponent component )
 void Game::addComponent( PhysicalComponent component )
 {
     _physics.push_back( component );
-    [_world addRigidBody: component.body];
+    _bullet3d.addRigidBody( component.body );
 }
 
 void Game::addComponent( BehavioralComponent component )
@@ -492,7 +441,7 @@ void Game::destroyEntity( EntityId _id )
     for ( int i = 0; i < _physics.size(); i++ )
         if ( _physics[ i ].entityId == _id )
         {
-            [_world removeRigidBody: _physics[ i ].body];
+            _bullet3d.removeRigidBody( _physics[ i ].body );
             _physics.erase( _physics.begin() + i-- );
         }
     
@@ -504,7 +453,7 @@ void Game::destroyEntity( EntityId _id )
     _entities.erase( _id );
 }
 
-
+// Old rail implementation.
 /*size_t railsize = _rail.rail.size();
  
  _eyelook = _rail.rail[ (_railidx + 1) % railsize ];
