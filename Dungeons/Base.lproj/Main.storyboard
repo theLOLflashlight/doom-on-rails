@@ -223,7 +223,7 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JC-dQ-SfM">
                                 <rect key="frame" x="163" y="541" width="270" height="142"/>
                                 <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="60"/>
-                                <state key="normal" title="Retry">
+                                <state key="normal" title="Restart">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
