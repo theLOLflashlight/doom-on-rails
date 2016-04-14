@@ -804,7 +804,6 @@
 				53C2DCAD1CBEE912004CF029 /* Level2Rail.obj in Resources */,
 				53C2DC891CBE012F004CF029 /* Level1Rail.obj in Resources */,
 				445332111CB5C48E004DC43B /* Logout.png in Resources */,
-				53C2DC971CBEABFB004CF029 /* Level2Layout.mtl in Resources */,
 				03E249FD1CBF1046007F1D7A /* endoflevel.png in Resources */,
 				5385DE5C1CA3365100F1A323 /* crate.mtl in Resources */,
 				53F05FC51CBB4497007F3023 /* Level0EnemyPosRail.obj in Resources */,

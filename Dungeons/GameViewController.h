@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *Ammo;
 @property (nonatomic) int LevelIndex;
 @property (weak, nonatomic) IBOutlet UILabel *BFGAmmo;
+@property (nonatomic) int GameTotalScore;
 
 - (IBAction)SoundButton:(UIButton *)sender;
 
