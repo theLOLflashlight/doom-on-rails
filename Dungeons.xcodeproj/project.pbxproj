@@ -108,6 +108,8 @@
 		53C2DCC31CBEFADA004CF029 /* Level2Layout.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DCC01CBEFADA004CF029 /* Level2Layout.mtl */; };
 		53C2DCC41CBEFADA004CF029 /* Level2Layout.obj in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DCC11CBEFADA004CF029 /* Level2Layout.obj */; };
 		53C2DCC61CBF02B4004CF029 /* enemytextures in Resources */ = {isa = PBXBuildFile; fileRef = 53C2DCC51CBF02B4004CF029 /* enemytextures */; };
+		53C2DCD41CBF4179004CF029 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53C2DCD21CBF40D7004CF029 /* CoreData.framework */; };
+		53C2DCD81CBF422D004CF029 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C2DCD71CBF422D004CF029 /* CoreDataHelper.m */; };
 		53C679221CA22E62007C7945 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C679211CA22E62007C7945 /* main.m */; };
 		53C679251CA22E62007C7945 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C679241CA22E62007C7945 /* AppDelegate.m */; };
 		53C6792C1CA22E62007C7945 /* GameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 53C6792B1CA22E62007C7945 /* GameViewController.mm */; };
@@ -315,6 +317,8 @@
 		53C2DCC51CBF02B4004CF029 /* enemytextures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = enemytextures; sourceTree = "<group>"; };
 		53C2DCC71CBF0ED0004CF029 /* Renderer.readme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Renderer.readme; sourceTree = "<group>"; };
 		53C2DCD21CBF40D7004CF029 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		53C2DCD61CBF422D004CF029 /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
+		53C2DCD71CBF422D004CF029 /* CoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelper.m; sourceTree = "<group>"; };
 		53C6791D1CA22E62007C7945 /* Dungeons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dungeons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53C679211CA22E62007C7945 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		53C679231CA22E62007C7945 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -357,6 +361,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53C2DCD41CBF4179004CF029 /* CoreData.framework in Frameworks */,
 				53F05F7E1CB9AED9007F3023 /* libLinearMath_xcode4.a in Frameworks */,
 				53F05F7D1CB9AED5007F3023 /* libBulletDynamics_xcode4.a in Frameworks */,
 				53F05F7C1CB9AED1007F3023 /* libBulletCollision_xcode4.a in Frameworks */,
@@ -580,6 +585,15 @@
 			name = Level2;
 			sourceTree = "<group>";
 		};
+		53C2DCD51CBF4198004CF029 /* Generic Core Data Classes */ = {
+			isa = PBXGroup;
+			children = (
+				53C2DCD61CBF422D004CF029 /* CoreDataHelper.h */,
+				53C2DCD71CBF422D004CF029 /* CoreDataHelper.m */,
+			);
+			name = "Generic Core Data Classes";
+			sourceTree = "<group>";
+		};
 		53C679141CA22E62007C7945 = {
 			isa = PBXGroup;
 			children = (
@@ -604,6 +618,7 @@
 		53C6791F1CA22E62007C7945 /* Dungeons */ = {
 			isa = PBXGroup;
 			children = (
+				53C2DCD51CBF4198004CF029 /* Generic Core Data Classes */,
 				445332031CB5BD68004DC43B /* Pictures */,
 				445332021CB5BD5E004DC43B /* Sounds */,
 				53C679351CA22E62007C7945 /* Info.plist */,
@@ -903,6 +918,7 @@
 				53F05F901CB9C5F9007F3023 /* Skybox.cpp in Sources */,
 				5385DE6D1CA3365100F1A323 /* ShaderLoader.cpp in Sources */,
 				5385DE651CA3365100F1A323 /* ObjMesh.cpp in Sources */,
+				53C2DCD81CBF422D004CF029 /* CoreDataHelper.m in Sources */,
 				53C679221CA22E62007C7945 /* main.m in Sources */,
 				5385DE901CA3544200F1A323 /* image_DXT.c in Sources */,
 				5385DE5E1CA3365100F1A323 /* Game.mm in Sources */,
