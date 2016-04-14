@@ -39,22 +39,51 @@
 
 -(void)viewDidLoad
 {
-    
     //self.KillSum.text =[[NSString alloc] initWithFormat: @"%d", 11];
     NSData *GBSoundPath = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"AND HIS NAME IS JOHN CENA" ofType:@"mp3"]];
     BGSound = [[AVAudioPlayer alloc]initWithData:GBSoundPath error:nil];
     
+    
+    //load high score if one exists
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    int currLevel = _LevelIndex;
+    NSString *saveKey = [NSString stringWithFormat:@"Lv%dKeyToFindText", currLevel];
+    
+    NSString *textToLoad = [prefs stringForKey:saveKey];
+    if((textToLoad != NULL)) {
+        int oldHighScore = [textToLoad intValue];
+        if(_LevelScoreV >= oldHighScore) {
+            //Update high score if this would be a newer one
+            _LevelHighScoreV = _LevelScoreV;
+            NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+            [prefs setObject:[NSString stringWithFormat: @"%d", _LevelHighScoreV] forKey:saveKey];
+        }
+        else {
+            _LevelHighScoreV = oldHighScore;
+        }
+    }
+    else
+    {
+        //Create new high score if none exists
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        [prefs setObject:@"TextToSave" forKey:saveKey];
+        _LevelHighScoreV = _LevelScoreV;
+    }
+    
+    
+    //Save high score if one did not previously exist
     _KillsScore.text = [NSString stringWithFormat: @"%d", _KillsScoreV];
     _ShotsScore.text = [NSString stringWithFormat: @"%d", _ShotsScoreV];
     _FBGsLeftScore.text = [NSString stringWithFormat: @"%d", _FBGsLeftScoreV];
     _HealthScore.text = [NSString stringWithFormat: @"%d", (100 - _HealthScoreV)]; //Actually damage taken, hard-coded from health score
     _LevelScore.text = [NSString stringWithFormat: @"%d", _LevelScoreV];
-    //_LevelHighScore.text = [NSString stringWithFormat: @"%d", _LevelHighScoreV];
+    _LevelHighScore.text = [NSString stringWithFormat: @"%d", _LevelHighScoreV];
     _GameTotalScore.text = [NSString stringWithFormat: @"%d", _GameTotalScoreV];
     _KillsScoreCalc.text = [NSString stringWithFormat: @"%d", _KillsScoreV * 100]; //hard-coded multiplier value
     _ShotsScoreCalc.text = [NSString stringWithFormat: @"%d", _ShotsScoreV * -20]; //hard-coded multiplier value
     _FBGsScoreCAlc.text = [NSString stringWithFormat: @"%d", _FBGsLeftScoreV * 600]; //hard-coded multiplier value
     _HealthScoreCalc.text = [NSString stringWithFormat: @"%d", (100 - _HealthScoreV) * -60]; //hard-coded multiplier value
+    
     
     [BGSound prepareToPlay];
     [BGSound play];
