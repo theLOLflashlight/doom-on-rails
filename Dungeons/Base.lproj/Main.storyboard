@@ -39,6 +39,7 @@
             <string>DooM</string>
             <string>DooM</string>
             <string>DooM</string>
+            <string>DooM</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -51,7 +52,7 @@
                         <viewControllerLayoutGuide type="bottom" id="sTi-vM-V0k"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5l8-c4-kS1">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="MainMenu.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Vra-X4-moM">
@@ -219,19 +220,26 @@
                                     <segue destination="rZz-8N-SCI" kind="show" id="neD-dp-SyB"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EW9-ke-ghn">
-                                <rect key="frame" x="153" y="550" width="295" height="60"/>
-                                <state key="normal" image="replay.png"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JC-dQ-SfM">
+                                <rect key="frame" x="163" y="541" width="270" height="142"/>
+                                <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="60"/>
+                                <state key="normal" title="Retry">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
-                                    <segue destination="BV1-FR-VrT" kind="show" identifier="ReplayToGame" id="elI-tx-AbD"/>
+                                    <segue destination="BV1-FR-VrT" kind="show" id="PPN-SA-gxa"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6C8-OD-9ic">
+                                <rect key="frame" x="163" y="560" width="240" height="128"/>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="uV3-zA-oEz" firstAttribute="width" secondItem="y9v-kt-4am" secondAttribute="width" id="D7m-RG-oKD"/>
                             <constraint firstItem="uV3-zA-oEz" firstAttribute="height" secondItem="y9v-kt-4am" secondAttribute="height" id="OyX-ir-i1a"/>
-                            <constraint firstItem="EW9-ke-ghn" firstAttribute="centerX" secondItem="y9v-kt-4am" secondAttribute="centerX" id="a25-Qx-Pza"/>
+                            <constraint firstItem="sSJ-LB-PJg" firstAttribute="top" secondItem="9JC-dQ-SfM" secondAttribute="bottom" constant="85" id="e95-XX-dNR"/>
+                            <constraint firstItem="9JC-dQ-SfM" firstAttribute="centerX" secondItem="y9v-kt-4am" secondAttribute="centerX" id="pnE-KO-oze"/>
                             <constraint firstItem="uV3-zA-oEz" firstAttribute="centerX" secondItem="y9v-kt-4am" secondAttribute="centerX" id="xiS-5d-ozX"/>
                         </constraints>
                     </view>
@@ -500,10 +508,9 @@
         <image name="MainMenu.jpg" width="1280" height="720"/>
         <image name="Shooter_Menu.png" width="1600" height="120"/>
         <image name="endoflevel.png" width="787" height="446"/>
-        <image name="replay.png" width="407" height="113"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="scL-5J-FdB"/>
-        <segue reference="vpU-i5-Raj"/>
+        <segue reference="PPN-SA-gxa"/>
+        <segue reference="neD-dp-SyB"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -324,7 +324,7 @@
     tap2Gesture.numberOfTapsRequired = 1;
     tap2Gesture.numberOfTouchesRequired = 2;
     [self.view addGestureRecognizer:tap2Gesture];
-    
+    /*
     UITapGestureRecognizer *tap3Gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap3Gesture:)];
     tap3Gesture.numberOfTapsRequired = 1;
     tap3Gesture.numberOfTouchesRequired = 3;
@@ -334,7 +334,7 @@
     tap4Gesture.numberOfTapsRequired = 1;
     tap4Gesture.numberOfTouchesRequired = 4;
     [self.view addGestureRecognizer:tap4Gesture];
-    
+    */
     //play looping sound
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
