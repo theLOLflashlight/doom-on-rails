@@ -267,8 +267,8 @@
                                     <segue destination="rZz-8N-SCI" kind="show" id="vpU-i5-Raj"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eoX-ze-X2I">
-                                <rect key="frame" x="709" y="638" width="295" height="60"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eoX-ze-X2I">
+                                <rect key="frame" x="668" y="646" width="295" height="60"/>
                                 <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="35"/>
                                 <state key="normal" title="next level">
                                     <color key="titleColor" red="1" green="0.27120052358486457" blue="0.1658197415095396" alpha="1" colorSpace="calibratedRGB"/>
@@ -307,10 +307,10 @@
                                 <color key="textColor" red="0.0" green="1" blue="0.1267665226233623" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="1" green="0.2789417508" blue="0.17181309089999999" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="60" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oj2-y9-GV4">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-60" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oj2-y9-GV4">
                                 <rect key="frame" x="553" y="300" width="190" height="95"/>
                                 <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="40"/>
-                                <color key="textColor" red="0.0" green="1" blue="0.1267665226233623" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.98431372549999996" green="0.16862745100000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="1" green="0.2789417508" blue="0.17181309089999999" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="x" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P8H-CE-uj2">
@@ -349,7 +349,7 @@
                                 <color key="textColor" red="0.0" green="0.76820915775932797" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="1" green="0.2789417508" blue="0.17181309089999999" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="health left :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zvt-BK-Nox">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="hp lost :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zvt-BK-Nox">
                                 <rect key="frame" x="-85" y="300" width="463" height="95"/>
                                 <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="40"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -391,6 +391,12 @@
                                 <color key="textColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bro-zS-9QS">
+                                <rect key="frame" x="577" y="392" width="465" height="95"/>
+                                <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="50"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" red="1" green="0.2789417508" blue="0.17181309089999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8dZ-Kg-d2t">
                                 <rect key="frame" x="553" y="189" width="190" height="95"/>
                                 <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="40"/>
@@ -403,25 +409,25 @@
                                 <color key="textColor" red="0.0" green="0.76820915775932797" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="1" green="0.2789417508" blue="0.17181309089999999" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgj-SI-VXY">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgj-SI-VXY">
                                 <rect key="frame" x="779" y="136" width="179" height="95"/>
                                 <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="40"/>
                                 <color key="textColor" red="1" green="0.60488041077970089" blue="0.039275506685663042" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="1" green="0.2789417508" blue="0.17181309089999999" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htE-MJ-4C8">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htE-MJ-4C8">
                                 <rect key="frame" x="779" y="189" width="178" height="95"/>
                                 <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="40"/>
                                 <color key="textColor" red="1" green="0.60488041077970089" blue="0.039275506685663042" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="1" green="0.2789417508" blue="0.17181309089999999" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1M0-S6-hQt">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1M0-S6-hQt">
                                 <rect key="frame" x="776" y="245" width="185" height="95"/>
                                 <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="40"/>
                                 <color key="textColor" red="1" green="0.60488041077970089" blue="0.039275506685663042" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="1" green="0.2789417508" blue="0.17181309089999999" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BqV-jO-kkC">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BqV-jO-kkC">
                                 <rect key="frame" x="774" y="300" width="189" height="95"/>
                                 <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="40"/>
                                 <color key="textColor" red="1" green="0.60488041077970089" blue="0.039275506685663042" alpha="1" colorSpace="calibratedRGB"/>
@@ -445,21 +451,15 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="1" green="0.2789417508" blue="0.17181309089999999" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="=" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MI9-C1-M86">
-                                <rect key="frame" x="646" y="300" width="190" height="95"/>
-                                <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="40"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="highlightedColor" red="1" green="0.2789417508" blue="0.17181309089999999" alpha="1" colorSpace="calibratedRGB"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuC-0U-ZsW">
                                 <rect key="frame" x="577" y="535" width="761" height="95"/>
                                 <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="50"/>
                                 <color key="textColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="1" green="0.2789417508" blue="0.17181309089999999" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bro-zS-9QS">
-                                <rect key="frame" x="577" y="392" width="465" height="95"/>
-                                <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="50"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="=" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MI9-C1-M86">
+                                <rect key="frame" x="646" y="300" width="190" height="95"/>
+                                <fontDescription key="fontDescription" name="DooM" family="DooM" pointSize="40"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="1" green="0.2789417508" blue="0.17181309089999999" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
@@ -467,7 +467,6 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="EYl-xf-Vl7" firstAttribute="height" secondItem="FQw-Qs-x9z" secondAttribute="height" id="FiR-mX-4HY"/>
-                            <constraint firstItem="eoX-ze-X2I" firstAttribute="centerX" secondItem="FQw-Qs-x9z" secondAttribute="centerX" id="HF3-Wj-b0q"/>
                             <constraint firstItem="EYl-xf-Vl7" firstAttribute="centerY" secondItem="FQw-Qs-x9z" secondAttribute="centerY" id="Sgq-mk-wn1"/>
                             <constraint firstItem="EYl-xf-Vl7" firstAttribute="centerX" secondItem="FQw-Qs-x9z" secondAttribute="centerX" id="li8-KF-Hoh"/>
                             <constraint firstItem="EYl-xf-Vl7" firstAttribute="width" secondItem="FQw-Qs-x9z" secondAttribute="width" id="pXg-F5-d2P"/>

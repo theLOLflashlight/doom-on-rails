@@ -278,7 +278,7 @@
         
         //endController.LevelScoreV = (int);
         //endController.HighScoreV = (int)_healthInternal;
-        int totalScore = Kills * 100 + _healthInternal * 60 + _bulletId * -20 + BFGAmmoNumber * 600;
+        int totalScore = Kills * 100 + (100 - _healthInternal) * -60 + _bulletId * -20 + BFGAmmoNumber * 600;
         endController.LevelScoreV = (int)totalScore;
         endController.LevelHighScoreV = totalScore;
         _GameTotalScore += totalScore;
@@ -380,7 +380,7 @@
             
             //endController.LevelScoreV = (int);
             //endController.HighScoreV = (int)_healthInternal;
-            int totalScore = Kills * 100 + _healthInternal * 60 + _bulletId * -20 + BFGAmmoNumber * 600;
+            int totalScore = Kills * 100 + (100 - _healthInternal) * -60 + _bulletId * -20 + BFGAmmoNumber * 600;
             endController.LevelScoreV = (int)totalScore;
             endController.LevelHighScoreV = totalScore;
             _GameTotalScore += totalScore;
@@ -1125,7 +1125,7 @@
     
     //Jacob: Was considering: Update score in game ...but it would look weird if the score decreased and you started with score.
     //Anyways, consistent with Doom, would calculate score only at the end.
-    //int totalScore = Kills * 100 + _healthInternal * 60 + _bulletId * -20 + BFGAmmoNumber * 600;
+    //int totalScore = Kills * 100 + (100 - _healthInternal) * -60 + _bulletId * -20 + BFGAmmoNumber * 600;
     //self.LevelScore_Curr.text = [[NSString alloc] initWithFormat: @"%d", totalScore];
     
     //NSLog(@"count_Aggressive: %d", count_Aggressive);
