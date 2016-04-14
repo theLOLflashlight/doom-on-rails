@@ -30,6 +30,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *HealthScore;
 @property (weak, nonatomic) IBOutlet UILabel *LevelScore;
 @property (weak, nonatomic) IBOutlet UILabel *LevelHighScore;
+@property (weak, nonatomic) IBOutlet UILabel *KillsScoreCalc;
+@property (weak, nonatomic) IBOutlet UILabel *ShotsScoreCalc;
+@property (weak, nonatomic) IBOutlet UILabel *FBGsScoreCAlc;
+@property (weak, nonatomic) IBOutlet UILabel *HealthScoreCalc;
 @property (nonatomic) int LevelIndex;
 
 @end

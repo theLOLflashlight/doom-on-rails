@@ -50,6 +50,10 @@
     _LevelScore.text = [NSString stringWithFormat: @"%d", _LevelScoreV];
     //_LevelHighScore.text = [NSString stringWithFormat: @"%d", _LevelHighScoreV];
     _GameTotalScore.text = [NSString stringWithFormat: @"%d", _GameTotalScoreV];
+    _KillsScoreCalc.text = [NSString stringWithFormat: @"%d", _KillsScoreV * 100]; //hard-coded multiplier value
+    _ShotsScoreCalc.text = [NSString stringWithFormat: @"%d", _ShotsScoreV * -20]; //hard-coded multiplier value
+    _FBGsScoreCAlc.text = [NSString stringWithFormat: @"%d", _FBGsLeftScoreV * 600]; //hard-coded multiplier value
+    _HealthScoreCalc.text = [NSString stringWithFormat: @"%d", _HealthScoreV * 60]; //hard-coded multiplier value
     
     [BGSound prepareToPlay];
     [BGSound play];

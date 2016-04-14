@@ -278,7 +278,7 @@
         
         //endController.LevelScoreV = (int);
         //endController.HighScoreV = (int)_healthInternal;
-        int totalScore = Kills * 100 + _healthInternal * 100 + _bulletId * -20 + BFGAmmoNumber * 1000;
+        int totalScore = Kills * 100 + _healthInternal * 60 + _bulletId * -20 + BFGAmmoNumber * 600;
         endController.LevelScoreV = (int)totalScore;
         endController.LevelHighScoreV = totalScore;
         _GameTotalScore += totalScore;
@@ -286,10 +286,9 @@
         endController.GameTotalScoreV = _GameTotalScore;
         
         endController.LevelIndex = _LevelIndex + 1;
-        [self presentViewController: endController animated: YES completion: nil];
-        //[self presentViewController: endController animated: YES completion: ^() {
-            //delete _game;
-        //}];
+        [self presentViewController: endController animated: YES completion: ^() {
+            delete _game;
+        }];
         int a = 0;
     }
 }
@@ -381,7 +380,7 @@
             
             //endController.LevelScoreV = (int);
             //endController.HighScoreV = (int)_healthInternal;
-            int totalScore = Kills * 100 + _healthInternal * 100 + _bulletId * -20 + BFGAmmoNumber * 1000;
+            int totalScore = Kills * 100 + _healthInternal * 60 + _bulletId * -20 + BFGAmmoNumber * 600;
             endController.LevelScoreV = (int)totalScore;
             endController.LevelHighScoreV = totalScore;
             _GameTotalScore += totalScore;
@@ -390,7 +389,7 @@
             
             endController.LevelIndex = _LevelIndex + 1;
             [self presentViewController: endController animated: YES completion: ^() {
-                //delete _game;
+                delete _game;
             }];
         }
     };
@@ -778,7 +777,7 @@
         self.context = nil;
     }
     
-    //delete _game;
+    delete _game;
     // Dispose of any resources that can be recreated.
 }
 
@@ -1102,7 +1101,7 @@
         
         goController.LevelIndex = _LevelIndex;
         [self presentViewController: goController animated: YES completion: ^() {
-            //delete _game;
+            delete _game;
         }];
     }
     
@@ -1126,7 +1125,7 @@
     
     //Jacob: Was considering: Update score in game ...but it would look weird if the score decreased and you started with score.
     //Anyways, consistent with Doom, would calculate score only at the end.
-    //int totalScore = Kills * 100 + _healthInternal * 100 + _bulletId * -20 + BFGAmmoNumber * 1000;
+    //int totalScore = Kills * 100 + _healthInternal * 60 + _bulletId * -20 + BFGAmmoNumber * 600;
     //self.LevelScore_Curr.text = [[NSString alloc] initWithFormat: @"%d", totalScore];
     
     //NSLog(@"count_Aggressive: %d", count_Aggressive);
