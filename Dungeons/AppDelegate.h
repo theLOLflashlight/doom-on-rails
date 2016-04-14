@@ -7,11 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <UIKit/UIKit.h>
+#import "CoreDataHelper.h" //new - part of http://www.informit.com/articles/article.aspx?p=2160898&seqNum=4 tutorial
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
-
 @property (strong, nonatomic) UIWindow *window;
-
-
+@property (nonatomic, strong, readonly) CoreDataHelper *coreDataHelper; //new
 @end
-

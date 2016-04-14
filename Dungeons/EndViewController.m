@@ -10,6 +10,7 @@
 #import "EndViewController.h"
 #import "GameViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import <CoreData/CoreData.h>
 
 @interface EndViewController()
 {
